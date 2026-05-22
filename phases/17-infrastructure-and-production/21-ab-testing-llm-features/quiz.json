@@ -1,0 +1,78 @@
+{
+  "lesson": "21-ab-testing-llm-features",
+  "title": "A/B Testing LLM Features — GrowthBook, Statsig, and the Vibes Problem",
+  "questions": [
+    {
+      "stage": "pre",
+      "question": "What is the precise distinction between evals and A/B tests in the lesson?",
+      "options": [
+        "Evals are user-facing; A/B tests are offline",
+        "Evals answer \"can the model do the job?\" on a labeled set; A/B tests answer \"do users care?\" with live randomized traffic",
+        "They are interchangeable",
+        "Only A/B tests are required"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "What does CUPED do for an experiment?",
+      "options": [
+        "Increases sample size by hiring more users",
+        "Regresses out pre-period variance before comparing post-period, typically reducing variance 30-70% and boosting effective sample size",
+        "Replaces sequential testing entirely",
+        "Disables multiple-comparison correction"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "Why do you need multiple-comparison corrections (Bonferroni or Benjamini-Hochberg) when running many A/Bs?",
+      "options": [
+        "They speed up experiments",
+        "Running 20 tests at 95% confidence produces one false positive by chance; corrections control family-wise error or false discovery rate",
+        "They are required by GDPR",
+        "They are only needed for sequential tests"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "check",
+      "question": "What does SRM (sample ratio mismatch) detect?",
+      "options": [
+        "Memory leaks in the experiment platform",
+        "An assignment-hash bug producing a delivered split that diverges from the intended (e.g. 47/53 when targeting 50/50)",
+        "Slow tokenizer performance",
+        "PII leakage"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "Why does LLM non-determinism require buffering sample size?",
+      "options": [
+        "Non-determinism reduces required samples",
+        "It violates IID assumptions; effective sample size drops, so multiply required size by roughly 1.3-1.5x as a safety margin",
+        "It only matters offline",
+        "It is irrelevant to power calculations"
+      ],
+      "correct": 1,
+      "explanation": ""
+    },
+    {
+      "stage": "post",
+      "question": "How does the lesson contrast Statsig and GrowthBook?",
+      "options": [
+        "Identical feature sets",
+        "Statsig is all-in-one SaaS (acquired by OpenAI Sept 2025, $1.1B); GrowthBook is open-source MIT, warehouse-native, with Bayesian/Frequentist/Sequential engines and CUPED/SRM/BH",
+        "GrowthBook is closed source",
+        "Statsig is warehouse-native only"
+      ],
+      "correct": 1,
+      "explanation": ""
+    }
+  ]
+}
