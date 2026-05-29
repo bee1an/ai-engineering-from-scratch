@@ -1,0 +1,377 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - link "AI / FROM SCRATCH" [ref=e5] [cursor=pointer]:
+        - /url: index.html
+        - text: AI / FROM SCRATCH
+      - navigation [ref=e7]:
+        - link "Contents" [ref=e8] [cursor=pointer]:
+          - /url: index.html#contents
+        - link "Catalog" [ref=e9] [cursor=pointer]:
+          - /url: catalog.html
+        - link "Roadmap" [ref=e10] [cursor=pointer]:
+          - /url: prereqs.html
+        - link "Glossary" [ref=e11] [cursor=pointer]:
+          - /url: glossary.html
+        - link "GitHub stars" [ref=e12] [cursor=pointer]:
+          - /url: https://github.com/bee1an/ai-engineering-from-scratch
+          - img [ref=e13]
+          - img [ref=e15]
+          - generic "GitHub stars" [ref=e17]: "0"
+      - button "Search (⌘K)" [ref=e18] [cursor=pointer]:
+        - img [ref=e19]
+      - button "切换到中文" [ref=e22] [cursor=pointer]: 中
+      - button "Toggle theme" [ref=e23] [cursor=pointer]:
+        - generic [ref=e24]: "N"
+  - generic [ref=e25]:
+    - complementary [ref=e26]:
+      - 'link "Phase 01: Math Foundations →" [ref=e28] [cursor=pointer]':
+        - /url: lesson.html?path=phases/01-math-foundations/01-linear-algebra-intuition
+      - generic [ref=e29]: Phase 00 · Setup & Tooling
+      - link "Dev Environment" [ref=e30] [cursor=pointer]:
+        - /url: lesson.html?path=phases/00-setup-and-tooling/01-dev-environment
+        - text: Dev Environment
+      - link "Git & Collaboration" [ref=e32] [cursor=pointer]:
+        - /url: lesson.html?path=phases/00-setup-and-tooling/02-git-and-collaboration
+        - text: Git & Collaboration
+      - link "GPU Setup & Cloud" [ref=e34] [cursor=pointer]:
+        - /url: lesson.html?path=phases/00-setup-and-tooling/03-gpu-setup-and-cloud
+        - text: GPU Setup & Cloud
+      - link "APIs & Keys" [ref=e36] [cursor=pointer]:
+        - /url: lesson.html?path=phases/00-setup-and-tooling/04-apis-and-keys
+        - text: APIs & Keys
+      - link "Jupyter Notebooks" [ref=e38] [cursor=pointer]:
+        - /url: lesson.html?path=phases/00-setup-and-tooling/05-jupyter-notebooks
+        - text: Jupyter Notebooks
+      - link "Python Environments" [ref=e40] [cursor=pointer]:
+        - /url: lesson.html?path=phases/00-setup-and-tooling/06-python-environments
+        - text: Python Environments
+      - link "Docker for AI" [ref=e42] [cursor=pointer]:
+        - /url: lesson.html?path=phases/00-setup-and-tooling/07-docker-for-ai
+        - text: Docker for AI
+      - link "Editor Setup" [ref=e44] [cursor=pointer]:
+        - /url: lesson.html?path=phases/00-setup-and-tooling/08-editor-setup
+        - text: Editor Setup
+      - link "Data Management" [ref=e46] [cursor=pointer]:
+        - /url: lesson.html?path=phases/00-setup-and-tooling/09-data-management
+        - text: Data Management
+      - link "Terminal & Shell" [ref=e48] [cursor=pointer]:
+        - /url: lesson.html?path=phases/00-setup-and-tooling/10-terminal-and-shell
+        - text: Terminal & Shell
+      - link "Linux for AI" [ref=e50] [cursor=pointer]:
+        - /url: lesson.html?path=phases/00-setup-and-tooling/11-linux-for-ai
+        - text: Linux for AI
+      - link "Debugging & Profiling" [ref=e52] [cursor=pointer]:
+        - /url: lesson.html?path=phases/00-setup-and-tooling/12-debugging-and-profiling
+        - text: Debugging & Profiling
+    - main [ref=e54]:
+      - article [ref=e56]:
+        - heading "Dev Environment" [level=1] [ref=e57]
+        - generic [ref=e58]: Your tools shape your thinking. Set them up once, set them up right.
+        - paragraph [ref=e59]:
+          - strong [ref=e60]: "Type:"
+          - text: Build
+        - paragraph [ref=e61]:
+          - strong [ref=e62]: "Languages:"
+          - text: Python, Node.js, Rust
+        - paragraph [ref=e63]:
+          - strong [ref=e64]: "Prerequisites:"
+          - text: None
+        - paragraph [ref=e65]:
+          - strong [ref=e66]: "Time:"
+          - text: ~45 minutes
+        - generic [ref=e67]:
+          - generic [ref=e68]: 🎯 Learning Objectives
+          - list [ref=e69]:
+            - listitem [ref=e70]: Set up Python 3.11+, Node.js 20+, and Rust toolchains from scratch
+            - listitem [ref=e71]: Configure virtual environments and package managers for reproducible builds
+            - listitem [ref=e72]: Verify GPU access with CUDA/MPS and run a test tensor operation
+            - listitem [ref=e73]: "Understand the four-layer stack: system, packages, runtimes, AI libraries"
+        - heading "The Problem" [level=2] [ref=e74]
+        - paragraph [ref=e75]: You're about to learn AI engineering across 200+ lessons using Python, TypeScript, Rust, and Julia. If your environment is broken, every single lesson becomes a fight against tooling instead of learning.
+        - paragraph [ref=e76]: Most people skip environment setup. Then they spend hours debugging import errors, version conflicts, and missing CUDA drivers. We're going to do this once, properly.
+        - generic [ref=e77]:
+          - generic [ref=e78]: ✅ Pre-Lesson Check
+          - generic [ref=e79]:
+            - generic [ref=e80]: 1. Why do AI projects need a separate virtual environment?
+            - generic [ref=e81]:
+              - generic [ref=e84] [cursor=pointer]: Virtual environments make code run faster
+              - generic [ref=e87] [cursor=pointer]: They isolate dependencies so different projects don't conflict
+              - generic [ref=e90] [cursor=pointer]: Python requires virtual environments to import packages
+              - generic [ref=e93] [cursor=pointer]: Virtual environments provide GPU access
+          - generic [ref=e94]:
+            - generic [ref=e95]: 2. What does CUDA provide for AI workloads?
+            - generic [ref=e96]:
+              - generic [ref=e99] [cursor=pointer]: A Python package manager for ML libraries
+              - generic [ref=e102] [cursor=pointer]: A web framework for deploying models
+              - generic [ref=e105] [cursor=pointer]: Parallel computing on NVIDIA GPUs for matrix operations
+              - generic [ref=e108] [cursor=pointer]: A container runtime for model serving
+        - heading "The Concept" [level=2] [ref=e109]
+        - paragraph [ref=e110]: "An AI engineering environment has four layers:"
+        - button "Expand" [ref=e114] [cursor=pointer]
+        - paragraph [ref=e116]: We install bottom-up. Each layer depends on the one below it.
+        - heading "Build It" [level=2] [ref=e117]
+        - 'heading "Step 1: System Foundation" [level=3] [ref=e118]'
+        - paragraph [ref=e119]: Check your system and install the basics.
+        - generic [ref=e120]:
+          - generic [ref=e121]: bash
+          - button "Copy" [ref=e122] [cursor=pointer]
+          - code [ref=e123]: "# macOS xcode-select --install brew install git curl wget # Ubuntu/Debian sudo apt update && sudo apt install -y build-essential git curl wget # Windows (use WSL2) wsl --install -d Ubuntu-24.04"
+        - 'heading "Step 2: Python with uv" [level=3] [ref=e124]'
+        - paragraph [ref=e125]:
+          - text: We use
+          - code [ref=e126]: uv
+          - text: — it's 10-100x faster than pip and handles virtual environments automatically.
+        - generic [ref=e127]:
+          - generic [ref=e128]: bash
+          - button "Copy" [ref=e129] [cursor=pointer]
+          - code [ref=e130]: "curl -LsSf https://astral.sh/uv/install.sh | sh uv python install 3.12 uv venv source .venv/bin/activate # or .venv\\Scripts\\activate on Windows uv pip install numpy matplotlib jupyter"
+        - paragraph [ref=e131]: "Verify:"
+        - generic [ref=e132]:
+          - generic [ref=e133]: python
+          - button "Copy" [ref=e134] [cursor=pointer]
+          - code [ref=e135]: "import sys print(f\"Python {sys.version}\") import numpy as np print(f\"NumPy {np.__version__}\") a = np.array([1, 2, 3]) print(f\"Vector: {a}, dot product with itself: {np.dot(a, a)}\")"
+        - 'heading "Step 3: Node.js with pnpm" [level=3] [ref=e136]'
+        - paragraph [ref=e137]: For TypeScript lessons (agents, MCP servers, web apps).
+        - generic [ref=e138]:
+          - generic [ref=e139]: bash
+          - button "Copy" [ref=e140] [cursor=pointer]
+          - code [ref=e141]: curl -fsSL https://fnm.vercel.app/install | bash fnm install 22 fnm use 22 npm install -g pnpm node -e "console.log('Node', process.version)"
+        - 'heading "Step 4: Rust" [level=3] [ref=e142]'
+        - paragraph [ref=e143]: For performance-critical lessons (inference, systems).
+        - generic [ref=e144]:
+          - generic [ref=e145]: bash
+          - button "Copy" [ref=e146] [cursor=pointer]
+          - code [ref=e147]: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh rustc --version cargo --version
+        - 'heading "Step 5: Julia (Optional)" [level=3] [ref=e148]'
+        - paragraph [ref=e149]: For math-heavy lessons where Julia shines.
+        - generic [ref=e150]:
+          - generic [ref=e151]: bash
+          - button "Copy" [ref=e152] [cursor=pointer]
+          - code [ref=e153]: curl -fsSL https://install.julialang.org | sh julia -e 'println("Julia ", VERSION)'
+        - 'heading "Step 6: GPU Setup (If You Have One)" [level=3] [ref=e154]'
+        - generic [ref=e155]:
+          - generic [ref=e156]: bash
+          - button "Copy" [ref=e157] [cursor=pointer]
+          - code [ref=e158]: "# NVIDIA nvidia-smi # Install PyTorch with CUDA uv pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124"
+        - generic [ref=e159]:
+          - generic [ref=e160]: python
+          - button "Copy" [ref=e161] [cursor=pointer]
+          - code [ref=e162]: "import torch print(f\"CUDA available: {torch.cuda.is_available()}\") if torch.cuda.is_available(): print(f\"GPU: {torch.cuda.get_device_name(0)}\")"
+        - paragraph [ref=e163]: No GPU? No problem. Most lessons work on CPU. For training-heavy lessons, use Google Colab or cloud GPUs.
+        - 'heading "Step 7: Verify Everything" [level=3] [ref=e164]'
+        - paragraph [ref=e165]: "Run the verification script:"
+        - generic [ref=e166]:
+          - generic [ref=e167]: bash
+          - button "Copy" [ref=e168] [cursor=pointer]
+          - code [ref=e169]: python phases/00-setup-and-tooling/01-dev-environment/code/verify.py
+        - heading "Use It" [level=2] [ref=e170]
+        - paragraph [ref=e171]: "Your environment is now ready for every lesson in this course. Here's what you'll use where:"
+        - table [ref=e173]:
+          - rowgroup [ref=e174]:
+            - row "Language Used In Package Manager" [ref=e175]:
+              - columnheader "Language" [ref=e176]
+              - columnheader "Used In" [ref=e177]
+              - columnheader "Package Manager" [ref=e178]
+          - rowgroup [ref=e179]:
+            - row "Python Phases 1-12 (ML, DL, NLP, Vision, Audio, LLMs) uv" [ref=e180]:
+              - cell "Python" [ref=e181]
+              - cell "Phases 1-12 (ML, DL, NLP, Vision, Audio, LLMs)" [ref=e182]
+              - cell "uv" [ref=e183]
+            - row "TypeScript Phases 13-17 (Tools, Agents, Swarms, Infra) pnpm" [ref=e184]:
+              - cell "TypeScript" [ref=e185]
+              - cell "Phases 13-17 (Tools, Agents, Swarms, Infra)" [ref=e186]
+              - cell "pnpm" [ref=e187]
+            - row "Rust Phases 12, 15-17 (Performance-critical systems) cargo" [ref=e188]:
+              - cell "Rust" [ref=e189]
+              - cell "Phases 12, 15-17 (Performance-critical systems)" [ref=e190]
+              - cell "cargo" [ref=e191]
+            - row "Julia Phase 1 (Math foundations) Pkg" [ref=e192]:
+              - cell "Julia" [ref=e193]
+              - cell "Phase 1 (Math foundations)" [ref=e194]
+              - cell "Pkg" [ref=e195]
+        - heading "Ship It" [level=2] [ref=e196]
+        - paragraph [ref=e197]: This lesson produces a verification script that anyone can run to check their setup.
+        - paragraph [ref=e198]:
+          - text: See
+          - code [ref=e199]: outputs/prompt-env-check.md
+          - text: for a prompt that helps AI assistants diagnose environment issues.
+        - heading "Exercises" [level=2] [ref=e200]
+        - list [ref=e201]:
+          - listitem [ref=e202]: Run the verification script and fix any failures
+          - listitem [ref=e203]: Create a Python virtual environment for this course and install PyTorch
+          - listitem [ref=e204]: Write a "hello world" in all four languages and run each one
+        - generic [ref=e205]:
+          - generic [ref=e206]:
+            - generic [ref=e207]:
+              - generic [ref=e208]: O
+              - generic [ref=e209]: What This Lesson Ships
+            - generic [ref=e210]: Prompts, skills, and artifacts you can use right now
+            - generic [ref=e213]:
+              - generic [ref=e214]: Prompt
+              - generic [ref=e215]: prompt-env-check.md
+              - generic [ref=e216]: Loading description...
+              - generic [ref=e217]:
+                - link "View on GitHub" [ref=e218] [cursor=pointer]:
+                  - /url: https://github.com/bee1an/ai-engineering-from-scratch/blob/main/phases/00-setup-and-tooling/01-dev-environment/outputs/prompt-env-check.md
+                - button "Install" [ref=e219] [cursor=pointer]
+          - generic [ref=e220]:
+            - generic [ref=e221]:
+              - generic [ref=e222]: C
+              - generic [ref=e223]: Run the Code
+            - generic [ref=e224]: Executable files from this lesson
+            - generic [ref=e226]:
+              - generic [ref=e227]:
+                - generic [ref=e228]:
+                  - generic [ref=e229]: RS
+                  - generic [ref=e230]: main.rs
+                - generic [ref=e231]: 4.8 KB
+                - generic [ref=e232]: cargo run -- phases/00-setup-and-tooling/01-dev-environment/code/main.rs
+                - generic [ref=e233]:
+                  - link "View on GitHub" [ref=e234] [cursor=pointer]:
+                    - /url: https://github.com/bee1an/ai-engineering-from-scratch/blob/main/phases/00-setup-and-tooling/01-dev-environment/code/main.rs
+                  - button "Copy command" [ref=e235] [cursor=pointer]
+              - generic [ref=e236]:
+                - generic [ref=e237]:
+                  - generic [ref=e238]: PY
+                  - generic [ref=e239]: verify.py
+                - generic [ref=e240]: 2.1 KB
+                - generic [ref=e241]: python phases/00-setup-and-tooling/01-dev-environment/code/verify.py
+                - generic [ref=e242]:
+                  - link "View on GitHub" [ref=e243] [cursor=pointer]:
+                    - /url: https://github.com/bee1an/ai-engineering-from-scratch/blob/main/phases/00-setup-and-tooling/01-dev-environment/code/verify.py
+                  - button "Copy command" [ref=e244] [cursor=pointer]
+              - generic [ref=e245]:
+                - generic [ref=e246]:
+                  - generic [ref=e247]: TS
+                  - generic [ref=e248]: verify.ts
+                - generic [ref=e249]: 2.9 KB
+                - generic [ref=e250]: npx tsx phases/00-setup-and-tooling/01-dev-environment/code/verify.ts
+                - generic [ref=e251]:
+                  - link "View on GitHub" [ref=e252] [cursor=pointer]:
+                    - /url: https://github.com/bee1an/ai-engineering-from-scratch/blob/main/phases/00-setup-and-tooling/01-dev-environment/code/verify.ts
+                  - button "Copy command" [ref=e253] [cursor=pointer]
+          - generic [ref=e254]:
+            - generic [ref=e255]:
+              - generic [ref=e256]: Q
+              - generic [ref=e257]: Test Your Understanding
+            - generic [ref=e258]: Did you get it?
+            - generic [ref=e259]:
+              - generic [ref=e260]:
+                - generic [ref=e261]: Question 1 of 3
+                - generic [ref=e262]: What distinguishes an AI agent from a simple chatbot?
+                - generic [ref=e263]:
+                  - button "A Agents are faster" [ref=e264] [cursor=pointer]:
+                    - generic [ref=e265]: A
+                    - generic [ref=e266]: Agents are faster
+                  - button "B Agents can take actions and use tools autonomously" [ref=e267] [cursor=pointer]:
+                    - generic [ref=e268]: B
+                    - generic [ref=e269]: Agents can take actions and use tools autonomously
+                  - button "C Agents use bigger models" [ref=e270] [cursor=pointer]:
+                    - generic [ref=e271]: C
+                    - generic [ref=e272]: Agents use bigger models
+                  - button "D There is no difference" [ref=e273] [cursor=pointer]:
+                    - generic [ref=e274]: D
+                    - generic [ref=e275]: There is no difference
+              - generic [ref=e276]:
+                - generic [ref=e277]: Question 2 of 3
+                - generic [ref=e278]: What is MCP (Model Context Protocol)?
+                - generic [ref=e279]:
+                  - button "A A model training format" [ref=e280] [cursor=pointer]:
+                    - generic [ref=e281]: A
+                    - generic [ref=e282]: A model training format
+                  - button "B A standardized protocol for connecting AI models to tools and data sources" [ref=e283] [cursor=pointer]:
+                    - generic [ref=e284]: B
+                    - generic [ref=e285]: A standardized protocol for connecting AI models to tools and data sources
+                  - button "C A compression algorithm" [ref=e286] [cursor=pointer]:
+                    - generic [ref=e287]: C
+                    - generic [ref=e288]: A compression algorithm
+                  - button "D A testing framework" [ref=e289] [cursor=pointer]:
+                    - generic [ref=e290]: D
+                    - generic [ref=e291]: A testing framework
+              - generic [ref=e292]:
+                - generic [ref=e293]: Question 3 of 3
+                - generic [ref=e294]: Why is tool-use important for LLMs?
+                - generic [ref=e295]:
+                  - button "A It reduces cost" [ref=e296] [cursor=pointer]:
+                    - generic [ref=e297]: A
+                    - generic [ref=e298]: It reduces cost
+                  - button "B It lets LLMs access real-time information and take actions beyond text generation" [ref=e299] [cursor=pointer]:
+                    - generic [ref=e300]: B
+                    - generic [ref=e301]: It lets LLMs access real-time information and take actions beyond text generation
+                  - button "C It makes responses shorter" [ref=e302] [cursor=pointer]:
+                    - generic [ref=e303]: C
+                    - generic [ref=e304]: It makes responses shorter
+                  - button "D It removes hallucinations entirely" [ref=e305] [cursor=pointer]:
+                    - generic [ref=e306]: D
+                    - generic [ref=e307]: It removes hallucinations entirely
+              - generic [ref=e308]:
+                - text: Want a deeper quiz? Run
+                - code [ref=e309]: /check-understanding 00-setup-and-tooling
+                - text: in Claude, Cursor, Codex, OpenClaw, Hermes, or any agent with the curriculum skills installed
+          - generic [ref=e310]:
+            - generic [ref=e311]:
+              - generic [ref=e312]: P
+              - generic [ref=e313]: Learning Path
+            - generic [ref=e314]: "Phase 00: Setup & Tooling"
+            - generic [ref=e315]:
+              - link "Dev Environment" [ref=e316] [cursor=pointer]:
+                - /url: lesson.html?path=phases/00-setup-and-tooling/01-dev-environment
+                - generic [ref=e318]: Dev Environment
+              - link "Git & Collaboration" [ref=e320] [cursor=pointer]:
+                - /url: lesson.html?path=phases/00-setup-and-tooling/02-git-and-collaboration
+                - generic [ref=e322]: Git & Collaboration
+              - link "GPU Setup & Cloud" [ref=e324] [cursor=pointer]:
+                - /url: lesson.html?path=phases/00-setup-and-tooling/03-gpu-setup-and-cloud
+                - generic [ref=e326]: GPU Setup & Cloud
+              - link "APIs & Keys" [ref=e328] [cursor=pointer]:
+                - /url: lesson.html?path=phases/00-setup-and-tooling/04-apis-and-keys
+                - generic [ref=e330]: APIs & Keys
+              - link "Jupyter Notebooks" [ref=e332] [cursor=pointer]:
+                - /url: lesson.html?path=phases/00-setup-and-tooling/05-jupyter-notebooks
+                - generic [ref=e334]: Jupyter Notebooks
+              - generic "7 later lessons" [ref=e336]: 7 »
+            - generic [ref=e339]: You've completed 1 of 12 lessons in this phase
+          - generic [ref=e340]:
+            - generic [ref=e341]:
+              - generic [ref=e342]: "N"
+              - generic [ref=e343]: Continue Learning
+            - generic [ref=e344]:
+              - generic [ref=e345]:
+                - link "Browse all Phase 00 lessons" [ref=e346] [cursor=pointer]:
+                  - /url: lesson.html?path=phases/00-setup-and-tooling/01-dev-environment
+                - link "Full course catalog" [ref=e347] [cursor=pointer]:
+                  - /url: catalog.html
+              - generic [ref=e348]:
+                - text: Run
+                - code [ref=e349]: /find-your-level
+                - text: in Claude, Cursor, Codex, OpenClaw, Hermes, or any agent with the curriculum skills installed for a personalized learning path
+        - link "Next → Git & Collaboration" [ref=e351] [cursor=pointer]:
+          - /url: lesson.html?path=phases/00-setup-and-tooling/02-git-and-collaboration
+          - generic [ref=e352]: Next →
+          - generic [ref=e353]: Git & Collaboration
+        - generic [ref=e354]:
+          - generic [ref=e355]: ✅ Post-Lesson Quiz
+          - generic [ref=e356]:
+            - generic [ref=e357]: 1. In the four-layer environment stack, which layer must be installed first?
+            - generic [ref=e358]:
+              - generic [ref=e361] [cursor=pointer]: AI/ML Libraries (PyTorch, JAX)
+              - generic [ref=e364] [cursor=pointer]: Package Managers (pip, npm, cargo)
+              - generic [ref=e367] [cursor=pointer]: Language Runtimes (Python, Node.js)
+              - generic [ref=e370] [cursor=pointer]: System Foundation (OS, shell, GPU drivers)
+          - generic [ref=e371]:
+            - generic [ref=e372]: 2. What is the purpose of uv in a Python AI project?
+            - generic [ref=e373]:
+              - generic [ref=e376] [cursor=pointer]: A GPU monitoring tool
+              - generic [ref=e379] [cursor=pointer]: An ultra-fast Python package installer and resolver
+              - generic [ref=e382] [cursor=pointer]: A neural network visualization library
+              - generic [ref=e385] [cursor=pointer]: A CUDA compiler for custom kernels
+          - generic [ref=e386]:
+            - generic [ref=e387]: 3. How do you verify that PyTorch can access your GPU?
+            - generic [ref=e388]:
+              - generic [ref=e391] [cursor=pointer]: import torch; print(torch.__version__)
+              - generic [ref=e394] [cursor=pointer]: nvidia-smi --query
+              - generic [ref=e397] [cursor=pointer]: import torch; print(torch.cuda.is_available())
+              - generic [ref=e400] [cursor=pointer]: python -c 'import gpu'

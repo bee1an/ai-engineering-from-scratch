@@ -1603,9 +1603,9 @@
   <div class="mermaid-modal-overlay" id="mermaidModalOverlay" aria-hidden="true">
     <div class="mermaid-modal" role="dialog" aria-modal="true" aria-label="Expanded diagram">
       <div class="mermaid-modal-header">
-        <div class="mermaid-modal-title" id="mermaidModalTitle">Diagram</div>
+        <div class="mermaid-modal-title" id="mermaidModalTitle" data-i18n="lesson.diagram">Diagram</div>
         <div class="mermaid-modal-actions">
-          <button class="mermaid-btn" type="button" id="mermaidModalClose">Close</button>
+          <button class="mermaid-btn" type="button" id="mermaidModalClose" data-i18n="lesson.close">Close</button>
         </div>
       </div>
       <div class="mermaid-modal-body" id="mermaidModalBody"><div class="mermaid-modal-center" id="mermaidModalCenter"></div></div>
@@ -1618,7 +1618,7 @@
       <div class="lesson-content" id="lessonContent">
         <div class="lesson-loading" id="lessonLoading">
           <div class="spinner"></div>
-          <div class="lesson-loading-text">Loading lesson...</div>
+          <div class="lesson-loading-text" data-i18n="lesson.loading">Loading lesson...</div>
         </div>
       </div>
     </main>
@@ -1741,7 +1741,9 @@
       document.addEventListener('lang:change', function () {
         var el = document.getElementById('lessonContent');
         if (el) {
-          el.innerHTML = '<div class="lesson-loading"><div class="spinner"></div><div class="lesson-loading-text">Loading lesson...</div></div>';
+          var t = (window.AIFS_LANG && AIFS_LANG.t) ? AIFS_LANG.t : function(k){return null;};
+          var loadingText = t('lesson.loading') || 'Loading lesson...';
+          el.innerHTML = '<div class="lesson-loading"><div class="spinner"></div><div class="lesson-loading-text">' + loadingText + '</div></div>';
         }
         fetchLesson(lessonPath);
       });
@@ -1891,13 +1893,19 @@
               });
           })
           .catch(function () {
-            showError('Lesson not found', 'Could not fetch the lesson at <code>' + escapeHtml(path) + '</code>. It may not have been written yet.');
+            var t = (window.AIFS_LANG && AIFS_LANG.t) ? AIFS_LANG.t : function(k){return null;};
+            var title = t('lesson.notfound.title') || 'Lesson not found';
+            var notFoundMsg = t('lesson.notfound.msg') || 'Could not fetch the lesson at';
+            var notWritten = t('lesson.notfound.written') || 'It may not have been written yet.';
+            showError(title, notFoundMsg + ' <code>' + escapeHtml(path) + '</code>. ' + notWritten);
           });
       }
 
       function showError(title, msg) {
+        var t = (window.AIFS_LANG && AIFS_LANG.t) ? AIFS_LANG.t : function(k){return null;};
+        var backText = t('lesson.back') || 'Back to Home';
         var el = document.getElementById('lessonContent');
-        el.innerHTML = '<div class="lesson-error"><h2>' + title + '</h2><p>' + msg + '</p><a href="index.html" class="btn btn-primary">Back to Home</a></div>';
+        el.innerHTML = '<div class="lesson-error"><h2>' + title + '</h2><p>' + msg + '</p><a href="index.html" class="btn btn-primary">' + backText + '</a></div>';
       }
 
       function renderLesson(md) {
@@ -2218,7 +2226,8 @@
                 out += '<div class="mermaid-container">';
                 out += '<div class="mermaid-block" data-mermaid-index="' + mermaidBlocks + '">';
                 out += '<div class="mermaid-toolbar">';
-                out += '<button type="button" class="mermaid-btn mermaid-expand" data-mermaid-index="' + mermaidBlocks + '">Expand</button>';
+                var expandLabel = (window.AIFS_LANG && AIFS_LANG.t) ? (AIFS_LANG.t('lesson.expand') || 'Expand') : 'Expand';
+                out += '<button type="button" class="mermaid-btn mermaid-expand" data-mermaid-index="' + mermaidBlocks + '">' + expandLabel + '</button>';
                 out += '</div>';
                 out += '<pre class="mermaid mermaid-source" id="mermaid-' + mermaidBlocks + '">' + escapeHtml(raw) + '</pre>';
                 out += '<div class="mermaid-render" id="mermaid-render-' + mermaidBlocks + '"></div>';
@@ -2413,7 +2422,8 @@
       function renderCodeBlock(code, lang) {
         var highlighted = highlightSyntax(escapeHtml(code), lang);
         var langLabel = lang ? '<span class="code-lang">' + escapeHtml(lang) + '</span>' : '';
-        return '<pre>' + langLabel + '<button class="code-copy" data-code="' + escapeAttr(code) + '">Copy</button><code>' + highlighted + '</code></pre>';
+        var copyLabel = (window.AIFS_LANG && AIFS_LANG.t) ? (AIFS_LANG.t('lesson.copy') || 'Copy') : 'Copy';
+        return '<pre>' + langLabel + '<button class="code-copy" data-code="' + escapeAttr(code) + '">' + copyLabel + '</button><code>' + highlighted + '</code></pre>';
       }
 
       function highlightSyntax(code, lang) {
@@ -2461,8 +2471,11 @@
           btn.addEventListener('click', function () {
             var code = btn.getAttribute('data-code');
             navigator.clipboard.writeText(code).then(function () {
-              btn.textContent = 'Copied!';
-              setTimeout(function () { btn.textContent = 'Copy'; }, 1500);
+              var t = (window.AIFS_LANG && AIFS_LANG.t) ? AIFS_LANG.t : function(k){return null;};
+              var copiedLabel = t('lesson.copied') || 'Copied!';
+              var copyLabel = t('lesson.copy') || 'Copy';
+              btn.textContent = copiedLabel;
+              setTimeout(function () { btn.textContent = copyLabel; }, 1500);
             });
           });
         });
@@ -2792,7 +2805,9 @@
         }
         var scoreEl = section.querySelector('.quiz-score');
         if (scoreEl) {
-          scoreEl.textContent = correctCount + '/' + allQs.length + ' correct';
+          var t = (window.AIFS_LANG && AIFS_LANG.t) ? AIFS_LANG.t : function(k){return null;};
+          var correctLabel = t('lesson.quiz.correct') || 'correct';
+          scoreEl.textContent = correctCount + '/' + allQs.length + ' ' + correctLabel;
           scoreEl.style.display = 'block';
         }
       }
@@ -2825,6 +2840,10 @@
       function addBottomNav(html) {
         if (currentLessonIndex < 0) return html;
 
+        var t = (window.AIFS_LANG && AIFS_LANG.t) ? AIFS_LANG.t : function(k){return null;};
+        var prevLabel = t('lesson.prev') || 'Previous';
+        var nextLabel = t('lesson.next') || 'Next';
+
         var prev = null;
         for (var pi = currentLessonIndex - 1; pi >= 0; pi--) {
           if (flatLessons[pi].isReadable) { prev = flatLessons[pi]; break; }
@@ -2837,7 +2856,7 @@
         var nav = '<div class="lesson-nav-bottom">';
         if (prev) {
           nav += '<a class="lesson-nav-btn prev" href="lesson.html?path=' + prev.path + '">';
-          nav += '<span class="nav-label">&larr; Previous</span>';
+          nav += '<span class="nav-label">&larr; ' + prevLabel + '</span>';
           nav += '<span class="nav-title">' + escapeHtml(prev.lessonName) + '</span>';
           nav += '</a>';
         } else {
@@ -2845,7 +2864,7 @@
         }
         if (next) {
           nav += '<a class="lesson-nav-btn next" href="lesson.html?path=' + next.path + '">';
-          nav += '<span class="nav-label">Next &rarr;</span>';
+          nav += '<span class="nav-label">' + nextLabel + ' &rarr;</span>';
           nav += '<span class="nav-title">' + escapeHtml(next.lessonName) + '</span>';
           nav += '</a>';
         }
@@ -3012,8 +3031,11 @@
             btn.addEventListener('click', function () {
               var command = btn.getAttribute('data-command');
               navigator.clipboard.writeText(command).then(function () {
-                btn.textContent = 'Copied!';
-                setTimeout(function () { btn.textContent = 'Copy command'; }, 1500);
+                var t = (window.AIFS_LANG && AIFS_LANG.t) ? AIFS_LANG.t : function(k){return null;};
+                var copiedLabel = t('lesson.copied') || 'Copied!';
+                var copyCmdLabel = t('lesson.copycmd') || 'Copy command';
+                btn.textContent = copiedLabel;
+                setTimeout(function () { btn.textContent = copyCmdLabel; }, 1500);
               });
             });
           });
@@ -3120,7 +3142,9 @@
           html += '</div>';
         });
 
-        html += '<div class="quiz-score" id="quizScore"><div class="quiz-score-number" id="quizScoreNum">0/' + questions.length + '</div><div class="quiz-score-label">Complete all questions to see your score</div></div>';
+        var t = (window.AIFS_LANG && AIFS_LANG.t) ? AIFS_LANG.t : function(k){return null;};
+        var scoreLabel = t('lesson.quiz.complete') || 'Complete all questions to see your score';
+        html += '<div class="quiz-score" id="quizScore"><div class="quiz-score-number" id="quizScoreNum">0/' + questions.length + '</div><div class="quiz-score-label">' + scoreLabel + '</div></div>';
         html += '<div class="quiz-deeper">Want a deeper quiz? Run <code>/check-understanding ' + escapeHtml(phase) + '</code> in Claude, Cursor, Codex, OpenClaw, Hermes, or any agent with the curriculum skills installed</div>';
         html += '</div>';
 
