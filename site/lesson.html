@@ -1737,8 +1737,9 @@
       initScrollProgress();
       fetchLesson(lessonPath);
 
-      // Re-fetch the lesson body when the user toggles language.
-      document.addEventListener('lang:change', function () {
+      // Re-fetch the lesson body when the user toggles language,
+      // or when lang.js finishes initializing (lang:ready).
+      function onLangEvent() {
         var el = document.getElementById('lessonContent');
         if (el) {
           var t = (window.AIFS_LANG && AIFS_LANG.t) ? AIFS_LANG.t : function(k){return null;};
@@ -1746,7 +1747,9 @@
           el.innerHTML = '<div class="lesson-loading"><div class="spinner"></div><div class="lesson-loading-text">' + loadingText + '</div></div>';
         }
         fetchLesson(lessonPath);
-      });
+      }
+      document.addEventListener('lang:change', onLangEvent);
+      document.addEventListener('lang:ready', onLangEvent);
 
       function extractPhaseSlug(phase, index) {
         if (phase.url) {
