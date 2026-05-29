@@ -3,37 +3,102 @@
     {
       "stage": "pre",
       "question": "Why do production vision pipelines use Pydantic models (or equivalent) at every stage boundary?",
-      "options": ["Pydantic is faster than dict access", "Typed schemas catch interface mismatches at the boundary; a detector returning (cx, cy, w, h) when the downstream expects (x1, y1, x2, y2) fails loudly with a validation error instead of silently producing empty crops", "Pydantic is required by FastAPI", "It helps with GPU allocation"],
+      "options": [
+        "Pydantic is faster than dict access",
+        "Typed schemas catch interface mismatches at the boundary; a detector returning (cx, cy, w, h) when the downstream expects (x1, y1, x2, y2) fails loudly with a validation error instead of silently producing empty crops",
+        "Pydantic is required by FastAPI",
+        "It helps with GPU allocation"
+      ],
       "correct": 1,
-      "explanation": "Silent interface bugs are the defining pain of ML pipelines. Every boundary has a coordinate system, a channel order, a value range, and a shape. Validating at the boundary with Pydantic turns every mismatch into an immediate error. The cost is a few microseconds; the savings are hours of debugging."
+      "explanation": "Silent interface bugs are the defining pain of ML pipelines. Every boundary has a coordinate system, a channel order, a value range, and a shape. Validating at the boundary with Pydantic turns every mismatch into an immediate error. The cost is a few microseconds; the savings are hours of debugging.",
+      "question_zh": "为什么生产视觉 pipeline 在每个阶段边界都用 Pydantic 模型（或等价物）？",
+      "options_zh": [
+        "Pydantic 比 dict 访问更快",
+        "类型化的 schema 能在边界上抓到接口不匹配；比如检测器返回 (cx, cy, w, h)，下游期望 (x1, y1, x2, y2)，Pydantic 会立即抛出验证错误，而不是悄悄产出空 crop",
+        "FastAPI 必须用 Pydantic",
+        "有助于 GPU 分配"
+      ],
+      "explanation_zh": "ML pipeline 最折磨人的就是隐性接口 bug。每个边界都涉及坐标系、通道顺序、数值范围、shape。在边界上用 Pydantic 校验，能把每次错配都变成立即报错。代价只是几微秒，省下的却是几小时调试时间。"
     },
     {
       "stage": "pre",
       "question": "On a CPU-only vision pipeline, which stage is most often the biggest latency block?",
-      "options": ["The detector's final NMS", "Image preprocessing (JPEG decode, colour conversion, resize); it is CPU-bound and often dominates when no GPU is involved or when the GPU model is small", "Writing the JSON response", "Reading the HTTP request body"],
+      "options": [
+        "The detector's final NMS",
+        "Image preprocessing (JPEG decode, colour conversion, resize); it is CPU-bound and often dominates when no GPU is involved or when the GPU model is small",
+        "Writing the JSON response",
+        "Reading the HTTP request body"
+      ],
       "correct": 1,
-      "explanation": "On CPU, preprocessing is frequently the biggest single cost. JPEG decode can take milliseconds, colour conversion more, resizing to model input another chunk. The rule is simple: profile before optimising. On GPU the detector typically dominates, but do not assume that on CPU."
+      "explanation": "On CPU, preprocessing is frequently the biggest single cost. JPEG decode can take milliseconds, colour conversion more, resizing to model input another chunk. The rule is simple: profile before optimising. On GPU the detector typically dominates, but do not assume that on CPU.",
+      "question_zh": "在 CPU-only 的视觉 pipeline 里，哪个阶段最常成为最大的延迟瓶颈？",
+      "options_zh": [
+        "检测器最后的 NMS",
+        "图像预处理（JPEG 解码、色彩空间转换、resize）；这部分完全 CPU bound，在没有 GPU 或 GPU 模型很小时常常是大头",
+        "写 JSON 响应",
+        "读 HTTP 请求体"
+      ],
+      "explanation_zh": "在 CPU 上，预处理常常是最大的单一开销。JPEG 解码可能要好几毫秒，色彩转换更费，再 resize 到模型输入又是一块。规则很简单：先 profile 再优化。GPU 上检测器通常占大头，但 CPU 上不能想当然。"
     },
     {
       "stage": "post",
       "question": "The pipeline classifier crashes when a detection has box size 3x4 pixels. What is the correct fix?",
-      "options": ["Add a global try/except and return empty classifications", "Set a min_crop threshold (e.g. 16 or 32 pixels) and skip classification for detections smaller than that; log the skip and include the detection in the response without a classification field", "Retrain the classifier on smaller images", "Increase batch size"],
+      "options": [
+        "Add a global try/except and return empty classifications",
+        "Set a min_crop threshold (e.g. 16 or 32 pixels) and skip classification for detections smaller than that; log the skip and include the detection in the response without a classification field",
+        "Retrain the classifier on smaller images",
+        "Increase batch size"
+      ],
       "correct": 1,
-      "explanation": "Tiny crops are a legitimate failure mode: the classifier was trained on 224x224 inputs and cannot reliably classify 3-pixel patches. A threshold (min_crop) skips those, preserves the detection, and produces a complete, honest response. Generic try/except hides the condition; returning no classification at all hides real failures; the right move is a named, logged skip."
+      "explanation": "Tiny crops are a legitimate failure mode: the classifier was trained on 224x224 inputs and cannot reliably classify 3-pixel patches. A threshold (min_crop) skips those, preserves the detection, and produces a complete, honest response. Generic try/except hides the condition; returning no classification at all hides real failures; the right move is a named, logged skip.",
+      "question_zh": "pipeline 里的分类器在某个 3x4 像素的检测框上崩了，正确的修复是什么？",
+      "options_zh": [
+        "全局 try/except，分类失败就返回空",
+        "设一个 min_crop 阈值（比如 16 或 32 像素），小于这个尺寸的检测就跳过分类；记录 skip，把检测保留在响应里但不带 classification 字段",
+        "用更小的图重训分类器",
+        "增大 batch size"
+      ],
+      "explanation_zh": "极小 crop 是合法的失败模式：分类器是在 224x224 输入上训练的，没法可靠分类 3 像素的 patch。设阈值（min_crop）跳过这类样本，保留检测结果，给出完整且诚实的响应。泛化的 try/except 会掩盖问题；干脆不返回分类也会掩盖真正的失败；正确做法是命名清晰、有日志的 skip。"
     },
     {
       "stage": "post",
       "question": "You add batching to the classifier (wait up to 10 ms, batch all pending crops, one GPU forward). What is the expected effect?",
-      "options": ["Latency strictly decreases", "Throughput increases significantly, per-request latency increases by up to the batching window (~10ms) plus a smaller amount from larger tensor ops; the right answer depends on whether the service is throughput-bound or latency-bound", "Throughput decreases because of the wait", "No effect"],
+      "options": [
+        "Latency strictly decreases",
+        "Throughput increases significantly, per-request latency increases by up to the batching window (~10ms) plus a smaller amount from larger tensor ops; the right answer depends on whether the service is throughput-bound or latency-bound",
+        "Throughput decreases because of the wait",
+        "No effect"
+      ],
       "correct": 1,
-      "explanation": "Batching is a throughput-latency trade. Each request waits up to the window, which adds latency. The batched forward pass is more efficient per image, so throughput scales with batch size. Use batching when QPS is high and individual latency has slack; avoid it when latency SLA is under 50ms."
+      "explanation": "Batching is a throughput-latency trade. Each request waits up to the window, which adds latency. The batched forward pass is more efficient per image, so throughput scales with batch size. Use batching when QPS is high and individual latency has slack; avoid it when latency SLA is under 50ms.",
+      "question_zh": "你给分类器加了 batching（最多等 10 ms，把所有等待中的 crop 攒成一批做一次 GPU forward），效果会怎样？",
+      "options_zh": [
+        "延迟严格降低",
+        "吞吐显著提升，单个请求的延迟在 batching 窗口（约 10ms）基础上还要加上 batch 张量计算的少量开销；具体取决于服务是吞吐 bound 还是延迟 bound",
+        "因为要等待，吞吐反而下降",
+        "没有任何影响"
+      ],
+      "explanation_zh": "Batching 是吞吐和延迟之间的权衡。每个请求最多要等一个窗口，这部分延迟跑不掉。但 batched forward 单图效率更高，吞吐随 batch size 增加而提升。当 QPS 高、单请求延迟有余量时用 batching；当延迟 SLA 低于 50ms 时就别用了。"
     },
     {
       "stage": "post",
       "question": "Your pipeline response is a 500 error when a user uploads a corrupted JPEG. How should you fix it?",
-      "options": ["Ignore it; the user will retry", "Catch image-decode failures early in preprocessing, return a 400 with a specific error code like 'image_decode_failed' so the client can retry with a different file instead of a 500 that implies server error", "Always return 200 with an empty result", "Move decoding to the classifier"],
+      "options": [
+        "Ignore it; the user will retry",
+        "Catch image-decode failures early in preprocessing, return a 400 with a specific error code like 'image_decode_failed' so the client can retry with a different file instead of a 500 that implies server error",
+        "Always return 200 with an empty result",
+        "Move decoding to the classifier"
+      ],
       "correct": 1,
-      "explanation": "A 500 from corrupt user input is an API contract bug. Bad inputs should return 4xx so the client knows it is their problem; 5xx responses signal a server problem and trigger the client's retry logic with the same bad input, amplifying load. Named failure codes (image_decode_failed, image_too_large, unsupported_content_type) let clients react correctly."
+      "explanation": "A 500 from corrupt user input is an API contract bug. Bad inputs should return 4xx so the client knows it is their problem; 5xx responses signal a server problem and trigger the client's retry logic with the same bad input, amplifying load. Named failure codes (image_decode_failed, image_too_large, unsupported_content_type) let clients react correctly.",
+      "question_zh": "用户上传一张损坏的 JPEG 时，你的 pipeline 返回 500 错误，应该怎么改？",
+      "options_zh": [
+        "不管它，让用户自己重试",
+        "在预处理早期捕获图像解码失败，返回 400 并附带 'image_decode_failed' 这类具体错误码，让客户端知道是要换文件而不是把同样的坏文件再发一次",
+        "永远返回 200 加空结果",
+        "把解码挪到分类器里"
+      ],
+      "explanation_zh": "因损坏的用户输入返回 500 是 API 契约 bug。坏输入应该返回 4xx，让客户端知道是自己的问题；返回 5xx 暗示服务端故障，会触发客户端用同样的坏输入重试，进一步放大负载。命名清晰的错误码（image_decode_failed、image_too_large、unsupported_content_type）能让客户端做出正确反应。"
     }
   ]
 }

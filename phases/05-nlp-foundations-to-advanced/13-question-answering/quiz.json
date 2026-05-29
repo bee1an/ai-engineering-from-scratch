@@ -12,7 +12,15 @@
         "A retrieved passage ID"
       ],
       "correct": 2,
-      "explanation": "Extractive QA outputs the span of the passage that contains the answer."
+      "explanation": "Extractive QA outputs the span of the passage that contains the answer.",
+      "question_zh": "抽取式 QA 预测什么？",
+      "options_zh": [
+        "生成的自然语言答案",
+        "只是一个置信度分数",
+        "答案 span 在给定 passage 中的起止 token 索引",
+        "检索到的 passage ID"
+      ],
+      "explanation_zh": "抽取式 QA 输出 passage 中包含答案的 span。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "A retriever (find relevant passages) and a reader (extract or generate the answer)"
       ],
       "correct": 3,
-      "explanation": "RAG = retriever (finds relevant context) plus reader (answers from it)."
+      "explanation": "RAG = retriever (finds relevant context) plus reader (answers from it).",
+      "question_zh": "基础 RAG 流水线由哪两部分定义？",
+      "options_zh": [
+        "联合训练的 encoder 和 decoder",
+        "reranker 和 translator",
+        "tokenizer 和 POS tagger",
+        "retriever（找相关 passage）和 reader（抽取或生成答案）"
+      ],
+      "explanation_zh": "RAG = retriever（找相关上下文）加 reader（基于它回答）。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Token-level F1"
       ],
       "correct": 2,
-      "explanation": "EM is strict equality after a defined normalization step; partial matches score zero."
+      "explanation": "EM is strict equality after a defined normalization step; partial matches score zero.",
+      "question_zh": "在 SQuAD 上，Exact Match (EM) 衡量什么？",
+      "options_zh": [
+        "编辑距离",
+        "逐词重叠",
+        "在归一化（小写、去标点、去冠词）后预测是否与参考完全相同",
+        "token 级 F1"
+      ],
+      "explanation_zh": "EM 是定义好的归一化后严格相等；部分匹配得 0。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Cross-lingual retrieval"
       ],
       "correct": 1,
-      "explanation": "SQuAD 2.0 includes unanswerable items; models trained on it can predict 'no answer'."
+      "explanation": "SQuAD 2.0 includes unanswerable items; models trained on it can predict 'no answer'.",
+      "question_zh": "deepset/roberta-base-squad2 相对 SQuAD 1.1 模型多了什么？",
+      "options_zh": [
+        "多语言支持",
+        "在不可回答问题上训练，让模型可以预测 'no answer'",
+        "更大的上下文窗口",
+        "跨语言检索"
+      ],
+      "explanation_zh": "SQuAD 2.0 包含不可回答项；在它上训练的模型能预测 'no answer'。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Context precision"
       ],
       "correct": 2,
-      "explanation": "Faithfulness checks each answer claim against retrieved context via NLI entailment."
+      "explanation": "Faithfulness checks each answer claim against retrieved context via NLI entailment.",
+      "question_zh": "RAGAS 的哪个维度专门针对幻觉？",
+      "options_zh": [
+        "Answer relevance",
+        "Context recall",
+        "Faithfulness，通过对答案 claim 与检索上下文做 NLI 蕴含来度量",
+        "Context precision"
+      ],
+      "explanation_zh": "Faithfulness 通过 NLI 蕴含逐 claim 检查答案是否被检索上下文支持。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "If the correct passage is not in the top-k, the reader cannot succeed regardless of how good it is"
       ],
       "correct": 3,
-      "explanation": "A reader cannot answer when the right passage is missing; retrieval recall bounds reader performance."
+      "explanation": "A reader cannot answer when the right passage is missing; retrieval recall bounds reader performance.",
+      "question_zh": "为什么应在评估 reader 准确率前先衡量检索召回？",
+      "options_zh": [
+        "transformer 要求",
+        "召回决定 ROUGE",
+        "reader 延迟取决于它",
+        "如果正确 passage 不在 top-k 内，reader 无论多好都不可能成功"
+      ],
+      "explanation_zh": "右 passage 缺失时 reader 无法回答；检索召回是 reader 性能的上界。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Removing the question"
       ],
       "correct": 0,
-      "explanation": "Grounding + explicit refusal instructions cuts hallucination rates substantially."
+      "explanation": "Grounding + explicit refusal instructions cuts hallucination rates substantially.",
+      "question_zh": "哪种 prompt 模式能减少 RAG 生成中的幻觉？",
+      "options_zh": [
+        "告诉模型只用提供的上下文回答，并在上下文不足时回 'I don't know'",
+        "包含更多 passage",
+        "要求模型有创造性",
+        "去掉问题"
+      ],
+      "explanation_zh": "锚定 + 显式拒答指令大幅降低幻觉率。"
     },
     {
       "stage": "post",
@@ -96,7 +152,15 @@
         "Open-domain trivia"
       ],
       "correct": 1,
-      "explanation": "Extractive QA gives verbatim quotes from an authoritative corpus, which compliance contexts demand."
+      "explanation": "Extractive QA gives verbatim quotes from an authoritative corpus, which compliance contexts demand.",
+      "question_zh": "在 2026 年，抽取式 QA 何时仍优于生成式 RAG？",
+      "options_zh": [
+        "对话式 QA",
+        "需要从权威来源逐字引用的受监管领域（法律、医疗、审计）",
+        "多语言支持",
+        "开放域 trivia"
+      ],
+      "explanation_zh": "抽取式 QA 给出来自权威语料的逐字引用，这是合规场景的要求。"
     }
   ]
 }

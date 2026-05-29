@@ -12,7 +12,15 @@
         "It is required by HIPAA."
       ],
       "correct": 1,
-      "explanation": "The conventions are a contract with the wider ecosystem. Honeycomb, Grafana Tempo, Jaeger, and Datadog all parse gen_ai.* attributes out of the box."
+      "explanation": "The conventions are a contract with the wider ecosystem. Honeycomb, Grafana Tempo, Jaeger, and Datadog all parse gen_ai.* attributes out of the box.",
+      "question_zh": "在阅读课程之前: 用 OTel GenAI 属性形态写 harness 的 span,实用上的好处是什么?",
+      "options_zh": [
+        "OTel span 在磁盘上压缩得更好。",
+        "任何兼容 OTel 的后端都能解析它们,不需要自定义 parser。",
+        "OTel 是只支持 Python 的标准,所以 harness 能拿到类型提示。",
+        "HIPAA 要求。"
+      ],
+      "explanation_zh": "这套约定是与广义生态的契约。Honeycomb、Grafana Tempo、Jaeger 和 Datadog 都能开箱即用地解析 gen_ai.* 属性。"
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "The span is renamed to 'error'."
       ],
       "correct": 1,
-      "explanation": "Status ERROR plus an exception event matches the OTel spec. The exception is re-raised so caller code can react."
+      "explanation": "Status ERROR plus an exception event matches the OTel spec. The exception is re-raised so caller code can react.",
+      "question_zh": "在 SpanBuilder.span() 上下文中抛出异常时,本节的 builder 会记录什么?",
+      "options_zh": [
+        "Span 被丢弃以避免污染 trace。",
+        "status=ERROR,status_message 包含异常类型和消息,并追加一个 'exception' event。",
+        "status 仍为 UNSET,异常被静默吞掉。",
+        "Span 被改名为 'error'。"
+      ],
+      "explanation_zh": "ERROR 状态加 exception event 与 OTel 规范一致。异常会被重新抛出,让调用方代码可以反应。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Cumulative counts reduce floating-point error."
       ],
       "correct": 0,
-      "explanation": "Prometheus' design choice: a backend reads cumulative counts and computes per-bucket differences. This lets the time series be a simple monotonic counter per bucket."
+      "explanation": "Prometheus' design choice: a backend reads cumulative counts and computes per-bucket differences. This lets the time series be a simple monotonic counter per bucket.",
+      "question_zh": "Prometheus 给 histogram 暴露 _bucket、_sum、_count 行。为什么 bucket 计数是累计的 (每个 le bucket 包含所有更小的 bucket)?",
+      "options_zh": [
+        "累计计数让 scraper 通过相减就能算出每个 bucket 的计数,不必存所有观测值。",
+        "Grafana 只支持累计计数。",
+        "并不是累计的; 本节的暴露格式是非标准的。",
+        "累计计数能减少浮点误差。"
+      ],
+      "explanation_zh": "Prometheus 的设计选择: 后端读取累计计数,通过差分得到每个 bucket。这让每个 bucket 的时间序列就是一个单调递增计数器。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "operation + tool.name."
       ],
       "correct": 1,
-      "explanation": "gen_ai.tool.name and gen_ai.tool.call.id are the canonical keys for tool executions in the GenAI conventions."
+      "explanation": "gen_ai.tool.name and gen_ai.tool.call.id are the canonical keys for tool executions in the GenAI conventions.",
+      "question_zh": "harness 把工具执行包成一个 span。在 GenAI 约定下,哪些属性 key 表明这是工具调用?",
+      "options_zh": [
+        "gen_ai.system + gen_ai.request.model。",
+        "gen_ai.tool.name + gen_ai.tool.call.id。",
+        "agent.harness.tool + agent.harness.call。",
+        "operation + tool.name。"
+      ],
+      "explanation_zh": "gen_ai.tool.name 和 gen_ai.tool.call.id 是 GenAI 约定中工具执行的规范键。"
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "The status_message field of the span."
       ],
       "correct": 1,
-      "explanation": "Histograms are the right tool for percentiles. The counter only counts; the trace contains raw spans but is not pre-aggregated."
+      "explanation": "Histograms are the right tool for percentiles. The counter only counts; the trace contains raw spans but is not pre-aggregated.",
+      "question_zh": "你想查询「read_file 调用的 p95 延迟是多少」。该查询哪份 artifact?",
+      "options_zh": [
+        "traces.jsonl 中每个 span 的 duration_ms,用脚本解析。",
+        "在一个时间窗口上 scrape 的 Prometheus histogram tool_latency_ms{tool=\"read_file\"}。",
+        "用计数器 tools_called_total 除以时间窗口。",
+        "span 的 status_message 字段。"
+      ],
+      "explanation_zh": "Histogram 是计算分位数的合适工具。计数器只数次数; trace 包含原始 span 但未做预聚合。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "The SDK requires a network connection at import time."
       ],
       "correct": 1,
-      "explanation": "The conventions are stable across implementations. The hand-rolled version exists for clarity; production wires in the SDK and reuses the same gen_ai.* keys."
+      "explanation": "The conventions are stable across implementations. The hand-rolled version exists for clarity; production wires in the SDK and reuses the same gen_ai.* keys.",
+      "question_zh": "评审者问为什么本节手写而不是引入 opentelemetry-sdk。哪个回答正确?",
+      "options_zh": [
+        "SDK 不支持 GenAI 约定。",
+        "手写让你了解线协议; 之后再换上 SDK,沿用同一套属性键。",
+        "手写在运行时更快。",
+        "SDK 在 import 时需要网络连接。"
+      ],
+      "explanation_zh": "约定在不同实现间是稳定的。手写版本是为了表达清晰; 生产里接入 SDK,复用同一套 gen_ai.* 键。"
     }
   ]
 }

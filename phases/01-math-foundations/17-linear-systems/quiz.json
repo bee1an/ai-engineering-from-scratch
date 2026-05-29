@@ -3,62 +3,102 @@
     {
       "stage": "pre",
       "question": "What does it mean geometrically when a system Ax = b has no exact solution?",
+      "question_zh": "当方程组 Ax = b 没有精确解时，几何上代表什么？",
       "options": [
         "The matrix A has all zero entries",
         "The vector b does not lie in the column space of A",
         "The system has more unknowns than equations",
         "The matrix A is symmetric"
       ],
+      "options_zh": [
+        "矩阵 A 全是 0",
+        "向量 b 不在 A 的列空间里",
+        "未知数个数多于方程数",
+        "矩阵 A 是对称的"
+      ],
       "correct": 1,
-      "explanation": "In the column picture, Ax = b asks: what linear combination of A's columns produces b? If b is not in the column space (span of A's columns), no exact solution exists. This happens when the system is overdetermined (more equations than unknowns)."
+      "explanation": "In the column picture, Ax = b asks: what linear combination of A's columns produces b? If b is not in the column space (span of A's columns), no exact solution exists. This happens when the system is overdetermined (more equations than unknowns).",
+      "explanation_zh": "从列空间角度看，Ax = b 是在问「A 的列怎样线性组合才能得到 b」。如果 b 不在 A 的列空间（A 各列张成的空间）中，就没有精确解。这通常发生在方程数多于未知数的超定系统里。"
     },
     {
       "stage": "pre",
       "question": "Why is partial pivoting used in Gaussian elimination?",
+      "question_zh": "为什么高斯消元法中要使用部分主元（partial pivoting）？",
       "options": [
         "It reduces the time complexity from O(n^3) to O(n^2)",
         "It selects the largest available pivot to minimize error amplification from dividing by small numbers",
         "It ensures the result is always an integer",
         "It eliminates the need for back substitution"
       ],
+      "options_zh": [
+        "把复杂度从 O(n^3) 降到 O(n^2)",
+        "选择当前可用的最大主元，避免因除以很小的数而放大误差",
+        "保证结果始终是整数",
+        "不再需要回代"
+      ],
       "correct": 1,
-      "explanation": "Without pivoting, dividing by a small pivot amplifies rounding errors. Partial pivoting swaps rows to place the largest absolute value in the pivot position, keeping the multipliers small and the computation numerically stable."
+      "explanation": "Without pivoting, dividing by a small pivot amplifies rounding errors. Partial pivoting swaps rows to place the largest absolute value in the pivot position, keeping the multipliers small and the computation numerically stable.",
+      "explanation_zh": "不做主元选取时，除以一个很小的主元会放大舍入误差。部分主元会通过交换行，把当前列的最大绝对值放到主元位置，让乘子保持较小，从而保证数值稳定。"
     },
     {
       "stage": "post",
       "question": "Why is Cholesky decomposition preferred over LU for solving (X^T X + lambda I) w = X^T y in ridge regression?",
+      "question_zh": "在岭回归求解 (X^T X + λI) w = X^T y 时，为什么 Cholesky 分解比 LU 更合适？",
       "options": [
         "Cholesky works on any matrix while LU requires square matrices",
         "The matrix X^T X + lambda I is symmetric positive definite, so Cholesky is twice as fast as LU and requires half the storage",
         "Cholesky gives a more accurate answer than LU",
         "LU decomposition cannot handle regularization terms"
       ],
+      "options_zh": [
+        "Cholesky 适用于任意矩阵，而 LU 要求方阵",
+        "X^T X + λI 是对称正定矩阵，Cholesky 比 LU 快一倍，存储也只需一半",
+        "Cholesky 比 LU 给出的结果更精确",
+        "LU 分解无法处理正则项"
+      ],
       "correct": 1,
-      "explanation": "When lambda > 0, X^T X + lambda I is always symmetric positive definite. Cholesky factors A = LL^T in O(n^3/3) operations — roughly half the O(2n^3/3) of LU — and needs only the lower triangle. It exploits the symmetry that LU does not."
+      "explanation": "When lambda > 0, X^T X + lambda I is always symmetric positive definite. Cholesky factors A = LL^T in O(n^3/3) operations — roughly half the O(2n^3/3) of LU — and needs only the lower triangle. It exploits the symmetry that LU does not.",
+      "explanation_zh": "当 λ > 0 时，X^T X + λI 始终是对称正定矩阵。Cholesky 把 A 分解为 LL^T，运算量约 O(n^3/3)，大约是 LU（O(2n^3/3)）的一半，存储也只需下三角。它利用了 LU 没用到的对称性。"
     },
     {
       "stage": "post",
       "question": "A matrix has condition number kappa = 10^8. You are using float64 (~15 digits of precision). How many digits of the solution can you trust?",
+      "question_zh": "矩阵的条件数 κ = 10^8，你使用 float64（约 15 位精度）。解的可信位数大约是多少？",
       "options": [
         "About 15 digits",
         "About 7 digits (15 - log10(10^8) = 15 - 8)",
         "About 8 digits",
         "Zero digits — the solution is meaningless"
       ],
+      "options_zh": [
+        "大约 15 位",
+        "大约 7 位（15 - log10(10^8) = 15 - 8）",
+        "大约 8 位",
+        "0 位，解毫无意义"
+      ],
       "correct": 1,
-      "explanation": "You lose approximately log10(kappa) digits of precision. With kappa = 10^8, you lose about 8 digits from float64's ~15 digits, leaving about 7 trustworthy digits. If kappa approaches 10^16, the solution becomes meaningless in float64."
+      "explanation": "You lose approximately log10(kappa) digits of precision. With kappa = 10^8, you lose about 8 digits from float64's ~15 digits, leaving about 7 trustworthy digits. If kappa approaches 10^16, the solution becomes meaningless in float64.",
+      "explanation_zh": "解的精度大约会损失 log10(κ) 位。κ = 10^8 时，从 float64 的约 15 位中丢掉约 8 位，剩下大约 7 位可信。如果 κ 接近 10^16，float64 下的解就基本没意义了。"
     },
     {
       "stage": "post",
       "question": "What is the main advantage of LU decomposition over Gaussian elimination when you need to solve Ax = b for many different b vectors?",
+      "question_zh": "在需要对许多不同的 b 解 Ax = b 时，LU 分解相比每次重新做高斯消元的主要优势是什么？",
       "options": [
         "LU decomposition is more numerically stable",
         "The O(n^3) factorization is done once; each subsequent solve with a new b costs only O(n^2)",
         "LU decomposition works on rectangular matrices",
         "LU always produces a unique solution"
       ],
+      "options_zh": [
+        "LU 数值上更稳定",
+        "O(n^3) 的分解只做一次；之后每个新 b 的求解只要 O(n^2)",
+        "LU 适用于矩形矩阵",
+        "LU 总是给出唯一解"
+      ],
       "correct": 1,
-      "explanation": "LU factors A = LU once in O(n^3). Then for each new b, you solve Ly = b (forward substitution) and Ux = y (back substitution), each O(n^2). Gaussian elimination would redo the full O(n^3) for every new b."
+      "explanation": "LU factors A = LU once in O(n^3). Then for each new b, you solve Ly = b (forward substitution) and Ux = y (back substitution), each O(n^2). Gaussian elimination would redo the full O(n^3) for every new b.",
+      "explanation_zh": "LU 用 O(n^3) 把 A 分解为 LU 一次。之后对每个新的 b，只需做前代 Ly = b 和回代 Ux = y，各 O(n^2)。如果直接用高斯消元，每来一个 b 就得重做 O(n^3) 的工作。"
     }
   ]
 }

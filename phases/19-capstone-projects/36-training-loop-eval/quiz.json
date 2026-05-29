@@ -12,7 +12,15 @@
         "It is required by AdamW"
       ],
       "correct": 1,
-      "explanation": "Input is tokens 0..T-1; target is tokens 1..T; loss is computed on the flattened (batch*seq, vocab) and (batch*seq,) shapes."
+      "explanation": "Input is tokens 0..T-1; target is tokens 1..T; loss is computed on the flattened (batch*seq, vocab) and (batch*seq,) shapes.",
+      "question_zh": "为什么 target tensor 必须是 input tensor 移位一位?",
+      "options_zh": [
+        "Cross entropy 需要相同张量",
+        "训练目标是预测下一个 token: 模型在每个位置预测下一个 token; 忘了移位就训练成了模型预测自己,什么也没学到",
+        "能加速优化器",
+        "AdamW 要求"
+      ],
+      "explanation_zh": "input 是 token 0..T-1; target 是 token 1..T; loss 在展平后的 (batch*seq, vocab) 与 (batch*seq,) 上计算。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "It computes gradients twice"
       ],
       "correct": 1,
-      "explanation": "Held out evaluation needs no gradients, no dropout, and a fixed slice of validation data to be reproducible across runs."
+      "explanation": "Held out evaluation needs no gradients, no dropout, and a fixed slice of validation data to be reproducible across runs.",
+      "question_zh": "evaluate_model 比训练步多做了什么?",
+      "options_zh": [
+        "运行优化器",
+        "在 no_grad 下、关闭 dropout 地跑固定数量的验证 batch,返回可复现的均值 loss",
+        "改变模型权重",
+        "两次计算梯度"
+      ],
+      "explanation_zh": "留出评估不需要梯度、不需要 dropout,且需要固定的验证切片,以便跨次运行可复现。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Only the LayerNorm scales"
       ],
       "correct": 1,
-      "explanation": "Putting decay on a LayerNorm scale drives the scale to zero and breaks normalization; the split is a standard production pattern."
+      "explanation": "Putting decay on a LayerNorm scale drives the scale to zero and breaks normalization; the split is a standard production pattern.",
+      "question_zh": "AdamW 的哪些参数会被加 weight decay?",
+      "options_zh": [
+        "所有参数都同等",
+        "矩阵形态的张量 (linear 权重、embedding 表) 加 weight decay; scale、shift、bias 张量不加",
+        "只有 LM head",
+        "只有 LayerNorm 的 scale"
+      ],
+      "explanation_zh": "在 LayerNorm 的 scale 上加 decay 会把它推向 0,破坏归一化; 这种分组是标准的生产做法。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Step function"
       ],
       "correct": 1,
-      "explanation": "Warmup populates optimizer state; cosine decay tapers the step size so the final phase fine-tunes the weights."
+      "explanation": "Warmup populates optimizer state; cosine decay tapers the step size so the final phase fine-tunes the weights.",
+      "question_zh": "warmup + cosine 调度从第 0 步到最后一步的形状是?",
+      "options_zh": [
+        "常数",
+        "在 warmup_steps 内从 0 线性升到 max,再在剩余步数上从 max 余弦衰减到 lr_min",
+        "指数增长",
+        "阶梯函数"
+      ],
+      "explanation_zh": "Warmup 让优化器状态稳定下来; cosine 衰减把步长收窄,让训练后期做精细调整。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "It removes the warmup requirement"
       ],
       "correct": 1,
-      "explanation": "Gradient clipping is the cheapest insurance against divergence; one is the default that survives most setups."
+      "explanation": "Gradient clipping is the cheapest insurance against divergence; one is the default that survives most setups.",
+      "question_zh": "为什么在 optimizer.step() 之前对梯度做范数裁剪?",
+      "options_zh": [
+        "加速 matmul",
+        "一个坏 batch 可能产生超大梯度,毁掉数小时训练; 裁剪到 max_norm=1.0 把优化器约束在安全范围,而不影响正常更新",
+        "降低显存占用",
+        "去掉 warmup 的需求"
+      ],
+      "explanation_zh": "梯度裁剪是最便宜的发散保险; 1.0 是适用于多数设置的默认值。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "JSONL uses less GPU memory"
       ],
       "correct": 1,
-      "explanation": "Any crash leaves a readable artifact; resume reads the last step; tooling on top is trivial."
+      "explanation": "Any crash leaves a readable artifact; resume reads the last step; tooling on top is trivial.",
+      "question_zh": "为什么把每步记录写成 JSONL,而不是 pickle 状态?",
+      "options_zh": [
+        "JSONL 是优化器要求的",
+        "JSONL 跨重构稳定、可 grep、用 30 行就能画图、能在崩溃中保存; pickle 状态把你绑死在产生它的模块布局上",
+        "JSONL 训练得更快",
+        "JSONL 占更少的 GPU 显存"
+      ],
+      "explanation_zh": "任何崩溃都留下可读 artifact; resume 读最后一步; 上层工具搭起来都很轻松。"
     }
   ]
 }

@@ -12,7 +12,15 @@
         "RNN encoder and decoder"
       ],
       "correct": 1,
-      "explanation": "Every modern decoder LLM block is attention plus MLP, each with its own residual path and its own LayerNorm."
+      "explanation": "Every modern decoder LLM block is attention plus MLP, each with its own residual path and its own LayerNorm.",
+      "question_zh": "单个 decoder transformer block 内有哪两个子层?",
+      "options_zh": [
+        "卷积与 RNN 门",
+        "多头因果 attention 与逐位置的 MLP,各自包在一个 residual 连接里",
+        "embedding 查找与 softmax",
+        "RNN encoder 与 decoder"
+      ],
+      "explanation_zh": "现代 decoder LLM 的每个 block 都是 attention + MLP,各自带自己的 residual 路径和自己的 LayerNorm。"
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "Pre-LN works only for encoders"
       ],
       "correct": 1,
-      "explanation": "Pre-LN trains stably without warmup at common learning rates; post-LN is what the 2017 paper shipped and needed warmup."
+      "explanation": "Pre-LN trains stably without warmup at common learning rates; post-LN is what the 2017 paper shipped and needed warmup.",
+      "question_zh": "在深度上 pre-LN 与 post-LN 的关键区别是?",
+      "options_zh": [
+        "pre-LN 用不同的 attention 数学",
+        "pre-LN 让 residual 信号保持未归一化,梯度可以干净地传到 embedding; post-LN 把 norm 放在 residual 加之后,会在深度上压缩梯度,需要 warmup",
+        "post-LN 在 GPU 上更快",
+        "pre-LN 只对 encoder 有用"
+      ],
+      "explanation_zh": "pre-LN 在常见学习率下不需要 warmup 就能稳定训练; post-LN 是 2017 年那篇论文的版本,需要 warmup。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Picks the longest sequence in the batch"
       ],
       "correct": 1,
-      "explanation": "Forgetting the causal mask trains a model that can read future tokens; the mask is the only piece that enforces causality."
+      "explanation": "Forgetting the causal mask trains a model that can read future tokens; the mask is the only piece that enforces causality.",
+      "question_zh": "多头 attention 中的 causal mask 做什么?",
+      "options_zh": [
+        "随机丢 token",
+        "把 attention logits 的上三角设为负无穷,token i 就不能 attend 到位置大于 i 的 token",
+        "对 attention score 做归一化",
+        "挑出 batch 中最长的序列"
+      ],
+      "explanation_zh": "忘了 causal mask,模型就会读到未来 token; 它是唯一强制因果性的部件。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "It removes the residual"
       ],
       "correct": 1,
-      "explanation": "Same math, fewer kernels; reference implementations of GPT-2, LLaMA, and Mistral all ship the fused projection."
+      "explanation": "Same math, fewer kernels; reference implementations of GPT-2, LLaMA, and Mistral all ship the fused projection.",
+      "question_zh": "为什么使用融合的 QKV 投影,而不是三个独立的 linear?",
+      "options_zh": [
+        "改变模型表达力",
+        "宽度为 3*d_model 的一个 linear 把三次 kernel 启动和三次 matmul 合并为一次,在每种加速器上都更快,并与 GPT-2 参考实现一致",
+        "可以避免 softmax",
+        "可以去掉 residual"
+      ],
+      "explanation_zh": "数学相同、kernel 更少; GPT-2、LLaMA、Mistral 的参考实现都用融合投影。"
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "Inside the feed forward expansion"
       ],
       "correct": 1,
-      "explanation": "Dropout belongs on the attention output and on the MLP residual update, never on the identity branch of the residual."
+      "explanation": "Dropout belongs on the attention output and on the MLP residual update, never on the identity branch of the residual.",
+      "question_zh": "transformer block 中 dropout 不应放在哪里?",
+      "options_zh": [
+        "attention softmax 输出上",
+        "residual 的 identity 路径上,因为这破坏了让深度上梯度流动的加性恒等",
+        "第二个 MLP linear 之后",
+        "前馈扩展内部"
+      ],
+      "explanation_zh": "Dropout 放在 attention 输出和 MLP 残差更新上,绝不要放在 residual 的 identity 分支上。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Buffers improve numerical accuracy"
       ],
       "correct": 1,
-      "explanation": "Allocate once with register_buffer, slice per forward; otherwise the mask becomes a per-call allocation cost."
+      "explanation": "Allocate once with register_buffer, slice per forward; otherwise the mask becomes a per-call allocation cost.",
+      "question_zh": "为什么把 causal mask 注册为 buffer,而不是每次 forward 都分配?",
+      "options_zh": [
+        "buffer 经过加密",
+        "mask 只依赖最大上下文长度,所以构造时分配一次、每次 forward 切片活动窗口,可避免长上下文下的分配热点",
+        "buffer 只能在 GPU 上运行",
+        "buffer 改善数值精度"
+      ],
+      "explanation_zh": "用 register_buffer 一次分配,每次 forward 切片; 否则 mask 会变成每次调用的分配开销。"
     }
   ]
 }

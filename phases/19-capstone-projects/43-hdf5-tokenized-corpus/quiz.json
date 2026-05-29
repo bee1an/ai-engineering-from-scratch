@@ -12,7 +12,15 @@
         "Random reasons"
       ],
       "correct": 1,
-      "explanation": "The dataloader wants a flat token stream with addressable slices; HDF5 supplies that natively."
+      "explanation": "The dataloader wants a flat token stream with addressable slices; HDF5 supplies that natively.",
+      "question_zh": "为什么把分词后的语料存成可调整大小的、分块的 HDF5 数据集,而不是 JSONL?",
+      "options_zh": [
+        "HDF5 的 logo 更小",
+        "HDF5 提供分块、纯整数、内存映射且 O(1) 随机访问的读取; JSONL 把 parser 放进每次热路径读取",
+        "JSONL 已弃用",
+        "随机原因"
+      ],
+      "explanation_zh": "Dataloader 想要平坦的 token 流和可寻址切片; HDF5 原生提供。"
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "Pick the largest chunk that fits in RAM"
       ],
       "correct": 1,
-      "explanation": "Mismatched chunks halve throughput because every sample straddles two chunks instead of one."
+      "explanation": "Mismatched chunks halve throughput because every sample straddles two chunks instead of one.",
+      "question_zh": "HDF5 chunk 与 trainer 的 window_size 应该按什么规则配?",
+      "options_zh": [
+        "总是 chunk=1",
+        "把 chunk 设为 window_size 的倍数,使每个样本落在 1 或 2 个 chunk 内,读对页缓存对齐",
+        "把 chunk 设成文档长度",
+        "选能放进 RAM 的最大 chunk"
+      ],
+      "explanation_zh": "Chunk 不匹配会让吞吐减半,因为每个样本都跨两个 chunk 而不是落在一个里。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Attributes are mandatory"
       ],
       "correct": 1,
-      "explanation": "The chunked layout sometimes leaves trailing slots; the attribute carries the truth."
+      "explanation": "The chunked layout sometimes leaves trailing slots; the attribute carries the truth.",
+      "question_zh": "为什么 token_count 存成 HDF5 attribute,而不是从数据集 shape 推断?",
+      "options_zh": [
+        "Attribute 漂亮",
+        "尾部 chunk 可能未填满; 没有显式 attribute,reader 会越过真实结尾,读到 0 padding 的 token,模型就学会预测 0",
+        "Shape 读取慢",
+        "Attribute 是必需的"
+      ],
+      "explanation_zh": "Chunked 布局有时尾槽未满; attribute 携带真值。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Speeds up sha256"
       ],
       "correct": 1,
-      "explanation": "Buffer-then-extend at chunk size is the only way to keep HDF5 chunks contiguous on disk."
+      "explanation": "Buffer-then-extend at chunk size is the only way to keep HDF5 chunks contiguous on disk.",
+      "question_zh": "writer 在每次 resize 前把 token 缓冲到 chunk_size,达到了什么效果?",
+      "options_zh": [
+        "节省几个 CPU 周期",
+        "写入是连续且按 chunk 对齐的,避免逐 token resize 造成的碎片",
+        "缩小词表",
+        "加速 sha256"
+      ],
+      "explanation_zh": "「先缓冲再以 chunk 大小扩展」是让 HDF5 chunk 在磁盘上保持连续的唯一办法。"
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "Security"
       ],
       "correct": 1,
-      "explanation": "Mixing the two modes is the most common cause of 'file is locked' failures."
+      "explanation": "Mixing the two modes is the most common cause of 'file is locked' failures.",
+      "question_zh": "为什么 swmr=True 是在 reader 端打开,而不是在 writer 端?",
+      "options_zh": [
+        "随机偏好",
+        "Single-Writer-Multiple-Reader 模式让 dataloader worker 可以安全地共享文件; writer 不需要特殊模式,因为它每个进程写一个分片",
+        "性能",
+        "安全"
+      ],
+      "explanation_zh": "把两种模式混在一起是「文件被锁」失败最常见的原因。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Random data"
       ],
       "correct": 1,
-      "explanation": "Without an explicit boundary the trainer learns boundaries as noise; with it the boundary becomes a usable separator."
+      "explanation": "Without an explicit boundary the trainer learns boundaries as noise; with it the boundary becomes a usable separator.",
+      "question_zh": "boundary token id 用来显式表达什么?",
+      "options_zh": [
+        "词表大小限制",
+        "打包窗口里的文档边界,免得模型在跨文档拼接上被静默训练",
+        "压缩",
+        "随机数据"
+      ],
+      "explanation_zh": "没有显式边界时,trainer 会把边界当作噪声学习; 有了它,边界就是可用的分隔符。"
     }
   ]
 }

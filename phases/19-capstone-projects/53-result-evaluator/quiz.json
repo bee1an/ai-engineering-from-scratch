@@ -12,7 +12,15 @@
         "Because t tests are always required by IRB"
       ],
       "correct": 1,
-      "explanation": "Pairing by seed cancels out random initialisation effects. The remaining difference is attributable to the configuration change, which is what the test measures."
+      "explanation": "Pairing by seed cancels out random initialisation effects. The remaining difference is attributable to the configuration change, which is what the test measures.",
+      "question_zh": "为什么 evaluator 用配对 t 检验,而不是比较两个单一数字?",
+      "options_zh": [
+        "因为 numpy 要求成对数组",
+        "因为按相同 seed 把候选与 baseline 配对,可以把配置变化从随机初始化噪声中分离",
+        "因为 runner 不能输出单一数字",
+        "因为 IRB 总是要求做 t 检验"
+      ],
+      "explanation_zh": "按 seed 配对消去随机初始化的影响。剩下的差异归因于配置变化,这正是检验衡量的对象。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Because the parser expects it"
       ],
       "correct": 0,
-      "explanation": "Higher is better metrics improve when they go up; lower is better metrics improve when they go down. The direction field tells the improvement function which sign convention to apply."
+      "explanation": "Higher is better metrics improve when they go up; lower is better metrics improve when they go down. The direction field tells the improvement function which sign convention to apply.",
+      "question_zh": "为什么 evaluator 在每个 metric 上携带 direction 字段?",
+      "options_zh": [
+        "因为 accuracy 与 loss 的方向相反; 改进的符号取决于该 metric 哪个方向更好",
+        "因为 runner 要求",
+        "因为 numpy 计算方差需要 direction",
+        "因为 parser 期望它"
+      ],
+      "explanation_zh": "「越大越好」的 metric 上升即改进; 「越小越好」的 metric 下降即改进。Direction 字段告诉 improvement 函数采用哪种符号约定。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "failed"
       ],
       "correct": 2,
-      "explanation": "A statistically significant change that is too small to act on is still noise from the loop's point of view. The threshold gate runs before the significance gate."
+      "explanation": "A statistically significant change that is too small to act on is still noise from the loop's point of view. The threshold gate runs before the significance gate.",
+      "question_zh": "当 |improvement| 低于阈值时,即便 p value 显著,verdict 路径返回什么?",
+      "options_zh": [
+        "improved",
+        "regressed",
+        "noise",
+        "failed"
+      ],
+      "explanation_zh": "统计显著但量级太小、不值得行动的变化,从循环视角看仍是 noise。阈值闸门在显著性闸门之前。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Because the runner only emits log scaled metrics"
       ],
       "correct": 1,
-      "explanation": "Perplexity is exp(loss). A small loss change is a large perplexity change. Taking the log keeps relative improvements comparable to linear metrics under one threshold."
+      "explanation": "Perplexity is exp(loss). A small loss change is a large perplexity change. Taking the log keeps relative improvements comparable to linear metrics under one threshold.",
+      "question_zh": "为什么 evaluator 在计算 improvement 之前对 log 缩放的 metric 做变换?",
+      "options_zh": [
+        "numpy 的 log 更快",
+        "Perplexity 等 metric 随 loss 指数增长; 转到 log 空间让像 2% 这种阈值在线性与 log 指标间都有意义",
+        "p value 依赖它",
+        "runner 只输出 log 缩放 metric"
+      ],
+      "explanation_zh": "Perplexity 是 exp(loss)。一个小 loss 变化对应大 perplexity 变化。取 log 让相对改进在同一阈值下与线性指标可比。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "When the metric scale is log"
       ],
       "correct": 1,
-      "explanation": "The t distribution needs at least one degree of freedom. With n less than two there is no variance estimate and the helper returns None so the verdict path can mark the run as noise."
+      "explanation": "The t distribution needs at least one degree of freedom. With n less than two there is no variance estimate and the helper returns None so the verdict path can mark the run as noise.",
+      "question_zh": "配对 t 检验助手在什么时候返回 p_value = None?",
+      "options_zh": [
+        "当均值相等时",
+        "当成对样本少于两个时",
+        "当方差为零时",
+        "当 metric 是 log scale 时"
+      ],
+      "explanation_zh": "t 分布需要至少 1 自由度。n 小于 2 时没有方差估计,助手返回 None,verdict 路径据此把这次运行标为 noise。"
     },
     {
       "stage": "check",
@@ -72,7 +112,15 @@
         "The evaluator falls back to a one sided test"
       ],
       "correct": 1,
-      "explanation": "A failed run invalidates the candidate set. The evaluator short circuits the verdict path and returns failed with the offending terminals listed, so the orchestrator does not draw a conclusion from a crashed run."
+      "explanation": "A failed run invalidates the candidate set. The evaluator short circuits the verdict path and returns failed with the offending terminals listed, so the orchestrator does not draw a conclusion from a crashed run.",
+      "question_zh": "如果哪怕一个候选结果的 terminal 标签不是 ok,会发生什么?",
+      "options_zh": [
+        "evaluator 丢掉该 seed 继续",
+        "evaluator 返回 failed,在 rationale 中记录有问题的 terminal",
+        "evaluator 重试运行",
+        "evaluator 退化为单侧检验"
+      ],
+      "explanation_zh": "失败的运行使候选集失效。Evaluator 短路 verdict 路径,返回 failed 并列出违规 terminal,使编排器不会从崩溃运行得出结论。"
     }
   ]
 }

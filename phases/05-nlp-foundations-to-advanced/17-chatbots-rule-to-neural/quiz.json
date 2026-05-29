@@ -12,7 +12,15 @@
         "Tracks which required parameters (date, destination, amount) are still missing and asks for them in sequence"
       ],
       "correct": 3,
-      "explanation": "Slot filling iteratively collects the structured parameters a task handler needs."
+      "explanation": "Slot filling iteratively collects the structured parameters a task handler needs.",
+      "question_zh": "在基于规则的聊天机器人中，slot-filling 状态机做什么？",
+      "options_zh": [
+        "检测讽刺",
+        "选择最流畅的回复",
+        "embed 用户消息",
+        "跟踪还缺哪些必填参数（日期、目的地、金额），并按顺序逐项询问"
+      ],
+      "explanation_zh": "Slot filling 反复收集任务处理器需要的结构化参数。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "It uses BM25"
       ],
       "correct": 2,
-      "explanation": "Retrieval surfaces pre-written answers; no generation means no fabricated content."
+      "explanation": "Retrieval surfaces pre-written answers; no generation means no fabricated content.",
+      "question_zh": "为什么基于检索的聊天对幻觉更具抵抗力？",
+      "options_zh": [
+        "它使用 embedding",
+        "它拒绝所有查询",
+        "它从精选集合中返回预设回复，而不是生成新文本",
+        "它使用 BM25"
+      ],
+      "explanation_zh": "检索从预先写好的答案中选择；不生成内容意味着不会捏造。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Bigger context window"
       ],
       "correct": 2,
-      "explanation": "Agents add a plan-act-observe loop with tool calls and a termination condition."
+      "explanation": "Agents add a plan-act-observe loop with tool calls and a termination condition.",
+      "question_zh": "什么定义了 LLM agent 循环与单次 LLM 调用的区别？",
+      "options_zh": [
+        "使用 greedy 解码",
+        "使用 softmax",
+        "一个控制器交替进行 LLM 调用和工具调用，直到模型给出最终回答或步数预算耗尽",
+        "更大的上下文窗口"
+      ],
+      "explanation_zh": "Agent 增加了 plan-act-observe 循环，包含工具调用和终止条件。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "It avoids embeddings"
       ],
       "correct": 2,
-      "explanation": "Hybrid systems use deterministic rules for risky actions and reserve LLM agents for open-ended queries."
+      "explanation": "Hybrid systems use deterministic rules for risky actions and reserve LLM agents for open-ended queries.",
+      "question_zh": "为什么混合路由（规则 + 检索 + LLM agent）是 2026 年生产默认？",
+      "options_zh": [
+        "维护更便宜",
+        "它消除了评估的需要",
+        "没有单一架构能很好处理每种请求；规则覆盖破坏性动作，检索覆盖 FAQ，agent 处理模糊的开放式查询",
+        "它避免使用 embedding"
+      ],
+      "explanation_zh": "混合系统对高风险动作使用确定性规则，对开放式查询才动用 LLM agent。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "User-supplied (direct) or document-supplied (indirect) text that tries to override the system prompt or hijack the agent's behavior"
       ],
       "correct": 3,
-      "explanation": "Prompt injection rewrites the agent's behavior via untrusted text in user input or tool outputs."
+      "explanation": "Prompt injection rewrites the agent's behavior via untrusted text in user input or tool outputs.",
+      "question_zh": "什么是 prompt injection？",
+      "options_zh": [
+        "只是 SQL injection 的一个变体",
+        "一种 tokenizer 攻击",
+        "向 embedding 中注入 token",
+        "用户提供（直接）或文档提供（间接）的文本，试图覆盖系统 prompt 或劫持 agent 行为"
+      ],
+      "explanation_zh": "Prompt injection 通过用户输入或工具输出中的不可信文本改写 agent 行为。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "SQL injection"
       ],
       "correct": 0,
-      "explanation": "Prompt injection is LLM01 in the OWASP LLM Apps Top 10 (2025)."
+      "explanation": "Prompt injection is LLM01 in the OWASP LLM Apps Top 10 (2025).",
+      "question_zh": "OWASP LLM Apps 2025 Top 10 中排在 LLM01 的风险是什么？",
+      "options_zh": [
+        "Prompt injection（直接和间接）",
+        "不安全反序列化",
+        "访问控制失效",
+        "SQL injection"
+      ],
+      "explanation_zh": "Prompt injection 是 OWASP LLM Apps Top 10 (2025) 中的 LLM01。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Lower temperature"
       ],
       "correct": 1,
-      "explanation": "PVE checks each step against the agreed plan, so injected instructions from tool outputs are rejected."
+      "explanation": "PVE checks each step against the agreed plan, so injected instructions from tool outputs are rejected.",
+      "question_zh": "哪种缓解模式通过把规划与执行分开来减少间接 prompt injection？",
+      "options_zh": [
+        "更短的上下文",
+        "Plan-Verify-Execute：agent 先规划，再针对计划核对每个动作，然后执行——阻止工具输出注入新的未规划动作",
+        "更大模型",
+        "更低温度"
+      ],
+      "explanation_zh": "PVE 让每一步都对照已商定的计划核查，于是工具输出中注入的指令会被拒绝。"
     },
     {
       "stage": "post",
@@ -96,7 +152,15 @@
         "Confident fabrication, prompt injection, and scope creep mean the LLM cannot be the sole authority for irreversible side effects"
       ],
       "correct": 3,
-      "explanation": "Hallucination and injection make irreversible actions through pure LLM agents unsafe; require deterministic confirmation flows."
+      "explanation": "Hallucination and injection make irreversible actions through pure LLM agents unsafe; require deterministic confirmation flows.",
+      "question_zh": "为什么即使在 LLM-agent 系统中，破坏性动作（支付、删除）也必须走结构化流程？",
+      "options_zh": [
+        "LLM 慢",
+        "beam search 不安全",
+        "工具不能被调用",
+        "自信捏造、prompt injection 和范围漂移意味着 LLM 不能成为不可逆副作用的唯一权威"
+      ],
+      "explanation_zh": "幻觉和 injection 让纯 LLM agent 执行不可逆动作不安全；需要确定性确认流程。"
     }
   ]
 }

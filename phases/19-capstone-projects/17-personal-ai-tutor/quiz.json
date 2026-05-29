@@ -12,7 +12,15 @@
         "Switches to a different concept node"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "当学习者直接索取答案时,Socratic 导师策略会怎么做?",
+      "options_zh": [
+        "提出一个引导性问题,把学习者一步步引向答案",
+        "记录请求并保持沉默",
+        "立即给出答案并继续下一个话题",
+        "切换到另一个概念节点"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Only the most recently studied node"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "课程图编码的是什么结构?",
+      "options_zh": [
+        "概念的有向图,带有先修边,挂接 OER 内容",
+        "话题的随机洗牌",
+        "互不相关的概念扁平列表",
+        "只保存最近学习过的节点"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Per-concept mastery probability via Bayesian knowledge tracing or a similar variant"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "学习者模型在每次交互后更新什么?",
+      "options_zh": [
+        "底层 LLM 的权重",
+        "COPPA 留存策略",
+        "课程图的 schema",
+        "通过 Bayesian knowledge tracing 或类似变体更新每个概念的掌握概率"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Episodic holds embeddings; semantic holds raw audio"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "记忆如何在 episodic 与 semantic 存储之间分配?",
+      "options_zh": [
+        "episodic 保留每次交互; semantic 保存从 episodic 提升上来的、压缩后的错误和偏好",
+        "二者是同一份数据的副本",
+        "episodic 给家长,semantic 给学生",
+        "episodic 存 embedding,semantic 存原始音频"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "COPPA-aware retention with auto-deletion after a defined window and parental access"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "K-12 学生的记忆留存受哪种约束影响?",
+      "options_zh": [
+        "基于模型上下文长度的留存",
+        "永久留存,不删除",
+        "仅 GDPR",
+        "符合 COPPA 的留存: 在规定窗口后自动删除,且家长可访问"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "A single one-hour session with one learner"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "用于把关交付物的 efficacy 研究结构是?",
+      "options_zh": [
+        "匿名互联网调查",
+        "30 秒的 A/B 测试",
+        "10 名学生持续两周的 pre-test/post-test,与非自适应基线对照组对比",
+        "对 1 名学生进行的单次 1 小时会话"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Text typed, voice via LiveKit + Whisper, and photo math via dots.ocr or PaliGemma 2"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "导师向学习者暴露哪些多模态输入路径?",
+      "options_zh": [
+        "仅文本",
+        "仅照片,通过自定义 OCR 模型",
+        "仅语音,无文本或照片",
+        "文本输入、通过 LiveKit + Whisper 的语音、通过 dots.ocr 或 PaliGemma 2 的拍照数学"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

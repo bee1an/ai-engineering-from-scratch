@@ -5,74 +5,122 @@
     {
       "stage": "pre",
       "question": "Roughly how long does a cold start typically take for a 70B model on a fresh node without mitigations?",
+      "question_zh": "在不做任何缓解措施的情况下，70B 模型在全新节点上典型的冷启动大约需要多久？",
       "options": [
         "Over 1 hour",
         "30-60 seconds",
         "3-8 minutes",
         "Under 10 seconds"
       ],
+      "options_zh": [
+        "超过 1 小时",
+        "30-60 秒",
+        "3-8 分钟",
+        "10 秒以内"
+      ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "Which AWS-side feature does the lesson recommend for pre-seeding container images so step-2 image pull disappears?",
+      "question_zh": "本课推荐用 AWS 侧的哪个特性来预置容器镜像，让第二步的 image pull 消失？",
       "options": [
         "Bottlerocket dual-volume architecture referenced from EC2NodeClass",
         "ECS task definitions",
         "Spot fleet placement",
         "EBS volume snapshots only"
       ],
+      "options_zh": [
+        "在 EC2NodeClass 中引用的 Bottlerocket 双卷架构",
+        "ECS task definitions",
+        "Spot fleet placement",
+        "仅 EBS 卷快照"
+      ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "Which Modal feature provides the closest thing to a \"warm GPU boot in seconds\" by deserializing post-load state directly into HBM?",
+      "question_zh": "Modal 的哪个特性最接近 “数秒内热启 GPU”，能把加载完成后的状态直接反序列化到 HBM？",
       "options": [
         "Tiered NVMe-to-DRAM loading",
         "Live migration",
         "GPU memory snapshots (checkpoints)",
         "Run:ai Model Streamer"
       ],
+      "options_zh": [
+        "NVMe 到 DRAM 的分级加载",
+        "热迁移",
+        "GPU 显存快照（checkpoints）",
+        "Run:ai Model Streamer"
+      ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "Why does live migration transfer input tokens rather than KV cache between nodes?",
+      "question_zh": "节点间热迁移为什么传输输入 token 而不是 KV cache？",
       "options": [
         "Live migration is required by GDPR",
         "Input tokens have larger entropy",
         "KV cache is encrypted and cannot move",
         "Recomputing KV on the destination is cheaper than transferring GB of KV cache over the network"
       ],
+      "options_zh": [
+        "热迁移是 GDPR 要求",
+        "输入 token 熵更大",
+        "KV cache 是加密的，无法迁移",
+        "在目标节点上重新计算 KV，比通过网络传输几 GB 的 KV cache 更便宜"
+      ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "post",
       "question": "Which serverless layer trades direct GPU cost for predictable readiness by keeping at least one replica live?",
+      "question_zh": "哪一层 serverless 方案通过保留至少一个常驻副本，用直接的 GPU 成本换取可预期的就绪时间？",
       "options": [
         "Warm pool with min_workers >= 1",
         "Tiered loading",
         "Bottlerocket pre-seeding",
         "Live migration"
       ],
+      "options_zh": [
+        "min_workers >= 1 的暖池",
+        "分级加载",
+        "Bottlerocket 预置",
+        "热迁移"
+      ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "post",
       "question": "Why does the lesson say cold-start mitigation must be stacked across layers rather than picked as a single tool?",
+      "question_zh": "本课为什么强调冷启动缓解必须分层叠加，而不是只挑一个工具？",
       "options": [
         "No single layer eliminates every step (node provision, image pull, weights load, engine init); stacking layers compresses each step",
         "It is a regulatory requirement",
         "Modal owns the entire stack",
         "All five layers are bundled in vLLM"
       ],
+      "options_zh": [
+        "没有任何单一层能消除所有环节（节点开通、image pull、权重加载、引擎初始化）；叠加多层才能逐步压缩每个环节",
+        "这是合规要求",
+        "Modal 把整个栈都包了",
+        "vLLM 已经把五层全部打包进去了"
+      ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     }
   ]
 }

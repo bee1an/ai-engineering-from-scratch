@@ -5,86 +5,142 @@
     {
       "stage": "pre",
       "question": "Why is scope creep called the most under-monitored failure mode?",
+      "question_zh": "为什么说范围蔓延（scope creep）是最缺乏监控的失败模式？",
       "options": [
         "It crashes the agent loudly",
         "Each touch had a plausible reason in the moment; together they form a different change than was reviewed",
         "It is too rare to monitor",
         "Tests catch it automatically"
       ],
+      "options_zh": [
+        "它会让 agent 大声崩溃",
+        "每一次改动当下都有合理理由，但合在一起就形成了和评审时完全不同的变更",
+        "它太少见了，不值得监控",
+        "测试会自动发现它"
+      ],
       "correct": 1,
-      "explanation": "Agents narrate each step in good faith; the silent total is the creep."
+      "explanation": "Agents narrate each step in good faith; the silent total is the creep.",
+      "explanation_zh": "Agent 善意地解释每一步，悄悄累积起来的总量才是真正的蔓延。"
     },
     {
       "stage": "pre",
       "question": "Which contract field does the lesson call half the contract?",
+      "question_zh": "课程把契约的哪个字段称为契约的一半？",
       "options": [
         "goal",
         "forbidden_files (the negative space)",
         "task_id",
         "approvals_required"
       ],
+      "options_zh": [
+        "goal",
+        "forbidden_files（负空间）",
+        "task_id",
+        "approvals_required"
+      ],
       "correct": 1,
-      "explanation": "A contract without forbidden_files is incomplete; the negative space is half the contract."
+      "explanation": "A contract without forbidden_files is incomplete; the negative space is half the contract.",
+      "explanation_zh": "没有 forbidden_files 的契约是残缺的；负空间是契约的另一半。"
     },
     {
       "stage": "check",
       "question": "Why pin allowed/forbidden to globs rather than raw paths?",
+      "question_zh": "为什么用 glob 模式而不是原始路径来锁定 allowed/forbidden？",
       "options": [
         "Globs are faster",
         "Real repos move files; globs survive refactors between sessions",
         "Globs encrypt better",
         "Raw paths are not JSON-serializable"
       ],
+      "options_zh": [
+        "Glob 更快",
+        "真实仓库会移动文件；glob 能在会话之间的重构中存活下来",
+        "Glob 加密效果更好",
+        "原始路径不能序列化为 JSON"
+      ],
       "correct": 1,
-      "explanation": "Globs (app/**/*.py) keep the contract valid through refactors."
+      "explanation": "Globs (app/**/*.py) keep the contract valid through refactors.",
+      "explanation_zh": "Glob（如 app/**/*.py）能让契约在重构后依旧有效。"
     },
     {
       "stage": "check",
       "question": "What does the 'violation budget' pattern do?",
+      "question_zh": "「违规预算」（violation budget）模式做了什么？",
       "options": [
         "Sets a monthly budget for the agent",
         "Allows minor scope slips as warnings within a budget; only excess triggers a merge refusal — the difference between a gate that ships and one that gets disabled",
         "Throttles model calls",
         "Charges per violation"
       ],
+      "options_zh": [
+        "为 agent 设置每月预算",
+        "在预算内允许轻微的范围越界作为警告，超出预算才阻止合并——这是「能上线的 gate」和「被禁用的 gate」之间的差别",
+        "限流模型调用",
+        "按违规次数收费"
+      ],
       "correct": 1,
-      "explanation": "agent-guardrails uses violationBudget so the gate is usable in day-to-day flow."
+      "explanation": "agent-guardrails uses violationBudget so the gate is usable in day-to-day flow.",
+      "explanation_zh": "agent-guardrails 用 violationBudget 让 gate 在日常流程里真正可用。"
     },
     {
       "stage": "check",
       "question": "What did the specsmaxxing practitioner report?",
+      "question_zh": "specsmaxxing 的实践者报告了什么结果？",
       "options": [
         "Latency dropped 90%",
         "Rabbit-hole rate dropped from 52% to 21% in three weeks without changing the agent; the contract did the work, not the model",
         "Cost rose 5x",
         "Tests slowed down"
       ],
+      "options_zh": [
+        "延迟下降 90%",
+        "在不改动 agent 的前提下，三周内「掉进兔子洞」的比例从 52% 降到 21%；起作用的是契约，不是模型",
+        "成本上涨 5 倍",
+        "测试变慢"
+      ],
       "correct": 1,
-      "explanation": "Scope contracts in YAML before invoking the agent halved the rabbit-hole rate without model changes."
+      "explanation": "Scope contracts in YAML before invoking the agent halved the rabbit-hole rate without model changes.",
+      "explanation_zh": "在调用 agent 前用 YAML 写好范围契约，不换模型也能把跑偏率减半。"
     },
     {
       "stage": "post",
       "question": "What are the multi-contract merge semantics (least privilege)?",
+      "question_zh": "多契约合并（最小权限）的语义是什么？",
       "options": [
         "Last contract wins",
         "Intersect allowed_files; union forbidden_files; min time_budget; accumulate approvals; deny-all sticks; merge of None defers to the other side",
         "First contract wins",
         "Random tie-break"
       ],
+      "options_zh": [
+        "最后一个契约获胜",
+        "allowed_files 取交集；forbidden_files 取并集；time_budget 取最小值；approvals 累加；deny-all 永远生效；与 None 合并时让位给另一边",
+        "第一个契约获胜",
+        "随机决胜"
+      ],
       "correct": 1,
-      "explanation": "Least-privilege merge: intersection on allows, union on forbids, most-restrictive time, accumulate approvals."
+      "explanation": "Least-privilege merge: intersection on allows, union on forbids, most-restrictive time, accumulate approvals.",
+      "explanation_zh": "最小权限合并：allow 取交集，forbid 取并集，时间取最严，approval 累加。"
     },
     {
       "stage": "post",
       "question": "Why do time and network budgets belong in the contract too?",
+      "question_zh": "为什么时间和网络预算也应该写进契约？",
       "options": [
         "Wall clock and external-host access are scope dimensions; file globs alone are necessary but not sufficient",
         "Providers require them",
         "They make the JSON smaller",
         "They are required by Apache 2.0"
       ],
+      "options_zh": [
+        "墙上时钟和外部主机访问也是范围维度；只有文件 glob 是必要但不充分的",
+        "供应商要求",
+        "可以让 JSON 变小",
+        "Apache 2.0 协议要求"
+      ],
       "correct": 0,
-      "explanation": "time_budget_minutes and network_egress allowlists are scope dimensions on top of file globs."
+      "explanation": "time_budget_minutes and network_egress allowlists are scope dimensions on top of file globs.",
+      "explanation_zh": "time_budget_minutes 和 network_egress 白名单是叠加在文件 glob 之上的范围维度。"
     }
   ]
 }

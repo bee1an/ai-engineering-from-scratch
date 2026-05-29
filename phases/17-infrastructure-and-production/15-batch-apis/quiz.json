@@ -12,7 +12,15 @@
         "50% discount with 24-hour turnaround"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "2026 年 OpenAI、Anthropic 和 Google 的 batch API 共同提供的是什么？",
+      "options_zh": [
+        "10% 折扣，1 小时返回",
+        "90% 折扣，7 天返回",
+        "1k token 以下免费",
+        "50% 折扣，24 小时返回"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "Only batches under 1k requests qualify"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "在本课的语境里，“24 小时返回”实际保证什么？",
+      "options_zh": [
+        "24h 是缓存 TTL",
+        "Batch 总是要花满 24 小时",
+        "供应商承诺 24 小时内返回，典型 P50 是 2-6 小时",
+        "只有少于 1k 请求的 batch 才有资格"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "It increases cost by 50%"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "在共享 system prompt 的工作负载上，把 batch 与缓存输入叠加相对于同步未缓存会怎样改变账单？",
+      "options_zh": [
+        "没有影响，因为缓存是自动的",
+        "只有在 Vertex 上才有效",
+        "可以降到大致是同步未缓存基线的 10% 左右",
+        "成本上升 50%"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Semi-interactive with async queue"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "2026 年在内容流水线和离线打标场景下，错误的工作负载分流默认是什么？",
+      "options_zh": [
+        "默认 interactive，因为听上去紧急",
+        "默认 batch，因为用户看不到 24h 延迟",
+        "Hybrid batch-and-cache",
+        "异步队列的 semi-interactive"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "Batch file formats differ per provider (OpenAI JSONL, Anthropic JSONL, Vertex BigQuery/GCS), so a portable client needs per-provider adapters"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "跨厂商的输出格式陷阱是什么？",
+      "options_zh": [
+        "Anthropic 不支持 JSONL",
+        "所有厂商使用相同的 OpenAI JSONL 格式",
+        "Vertex 只能用 Parquet",
+        "Batch 文件格式各厂商不同（OpenAI JSONL、Anthropic JSONL、Vertex BigQuery/GCS），可移植客户端需要按厂商写适配器"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "If the user wouldn't notice a 24-hour delivery, always batch (and stack caching)"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本课给出最简单的把工作负载分流到 batch 的判断规则是什么？",
+      "options_zh": [
+        "Prompt 少于 1k token 就 batch",
+        "用到工具就 batch",
+        "只有网关要求时才 batch",
+        "如果用户察觉不到 24 小时的交付延迟，就一律 batch（再叠加缓存）"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

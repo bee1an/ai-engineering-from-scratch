@@ -4,34 +4,49 @@
     "options": ["Masked language modeling (predicting masked tokens)", "Next-token prediction: given previous tokens, predict the next one", "Sentence classification", "Image-text alignment"],
     "correct": 1,
     "explanation": "GPT is a causal (autoregressive) language model trained with next-token prediction. Given tokens [t1, t2, ..., tn], it learns to predict tn+1. The loss is cross-entropy between predicted and actual next tokens.",
-    "stage": "pre"
+    "stage": "pre",
+    "question_zh": "GPT 在预训练时使用的训练目标是什么？",
+    "options_zh": ["Masked language modeling（预测被遮盖的 token）", "Next-token prediction：给定前面的 token，预测下一个", "句子分类", "图文对齐"],
+    "explanation_zh": "GPT 是一个因果（自回归）语言模型，用 next-token prediction 训练。给定 token [t1, t2, ..., tn]，它学习预测 tn+1。loss 是预测 token 和真实下一个 token 之间的交叉熵。"
   },
   {
     "question": "How many transformer layers, attention heads, and embedding dimensions does GPT-2 Small (124M) have?",
     "options": ["6 layers, 6 heads, 512 dims", "12 layers, 12 heads, 768 dims", "24 layers, 16 heads, 1024 dims", "48 layers, 25 heads, 1600 dims"],
     "correct": 1,
     "explanation": "GPT-2 Small has 12 transformer layers, 12 attention heads per layer, and 768-dimensional embeddings. This architecture has 124 million parameters and can be trained on a single GPU in a few hours.",
-    "stage": "pre"
+    "stage": "pre",
+    "question_zh": "GPT-2 Small (124M) 有多少 transformer 层、attention head 和 embedding 维度？",
+    "options_zh": ["6 层，6 head，512 维", "12 层，12 head，768 维", "24 层，16 head，1024 维", "48 层，25 head，1600 维"],
+    "explanation_zh": "GPT-2 Small 有 12 个 transformer 层、每层 12 个 attention head、768 维的 embedding。这个架构有 1.24 亿参数，可以在单卡 GPU 上几小时内训完。"
   },
   {
     "question": "What is the role of the causal attention mask in GPT?",
     "options": ["It prevents attention to padding tokens", "It prevents each token from attending to future tokens, ensuring the model can only use past context for predictions", "It masks out low-confidence attention scores", "It reduces memory usage during training"],
     "correct": 1,
     "explanation": "The causal mask is a triangular matrix that sets future positions to -infinity before softmax. Token at position 5 can attend to positions 1-5 but not 6+. This ensures the model generates tokens left-to-right.",
-    "stage": "post"
+    "stage": "post",
+    "question_zh": "在 GPT 中，causal attention mask 起什么作用？",
+    "options_zh": ["阻止 attention 看到 padding token", "阻止每个 token 注意到未来的 token，确保模型只能用过去的上下文做预测", "屏蔽掉置信度低的 attention 分数", "降低训练时的显存占用"],
+    "explanation_zh": "Causal mask 是一个三角矩阵，在 softmax 之前把未来位置设为 -∞。位置 5 的 token 可以注意位置 1-5 但看不到 6 及以后。这保证模型从左到右生成 token。"
   },
   {
     "question": "What does 'temperature' control during text generation?",
     "options": ["The speed of generation", "The randomness of token selection: lower temperature makes outputs more deterministic, higher makes them more diverse", "The number of tokens generated", "The model's confidence threshold"],
     "correct": 1,
     "explanation": "Temperature divides logits before softmax. Temperature=0.1 makes the distribution very peaked (nearly deterministic). Temperature=1.0 is the training distribution. Temperature>1.0 flattens it, increasing randomness.",
-    "stage": "post"
+    "stage": "post",
+    "question_zh": "文本生成时 temperature 控制什么？",
+    "options_zh": ["生成速度", "token 选择的随机性：temperature 越低输出越确定，越高越多样", "生成的 token 数量", "模型的置信度阈值"],
+    "explanation_zh": "Temperature 在 softmax 之前对 logits 做除法。Temperature=0.1 让分布非常尖锐（近乎确定）。Temperature=1.0 就是训练时的分布。Temperature>1.0 会让分布更平，增加随机性。"
   },
   {
     "question": "Why does pre-training require significantly more compute than fine-tuning?",
     "options": ["Pre-training uses larger batch sizes", "Pre-training processes trillions of tokens from scratch to learn general language patterns, while fine-tuning adjusts an already-capable model on thousands of examples", "Pre-training uses a different architecture", "Fine-tuning doesn't use gradients"],
     "correct": 1,
     "explanation": "Pre-training builds all language knowledge from random weights over trillions of tokens. Fine-tuning starts from these learned weights and adjusts them on a much smaller dataset (thousands to millions of examples).",
-    "stage": "post"
+    "stage": "post",
+    "question_zh": "为什么预训练需要的算力远多于 fine-tuning？",
+    "options_zh": ["预训练用更大的 batch size", "预训练要从零开始处理万亿级 token 来学通用语言模式，而 fine-tuning 只是在已有能力的模型上用几千条样本做微调", "预训练用的架构不一样", "fine-tuning 不用梯度"],
+    "explanation_zh": "预训练要从随机权重出发，通过万亿级 token 构建全部语言知识。Fine-tuning 则是从这些已学到的权重开始，在小得多的数据集（几千到几百万条样本）上微调。"
   }
 ]

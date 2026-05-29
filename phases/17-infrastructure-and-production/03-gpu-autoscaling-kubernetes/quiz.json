@@ -5,74 +5,122 @@
     {
       "stage": "pre",
       "question": "Which signal does HPA typically scale on by default that the lesson calls broken for vLLM-style serving?",
+      "question_zh": "HPA 默认会基于哪个信号做伸缩？课程认为这个信号对 vLLM 这类服务来说是失效的。",
       "options": [
         "Queue depth",
         "P99 TTFT",
         "KV cache utilization",
         "DCGM_FI_DEV_GPU_UTIL duty cycle"
       ],
+      "options_zh": [
+        "队列深度",
+        "P99 TTFT",
+        "KV cache 利用率",
+        "DCGM_FI_DEV_GPU_UTIL 占空比"
+      ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "Which problem does gang scheduling in KAI Scheduler primarily prevent?",
+      "question_zh": "KAI Scheduler 的 gang scheduling 主要防止什么问题？",
       "options": [
         "GPU memory fragmentation",
         "Tokenizer GIL contention",
         "The partial-allocation trap where 7 of 8 GPUs sit idle waiting on the eighth",
         "Cold-start latency"
       ],
+      "options_zh": [
+        "GPU 显存碎片",
+        "Tokenizer 的 GIL 争抢",
+        "「部分分配」陷阱：8 张 GPU 中 7 张在等第 8 张，全部空转",
+        "冷启动延迟"
+      ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "Why is Karpenter's default consolidationPolicy WhenEmptyOrUnderutilized dangerous for inference GPU pools?",
+      "question_zh": "为什么 Karpenter 默认的 consolidationPolicy: WhenEmptyOrUnderutilized 对推理 GPU 池来说很危险？",
       "options": [
         "It refuses to scale up under burst",
         "It only consolidates spot instances",
         "It terminates running GPU nodes to migrate pods, which evicts running requests and reloads weights",
         "It prevents Karpenter from provisioning new nodes"
       ],
+      "options_zh": [
+        "它在流量突增时拒绝扩容",
+        "它只整合 spot 实例",
+        "它会终止正在运行的 GPU 节点以迁移 pod，导致正在跑的请求被驱逐、权重重新加载",
+        "它会阻止 Karpenter 创建新节点"
+      ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "Roughly how much faster is Karpenter at provisioning a GPU node compared to Cluster Autoscaler?",
+      "question_zh": "相比 Cluster Autoscaler，Karpenter 大致快多少时间能拉起一个 GPU 节点？",
       "options": [
         "Roughly 40% faster (~45-60s vs ~90-120s)",
         "About 10x slower",
         "The same",
         "About 5% faster"
       ],
+      "options_zh": [
+        "大约快 40%（约 45-60s vs 约 90-120s）",
+        "慢约 10 倍",
+        "差不多",
+        "快约 5%"
+      ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "post",
       "question": "For disaggregated prefill / decode pods (Phase 17 · 17), which scaling signals does the lesson recommend?",
+      "question_zh": "对于解耦的 prefill / decode pod（第 17 阶段 · 第 17 课），课程推荐用哪些伸缩信号？",
       "options": [
         "Manual scaling only",
         "A single HPA on duty cycle covering both pod classes",
         "Queue depth for prefill pods and KV cache pressure for decode pods, as separate per-role HPAs",
         "Cluster Autoscaler for both"
       ],
+      "options_zh": [
+        "只做手动伸缩",
+        "用单个 HPA 基于占空比同时管两类 pod",
+        "Prefill pod 用队列深度、decode pod 用 KV cache 压力，按角色拆成各自的 HPA",
+        "两者都用 Cluster Autoscaler"
+      ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "post",
       "question": "Which Karpenter disruption setting does the lesson recommend for an inference GPU pool to avoid evicting running jobs?",
+      "question_zh": "为了避免驱逐正在运行的任务，课程推荐推理 GPU 池使用哪种 Karpenter disruption 配置？",
       "options": [
         "consolidationPolicy: WhenEmptyOrUnderutilized with consolidateAfter: 0s",
         "consolidationPolicy: WhenEmpty with consolidateAfter: 1h",
         "Always run with spot instances and no consolidation",
         "Disable Karpenter entirely"
       ],
+      "options_zh": [
+        "consolidationPolicy: WhenEmptyOrUnderutilized 配 consolidateAfter: 0s",
+        "consolidationPolicy: WhenEmpty 配 consolidateAfter: 1h",
+        "始终用 spot 实例且不做整合",
+        "完全禁用 Karpenter"
+      ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     }
   ]
 }

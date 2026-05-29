@@ -12,7 +12,15 @@
         "Extractive is slower than abstractive"
       ],
       "correct": 1,
-      "explanation": "Extractive lifts sentences verbatim; abstractive rewrites and risks hallucination."
+      "explanation": "Extractive lifts sentences verbatim; abstractive rewrites and risks hallucination.",
+      "question_zh": "抽取式与生成式摘要在行为上的关键区别是什么？",
+      "options_zh": [
+        "抽取式用 TF-IDF；生成式用 Word2Vec",
+        "抽取式逐字返回原文中的句子；生成式生成新文本，可能产生幻觉",
+        "抽取式只支持多语言",
+        "抽取式比生成式慢"
+      ],
+      "explanation_zh": "抽取式逐字提取句子；生成式重写并存在幻觉风险。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Token-level perplexity"
       ],
       "correct": 1,
-      "explanation": "ROUGE-1/2/L measure unigram, bigram, and LCS overlap with references."
+      "explanation": "ROUGE-1/2/L measure unigram, bigram, and LCS overlap with references.",
+      "question_zh": "ROUGE 衡量什么？",
+      "options_zh": [
+        "embedding 相似度",
+        "系统摘要与参考摘要之间的 n-gram 与最长公共子序列重叠",
+        "阅读时间",
+        "token 级 perplexity"
+      ],
+      "explanation_zh": "ROUGE-1/2/L 度量与参考的 unigram、bigram 和 LCS 重叠。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "By embedding cosine to the question"
       ],
       "correct": 2,
-      "explanation": "TextRank uses PageRank over a sentence-similarity graph; highly connected sentences score highest."
+      "explanation": "TextRank uses PageRank over a sentence-similarity graph; highly connected sentences score highest.",
+      "question_zh": "TextRank 在抽取式摘要中如何打分句子？",
+      "options_zh": [
+        "按原始词数",
+        "通过与参考摘要比较",
+        "在以句子相似度为边的图上跑 PageRank 风格的迭代",
+        "通过对问句的 embedding cosine"
+      ],
+      "explanation_zh": "TextRank 在句子相似度图上跑 PageRank；连接度高的句子分数最高。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Stemming is required by the rouge-score package"
       ],
       "correct": 0,
-      "explanation": "Stemming merges morphological variants so ROUGE credits semantically equivalent forms."
+      "explanation": "Stemming merges morphological variants so ROUGE credits semantically equivalent forms.",
+      "question_zh": "计算 ROUGE 时为什么要启用 stemming？",
+      "options_zh": [
+        "不 stemming 时 'running' 与 'run' 算不同 token，ROUGE 会低估真实重叠",
+        "为了加速 ROUGE",
+        "stemming 归一化大小写",
+        "rouge-score 包要求 stemming"
+      ],
+      "explanation_zh": "stemming 合并形态变体，使 ROUGE 给等价形式以信用。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "chrF"
       ],
       "correct": 2,
-      "explanation": "NLI-based faithfulness scoring flags claims in the summary not entailed by the source."
+      "explanation": "NLI-based faithfulness scoring flags claims in the summary not entailed by the source.",
+      "question_zh": "2026 年哪个指标专门用 NLI 蕴含来检测摘要幻觉？",
+      "options_zh": [
+        "BLEU",
+        "ROUGE-L",
+        "Faithfulness 检查（如 FactCC 或 RAGAS faithfulness）通过对源和摘要中的 claim 做 NLI",
+        "chrF"
+      ],
+      "explanation_zh": "基于 NLI 的 faithfulness 评分能标记摘要中未被源蕴含的 claim。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "ROUGE scores are higher"
       ],
       "correct": 0,
-      "explanation": "Verbatim extraction cannot invent content, which matters where factuality is regulated."
+      "explanation": "Verbatim extraction cannot invent content, which matters where factuality is regulated.",
+      "question_zh": "为什么合规相关内容更倾向使用抽取式摘要？",
+      "options_zh": [
+        "输出逐字来自源，消除了生成式幻觉这一类问题",
+        "它更快",
+        "抽取式支持更长输出",
+        "ROUGE 分数更高"
+      ],
+      "explanation_zh": "逐字抽取无法虚构内容，对受监管的真实性场景很重要。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Entity swap (e.g. 'John Smith' rendered as 'John Brown'), number drift, polarity flip, or fact invention"
       ],
       "correct": 3,
-      "explanation": "Entity swaps, numeric drift, polarity flips, and invented facts are the canonical abstractive failure modes."
+      "explanation": "Entity swaps, numeric drift, polarity flips, and invented facts are the canonical abstractive failure modes.",
+      "question_zh": "下列哪一种是要监控的生成式摘要幻觉类型？",
+      "options_zh": [
+        "标点漂移",
+        "停用词去除",
+        "句子过长",
+        "实体替换（'John Smith' 变成 'John Brown'）、数字漂移、极性翻转或事实捏造"
+      ],
+      "explanation_zh": "实体替换、数字漂移、极性翻转和事实捏造是经典的生成式失败模式。"
     },
     {
       "stage": "post",
@@ -96,7 +152,15 @@
         "For domains like scientific abstracts where Pegasus's gap-sentence pretraining objective is a closer fit"
       ],
       "correct": 3,
-      "explanation": "Pegasus's gap-sentence objective excels at long-form domain summarization (e.g. pubmed)."
+      "explanation": "Pegasus's gap-sentence objective excels at long-form domain summarization (e.g. pubmed).",
+      "question_zh": "什么时候你会选 Pegasus checkpoint 而不是 BART-large-CNN？",
+      "options_zh": [
+        "评估 BLEU 时",
+        "输入很短时",
+        "需要抽取式输出时",
+        "对像科学论文摘要这样的领域，Pegasus 的 gap-sentence 预训练目标更贴合"
+      ],
+      "explanation_zh": "Pegasus 的 gap-sentence 目标在长形领域摘要（如 pubmed）上表现优异。"
     }
   ]
 }

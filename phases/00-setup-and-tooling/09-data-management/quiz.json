@@ -3,37 +3,52 @@
     {
       "stage": "pre",
       "question": "Why is it important to have separate train, validation, and test splits in machine learning?",
+      "question_zh": "在机器学习中，为什么要把数据分成 train、validation、test 三份？",
       "options": ["To make the dataset smaller so training is faster", "To evaluate model performance on unseen data and prevent overfitting", "To ensure each split uses a different file format", "To distribute data across multiple GPUs"],
+      "options_zh": ["让数据集更小，训练更快", "在未见过的数据上评估模型表现，防止过拟合", "让每一份数据使用不同的文件格式", "把数据分布到多张 GPU 上"],
       "correct": 1,
-      "explanation": "The training set teaches the model, the validation set tunes hyperparameters during training, and the test set provides a final unbiased evaluation on data the model has never seen."
+      "explanation": "The training set teaches the model, the validation set tunes hyperparameters during training, and the test set provides a final unbiased evaluation on data the model has never seen.",
+      "explanation_zh": "training set 用来训练模型，validation set 用来调超参，test set 则在模型从未见过的数据上做最终的无偏评估。"
     },
     {
       "stage": "pre",
       "question": "What is the Hugging Face Hub primarily used for in AI/ML workflows?",
+      "question_zh": "在 AI/ML 工作流中，Hugging Face Hub 主要用来做什么？",
       "options": ["Hosting and sharing datasets, models, and ML artifacts", "Running GPU training jobs in the cloud", "Managing Python virtual environments", "Version controlling source code like GitHub"],
+      "options_zh": ["托管和分享数据集、模型以及 ML 制品", "在云上跑 GPU 训练任务", "管理 Python 虚拟环境", "像 GitHub 那样做源码版本控制"],
       "correct": 0,
-      "explanation": "Hugging Face Hub is a platform for hosting and sharing pre-trained models, datasets, and ML demos. The 'datasets' library provides a standard way to load data from it."
+      "explanation": "Hugging Face Hub is a platform for hosting and sharing pre-trained models, datasets, and ML demos. The 'datasets' library provides a standard way to load data from it.",
+      "explanation_zh": "Hugging Face Hub 是托管和分享预训练模型、数据集以及 ML demo 的平台。datasets 库提供了从 Hub 加载数据的标准方式。"
     },
     {
       "stage": "post",
       "question": "What advantage does the Parquet format have over CSV for storing ML datasets?",
+      "question_zh": "用 Parquet 而不是 CSV 来存 ML 数据集有什么优势？",
       "options": ["Parquet files are human-readable in any text editor", "Parquet uses columnar storage for smaller file sizes and faster read speeds", "Parquet supports more data types than CSV", "Parquet files can be edited in spreadsheet applications"],
+      "options_zh": ["Parquet 文件在任何文本编辑器里都能直接阅读", "Parquet 采用列式存储，文件更小、读取更快", "Parquet 支持的数据类型比 CSV 多", "Parquet 文件可以在表格软件里直接编辑"],
       "correct": 1,
-      "explanation": "Parquet is a columnar binary format that compresses better than CSV and enables fast column-level reads. It is the preferred storage format for ML datasets."
+      "explanation": "Parquet is a columnar binary format that compresses better than CSV and enables fast column-level reads. It is the preferred storage format for ML datasets.",
+      "explanation_zh": "Parquet 是列式二进制格式，比 CSV 压缩得更好，还能按列快速读取，是 ML 数据集首选的存储格式。"
     },
     {
       "stage": "post",
       "question": "What does 'streaming=True' do when loading a dataset with the Hugging Face datasets library?",
+      "question_zh": "用 Hugging Face datasets 库加载数据集时，streaming=True 起什么作用？",
       "options": ["Downloads the dataset faster using parallel connections", "Loads data row by row without downloading the full dataset to disk", "Converts the dataset to a streaming video format", "Enables real-time updates as new data is added to the Hub"],
+      "options_zh": ["用并行连接更快地下载数据集", "按行加载数据，无需把整份数据集下载到磁盘", "把数据集转换为流媒体视频格式", "让 Hub 上新增的数据实时更新到本地"],
       "correct": 1,
-      "explanation": "Streaming mode creates an IterableDataset that fetches rows on demand. Memory usage stays constant regardless of dataset size, which is essential for datasets too large to fit on disk."
+      "explanation": "Streaming mode creates an IterableDataset that fetches rows on demand. Memory usage stays constant regardless of dataset size, which is essential for datasets too large to fit on disk.",
+      "explanation_zh": "streaming 模式会创建一个 IterableDataset，按需获取每一行。无论数据集多大，内存占用都保持恒定，对于装不下磁盘的超大数据集尤为重要。"
     },
     {
       "stage": "post",
       "question": "When should you use DVC (Data Version Control) instead of just .gitignore for large files?",
+      "question_zh": "对于大文件，什么时候应该用 DVC（Data Version Control）而不是仅靠 .gitignore？",
       "options": ["When your dataset is smaller than 1 MB", "When you need to reproduce exact experiments across machines with versioned data", "When you are working alone on a personal project", "When you only have CSV files in your project"],
+      "options_zh": ["数据集小于 1 MB 时", "需要在不同机器上复现实验、并对数据做版本管理时", "一个人做个人项目时", "项目里只有 CSV 文件时"],
       "correct": 1,
-      "explanation": "DVC tracks data versions with small pointer files in git while storing the actual data in remote storage (S3, GCS). It ensures anyone can reproduce your exact experiment with the same data."
+      "explanation": "DVC tracks data versions with small pointer files in git while storing the actual data in remote storage (S3, GCS). It ensures anyone can reproduce your exact experiment with the same data.",
+      "explanation_zh": "DVC 用 git 里的小指针文件来跟踪数据版本，真实数据则存放在 S3、GCS 这类远端存储里，任何人都能拿到一模一样的数据来复现你的实验。"
     }
   ]
 }

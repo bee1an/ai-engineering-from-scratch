@@ -5,86 +5,142 @@
     {
       "stage": "pre",
       "question": "What single question does the verification gate answer?",
+      "question_zh": "验证门（verification gate）只回答哪一个问题？",
       "options": [
         "Is the model fast?",
         "Is this task actually complete? (reading scope, rule, feedback, and diff artifacts)",
         "Is the prompt optimal?",
         "Is the token budget healthy?"
       ],
+      "options_zh": [
+        "模型够快吗？",
+        "这个任务是不是真的完成了？（读取 scope、rule、feedback 和 diff 等产物）",
+        "Prompt 是否最优？",
+        "Token 预算是否健康？"
+      ],
       "correct": 1,
-      "explanation": "The gate is a deterministic function over workbench artifacts producing a pass/fail verdict."
+      "explanation": "The gate is a deterministic function over workbench artifacts producing a pass/fail verdict.",
+      "explanation_zh": "Gate 是作用在 workbench 产物上的确定性函数，输出 pass/fail 结论。"
     },
     {
       "stage": "pre",
       "question": "Why must the gate be deterministic?",
+      "question_zh": "为什么 gate 必须是确定性的？",
       "options": [
         "Determinism is free",
         "The same artifact set must produce the same verdict every time; LLM judges belong in the reviewer (qualitative), not the gate (status)",
         "Providers require it",
         "It saves money"
       ],
+      "options_zh": [
+        "确定性是免费的",
+        "相同的产物集合必须每次都得到相同的判定；LLM 评审属于 reviewer（定性），而不属于 gate（状态）",
+        "供应商要求",
+        "省钱"
+      ],
       "correct": 1,
-      "explanation": "Mixing model judgment into the gate collapses the deterministic/qualitative split."
+      "explanation": "Mixing model judgment into the gate collapses the deterministic/qualitative split.",
+      "explanation_zh": "把模型判断混进 gate 会让「确定性 vs 定性」的边界塌陷。"
     },
     {
       "stage": "check",
       "question": "What is the gate's override discipline?",
+      "question_zh": "Gate 的越权（override）纪律是什么？",
       "options": [
         "Anyone can override silently",
         "Block-severity findings can only be overridden by a human with a recorded override_reason and overridden_by user id in a signed audit log",
         "Override requires a manager email",
         "Overrides are forbidden"
       ],
+      "options_zh": [
+        "任何人都可以悄悄越权",
+        "Block 级别的发现只能由人类越权，必须在签名的审计日志中记录 override_reason 和 overridden_by 用户 ID",
+        "越权需要经理邮件",
+        "禁止越权"
+      ],
       "correct": 1,
-      "explanation": "Signed overrides land in outputs/verification/overrides.jsonl; agent cannot self-override."
+      "explanation": "Signed overrides land in outputs/verification/overrides.jsonl; agent cannot self-override.",
+      "explanation_zh": "签名越权落到 outputs/verification/overrides.jsonl；agent 不能给自己越权。"
     },
     {
       "stage": "check",
       "question": "What is the Hybrid Norm pairing the lesson cites?",
+      "question_zh": "课程引用的「混合规范」（Hybrid Norm）配对是什么？",
       "options": [
         "Hot/cold prompts",
         "Verifiable rewards (tests, schemas, exit codes) answer 'did it solve the problem?'; LLM rubrics answer 'is it readable, secure, on-style?'",
         "GPU and CPU split",
         "Cache vs no-cache"
       ],
+      "options_zh": [
+        "Hot/cold prompts",
+        "可验证奖励（测试、schema、退出码）回答「问题解决了吗？」；LLM rubric 回答「代码是否可读、安全、符合风格？」",
+        "GPU 与 CPU 分工",
+        "缓存与不缓存"
+      ],
       "correct": 1,
-      "explanation": "Anthropic 2026 guidance: gate runs the first class; reviewer (Lesson 39) runs the second."
+      "explanation": "Anthropic 2026 guidance: gate runs the first class; reviewer (Lesson 39) runs the second.",
+      "explanation_zh": "Anthropic 2026 指南：gate 跑第一类，reviewer（第 39 课）跑第二类。"
     },
     {
       "stage": "check",
       "question": "How does defense-in-depth layer the gates?",
+      "question_zh": "纵深防御如何分层布置 gate？",
       "options": [
         "Single gate at merge time",
         "Pre-commit hook -> CI status check -> pre-tool authz hook -> pre-merge gate; each layer is deterministic so failure in one is caught by the next",
         "Only IDE warnings",
         "Only a chat reminder"
       ],
+      "options_zh": [
+        "只在合并时设一个 gate",
+        "Pre-commit hook → CI 状态检查 → pre-tool 授权 hook → 合并前 gate；每一层都是确定性的，一层失守后下一层能接住",
+        "只有 IDE 警告",
+        "只有聊天提醒"
+      ],
       "correct": 1,
-      "explanation": "Multiple non-bypassable layers catch what a single layer would miss."
+      "explanation": "Multiple non-bypassable layers catch what a single layer would miss.",
+      "explanation_zh": "多层不可绕过的检查能接住单层会漏掉的问题。"
     },
     {
       "stage": "post",
       "question": "What does a coverage_floor check protect against?",
+      "question_zh": "coverage_floor 检查防的是什么？",
       "options": [
         "Hot-path latency",
         "Agents quietly deleting tests that fail; the gate fails if measured coverage drops below the floor or last merge by more than 1 percentage point",
         "Cold starts",
         "Outdated lockfiles"
       ],
+      "options_zh": [
+        "热路径延迟",
+        "Agent 悄悄删掉失败的测试；如果测量覆盖率低于下限，或者比上次合并下降超过 1 个百分点，gate 就失败",
+        "冷启动",
+        "过期的锁文件"
+      ],
       "correct": 1,
-      "explanation": "Without a floor, agents can silently lower coverage to keep the verdict green."
+      "explanation": "Without a floor, agents can silently lower coverage to keep the verdict green.",
+      "explanation_zh": "没有下限，agent 可以悄悄降低覆盖率来保住绿色结论。"
     },
     {
       "stage": "post",
       "question": "When should --strict mode promote every warn to block?",
+      "question_zh": "--strict 模式什么时候应该把所有 warn 提升为 block？",
       "options": [
         "Always",
         "Release branches, ship-blocking PRs, post-incident triage; not the daily default because strict-on-everything corrodes flow",
         "Never",
         "Only on Sundays"
       ],
+      "options_zh": [
+        "一直如此",
+        "发布分支、阻塞上线的 PR、事故后分诊；不应作为日常默认，因为对所有事都 strict 会腐蚀流畅度",
+        "从不",
+        "只在周日"
+      ],
       "correct": 1,
-      "explanation": "--strict is opt-in by branch; reserve for high-stakes moments."
+      "explanation": "--strict is opt-in by branch; reserve for high-stakes moments.",
+      "explanation_zh": "--strict 应按分支选用，只在高风险时刻启用。"
     }
   ]
 }

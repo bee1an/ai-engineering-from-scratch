@@ -1,37 +1,102 @@
 [
   {
     "question": "What is the limitation of basic top-k semantic search in RAG?",
-    "options": ["It's too slow", "It retrieves chunks that are semantically similar to the query but may not contain the actual answer, especially for ambiguous or multi-hop questions", "It can't handle large documents", "It requires GPU"],
+    "options": [
+      "It's too slow",
+      "It retrieves chunks that are semantically similar to the query but may not contain the actual answer, especially for ambiguous or multi-hop questions",
+      "It can't handle large documents",
+      "It requires GPU"
+    ],
     "correct": 1,
     "explanation": "Basic semantic search matches surface-level meaning. 'What was revenue last quarter?' retrieves chunks about 'revenue strategy' (semantically similar) instead of the chunk saying '$47.2M in Q3 2025' (which uses 'earnings').",
-    "stage": "pre"
+    "stage": "pre",
+    "question_zh": "RAG 中基础的 top-k 语义搜索有什么局限？",
+    "options_zh": [
+      "太慢",
+      "它召回的是与 query 语义相近的 chunk，但这些 chunk 不一定包含真正的答案，对模糊或多跳问题尤其明显",
+      "处理不了大文档",
+      "需要 GPU"
+    ],
+    "explanation_zh": "基础语义搜索匹配的是表层语义。'What was revenue last quarter?' 会召回 'revenue strategy' 这种语义相似的 chunk，而不是写着 '$47.2M in Q3 2025' 但用了 'earnings' 这种说法的 chunk。"
   },
   {
     "question": "What is hybrid search in the context of RAG?",
-    "options": ["Using two different LLMs", "Combining BM25 keyword matching with semantic vector search to capture both exact terms and meaning-based relevance", "Searching across multiple databases", "Using both CPU and GPU for search"],
+    "options": [
+      "Using two different LLMs",
+      "Combining BM25 keyword matching with semantic vector search to capture both exact terms and meaning-based relevance",
+      "Searching across multiple databases",
+      "Using both CPU and GPU for search"
+    ],
     "correct": 1,
     "explanation": "BM25 catches exact keyword matches (e.g., '$47.2M' or 'Q3'). Semantic search catches meaning matches. Combining them with a reranker gives the best of both worlds: precision on specific terms plus recall on semantic variants.",
-    "stage": "pre"
+    "stage": "pre",
+    "question_zh": "RAG 里的 hybrid search 是什么？",
+    "options_zh": [
+      "用两个不同的 LLM",
+      "把 BM25 关键字匹配和语义向量搜索结合起来，同时抓住精确词项和语义相关性",
+      "在多个数据库里搜索",
+      "同时用 CPU 和 GPU 搜索"
+    ],
+    "explanation_zh": "BM25 抓精确关键词（比如 '$47.2M' 或 'Q3'），语义搜索抓含义匹配。两者结合再加 reranker，就能兼得精确词项的 precision 和语义变体的 recall。"
   },
   {
     "question": "What does a cross-encoder reranker do in an advanced RAG pipeline?",
-    "options": ["It generates the final answer", "It takes (query, document) pairs and scores their relevance with higher accuracy than embedding similarity, reordering the initial retrieval results", "It encodes documents into vectors", "It splits documents into chunks"],
+    "options": [
+      "It generates the final answer",
+      "It takes (query, document) pairs and scores their relevance with higher accuracy than embedding similarity, reordering the initial retrieval results",
+      "It encodes documents into vectors",
+      "It splits documents into chunks"
+    ],
     "correct": 1,
     "explanation": "Bi-encoder similarity (used for initial retrieval) is fast but approximate. A cross-encoder processes the full query-document pair together with cross-attention, giving much more accurate relevance scores for reranking the top candidates.",
-    "stage": "post"
+    "stage": "post",
+    "question_zh": "在高级 RAG pipeline 里，cross-encoder reranker 做什么？",
+    "options_zh": [
+      "生成最终答案",
+      "接收 (query, document) 对，比 embedding 相似度更精确地打分相关性，重新排序初步检索结果",
+      "把文档编码成向量",
+      "把文档切成 chunk"
+    ],
+    "explanation_zh": "Bi-encoder 相似度（用于初步检索）快但近似。Cross-encoder 让 query 和文档一起进 cross-attention，对 top 候选给出准确得多的相关性分数用于 rerank。"
   },
   {
     "question": "What is the HyDE (Hypothetical Document Embedding) query transformation technique?",
-    "options": ["Hiding the query from the model", "Using the LLM to generate a hypothetical answer, then embedding that answer as the search query instead of the original question", "Encrypting the query for privacy", "Expanding abbreviations in the query"],
+    "options": [
+      "Hiding the query from the model",
+      "Using the LLM to generate a hypothetical answer, then embedding that answer as the search query instead of the original question",
+      "Encrypting the query for privacy",
+      "Expanding abbreviations in the query"
+    ],
     "correct": 1,
     "explanation": "The original query 'What was Q3 revenue?' might not embed close to the answer chunk. HyDE asks the LLM to generate a hypothetical answer ('Q3 revenue was approximately...'), then uses that as the search query, which embeds closer to actual answer-containing chunks.",
-    "stage": "post"
+    "stage": "post",
+    "question_zh": "HyDE（Hypothetical Document Embedding）查询变换是什么？",
+    "options_zh": [
+      "把 query 藏起来",
+      "先让 LLM 生成一个假设性的答案，再用这段答案的 embedding 作为搜索 query，而不是原问题",
+      "为隐私加密 query",
+      "展开 query 中的缩写"
+    ],
+    "explanation_zh": "原始 query 'What was Q3 revenue?' 的 embedding 不一定靠近答案 chunk。HyDE 让 LLM 写一段假设性回答（'Q3 revenue was approximately...'），再用这段答案做检索 query，与真正含答案的 chunk embedding 距离更近。"
   },
   {
     "question": "Why does parent-child chunking improve RAG over flat chunking?",
-    "options": ["It's faster to index", "Small child chunks are used for precise retrieval, but the larger parent chunk is returned for context, preventing the 'lost context' problem", "It reduces the number of chunks", "It eliminates the need for embeddings"],
+    "options": [
+      "It's faster to index",
+      "Small child chunks are used for precise retrieval, but the larger parent chunk is returned for context, preventing the 'lost context' problem",
+      "It reduces the number of chunks",
+      "It eliminates the need for embeddings"
+    ],
     "correct": 1,
     "explanation": "Small chunks (200 tokens) embed precisely but lack context. Large chunks (2000 tokens) have context but embed imprecisely. Parent-child uses small chunks for search accuracy but returns the parent chunk for generation context.",
-    "stage": "post"
+    "stage": "post",
+    "question_zh": "为什么 parent-child chunking 在 RAG 上比扁平 chunking 更好？",
+    "options_zh": [
+      "索引更快",
+      "用小的 child chunk 做精准检索，但返回更大的 parent chunk 给生成阶段，避免 'lost context' 问题",
+      "减少 chunk 数量",
+      "不再需要 embedding"
+    ],
+    "explanation_zh": "小 chunk（200 token）embedding 精确但缺乏上下文；大 chunk（2000 token）有上下文但 embedding 不精确。Parent-child 用小 chunk 提升搜索精度，再返回 parent chunk 给生成提供上下文。"
   }
 ]

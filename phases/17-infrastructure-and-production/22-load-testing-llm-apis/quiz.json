@@ -12,7 +12,15 @@
         "Locust requires CUDA"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "基于 Locust 做 LLM 压测时的 GIL 陷阱是什么？",
+      "options_zh": [
+        "Locust 仅在 Windows 上能跑",
+        "Locust 不支持 HTTP",
+        "客户端 tokenization 跑在 Python GIL 下，会和请求生成抢锁，把上报的 inter-token 延迟拉高",
+        "Locust 需要 CUDA"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "Looping the same prompt makes prefix caching look like full concurrent decode, inflating reported throughput"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "prompt-uniformity 陷阱是什么？",
+      "options_zh": [
+        "统一 prompt 总会让服务端变慢",
+        "从真实分布采样会让长 prompt 被低估",
+        "统一 prompt 需要流式",
+        "循环用同一条 prompt 会让 prefix caching 看上去像满并发的 decode，把上报的吞吐拉高"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Burst only"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本课推荐哪四种负载模式？",
+      "options_zh": [
+        "10 天恒定 1 RPS",
+        "手动点击测试",
+        "Steady-state、ramp、spike、soak",
+        "只做 burst"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Always use the same prompt to maximize cache hits"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本课建议怎么构造一份贴近真实的 prompt 分布？",
+      "options_zh": [
+        "用 mean 和 stddev 从真实分布采样（例如 LLMPerf 的 --mean-input-tokens / --stddev-input-tokens），或者直接回放真实流量",
+        "每个请求随机字符",
+        "手写 5 条 prompt 然后乱序",
+        "始终用同一条 prompt 来最大化缓存命中"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "Locust 2.43.3 stock"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "2026 年哪个工具组合被定位为最适合 CI/CD SLA 卡门以及 Kubernetes 原生分布式跑测试？",
+      "options_zh": [
+        "k6 v2026.1.0 加上 k6 Operator 1.0 GA（TestRun / PrivateLoadZone CRD）",
+        "仅 guidellm",
+        "仅 Vegeta",
+        "原生 Locust 2.43.3"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Cache eviction storms"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "soak 负载模式能抓到哪种失败模式？",
+      "options_zh": [
+        "数小时内的内存泄漏、连接池漂移和可观测性溢出",
+        "冷启动尾延迟",
+        "Tokenizer GIL 争用",
+        "缓存逐出风暴"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

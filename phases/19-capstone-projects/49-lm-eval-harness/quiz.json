@@ -12,7 +12,15 @@
         "weights and bias"
       ],
       "correct": 1,
-      "explanation": "The JSONL line is the contract. The extras field lets the code_exec metric pass io_pairs without polluting the prompt."
+      "explanation": "The JSONL line is the contract. The extras field lets the code_exec metric pass io_pairs without polluting the prompt.",
+      "question_zh": "harness 的 JSONL 格式中,定义一个任务样例的四个字段是?",
+      "options_zh": [
+        "name、score、payload、vendor",
+        "id、prompt、targets、metric,以及一个可选的 extras dict 提供 metric 需要的旁路数据",
+        "input 与 output",
+        "weights 与 bias"
+      ],
+      "explanation_zh": "JSONL 行就是契约。extras 字段让 code_exec metric 在不污染 prompt 的前提下传 io_pairs。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "It needs the model object"
       ],
       "correct": 1,
-      "explanation": "Floats in [0,1] mean per-task and overall scores are interpretable averages. The extras slot is how code_exec gets its io_pairs."
+      "explanation": "Floats in [0,1] mean per-task and overall scores are interpretable averages. The extras slot is how code_exec gets its io_pairs.",
+      "question_zh": "为什么 metric 函数签名是 (prediction, targets, extras) -> float?",
+      "options_zh": [
+        "随机选择",
+        "这是能同时处理单 target 字符串匹配、多参考 rouge-l 和带旁路数据的 code_exec 的最小签名,且把分数保持在可比的 [0.0, 1.0] 区间",
+        "返回 integer",
+        "需要模型对象"
+      ],
+      "explanation_zh": "[0,1] 浮点数让每任务和总分作为可解释的均值。Extras 槽是 code_exec 拿到 io_pairs 的途径。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "It rejects anything that contains def"
       ],
       "correct": 1,
-      "explanation": "The lesson's safe namespace strips builtins down to a handful of names. The test asserts that import os returns score 0.0 instead of executing."
+      "explanation": "The lesson's safe namespace strips builtins down to a handful of names. The test asserts that import os returns score 0.0 instead of executing.",
+      "question_zh": "code_exec metric 如何抵御恶意预测?",
+      "options_zh": [
+        "它不抵御",
+        "用剥离过的 __builtins__ dict 运行预测,命名空间只暴露少量安全名字; import 语句因找不到 importer 而失败",
+        "用 sandbox 容器",
+        "只要包含 def 就拒绝"
+      ],
+      "explanation_zh": "本节的安全 namespace 把 builtins 砍到几个名字。测试断言 import os 返回 0.0 而不是真的执行。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "It is required by torch"
       ],
       "correct": 1,
-      "explanation": "ToyAdapter in the lesson is a deterministic pattern matcher. An HttpAdapter for a real vendor has the same generate(prompts) -> list[str] surface."
+      "explanation": "ToyAdapter in the lesson is a deterministic pattern matcher. An HttpAdapter for a real vendor has the same generate(prompts) -> list[str] surface.",
+      "question_zh": "model adapter 抽象给你带来什么?",
+      "options_zh": [
+        "什么也没有",
+        "它是 harness 中唯一与模型相关的代码; 把 adapter 换成另一家厂商,任务、metric、runner 和 leaderboard 格式都不变",
+        "让模型更快",
+        "torch 要求"
+      ],
+      "explanation_zh": "本节里的 ToyAdapter 是确定性的模式匹配器。面向真实厂商的 HttpAdapter 拥有相同的 generate(prompts) -> list[str] 表面。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "It compresses the file"
       ],
       "correct": 1,
-      "explanation": "Same trick as the checkpoint payload from lesson 47. The schema field is the migration hook."
+      "explanation": "Same trick as the checkpoint payload from lesson 47. The schema field is the migration hook.",
+      "question_zh": "leaderboard JSON 为什么带 leaderboard.v1 这样的 schema 字符串?",
+      "options_zh": [
+        "为了 SEO",
+        "未来格式变化时升级版本,下游 dashboard 可基于它分发,而不是静默断裂",
+        "随机",
+        "压缩文件"
+      ],
+      "explanation_zh": "和第 47 课 checkpoint payload 一样的把戏。Schema 字段是迁移钩子。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Random sample"
       ],
       "correct": 1,
-      "explanation": "Mean of per-task means weights every task equally. Use --include-per-example to keep the prediction-level evidence next to the score so regressions are visible."
+      "explanation": "Mean of per-task means weights every task equally. Use --include-per-example to keep the prediction-level evidence next to the score so regressions are visible.",
+      "question_zh": "看 leaderboard 时,overall_score 怎么算,比较两次运行时还应注意什么?",
+      "options_zh": [
+        "正确数之和",
+        "每任务分数 (各在 [0,1]) 的均值; 比较时还要对分数变动的任务 diff 每个样例的预测,因为单看总分会掩盖具体哪些样例回归",
+        "最高任务分",
+        "随机抽样"
+      ],
+      "explanation_zh": "每任务均值再取均值会让每个任务被同等加权。用 --include-per-example 把样例级证据保留在分数旁,这样回归就可见。"
     }
   ]
 }

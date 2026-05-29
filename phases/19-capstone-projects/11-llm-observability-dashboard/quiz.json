@@ -12,7 +12,15 @@
         "Plain CSV log files"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Langfuse、Phoenix 和 OpenLLMetry 在哪种摄入 schema 上趋同?",
+      "options_zh": [
+        "每家厂商的私有 JSON",
+        "Prometheus exposition 格式",
+        "通过 OTLP HTTP 传输的 OpenTelemetry GenAI 语义约定",
+        "纯 CSV 日志文件"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "ClickHouse handles columnar analytics over spans while Postgres holds users, sessions, and app metadata"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么在存储层把 ClickHouse 与 Postgres 分开?",
+      "options_zh": [
+        "两者可互换,随机选一个",
+        "Postgres 在 span 摄入上更快",
+        "ClickHouse 不能存字符串",
+        "ClickHouse 处理 span 上的列式分析,Postgres 保存用户、会话和应用元数据"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Truncates spans below 100ms"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "OpenTelemetry Collector 中的 tail-sampling processor 做什么?",
+      "options_zh": [
+        "在 trace 完成后才决定是否保留,例如「保留错误,采样成功」这样的规则",
+        "把旧 trace 重放进 Postgres",
+        "无条件地透传所有字节",
+        "截断 100ms 以下的 span"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Counts unique trace IDs"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "dashboard 如何检测跨周的 drift?",
+      "options_zh": [
+        "在汇集后的 prompt embedding 上算 PSI 或 KL,并观察 eval-score 趋势",
+        "用肉眼看 dashboard",
+        "读取最新部署时间戳",
+        "统计唯一 trace ID 数量"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Under 5 minutes from bug deployed to Slack alert"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "对于注入的 PII 泄漏回归,交付物的 MTTR 目标是?",
+      "options_zh": [
+        "1 小时内",
+        "24 小时内",
+        "下一个 on-call 班次内",
+        "从 bug 部署到 Slack 告警 5 分钟内"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "OpenAI and Anthropic only"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "要满足 trace-coverage 评分要求,哪些 SDK 家族必须产出规范的 GenAI span?",
+      "options_zh": [
+        "只有 vLLM",
+        "至少 6 个: OpenAI、Anthropic、Google GenAI、LangChain、LlamaIndex 和 vLLM",
+        "任意一个 SDK 即可",
+        "仅 OpenAI 和 Anthropic"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "As eval spans written as children of the parent trace in ClickHouse"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "评估结果如何关联回原始 LLM 调用?",
+      "options_zh": [
+        "夜里通过邮件发出的 CSV",
+        "仅 Slack 消息",
+        "存在一张没有 trace ID 的 Postgres 表里",
+        "把 eval span 作为父 trace 的子 span 写入 ClickHouse"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

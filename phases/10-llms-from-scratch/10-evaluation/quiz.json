@@ -4,34 +4,49 @@
     "options": ["They test the wrong subjects", "Frontier models have saturated MMLU (scoring 86-89%), compressing the leaderboard to a range where differences are statistical noise", "MMLU was designed for smaller models", "The questions are too easy"],
     "correct": 1,
     "explanation": "When GPT-4, Claude 3, and Llama 3 all score 86-89% on MMLU, a 1-point difference is not meaningful. The benchmark no longer discriminates between models, yet it still dominates leaderboard culture.",
-    "stage": "pre"
+    "stage": "pre",
+    "question_zh": "为什么 MMLU 这类 benchmark 对比较前沿模型已经没那么有用了？",
+    "options_zh": ["它考的科目不对", "前沿模型已经把 MMLU 刷饱和了（86-89%），排行榜被压缩到一个差异接近统计噪声的区间", "MMLU 是为小模型设计的", "题目太简单"],
+    "explanation_zh": "当 GPT-4、Claude 3、Llama 3 在 MMLU 上都拿 86-89% 时，差 1 个百分点已经没什么意义。这个 benchmark 已经区分不出模型了，但它仍然主导着排行榜文化。"
   },
   {
     "question": "What is Goodhart's Law in the context of LLM evaluation?",
     "options": ["A law about model scaling", "When a measure becomes a target, it ceases to be a good measure -- models and teams optimize for benchmarks instead of real capabilities", "A rule about learning rate schedules", "A theorem about attention mechanisms"],
     "correct": 1,
     "explanation": "Labs optimize for benchmark scores (data contamination, benchmark-specific prompting). The score goes up, but real-world capability doesn't necessarily improve. Your own task-specific eval is the only reliable measure.",
-    "stage": "pre"
+    "stage": "pre",
+    "question_zh": "在 LLM 评估的语境里，Goodhart 法则指什么？",
+    "options_zh": ["关于模型 scaling 的定律", "当一个指标变成目标，它就不再是好指标——模型和团队会为 benchmark 优化，而不是真实能力", "关于学习率调度的规则", "关于 attention 机制的定理"],
+    "explanation_zh": "实验室会针对 benchmark 分数做优化（数据污染、benchmark 专属 prompt）。分数确实上去了，但真实能力未必跟着提升。只有你自己针对具体任务设计的评估才是可靠的衡量。"
   },
   {
     "question": "What is the LLM-as-judge evaluation approach?",
     "options": ["Having a human judge evaluate every response", "Using a strong LLM (e.g., GPT-4) to score responses against rubrics, replacing expensive human evaluation at scale", "Training a separate classifier for evaluation", "Using the model to evaluate itself"],
     "correct": 1,
     "explanation": "LLM-as-judge uses a capable model to score responses against defined criteria. It's cheaper and faster than human evaluation, though it has biases (e.g., preferring verbose responses) that must be calibrated.",
-    "stage": "post"
+    "stage": "post",
+    "question_zh": "LLM-as-judge 评估方式是什么？",
+    "options_zh": ["让人类评审看每条回答", "用一个强大的 LLM（比如 GPT-4）按评分标准给回答打分，在规模化场景里替代昂贵的人工评估", "另外训一个分类器做评估", "让模型评估自己"],
+    "explanation_zh": "LLM-as-judge 用一个能力强的模型按既定标准给回答打分。比人工评估更便宜更快，但它有偏差（比如偏好啰嗦回答），必须做校准。"
   },
   {
     "question": "Why is building a custom evaluation suite important rather than relying on public benchmarks?",
     "options": ["Public benchmarks are always wrong", "Public benchmarks test general capabilities; your application has specific requirements that only a custom eval can measure", "Custom evals are easier to build", "Public benchmarks are too expensive"],
     "correct": 1,
     "explanation": "A model scoring 90% on MMLU might fail on your specific task (e.g., extracting dates from legal documents in your format). Only a custom eval with your data, your edge cases, and your success criteria measures what matters.",
-    "stage": "post"
+    "stage": "post",
+    "question_zh": "为什么要自建评估套件，而不是只依赖公开 benchmark？",
+    "options_zh": ["公开 benchmark 总是错的", "公开 benchmark 测的是通用能力，你的应用有具体需求，只有自定义评估才能衡量到", "自定义评估更容易做", "公开 benchmark 太贵了"],
+    "explanation_zh": "MMLU 打 90 分的模型可能在你具体的任务上翻车（比如按你的格式从法律文档里抽日期）。只有用你自己的数据、边缘 case 和成功标准的自定义评估，才衡量到真正重要的东西。"
   },
   {
     "question": "What is data contamination in the context of LLM benchmarks?",
     "options": ["When training data is corrupted", "When benchmark questions appear in the model's pre-training data, inflating scores without reflecting true capability", "When the model generates incorrect data", "When evaluation data is mislabeled"],
     "correct": 1,
     "explanation": "If MMLU questions appeared in the training corpus, the model memorized the answers rather than reasoning about them. This inflates scores and makes benchmark comparisons unreliable. It's a growing problem as training corpora expand.",
-    "stage": "post"
+    "stage": "post",
+    "question_zh": "在 LLM benchmark 语境下，数据污染（data contamination）是什么？",
+    "options_zh": ["训练数据被损坏", "benchmark 题目混入了模型的预训练数据，分数虚高，并不反映真实能力", "模型生成了错误数据", "评估数据被打错标签"],
+    "explanation_zh": "如果 MMLU 题目出现在训练语料里，模型记下来的是答案，而不是在推理。分数会虚高，benchmark 对比也变得不可靠。随着训练语料越来越大，这个问题愈发严重。"
   }
 ]

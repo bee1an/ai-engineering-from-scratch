@@ -12,7 +12,15 @@
         "Gate chains let the model write its own policy."
       ],
       "correct": 1,
-      "explanation": "Audit trails and reproducibility are the practical wins. A judge model can also be wired in, but the structural gate needs to be deterministic so the decision can be reproduced and reviewed."
+      "explanation": "Audit trails and reproducibility are the practical wins. A judge model can also be wired in, but the structural gate needs to be deterministic so the decision can be reproduced and reviewed.",
+      "question_zh": "在阅读课程之前: 为什么 harness 需要确定性的 gate chain,而不是 model-as-judge?",
+      "options_zh": [
+        "模型在生产中作为 judge 太慢。",
+        "确定性让拒绝原因可审计、链路可重放。",
+        "model-as-judge 总是产出幻觉式的放行决定。",
+        "Gate chain 让模型自己写策略。"
+      ],
+      "explanation_zh": "审计追溯和可复现性是务实的收益。也可以接入一个 judge 模型,但结构性 gate 必须是确定性的,这样决定才能复现并被审查。"
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "Order does not matter because GateChain randomises evaluation order."
       ],
       "correct": 0,
-      "explanation": "Cheap denials run first. WhitelistGate is O(1) hash lookup. BudgetGate has to sum the ledger. Short-circuiting on whitelist avoids that work when the call is structurally illegal."
+      "explanation": "Cheap denials run first. WhitelistGate is O(1) hash lookup. BudgetGate has to sum the ledger. Short-circuiting on whitelist avoids that work when the call is structurally illegal.",
+      "question_zh": "为什么本节的链路里 WhitelistGate 在 BudgetGate 之前?",
+      "options_zh": [
+        "白名单拒绝更便宜,先短路它能避免昂贵的 ledger 求和。",
+        "BudgetGate 必须等到至少调用过一次工具才能跑。",
+        "按惯例 Whitelist 必须是最后一个 gate。",
+        "顺序无关,GateChain 会随机化求值顺序。"
+      ],
+      "explanation_zh": "便宜的拒绝先跑。WhitelistGate 是 O(1) 的 hash 查找,而 BudgetGate 必须求和 ledger。先白名单短路就能在结构性非法时跳过那部分工作。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "The refusal is appended as a synthetic Observation with the refuser's name."
       ],
       "correct": 1,
-      "explanation": "The ledger records observations the model has seen. A refusal produces a GateDecision, not an Observation. Refusal counts live alongside the ledger, not inside it."
+      "explanation": "The ledger records observations the model has seen. A refusal produces a GateDecision, not an Observation. Refusal counts live alongside the ledger, not inside it.",
+      "question_zh": "ObservationLedger 已记录一次来自 read_file 的 60-token observation。harness 之后拒绝了一次后续调用。Ledger 里关于这次拒绝记录了什么?",
+      "options_zh": [
+        "一行 token 数为零、标记为 refused 的 Observation。",
+        "什么都没有。Ledger 只记录成功的 observation。",
+        "一行表示拒绝代价的负 token 数 Observation。",
+        "拒绝被作为合成 Observation 追加,带上拒绝者的名字。"
+      ],
+      "explanation_zh": "Ledger 记录模型看到过的 observation。拒绝产生的是 GateDecision,而不是 Observation。拒绝计数与 ledger 并列,而不是写进 ledger。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "The gate raises an exception because the ledger is stale."
       ],
       "correct": 1,
-      "explanation": "RecencyGate compares (call.turn - ledger.latest_turn) against the window. 10 - 5 = 5, which is greater than 3, so the gate denies."
+      "explanation": "RecencyGate compares (call.turn - ledger.latest_turn) against the window. 10 - 5 = 5, which is greater than 3, so the gate denies.",
+      "question_zh": "RecencyGate.window 设为 3。Ledger 的 latest_turn 是 5。一次新的 ToolCall 在 turn 10 到达。会发生什么?",
+      "options_zh": [
+        "gate 放行: 调用就在最新 turn。",
+        "gate 拒绝: 间隔 5 超过窗口 3。",
+        "gate 放行: 窗口针对的是 ledger 大小,而不是 turn 间隔。",
+        "gate 抛出异常,因为 ledger 过期。"
+      ],
+      "explanation_zh": "RecencyGate 比较 (call.turn - ledger.latest_turn) 与 window。10 - 5 = 5,大于 3,所以拒绝。"
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "Inside the BudgetGate so the limits compose."
       ],
       "correct": 2,
-      "explanation": "The output size is not known at gate-evaluation time. The harness applies the cap after the tool runs, by truncating the observation before the model sees it. Gates evaluate inputs, not outputs."
+      "explanation": "The output size is not known at gate-evaluation time. The harness applies the cap after the tool runs, by truncating the observation before the model sees it. Gates evaluate inputs, not outputs.",
+      "question_zh": "你想加一个每次调用的输出上限 (单次 observation 不超过 8000 token)。这条 gate 在链路上属于哪里?",
+      "options_zh": [
+        "WhitelistGate 之前,因为 size 是最便宜的属性。",
+        "BudgetGate 之后,因为累计预算总是占主导。",
+        "它不能是 gate,因为大小要等工具运行后才知道。",
+        "放进 BudgetGate 内,让限制可叠加。"
+      ],
+      "explanation_zh": "在 gate 求值时还不知道输出大小。harness 在工具运行后通过截断 observation 来执行该上限。Gate 评估的是输入,不是输出。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "The model's chat transcript, which contains its own self-report."
       ],
       "correct": 1,
-      "explanation": "ChainOutcome records carry per-call decisions and deny reasons. The ledger and transcript can support the claim, but the auditable artifact is the chain decisions."
+      "explanation": "ChainOutcome records carry per-call decisions and deny reasons. The ledger and transcript can support the claim, but the auditable artifact is the chain decisions.",
+      "question_zh": "评审者要求你证明 agent 在一次会话中从未触发过被拒的工具调用。你指给他看哪份 artifact?",
+      "options_zh": [
+        "ObservationLedger 快照,只包含成功的 observation。",
+        "ChainOutcome 记录列表,包含每次调用的决定与拒绝原因。",
+        "pytest 输出,记录测试的通过 / 失败。",
+        "模型的对话记录,内容是它的自陈。"
+      ],
+      "explanation_zh": "ChainOutcome 携带每次调用的决定与拒绝原因。Ledger 和对话记录可以辅证,但可审计的 artifact 是链路决定。"
     }
   ]
 }

@@ -12,7 +12,15 @@
         "Hot and cold"
       ],
       "correct": 1,
-      "explanation": "Frames flow downstream source-to-sink and upstream for control and cancellation."
+      "explanation": "Frames flow downstream source-to-sink and upstream for control and cancellation.",
+      "question_zh": "Pipecat 的 pipeline 使用哪两种数据流方向？",
+      "options_zh": [
+        "读和写",
+        "DOWNSTREAM（源到汇）和 UPSTREAM（反馈、取消、barge-in）",
+        "入站和出站",
+        "热和冷"
+      ],
+      "explanation_zh": "Frame 沿 downstream 从源到汇流动，沿 upstream 流动用于控制和取消。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Audio -> JSON -> SQL -> response"
       ],
       "correct": 0,
-      "explanation": "VAD detects voice activity, STT transcribes, LLM responds, TTS speaks, transport delivers."
+      "explanation": "VAD detects voice activity, STT transcribes, LLM responds, TTS speaks, transport delivers.",
+      "question_zh": "典型的 Pipecat 语音 pipeline 是什么？",
+      "options_zh": [
+        "VAD -> STT -> LLM -> TTS -> transport",
+        "TTS -> STT -> LLM -> VAD",
+        "LLM -> embed -> retrieve -> answer",
+        "Audio -> JSON -> SQL -> response"
+      ],
+      "explanation_zh": "VAD 检测语音活动，STT 转写，LLM 回答，TTS 朗读，transport 投递。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "LocalAgent and CloudAgent"
       ],
       "correct": 0,
-      "explanation": "MultimodalAgent uses direct audio (Realtime-style); VoicePipelineAgent uses STT->LLM->TTS for text-level control."
+      "explanation": "MultimodalAgent uses direct audio (Realtime-style); VoicePipelineAgent uses STT->LLM->TTS for text-level control.",
+      "question_zh": "LiveKit Agents 提供哪两类语音 agent？",
+      "options_zh": [
+        "MultimodalAgent（直接处理音频）和 VoicePipelineAgent（STT/LLM/TTS 串联）",
+        "BatchAgent 和 StreamAgent",
+        "TextAgent 和 SpeechAgent",
+        "LocalAgent 和 CloudAgent"
+      ],
+      "explanation_zh": "MultimodalAgent 直接走音频（Realtime 风格）；VoicePipelineAgent 走 STT->LLM->TTS，方便在文本层做控制。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Captcha failure; retry"
       ],
       "correct": 1,
-      "explanation": "Barge-in is user interruption; UPSTREAM cancellation is how Pipecat handles it cleanly."
+      "explanation": "Barge-in is user interruption; UPSTREAM cancellation is how Pipecat handles it cleanly.",
+      "question_zh": "什么是 barge-in，怎么处理？",
+      "options_zh": [
+        "LLM 成本暴涨；减少 token",
+        "用户在 agent 说话时打断；UPSTREAM 取消 frame 让 TTS 在话说一半时停下",
+        "供应商故障；切换 region",
+        "Captcha 失败；重试"
+      ],
+      "explanation_zh": "Barge-in 即用户打断；UPSTREAM 取消是 Pipecat 处理它的干净方式。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "About 5000 ms"
       ],
       "correct": 1,
-      "explanation": "Premium stacks land around 450-600 ms; 800-1200 ms is common; over 1500 ms feels broken."
+      "explanation": "Premium stacks land around 450-600 ms; 800-1200 ms is common; over 1500 ms feels broken.",
+      "question_zh": "本课把端到端延迟在多少范围内称作高端水准？",
+      "options_zh": [
+        "大约 50 ms",
+        "大约 450-600 ms",
+        "大约 1500 ms",
+        "大约 5000 ms"
+      ],
+      "explanation_zh": "高端方案在 450-600 ms；800-1200 ms 比较常见；超过 1500 ms 就显得不可用。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Calls get cheaper"
       ],
       "correct": 1,
-      "explanation": "Treating low-confidence STT as truth is a top voice-agent failure mode."
+      "explanation": "Treating low-confidence STT as truth is a top voice-agent failure mode.",
+      "question_zh": "如果忽略 STT 置信度会怎样？",
+      "options_zh": [
+        "延迟会下降",
+        "低置信度的转写会被当作金科玉律喂给 LLM，产出错误答案；要按置信度门控或要求确认",
+        "TTS 会更快",
+        "通话会更便宜"
+      ],
+      "explanation_zh": "把低置信度 STT 当作真理是语音 agent 的头号失败模式之一。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Latency is required by WebRTC"
       ],
       "correct": 1,
-      "explanation": "Sum the chain (VAD + STT + LLM + TTS + transport) before shipping; targets are tight."
+      "explanation": "Sum the chain (VAD + STT + LLM + TTS + transport) before shipping; targets are tight.",
+      "question_zh": "为什么本课建议在上线前把组件延迟逐项加和？",
+      "options_zh": [
+        "供应商按延迟收费",
+        "每个组件多 50-200 ms；总和决定体验是不是已经崩了",
+        "为了满足合规要求",
+        "WebRTC 要求做这件事"
+      ],
+      "explanation_zh": "上线前把整条链（VAD + STT + LLM + TTS + transport）累加起来；指标卡得很紧。"
     }
   ]
 }

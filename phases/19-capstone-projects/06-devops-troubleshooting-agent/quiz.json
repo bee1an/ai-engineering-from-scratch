@@ -12,7 +12,15 @@
         "Cluster-admin so it can self-heal"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "排障 agent 的 RBAC 默认权限姿态是什么?",
+      "options_zh": [
+        "默认只读,破坏性动作放在独立服务器后,需要人工审批",
+        "只在受影响的命名空间拥有 namespace-admin",
+        "等价于 on-call 工程师",
+        "Cluster-admin,以便自我修复"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "A graph of GitHub commits and PR reviews"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "agent 在做根因分析时遍历的知识图是什么?",
+      "options_zh": [
+        "节点是 K8s 对象加遥测来源; 边编码所有权、调度和观测关系",
+        "最近重启的 pod 的扁平列表",
+        "按团队组织的 Prometheus 指标名",
+        "GitHub commit 与 PR review 的关系图"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "By the order they were generated"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Slack 简报里的根因假设是如何排序的?",
+      "options_zh": [
+        "用一个综合 recency、specificity、graph-path length 和引用数的证据分",
+        "仅按模型 log-probability",
+        "按告警名字母序",
+        "按生成顺序"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Replay attacks require both lists"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么审计日志同时记录 agent 「考虑过」的命令和「执行过」的命令?",
+      "options_zh": [
+        "评审者可以发现 agent 几乎执行了破坏性命令的 near-miss",
+        "ArgoCD 只接受被「考虑过」的命令",
+        "Slack API 同时需要两份",
+        "重放攻击需要两份列表"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "PagerDuty automatically pauses the deployment"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "什么机制阻止 agent 在故障部署上单方面回滚?",
+      "options_zh": [
+        "破坏性工具放在独立的 MCP server 后,需通过 Slack card 在短时间窗内提升的审批 token",
+        "由第二个 LLM-judge 投票决定回滚",
+        "GitOps 仓库的分支保护",
+        "PagerDuty 自动暂停部署"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Under 30 seconds"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "评分标准衡量的 p50 time-to-hypothesis 目标是?",
+      "options_zh": [
+        "在下一次 on-call 班次内",
+        "1 小时内",
+        "从告警到 Slack 简报 5 分钟内",
+        "30 秒内"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "20 scenarios covering OOMKill, DNS flap, HPA thrash, PVC fill, and more"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "用于评估 RCA 准确度的合成事故套件有多大?",
+      "options_zh": [
+        "1 个脚本化的演示事故",
+        "5 个场景",
+        "100 个随机抽样的生产告警",
+        "20 个场景,涵盖 OOMKill、DNS flap、HPA thrash、PVC 写满等"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

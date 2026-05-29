@@ -12,7 +12,15 @@
         "It contains too few tokens"
       ],
       "correct": 2,
-      "explanation": "BoW cannot bind 'not' to the word it negates, so the classifier misses the polarity flip."
+      "explanation": "BoW cannot bind 'not' to the word it negates, so the classifier misses the polarity flip.",
+      "question_zh": "为什么 'The food was not great' 对 naive BoW 分类器是难案例？",
+      "options_zh": [
+        "它没有标点",
+        "它混合了英语和法语",
+        "否定翻转了含义，但 bag of words 丢掉了 'not' 与 'great' 之间的联系",
+        "它包含的 token 太少"
+      ],
+      "explanation_zh": "BoW 不能把 'not' 绑定到它否定的词，所以分类器错过了极性翻转。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Search, then rank"
       ],
       "correct": 2,
-      "explanation": "Classical sentiment is feature extraction followed by a linear classifier."
+      "explanation": "Classical sentiment is feature extraction followed by a linear classifier.",
+      "question_zh": "经典情感分析由哪两步组成？",
+      "options_zh": [
+        "翻译，然后分类",
+        "embedding，然后聚类",
+        "表征（向量化文本）和分类（在向量上跑线性模型）",
+        "搜索，然后排序"
+      ],
+      "explanation_zh": "经典情感分析就是特征抽取后接一个线性分类器。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Laplace smoothing fixes dependence"
       ],
       "correct": 0,
-      "explanation": "Even with wrong independence, leaning-direction information per word is enough to classify well."
+      "explanation": "Even with wrong independence, leaning-direction information per word is enough to classify well.",
+      "question_zh": "尽管有 'naive' 独立性假设，Naive Bayes 为什么仍然有效？",
+      "options_zh": [
+        "在稀疏文本特征加上中等数据时，分类器主要在意每个词倾向于哪一边，而不是精确联合概率",
+        "Naive Bayes 暗中学到了交互",
+        "假设在文本上其实是成立的",
+        "Laplace 平滑修正了相关性"
+      ],
+      "explanation_zh": "即使独立性错误，每个词的倾向方向信息已足够分类。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "To shrink the vocabulary"
       ],
       "correct": 2,
-      "explanation": "Negation scoping splits negated forms into distinct features so a BoW classifier can model the flip."
+      "explanation": "Negation scoping splits negated forms into distinct features so a BoW classifier can model the flip.",
+      "question_zh": "为什么在预处理中要带上 'NOT_' 前缀的 token？",
+      "options_zh": [
+        "为了归一化大小写",
+        "为了 stemming",
+        "把 'good' 和 'NOT_good' 变成不同特征，分类器可以给它们相反权重",
+        "缩小词表"
+      ],
+      "explanation_zh": "negation scoping 把否定形式拆为不同特征，让 BoW 分类器能建模翻转。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Stopword removal breaks tokenization"
       ],
       "correct": 0,
-      "explanation": "Default stopword lists drop negations and similar carriers of sentiment."
+      "explanation": "Default stopword lists drop negations and similar carriers of sentiment.",
+      "question_zh": "为什么对情感分析做去停用词是有风险的？",
+      "options_zh": [
+        "否定词（'not'、'no'、'never'）通常被当作停用词，但它们承载情感信号",
+        "停用词表太长",
+        "它会增加稀疏性",
+        "去停用词会破坏 tokenization"
+      ],
+      "explanation_zh": "默认停用词表会丢掉否定及类似的情感信号载体。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Micro-F1 only"
       ],
       "correct": 0,
-      "explanation": "Macro-F1 forces the minority class to count; accuracy or micro-F1 hides it."
+      "explanation": "Macro-F1 forces the minority class to count; accuracy or micro-F1 hides it.",
+      "question_zh": "情感类别不平衡时该报告哪个指标？",
+      "options_zh": [
+        "Macro-F1（每类 F1 的等权均值）",
+        "单纯准确率",
+        "均方误差",
+        "只有 Micro-F1"
+      ],
+      "explanation_zh": "Macro-F1 强制少数类参与计数；准确率或 micro-F1 会掩盖它。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Sarcasm detection, long shifting documents, aspect-based sentiment, or low-resource languages"
       ],
       "correct": 3,
-      "explanation": "Sarcasm, aspect-based, and cross-lingual sentiment exceed classical BoW models' reach."
+      "explanation": "Sarcasm, aspect-based, and cross-lingual sentiment exceed classical BoW models' reach.",
+      "question_zh": "什么时候你应该跳过经典模型，对情感分析直接上 transformer？",
+      "options_zh": [
+        "样本少于 100 时",
+        "延迟关键时",
+        "需要可解释时",
+        "讽刺检测、长且情绪转移的文档、aspect-based 情感、低资源语言"
+      ],
+      "explanation_zh": "讽刺、aspect-based 和跨语言情感超出了经典 BoW 模型的能力范围。"
     },
     {
       "stage": "post",
@@ -96,7 +152,15 @@
         "Sparse high-dimensional text features otherwise let the model memorize training examples"
       ],
       "correct": 3,
-      "explanation": "L2 prevents overfitting in the sparse-feature, high-dimensional regime of text."
+      "explanation": "L2 prevents overfitting in the sparse-feature, high-dimensional regime of text.",
+      "question_zh": "为什么 L2 正则化对文本上的 logistic regression 很重要？",
+      "options_zh": [
+        "计算梯度需要",
+        "避免 ReLU 死单元",
+        "加速矩阵求逆",
+        "稀疏的高维文本特征否则会让模型记住训练样例"
+      ],
+      "explanation_zh": "L2 在稀疏特征、高维空间的设定下防止过拟合。"
     }
   ]
 }

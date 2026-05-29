@@ -12,7 +12,15 @@
         "OCR cannot run on GPUs"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么 2026 年的前沿在金融 PDF 和科研论文上偏好 vision-first 的 late interaction,而非 OCR-then-text?",
+      "options_zh": [
+        "视觉模型每页更便宜",
+        "OCR 流水线会把旋转表格、密集公式和图表搞坏,丢失一半的信号",
+        "OCR 比渲染慢",
+        "OCR 不能在 GPU 上跑"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "The reranker only runs on the final candidate"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "在 ColPali 风格的检索中,late interaction 指什么?",
+      "options_zh": [
+        "每个 query token 与每个 patch token 打分,然后通过 MaxSim 把每个 token 的最大值求和",
+        "Embedding 推迟到评估时再算",
+        "Embedding 在用户点击结果后才算",
+        "Reranker 仅对最终候选运行"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "16 vectors with negligible storage overhead"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "ColQwen 每页大约产生多少个 patch 向量,这会带来什么存储问题?",
+      "options_zh": [
+        "每页约 2048 个 patch 向量,相比单向量索引,原始存储会膨胀",
+        "正好 128 个,能干净地装进任何向量库",
+        "每页 1 个,没有存储问题",
+        "16 个,存储开销可忽略"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Crops bounding boxes around evidence regions"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "DocPruner 在本流水线中做什么?",
+      "options_zh": [
+        "在入库前去除重复的 PDF 页面",
+        "压缩多向量索引,保留约 50% 高信号 patch,精度损失可忽略",
+        "为更短的向量重写 query embedding",
+        "在证据区域上裁剪 bounding box"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Equation-dense and table-heavy pages benefit from a text fallback alongside the image"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么对部分页面仍要拼接 OCR 文本通道?",
+      "options_zh": [
+        "可以提升 PDF 渲染质量",
+        "VLM 在 180 DPI 下读不了图像",
+        "OCR 是主要检索模态",
+        "公式密集和表格繁多的页面,在图像之外辅以文本回退会更好"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "MMLU-Pro"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本 capstone 用哪个 benchmark 评估 vision-first 检索?",
+      "options_zh": [
+        "RewardBench-2",
+        "SWE-bench Pro",
+        "ViDoRe v3",
+        "MMLU-Pro"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Fraction of cited bounding boxes that actually contain the answer span"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "评分标准里的 evidence-region grounding 指什么?",
+      "options_zh": [
+        "DocPruner 实现的压缩比",
+        "Re-ranker 在 p99 尾部的延迟",
+        "每个 query 检索到的总页数",
+        "被引用的 bounding box 中实际包含答案 span 的比例"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

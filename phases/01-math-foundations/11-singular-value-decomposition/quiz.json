@@ -3,37 +3,52 @@
     {
       "stage": "pre",
       "question": "What advantage does SVD have over eigendecomposition?",
+      "question_zh": "SVD 相比特征分解有什么优势？",
       "options": ["SVD is always faster to compute", "SVD works on any matrix of any shape, while eigendecomposition requires square matrices with full eigenvector sets", "SVD produces smaller output matrices", "SVD does not require numerical computation"],
+      "options_zh": ["SVD 总是计算更快", "SVD 适用于任意形状的矩阵，而特征分解只能用在拥有 n 个线性无关特征向量的方阵上", "SVD 产生的输出矩阵更小", "SVD 不需要数值计算"],
       "correct": 1,
-      "explanation": "Eigendecomposition only works on square matrices that have n linearly independent eigenvectors. SVD decomposes ANY m x n matrix into U * Sigma * V^T with no restrictions on shape or rank."
+      "explanation": "Eigendecomposition only works on square matrices that have n linearly independent eigenvectors. SVD decomposes ANY m x n matrix into U * Sigma * V^T with no restrictions on shape or rank.",
+      "explanation_zh": "特征分解只适用于拥有 n 个线性无关特征向量的方阵。SVD 则可以把任意 m x n 矩阵分解为 U * Σ * V^T，对形状和秩都没有限制。"
     },
     {
       "stage": "pre",
       "question": "What does 'low-rank approximation' mean?",
+      "question_zh": "「低秩近似（low-rank approximation）」是什么意思？",
       "options": ["Removing rows with low values from a matrix", "Approximating a matrix by keeping only its most important components, producing a simpler matrix with fewer independent directions", "Converting a matrix to a lower precision data type", "Sorting the rows of a matrix by their magnitude"],
+      "options_zh": ["把矩阵中数值小的行去掉", "只保留矩阵最重要的几个成分，得到一个独立方向更少、更简洁的近似矩阵", "把矩阵转成更低精度的数据类型", "按数值大小给矩阵的行排序"],
       "correct": 1,
-      "explanation": "A rank-k approximation keeps only the top k singular values and their vectors, discarding the rest. The Eckart-Young theorem proves this is the BEST possible approximation of that rank."
+      "explanation": "A rank-k approximation keeps only the top k singular values and their vectors, discarding the rest. The Eckart-Young theorem proves this is the BEST possible approximation of that rank.",
+      "explanation_zh": "rank-k 近似只保留最大的 k 个奇异值及其对应向量，把其余部分丢掉。Eckart-Young 定理证明了这是该秩下的最佳近似。"
     },
     {
       "stage": "post",
       "question": "In SVD A = U * Sigma * V^T, what geometric operation does each factor represent?",
+      "question_zh": "在 SVD A = U * Σ * V^T 中，每一项分别代表什么几何操作？",
       "options": ["U scales, Sigma rotates, V^T translates", "V^T rotates in input space, Sigma scales along principal axes, U rotates into output space", "U compresses, Sigma expands, V^T normalizes", "All three factors perform the same operation: rotation"],
+      "options_zh": ["U 是缩放，Σ 是旋转，V^T 是平移", "V^T 在输入空间中旋转，Σ 沿主轴方向缩放，U 再旋转到输出空间", "U 压缩，Σ 拉伸，V^T 归一化", "三者都是旋转"],
       "correct": 1,
-      "explanation": "SVD reveals that every matrix performs: (1) V^T rotates inputs to align with principal directions, (2) Sigma stretches/compresses along each axis, (3) U rotates the result into the output space. Rotate, scale, rotate."
+      "explanation": "SVD reveals that every matrix performs: (1) V^T rotates inputs to align with principal directions, (2) Sigma stretches/compresses along each axis, (3) U rotates the result into the output space. Rotate, scale, rotate.",
+      "explanation_zh": "SVD 揭示了任意矩阵的作用方式：(1) V^T 把输入旋转，使之对齐主方向；(2) Σ 在各个轴上做拉伸/压缩；(3) U 再把结果旋转到输出空间。即「旋转-缩放-旋转」。"
     },
     {
       "stage": "post",
       "question": "Why does sklearn implement PCA using SVD instead of eigendecomposition of the covariance matrix?",
+      "question_zh": "为什么 sklearn 用 SVD 而不是协方差矩阵的特征分解来实现 PCA？",
       "options": ["SVD produces different results that are more accurate for ML", "SVD works directly on the data matrix without forming the covariance matrix, avoiding squaring the condition number and improving numerical stability", "SVD is easier to parallelize on GPUs", "SVD does not require centering the data"],
+      "options_zh": ["SVD 给出的结果不同，且对 ML 更准确", "SVD 直接作用于数据矩阵，不用构造协方差矩阵，避免了条件数被平方，从而数值更稳定", "SVD 在 GPU 上更容易并行", "SVD 不需要对数据中心化"],
       "correct": 1,
-      "explanation": "Forming A^T*A squares the singular values (and condition number). If A has singular values [1000, 0.001], A^T*A has eigenvalues [10^6, 10^-6] -- 6 digits of precision lost. SVD avoids this by working directly on A."
+      "explanation": "Forming A^T*A squares the singular values (and condition number). If A has singular values [1000, 0.001], A^T*A has eigenvalues [10^6, 10^-6] -- 6 digits of precision lost. SVD avoids this by working directly on A.",
+      "explanation_zh": "构造 A^T*A 会让奇异值（以及条件数）被平方。如果 A 的奇异值是 [1000, 0.001]，A^T*A 的特征值就是 [10^6, 10^-6]，相当于丢了 6 位精度。SVD 直接作用在 A 上避免了这个问题。"
     },
     {
       "stage": "post",
       "question": "How does truncated SVD enable recommendation systems to predict missing ratings?",
+      "question_zh": "truncated SVD 是怎么让推荐系统预测缺失评分的？",
       "options": ["It fills missing entries with the average rating", "It decomposes the ratings matrix into latent user and movie profiles; the dot product of a user profile with a movie profile predicts the missing rating", "It clusters similar users together and copies their ratings", "It trains a neural network on the observed ratings"],
+      "options_zh": ["用平均评分填充缺失项", "把评分矩阵分解为用户和电影的潜在画像，用户画像与电影画像点乘就能预测缺失评分", "把相似用户聚成一类，互相拷贝评分", "在已观察到的评分上训练一个神经网络"],
       "correct": 1,
-      "explanation": "SVD decomposes the ratings matrix into user profiles (U), latent factor importance (Sigma), and movie profiles (V^T). The low-rank reconstruction fills in missing entries based on the latent factors (genre, era, style) that explain user preferences."
+      "explanation": "SVD decomposes the ratings matrix into user profiles (U), latent factor importance (Sigma), and movie profiles (V^T). The low-rank reconstruction fills in missing entries based on the latent factors (genre, era, style) that explain user preferences.",
+      "explanation_zh": "SVD 把评分矩阵分解为用户画像（U）、潜在因子的重要程度（Σ）和电影画像（V^T）。低秩重建会基于这些隐含因子（题材、年代、风格等）对缺失评分做出预测。"
     }
   ]
 }

@@ -12,7 +12,15 @@
         "Coverage of every line of the candidate's code."
       ],
       "correct": 1,
-      "explanation": "Determinism is what makes a regression detectable. A non-deterministic verifier turns every red into a coin flip."
+      "explanation": "Determinism is what makes a regression detectable. A non-deterministic verifier turns every red into a coin flip.",
+      "question_zh": "在阅读课程之前: 一个好的 agent eval verifier 最重要的属性是什么?",
+      "options_zh": [
+        "毫秒级速度。",
+        "跨运行的确定性。",
+        "对判定结果给出自然语言解释。",
+        "覆盖候选者代码的每一行。"
+      ],
+      "explanation_zh": "确定性是让回归可被检测的关键。非确定性 verifier 把每次失败都变成抛硬币。"
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "1.00"
       ],
       "correct": 1,
-      "explanation": "pass@k = 1 - (1 - p)^k = 1 - (1 - 0.6)^5 = 1 - 0.4^5 = 1 - 0.01024 = 0.98976, which rounds to 0.99. The raw per-sample rate (0.6) is the value option (a) names, but the formula amplifies it across k samples."
+      "explanation": "pass@k = 1 - (1 - p)^k = 1 - (1 - 0.6)^5 = 1 - 0.4^5 = 1 - 0.01024 = 0.98976, which rounds to 0.99. The raw per-sample rate (0.6) is the value option (a) names, but the formula amplifies it across k samples.",
+      "question_zh": "在单个任务上,候选者在 5 个采样里取得 3 次通过。本节 pass@5 公式返回的值是多少 (保留两位小数)?",
+      "options_zh": [
+        "0.60",
+        "0.99",
+        "0.75",
+        "1.00"
+      ],
+      "explanation_zh": "pass@k = 1 - (1 - p)^k = 1 - (1 - 0.6)^5 = 1 - 0.4^5 = 1 - 0.01024 = 0.98976,四舍五入到 0.99。原始的单次采样率 (0.6) 是选项 (a),公式在 k 次采样上对其放大。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "pass@1 is the version supported by the verifier registry; pass@k is reserved for future verifiers."
       ],
       "correct": 1,
-      "explanation": "pass@k makes models that get the answer once in many tries look strong; pass@1 is the first-attempt floor. Reporting both prevents over-claiming."
+      "explanation": "pass@k makes models that get the answer once in many tries look strong; pass@1 is the first-attempt floor. Reporting both prevents over-claiming.",
+      "question_zh": "为什么本节同时把 pass@1 和 pass@k 写进报告?",
+      "options_zh": [
+        "pass@1 是用户在 dashboard 看到的值; pass@k 用于内部调试。",
+        "pass@k 会掩盖那些只在多次尝试里偶尔答对一次的模型,所以 pass@1 把结果锚定在首次尝试质量上。",
+        "对于 k > 1,pass@k 与 pass@1 数学上完全相同。",
+        "pass@1 是 verifier registry 支持的版本; pass@k 留给将来的 verifier。"
+      ],
+      "explanation_zh": "pass@k 让多次尝试中只有一次答对的模型显得很强; pass@1 是首次尝试的下限。同时报告两者可以避免高估。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "It is only relevant for shell verifiers."
       ],
       "correct": 1,
-      "explanation": "Without a fresh scratch, sample N+1 starts from sample N's output. The harness would measure 'second-attempt cleanup' rather than first-attempt success."
+      "explanation": "Without a fresh scratch, sample N+1 starts from sample N's output. The harness would measure 'second-attempt cleanup' rather than first-attempt success.",
+      "question_zh": "harness 在每次采样前调用 _prepare_scratch。当 pass@k > 1 时这为什么重要?",
+      "options_zh": [
+        "可避免共享临时目录的竞争。",
+        "可保证每次采样都从有 bug 的初始状态开始,而不是上一次采样的输出。",
+        "纯粹是性能优化。",
+        "只对 shell verifier 有意义。"
+      ],
+      "explanation_zh": "没有干净的 scratch,第 N+1 次采样从第 N 次的输出开始。harness 衡量到的就成了「第二次清理」而不是「首次成功」。"
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "It is impossible to express pytest as a verifier."
       ],
       "correct": 2,
-      "explanation": "pytest exits 0 on pass and non-zero on failure. shell_exit_zero is the right primitive. Production wiring routes the call through the sandbox from lesson 26."
+      "explanation": "pytest exits 0 on pass and non-zero on failure. shell_exit_zero is the right primitive. Production wiring routes the call through the sandbox from lesson 26.",
+      "question_zh": "你新增一个 verifier 'pytest_passes',在 scratch 目录里运行 pytest。应当基于哪个现有 verifier?",
+      "options_zh": [
+        "file_equals,因为 pytest 会写结果文件。",
+        "regex_match,因为 pytest 输出包含 'passed' 这个词。",
+        "shell_exit_zero,因为 pytest 通过 exit code 0 表示成功。",
+        "无法用 verifier 表达 pytest。"
+      ],
+      "explanation_zh": "pytest 通过时 exit 0,失败时非零。shell_exit_zero 是合适的原语。生产部署应通过第 26 课的 sandbox 路由调用。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "The fixture JSON files."
       ],
       "correct": 1,
-      "explanation": "Per-sample latency, verifier detail, and pass/fail let you triage: same fixtures, different verdicts, so the model changed; same verdicts but different latency, so something else moved."
+      "explanation": "Per-sample latency, verifier detail, and pass/fail let you triage: same fixtures, different verdicts, so the model changed; same verdicts but different latency, so something else moved.",
+      "question_zh": "评审者问: 「这次回归是模型问题还是 harness 问题?」哪份 artifact 能回答?",
+      "options_zh": [
+        "agent 的 chain-of-thought 转写。",
+        "每个任务、每次采样的 SampleResult 加上 verifier detail 信息。",
+        "verifier registry 的源码。",
+        "fixture 的 JSON 文件。"
+      ],
+      "explanation_zh": "每次采样的延迟、verifier detail 和通过 / 失败让你做分诊: 同样的 fixture、不同的判定 → 模型变了; 同样的判定但延迟不同 → 是别的东西动了。"
     }
   ]
 }

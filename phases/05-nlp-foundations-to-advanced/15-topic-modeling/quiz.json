@@ -12,7 +12,15 @@
         "Documents are independent of topics"
       ],
       "correct": 2,
-      "explanation": "LDA's generative story is mixed-membership: each doc has a topic distribution, each topic a word distribution."
+      "explanation": "LDA's generative story is mixed-membership: each doc has a topic distribution, each topic a word distribution.",
+      "question_zh": "LDA 对每个文档假设什么？",
+      "options_zh": [
+        "每个文档恰属于一个主题",
+        "文档是句子",
+        "每个文档是主题的混合；每个主题是词的分布",
+        "文档与主题无关"
+      ],
+      "explanation_zh": "LDA 的生成故事是混合成员资格：每个文档有主题分布，每个主题有词分布。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Train an LSTM end-to-end"
       ],
       "correct": 1,
-      "explanation": "BERTopic = embeddings + UMAP + HDBSCAN, with class-based TF-IDF for topic words."
+      "explanation": "BERTopic = embeddings + UMAP + HDBSCAN, with class-based TF-IDF for topic words.",
+      "question_zh": "BERTopic 用什么形成主题聚类？",
+      "options_zh": [
+        "对词表直接 softmax",
+        "用 sentence transformer 编码文档，UMAP 降维，然后 HDBSCAN 聚类",
+        "先 BM25 后 k-means",
+        "端到端训练 LSTM"
+      ],
+      "explanation_zh": "BERTopic = embedding + UMAP + HDBSCAN，再用类别加权 TF-IDF 选主题词。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Memory limits"
       ],
       "correct": 1,
-      "explanation": "LDA likelihood assumes counts; feeding TF-IDF values violates the model assumption."
+      "explanation": "LDA likelihood assumes counts; feeding TF-IDF values violates the model assumption.",
+      "question_zh": "为什么 scikit-learn 的 LDA 期望原始计数（CountVectorizer）而不是 TF-IDF？",
+      "options_zh": [
+        "TF-IDF 太慢",
+        "LDA 概率模型定义在整数 term 计数上；TF-IDF 会扭曲底层分布",
+        "LDA 不能处理浮点",
+        "内存限制"
+      ],
+      "explanation_zh": "LDA 似然假设是计数；喂 TF-IDF 值违反模型假设。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Top topic"
       ],
       "correct": 1,
-      "explanation": "HDBSCAN marks unclustered points with -1; in BERTopic these are documents that did not fit any topic."
+      "explanation": "HDBSCAN marks unclustered points with -1; in BERTopic these are documents that did not fit any topic.",
+      "question_zh": "BERTopic 输出中 HDBSCAN 的 -1 标签意味着什么？",
+      "options_zh": [
+        "保留类别",
+        "密度算法不能自信归类的离群文档簇",
+        "停用词簇",
+        "顶级主题"
+      ],
+      "explanation_zh": "HDBSCAN 把未聚类点标为 -1；在 BERTopic 中这些是没有归入任何主题的文档。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "c_v coherence via NPMI over sliding windows of top topic words"
       ],
       "correct": 3,
-      "explanation": "c_v coherence (Roder et al., 2015) is the canonical automatic topic-coherence metric."
+      "explanation": "c_v coherence (Roder et al., 2015) is the canonical automatic topic-coherence metric.",
+      "question_zh": "主题模型评估常用的默认 coherence 指标是哪个？",
+      "options_zh": [
+        "BLEU",
+        "Accuracy",
+        "只有 Perplexity",
+        "在 top 主题词的滑动窗口上用 NPMI 计算的 c_v coherence"
+      ],
+      "explanation_zh": "c_v coherence (Roder et al., 2015) 是规范的自动主题一致性指标。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "When you need a single topic per document"
       ],
       "correct": 1,
-      "explanation": "Long documents benefit from LDA's mixed-membership model; BERT encoders truncate inputs."
+      "explanation": "Long documents benefit from LDA's mixed-membership model; BERT encoders truncate inputs.",
+      "question_zh": "什么时候 LDA 通常比 BERTopic 更合适？",
+      "options_zh": [
+        "短推文上",
+        "长文档：混合成员资格主题分布有用，且 embedding 会截断输入",
+        "embedding 嘈杂时",
+        "需要每文档单一主题时"
+      ],
+      "explanation_zh": "长文档受益于 LDA 的混合成员模型；BERT 编码器会截断输入。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "It supports more languages"
       ],
       "correct": 2,
-      "explanation": "BERT embeddings provide semantic similarity for short text where word-overlap statistics fail."
+      "explanation": "BERT embeddings provide semantic similarity for short text where word-overlap statistics fail.",
+      "question_zh": "为什么 BERTopic 在短文本（推文、标题）上常占优？",
+      "options_zh": [
+        "短文本主题更少",
+        "它更快",
+        "embedding 空间的语义相似度能在词重叠统计太稀疏时仍捕捉含义",
+        "它支持更多语言"
+      ],
+      "explanation_zh": "BERT embedding 在词重叠统计失效的短文本上提供语义相似度。"
     },
     {
       "stage": "post",
@@ -96,7 +152,15 @@
         "Topics with too few documents"
       ],
       "correct": 2,
-      "explanation": "LDA can create junk topics that absorb stopwords; tighter min_df/max_df and stopword filtering mitigate."
+      "explanation": "LDA can create junk topics that absorb stopwords; tighter min_df/max_df and stopword filtering mitigate.",
+      "question_zh": "LDA 的一个常见失败模式是什么？应该监控什么？",
+      "options_zh": [
+        "文档混合和为 1",
+        "主题完美匹配标注类别",
+        "吸纳停用词或极高频词的垃圾主题",
+        "文档过少的主题"
+      ],
+      "explanation_zh": "LDA 可能产生吸收停用词的垃圾主题；收紧 min_df/max_df 和停用词过滤可缓解。"
     }
   ]
 }

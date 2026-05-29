@@ -12,7 +12,15 @@
         "A typo in the system prompt"
       ],
       "correct": 1,
-      "explanation": "Greshake et al. coined indirect prompt injection: attacker-controlled retrieved content carries instructions."
+      "explanation": "Greshake et al. coined indirect prompt injection: attacker-controlled retrieved content carries instructions.",
+      "question_zh": "什么是间接 prompt injection？",
+      "options_zh": [
+        "用户直接打『忽略所有规则』",
+        "嵌入在 agent 检索内容（页面、PDF、邮件、记忆笔记）中的指令，在被读入时覆盖开发者 prompt",
+        "模型误点",
+        "system prompt 里的 typo"
+      ],
+      "explanation_zh": "Greshake 等人提出 indirect prompt injection：攻击者控制的检索内容携带指令。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "A pure function call"
       ],
       "correct": 1,
-      "explanation": "Greshake's framing: retrieved instructions can hit any tool the agent has access to."
+      "explanation": "Greshake's framing: retrieved instructions can hit any tool the agent has access to.",
+      "question_zh": "本课说处理检索来的 prompt 等价于什么？",
+      "options_zh": [
+        "言论自由",
+        "在 agent 工具调用面上的任意代码执行",
+        "一次静态分析",
+        "一次纯函数调用"
+      ],
+      "explanation_zh": "用 Greshake 的说法：检索回的指令可以触达 agent 拥有的任何工具。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Cache invalidation"
       ],
       "correct": 3,
-      "explanation": "The five are data theft, worming, persistent memory poisoning, ecosystem contamination, arbitrary tool use."
+      "explanation": "The five are data theft, worming, persistent memory poisoning, ecosystem contamination, arbitrary tool use.",
+      "question_zh": "以下哪个不是已展示的五类利用方式？",
+      "options_zh": [
+        "数据窃取",
+        "蠕虫式扩散",
+        "持久 memory 投毒",
+        "缓存失效"
+      ],
+      "explanation_zh": "五类是 data theft、worming、persistent memory poisoning、ecosystem contamination、arbitrary tool use。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Pre-Vectorize-Embed"
       ],
       "correct": 0,
-      "explanation": "PVE wraps every tool invocation with a cheap validator before main-model commit."
+      "explanation": "PVE wraps every tool invocation with a cheap validator before main-model commit.",
+      "question_zh": "PVE 是什么意思？",
+      "options_zh": [
+        "Prompt-Validator-Executor：在每次工具调用上跑一个又便宜又快的验证器，赶在昂贵的主模型提交之前",
+        "Provider-Verifier-Encoder",
+        "Plan-Verify-Execute，一种 HTN 方言",
+        "Pre-Vectorize-Embed"
+      ],
+      "explanation_zh": "PVE 在每次工具调用前用一个便宜的验证器把关，再放给主模型提交。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "It is encrypted"
       ],
       "correct": 1,
-      "explanation": "Real defense needs source tagging, allowlists, per-step safety, and PVE-style validation, not just prompting."
+      "explanation": "Real defense needs source tagging, allowlists, per-step safety, and PVE-style validation, not just prompting.",
+      "question_zh": "为什么『system prompt 里写忽略不可信指令』并不够？",
+      "options_zh": [
+        "太短了",
+        "这只是 instruction-following，不是强制；只要注入内容足够有说服力，模型仍可能被覆盖",
+        "供应商会剥掉它",
+        "它被加密了"
+      ],
+      "explanation_zh": "真正的防御要靠来源标记、允许清单、per-step 安全和 PVE 风格的校验，不能只靠 prompt。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Forgetting to vacuum the index"
       ],
       "correct": 1,
-      "explanation": "Persistent memory poisoning means injections survive across sessions if memory is treated as trusted."
+      "explanation": "Persistent memory poisoning means injections survive across sessions if memory is treated as trusted.",
+      "question_zh": "什么是 overtrust of retrieved memory？",
+      "options_zh": [
+        "缓存太激进",
+        "昨天的 agent 写下了一条被污染的记忆笔记，今天的 agent 读到后又把注入执行了一遍",
+        "加载错了模型",
+        "忘了对索引做 vacuum"
+      ],
+      "explanation_zh": "持久 memory 投毒的意思是：如果 memory 被当作可信来源，注入就能跨 session 存活。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "A token count"
       ],
       "correct": 1,
-      "explanation": "Provenance tagging lets the validator treat content according to its trust level."
+      "explanation": "Provenance tagging lets the validator treat content according to its trust level.",
+      "question_zh": "本课建议给每条内容附加什么元数据？",
+      "options_zh": [
+        "一把加密密钥",
+        "一个来源标签：user_message vs tool_output vs retrieved；validator 拒绝执行 retrieved 中的指令",
+        "只一个时间戳",
+        "一个 token 计数"
+      ],
+      "explanation_zh": "来源标记让 validator 按内容的可信级别对待它。"
     }
   ]
 }

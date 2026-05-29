@@ -12,7 +12,15 @@
         "A process sitting between apps and model providers that consolidates routing, fallback, retries, rate limits, secret references, observability, and guardrails behind one API"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本课中 AI 网关的核心角色是什么？",
+      "options_zh": [
+        "一个模型微调服务",
+        "一个用于检索的向量数据库",
+        "一个仅负责日志的 sidecar",
+        "一个位于应用与模型供应商之间的进程，将路由、回退、重试、限流、密钥引用、可观测性和 guardrail 整合到同一个 API 后面"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "LiteLLM cannot be benchmarked"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Kong 的 benchmark 报告 LiteLLM 的规模上限是多少？",
+      "options_zh": [
+        "50 RPS 就到顶",
+        "在大约 2000 RPS、8 GB 内存时崩溃，持续负载下出现级联故障",
+        "10k RPS 之外仍线性扩展",
+        "LiteLLM 无法被 benchmark"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Slower than both"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "根据 Kong 在等同 CPU 下的 benchmark，Kong AI Gateway 比 Portkey 和 LiteLLM 分别快多少？",
+      "options_zh": [
+        "比 Portkey 快 228%、比 LiteLLM 快 859%",
+        "大约快 10% 和 20%",
+        "完全一致",
+        "比两者都慢"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Portkey"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本课把哪个网关定位成延迟开销 20-40 ms、聚焦 guardrail / PII 脱敏 / jailbreak 检测？",
+      "options_zh": [
+        "Kong AI Gateway",
+        "LiteLLM",
+        "Cloudflare AI Gateway",
+        "Portkey"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "Data residency requirements"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本课认为决定自托管 vs 托管网关的强约束是什么？",
+      "options_zh": [
+        "网关是否开源",
+        "支持的供应商数量",
+        "每请求成本",
+        "数据驻留要求"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Kong (~3-8 ms) or Cloudflare/Vercel edge gateways (~1-3 ms); Portkey at 20-40 ms is too heavy"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "当 SLA 是 TTFT P99 < 100 ms 时，哪些网关还能在预算内？",
+      "options_zh": [
+        "任何网关",
+        "仅 Portkey",
+        "仅 LiteLLM",
+        "Kong（约 3-8 ms）或 Cloudflare/Vercel 边缘网关（约 1-3 ms）；Portkey 的 20-40 ms 太重"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

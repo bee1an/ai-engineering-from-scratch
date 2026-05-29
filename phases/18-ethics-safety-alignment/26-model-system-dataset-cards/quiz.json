@@ -12,7 +12,15 @@
         "A regulatory legal contract"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "下列哪一项最贴切地描述了 Mitchell et al. (2019) 提出的原始 Model Card?",
+      "options_zh": [
+        "一种 OpenAPI 规范",
+        "ML 模型的「营养标签」: 训练数据、用途、影响因素、指标、评估数据、量化分组分析、伦理考量、注意事项",
+        "仅是模型 checkpoint 清单",
+        "一份监管法律合同"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "All model cards document them"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Oreamuno et al. (2023) 关于 Hugging Face model card 中伦理考量章节的覆盖情况发现了什么?",
+      "options_zh": [
+        "约 0.3% 记录了伦理考量",
+        "约 80% 记录了伦理考量",
+        "没有任何 model card 含有正文",
+        "所有 model card 都记录了伦理考量"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "A privacy-preserving query interface"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Pushkarna et al. (Google 2022) 提出的 Data Cards 中 telescopic / periscopic / microscopic 三层结构带来了什么?",
+      "options_zh": [
+        "一种边界对象框架: 同一份文档通过三种缩放层级,服务非专家、ML 实践者和审计者等不同读者",
+        "一份 RLHF 前的审计 checklist",
+        "一个望远镜主题的可视化库",
+        "一种保护隐私的查询接口"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Only the tokenizer"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "System Card 涵盖了哪些 Model Card 不覆盖的范围?",
+      "options_zh": [
+        "端到端 AI 系统: 模型 + 安全栈 + 部署上下文,包括安全能力、prompt-injection 防护、数据外泄检测、对齐和事故响应",
+        "仅数据集",
+        "仅 prompt 模板",
+        "仅 tokenizer"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "Detail decreased download rates"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Liang et al. (2024) 关于 model card 详细程度与 Hugging Face 下载量关系的报告是什么?",
+      "options_zh": [
+        "详尽的 model card 在 HF 上为实验组带来 +29.0% 的周下载量提升 (差中差分析); 采纳压力如今由市场驱动,而不仅仅是合规驱动",
+        "只有伦理考量章节会影响下载量",
+        "详细程度对下载量没有影响",
+        "详细程度反而降低了下载量"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "An LLM-based summary generator"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Laminator (Duddu et al. 2024) 给文档化带来了什么?",
+      "options_zh": [
+        "一个自动化的 benchmark harness",
+        "通过硬件 TEE / 密码学签名提供可验证的 attestation,让 card 携带「主张证明」而不仅仅是主张本身",
+        "对 Datasheets 标准的替代",
+        "基于 LLM 的摘要生成器"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

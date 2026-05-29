@@ -12,7 +12,15 @@
         "The model writes better code without them."
       ],
       "correct": 1,
-      "explanation": "python3 -c, bash -c, node -e, and friends are functionally identical to giving the model a shell. Blocking the executable name is not enough."
+      "explanation": "python3 -c, bash -c, node -e, and friends are functionally identical to giving the model a shell. Blocking the executable name is not enough.",
+      "question_zh": "在阅读课程之前: 为什么 sandbox 要检查像 python3 -c 这样的解释器调用的 argv 形态?",
+      "options_zh": [
+        "解释器很慢,会浪费 agent 预算。",
+        "带 -c 的解释器其实是另一种形式的 shell 调用,会绕过可执行文件 denylist。",
+        "解释器根本没法被安全 sandbox。",
+        "没有解释器时模型代码写得更好。"
+      ],
+      "explanation_zh": "python3 -c、bash -c、node -e 等等在功能上等同于把 shell 交给模型。仅拦截可执行文件名是不够的。"
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "The sandbox spawns the subprocess and checks the working directory after the fact."
       ],
       "correct": 1,
-      "explanation": "realpath resolves symlinks. A literal prefix check is bypassed by a symlink inside the project root pointing outside. realpath plus prefix-or-equal is the safe check."
+      "explanation": "realpath resolves symlinks. A literal prefix check is bypassed by a symlink inside the project root pointing outside. realpath plus prefix-or-equal is the safe check.",
+      "question_zh": "Sandbox 配置 project_root=/work。一个路径参数以 ./src/main.py 到达。jail 检查是怎么做的?",
+      "options_zh": [
+        "对 /work 做字面字符串前缀匹配。",
+        "对拼接后的绝对路径求 os.path.realpath,再检查是否以 /work 为前缀。",
+        "Sandbox 拒绝任何相对路径。",
+        "Sandbox 先启动子进程,再事后检查工作目录。"
+      ],
+      "explanation_zh": "realpath 会解析符号链接。字面前缀匹配可以被项目根内、指向外部的符号链接绕过。realpath 加「前缀或相等」才是安全的检查。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "The wall-clock timeout fired."
       ],
       "correct": 1,
-      "explanation": "The sentinel exit_code -100 paired with denied=True means the sandbox short-circuited before subprocess.run was called."
+      "explanation": "The sentinel exit_code -100 paired with denied=True means the sandbox short-circuited before subprocess.run was called.",
+      "question_zh": "一个 SandboxResult 返回 denied=True、timed_out=False、exit_code=-100。规范的解读是什么?",
+      "options_zh": [
+        "子进程已启动并被 SIGKILL 终止。",
+        "Sandbox 从未派生子进程; 调用在 exec 前被拒绝。",
+        "子进程显式返回了 -100。",
+        "Wall-clock 超时被触发。"
+      ],
+      "explanation_zh": "exit_code -100 与 denied=True 配合的哨兵值,表示 sandbox 在 subprocess.run 之前就短路了。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "It makes the test suite simpler."
       ],
       "correct": 1,
-      "explanation": "shell=True turns argv into a shell-interpreted string. Pipes, redirects, command substitution, and globbing all become available. The sandbox cannot meaningfully refuse a payload once shell parsing runs."
+      "explanation": "shell=True turns argv into a shell-interpreted string. Pipes, redirects, command substitution, and globbing all become available. The sandbox cannot meaningfully refuse a payload once shell parsing runs.",
+      "question_zh": "为什么 sandbox 默认 shell=False 并拒绝 shell 元字符?",
+      "options_zh": [
+        "shell=True 在 CPython 上更慢。",
+        "Shell 解析把整个 shell DSL 暴露给模型,而 sandbox 想要的恰恰是收缩这个攻击面。",
+        "subprocess 在 macOS 上不接受 shell=True。",
+        "为了让测试套件更简单。"
+      ],
+      "explanation_zh": "shell=True 把 argv 变成被 shell 解释的字符串。管道、重定向、命令替换、glob 全部可用。shell 解析一旦发生,sandbox 就无法有效拒绝任何 payload。"
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "Skip it: a denylist is sufficient for memory bombs."
       ],
       "correct": 0,
-      "explanation": "subprocess.run accepts preexec_fn (POSIX) or a similar mechanism. setrlimit(RLIMIT_AS) caps the address space of the child. The sandbox in this lesson does not ship this; lesson 29's end-to-end demo discusses how to layer container-level limits on top."
+      "explanation": "subprocess.run accepts preexec_fn (POSIX) or a similar mechanism. setrlimit(RLIMIT_AS) caps the address space of the child. The sandbox in this lesson does not ship this; lesson 29's end-to-end demo discusses how to layer container-level limits on top.",
+      "question_zh": "你想给 sandbox 加上单进程内存限制。本节的 sandbox 没实现这个。正确的下一步是什么?",
+      "options_zh": [
+        "在传给 subprocess.run 的 preexec_fn 中调用 os.setrlimit(RLIMIT_AS)。",
+        "把这个限制作为字符串加到 denylist。",
+        "提高 wall-clock 超时来抵消。",
+        "跳过它: denylist 足够防住内存炸弹。"
+      ],
+      "explanation_zh": "subprocess.run 接受 preexec_fn (POSIX) 或类似机制。setrlimit(RLIMIT_AS) 限制子进程的地址空间。本节 sandbox 没出货这一点; 第 29 课的端到端 demo 讨论如何在其上叠加容器级限制。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "It depends on whether the user is root."
       ],
       "correct": 1,
-      "explanation": "realpath normalises the path. The sandbox does not blanket-refuse .. tokens; it checks the resolved target. This is intentional: legitimate paths sometimes go through .. legitimately."
+      "explanation": "realpath normalises the path. The sandbox does not blanket-refuse .. tokens; it checks the resolved target. This is intentional: legitimate paths sometimes go through .. legitimately.",
+      "question_zh": "模型用 argv=['cat', 'src/../src/main.py'] 调用 sandbox。该文件在 project_root 下确实存在。这次调用应当通过 path jail 吗?",
+      "options_zh": [
+        "不应该,任何路径中出现 .. 都自动拒绝。",
+        "应该: realpath 把 src/../src 折叠成 src,解析后的目标在 project_root 内。",
+        "不应该: argv 在抵达 sandbox 前被正则 gate 拒绝。",
+        "看用户是不是 root。"
+      ],
+      "explanation_zh": "realpath 会规范化路径。Sandbox 不会一律拒绝 .. token,而是检查解析后的目标。这是有意为之: 合法路径有时确实会经过 ..。"
     }
   ]
 }

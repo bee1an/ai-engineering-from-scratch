@@ -12,7 +12,15 @@
         "Python versus TypeScript"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本课如何划分 2026 年的 LLM 可观测性市场？",
+      "options_zh": [
+        "开发平台（捆绑 eval/prompt/session）vs 网关/遥测工具",
+        "本地部署 vs 云",
+        "厂商 vs 开源",
+        "Python vs TypeScript"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "Langfuse"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本课把哪个工具定位为 MIT 许可的核心、有强自托管故事且免费云层提供 5 万事件/月？",
+      "options_zh": [
+        "LangSmith",
+        "Phoenix",
+        "Arize AX",
+        "Langfuse"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "10% cheaper"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Arize AX 相对 Datadog 这种一体化可观测性栈的主要规模卖点是什么？",
+      "options_zh": [
+        "永远更贵",
+        "在大规模场景下大约便宜 100 倍，依赖零拷贝的 Iceberg/Parquet 集成",
+        "100 万事件/天以下免费",
+        "便宜 10%"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Instrumenting at the HTTP/OpenAI-SDK layer"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本课认为对可移植性而言，错误的埋点层是哪个？",
+      "options_zh": [
+        "在 agent 框架内部埋点，因为这把你绑死在该框架上",
+        "对成功请求按 5% 采样",
+        "使用 OpenTelemetry GenAI 语义约定",
+        "在 HTTP/OpenAI-SDK 层埋点"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "OTel HTTP semantic conventions"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本课认为 2026 年作为可观测性工具间互操作层的是哪套 OpenTelemetry 约定？",
+      "options_zh": [
+        "OTel messaging 语义约定",
+        "OTel database 语义约定",
+        "GenAI 语义约定（gen_ai.system、gen_ai.request.model、gen_ai.usage.input_tokens）",
+        "OTel HTTP 语义约定"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Phoenix only supports 1M traces"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本课为什么认为日请求量超过 100 万就无法做全 trace 留存？",
+      "options_zh": [
+        "留存存储比 LLM 调用本身还贵；团队必须采样（例如错误 100%、高成本 100%、成功 5%）",
+        "OpenTelemetry 限制 trace 体量",
+        "供应商会拦截",
+        "Phoenix 只支持 100 万 trace"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

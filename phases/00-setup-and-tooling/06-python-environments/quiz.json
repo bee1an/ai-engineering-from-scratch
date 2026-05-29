@@ -3,37 +3,52 @@
     {
       "stage": "pre",
       "question": "What problem do virtual environments solve?",
+      "question_zh": "虚拟环境解决了什么问题？",
       "options": ["They make Python code run faster by optimizing the interpreter", "They isolate project dependencies so different projects can use different package versions", "They provide a graphical interface for managing Python scripts", "They automatically update packages to the latest versions"],
+      "options_zh": ["通过优化解释器让 Python 代码跑得更快", "隔离项目依赖，让不同项目可以使用不同的包版本", "提供管理 Python 脚本的图形界面", "自动把包更新到最新版本"],
       "correct": 1,
-      "explanation": "Virtual environments give each project its own isolated set of packages. Without them, installing PyTorch 2.4 for one project would overwrite PyTorch 2.1 needed by another."
+      "explanation": "Virtual environments give each project its own isolated set of packages. Without them, installing PyTorch 2.4 for one project would overwrite PyTorch 2.1 needed by another.",
+      "explanation_zh": "虚拟环境给每个项目一套独立的包。如果没有它，给某个项目装 PyTorch 2.4 就会覆盖另一个项目还在用的 PyTorch 2.1。"
     },
     {
       "stage": "pre",
       "question": "What is a lockfile in the context of Python dependency management?",
+      "question_zh": "在 Python 依赖管理中，lockfile（锁文件）是什么？",
       "options": ["A file that prevents other users from editing your code", "A file that pins every package to an exact version for reproducible installs", "A file that locks the Python interpreter version", "A file that encrypts your project dependencies"],
+      "options_zh": ["阻止其他人编辑你代码的文件", "把每个包都锁定到精确版本，从而可复现地安装的文件", "锁定 Python 解释器版本的文件", "用来加密项目依赖的文件"],
       "correct": 1,
-      "explanation": "A lockfile records the exact version of every package (including transitive dependencies) so anyone installing from it gets identical packages, ensuring reproducibility."
+      "explanation": "A lockfile records the exact version of every package (including transitive dependencies) so anyone installing from it gets identical packages, ensuring reproducibility.",
+      "explanation_zh": "lockfile 会记录每个包（包括传递依赖）的精确版本，任何人据此安装都能拿到完全一致的包，从而保证可复现性。"
     },
     {
       "stage": "post",
       "question": "How can you verify that your pip and python commands are using the virtual environment and not the system Python?",
+      "question_zh": "怎么确认 pip 和 python 命令用的是虚拟环境，而不是系统 Python？",
       "options": ["Run 'pip --version' and check the version number", "Run 'which python' and confirm it shows .venv/bin/python, not /usr/bin/python", "Check if the terminal background color has changed", "Run 'python --check-env' to verify"],
+      "options_zh": ["运行 pip --version 看版本号", "运行 which python，确认它指向 .venv/bin/python 而不是 /usr/bin/python", "看终端背景色是否变了", "运行 python --check-env 来验证"],
       "correct": 1,
-      "explanation": "'which python' (or 'where python' on Windows) shows the full path to the interpreter. If it points to .venv/bin/python, you are in the virtual environment."
+      "explanation": "'which python' (or 'where python' on Windows) shows the full path to the interpreter. If it points to .venv/bin/python, you are in the virtual environment.",
+      "explanation_zh": "which python（Windows 下是 where python）会显示解释器的完整路径。如果指向 .venv/bin/python，说明你确实在虚拟环境中。"
     },
     {
       "stage": "post",
       "question": "Why is mixing pip and conda in the same environment problematic?",
+      "question_zh": "为什么不应该在同一个环境里混用 pip 和 conda？",
       "options": ["Pip packages are incompatible with conda's Python interpreter", "Pip installs can break conda's dependency tracking, causing hard-to-debug conflicts", "Conda cannot install packages that pip has already installed", "It doubles the disk space used by every package"],
+      "options_zh": ["pip 装的包与 conda 的 Python 解释器不兼容", "pip 安装会破坏 conda 的依赖追踪，导致难以排查的冲突", "conda 无法安装 pip 已经装过的包", "会让每个包占用的磁盘空间翻倍"],
       "correct": 1,
-      "explanation": "Conda maintains its own dependency solver. Pip installs bypass it, so conda no longer knows the true state of the environment. This leads to dependency conflicts that are painful to resolve."
+      "explanation": "Conda maintains its own dependency solver. Pip installs bypass it, so conda no longer knows the true state of the environment. This leads to dependency conflicts that are painful to resolve.",
+      "explanation_zh": "conda 有自己的依赖求解器。pip 安装会绕开它，导致 conda 不再了解环境的真实状态，进而产生很难解决的依赖冲突。"
     },
     {
       "stage": "post",
       "question": "Your PyTorch code reports 'CUDA not available' despite having an NVIDIA GPU. What is the most likely cause?",
+      "question_zh": "明明有 NVIDIA GPU，PyTorch 却报「CUDA not available」，最可能的原因是什么？",
       "options": ["Your GPU does not support CUDA", "PyTorch was installed with a CUDA version incompatible with your GPU driver", "You forgot to import the torch.cuda module", "Virtual environments cannot access GPU hardware"],
+      "options_zh": ["你的 GPU 不支持 CUDA", "安装的 PyTorch 所带的 CUDA 版本与 GPU 驱动不兼容", "忘了 import torch.cuda 模块", "虚拟环境无法访问 GPU 硬件"],
       "correct": 1,
-      "explanation": "PyTorch ships CUDA bindings compiled for specific CUDA versions. If the PyTorch CUDA version exceeds your driver's CUDA version, CUDA will not be available. Check with nvidia-smi and torch.version.cuda."
+      "explanation": "PyTorch ships CUDA bindings compiled for specific CUDA versions. If the PyTorch CUDA version exceeds your driver's CUDA version, CUDA will not be available. Check with nvidia-smi and torch.version.cuda.",
+      "explanation_zh": "PyTorch 自带的 CUDA 绑定是针对特定 CUDA 版本编译的。如果 PyTorch 携带的 CUDA 版本高于驱动支持的 CUDA 版本，CUDA 就用不了。可以用 nvidia-smi 和 torch.version.cuda 对照检查。"
     }
   ]
 }

@@ -12,7 +12,15 @@
         "They miss semantic equivalence; 'June 29th, 2007' vs 'June 29, 2007' scores 0 EM despite being correct"
       ],
       "correct": 3,
-      "explanation": "Exact-match/F1 cannot recognize paraphrases or formatting differences that humans would mark correct."
+      "explanation": "Exact-match/F1 cannot recognize paraphrases or formatting differences that humans would mark correct.",
+      "question_zh": "为什么 Exact Match 和 token-F1 不足以评估现代 LLM 输出？",
+      "options_zh": [
+        "太慢",
+        "不可微",
+        "需要 GPU",
+        "它们抓不到语义等价；'June 29th, 2007' 与 'June 29, 2007' 在 EM 下都是 0 分，但人会判对"
+      ],
+      "explanation_zh": "Exact-match/F1 无法识别同义表述或格式差异，但人类会判定为正确。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Tokens per second"
       ],
       "correct": 1,
-      "explanation": "Faithfulness checks each answer claim against retrieved context using NLI entailment."
+      "explanation": "Faithfulness checks each answer claim against retrieved context using NLI entailment.",
+      "question_zh": "RAGAS 的 faithfulness 指标度量什么？",
+      "options_zh": [
+        "检索 recall",
+        "答案中每条 claim 是否能由检索到的上下文蕴含，使用 NLI 判定",
+        "延迟",
+        "每秒 token 数"
+      ],
+      "explanation_zh": "Faithfulness 用 NLI 蕴含关系把答案里的每条 claim 与检索上下文做核对。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Calibration is a tokenization issue"
       ],
       "correct": 1,
-      "explanation": "Without calibration, you cannot tell whether judge scores reflect quality or model bias."
+      "explanation": "Without calibration, you cannot tell whether judge scores reflect quality or model bias.",
+      "question_zh": "为什么在信任 judge 模型分数前，必须用人工标注做校准？",
+      "options_zh": [
+        "GDPR 要求",
+        "如果 judge 与人工标签的 Spearman 相关性太低（比如低于 0.7），分数就只是噪声而不是信号",
+        "校准能让 judge 更快",
+        "校准是分词问题"
+      ],
+      "explanation_zh": "不做校准，无法判断 judge 分数究竟反映质量还是模型偏差。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Judges ignore system prompts"
       ],
       "correct": 0,
-      "explanation": "Same-family generator+judge biases scores upward; use a different model family for judging."
+      "explanation": "Same-family generator+judge biases scores upward; use a different model family for judging.",
+      "question_zh": "LLM-as-judge 设置里的 self-evaluation bias 是什么？",
+      "options_zh": [
+        "用同一个 LLM 家族同时生成和评分，会比换家族评分高估 10-20%",
+        "更低的延迟",
+        "judge 在缓存输出上跑得更快",
+        "judge 会忽略 system prompt"
+      ],
+      "explanation_zh": "同家族 generator+judge 会让分数偏高；评分应该用不同模型家族。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "An explicit chain-of-thought rubric with named evaluation steps, which yields more stable scores"
       ],
       "correct": 3,
-      "explanation": "G-Eval's structured eval-steps produce more reliable scores than freeform 'rate it' prompts."
+      "explanation": "G-Eval's structured eval-steps produce more reliable scores than freeform 'rate it' prompts.",
+      "question_zh": "G-Eval 相对朴素的 'score 0-1' prompt 多加了什么？",
+      "options_zh": [
+        "更大的上下文",
+        "更低的成本",
+        "多语言评分",
+        "显式的链式思维评分细则，带命名的评估步骤，能产生更稳定的分数"
+      ],
+      "explanation_zh": "G-Eval 结构化的 eval-step 比 'rate it' 这类自由 prompt 更可靠。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "An 0.85 mean can hide 5% catastrophic failures; always inspect the bottom quantile"
       ],
       "correct": 3,
-      "explanation": "Means hide tail failures; surface bottom-10% to catch high-severity issues."
+      "explanation": "Means hide tail failures; surface bottom-10% to catch high-severity issues.",
+      "question_zh": "为什么只汇报均值分数很危险？",
+      "options_zh": [
+        "均值太大",
+        "均值忽略了 judge",
+        "均值需要 GPU",
+        "0.85 的均值可能掩盖了 5% 的灾难性失败；必须看底部分位"
+      ],
+      "explanation_zh": "均值掩盖尾部失败；展示 bottom-10% 才能抓到高严重度问题。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Upgrading the judge changes every metric; longitudinal comparison breaks without a frozen judge"
       ],
       "correct": 3,
-      "explanation": "A judge upgrade silently shifts the metric baseline; pinning preserves cross-run comparability."
+      "explanation": "A judge upgrade silently shifts the metric baseline; pinning preserves cross-run comparability.",
+      "question_zh": "为什么要在 CI 里把 judge 的模型和版本固定？",
+      "options_zh": [
+        "Anthropic 要求",
+        "更便宜",
+        "tokenizer 漂移",
+        "升级 judge 会让所有指标都变；不固定 judge 就没法做长期纵向比较"
+      ],
+      "explanation_zh": "Judge 升级会悄悄改变指标基线；固定版本才能跨运行对比。"
     },
     {
       "stage": "post",
@@ -96,7 +152,15 @@
         "Replaces RAGAS entirely"
       ],
       "correct": 0,
-      "explanation": "DeepEval anchors CI/CD regression testing; RAGAS handles reference-free RAG monitoring."
+      "explanation": "DeepEval anchors CI/CD regression testing; RAGAS handles reference-free RAG monitoring.",
+      "question_zh": "DeepEval 与 RAGAS 各自定位是什么？",
+      "options_zh": [
+        "DeepEval 是 'pytest-for-LLMs'（CI 门控、G-Eval、幻觉指标），RAGAS 专长于 reference-free 的 RAG 监控",
+        "DeepEval 只支持托管",
+        "DeepEval 是 tokenizer",
+        "完全替代 RAGAS"
+      ],
+      "explanation_zh": "DeepEval 主打 CI/CD 回归测试，RAGAS 处理 reference-free 的 RAG 监控。"
     }
   ]
 }

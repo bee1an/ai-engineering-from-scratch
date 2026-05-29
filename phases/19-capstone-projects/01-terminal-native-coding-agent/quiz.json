@@ -12,7 +12,15 @@
         "Fetch, embed, rank, synthesize"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "2026 年的终端 coding agent 共享哪种循环结构?",
+      "options_zh": [
+        "Plan、act、observe、recover",
+        "Encode、decode、sample、stream",
+        "Train、evaluate、deploy、monitor",
+        "Fetch、embed、rank、synthesize"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "To enable GPU access for the agent loop"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么 harness 把每个任务跑在 E2B 或 Daytona sandbox 内?",
+      "options_zh": [
+        "把文件系统和工具执行从宿主机隔离开,让 worktree 在任务结束后可以被销毁",
+        "为了绕过模型供应商的速率限制",
+        "为了在冷缓存上做 token 吞吐量基准测试",
+        "为了让 agent 循环获得 GPU 访问"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "PostToolUse"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "哪个内置 hook 最适合在执行前拦截破坏性 shell 命令?",
+      "options_zh": [
+        "PreToolUse",
+        "SessionStart",
+        "Stop",
+        "PostToolUse"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Model overfitting to tool-call traces"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本 capstone 把每次工具结果限制在大约 4k token,主要是为了避免哪种失败模式?",
+      "options_zh": [
+        "通过恶意 shell 元字符逃逸 sandbox",
+        "当工具返回大块输出时造成上下文污染和成本失控",
+        "在恢复会话时计划状态过期",
+        "模型对工具调用轨迹过拟合"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Switches the backing model to a smaller draft model"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "PreCompact hook 在 150k token 时做什么?",
+      "options_zh": [
+        "取消运行并退还用户预算",
+        "把更早的轮次摘要为一个 prior-state 块,让计划和新观察仍然能放进上下文",
+        "强推当前分支以备份进度",
+        "把后端模型切换为更小的 draft 模型"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Aider"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本 capstone 在 30 个 SWE-bench Pro 子集 issue 上把 harness 与哪个 baseline 对比?",
+      "options_zh": [
+        "OpenCode",
+        "mini-swe-agent",
+        "Live-SWE-agent",
+        "Aider"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "MRR@10 and nDCG@10"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "交付物对照的是哪一组指标?",
+      "options_zh": [
+        "WER、MOS 和 first-audio-out",
+        "Perplexity、BLEU 和 ROUGE",
+        "pass@1、turns-per-task 和 dollar-per-task",
+        "MRR@10 和 nDCG@10"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

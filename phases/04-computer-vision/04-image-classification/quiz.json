@@ -3,37 +3,52 @@
     {
       "stage": "pre",
       "question": "Your model outputs raw logits of shape (N, C). You write `loss = cross_entropy(softmax(logits), y)`. What goes wrong?",
+      "question_zh": "模型输出形状为 (N, C) 的原始 logits，你写了 `loss = cross_entropy(softmax(logits), y)`，会出什么问题？",
       "options": ["Nothing — that is the correct API", "cross_entropy re-applies softmax inside, so you end up computing softmax(softmax(logits)), producing nearly-uniform probabilities and useless gradients", "cross_entropy raises a ValueError about the shape", "Accuracy drops by exactly 1/C"],
+      "options_zh": ["不会有问题——这就是正确用法", "cross_entropy 内部会再做一次 softmax，所以最终算的是 softmax(softmax(logits))，概率几乎均匀，梯度也基本没用", "cross_entropy 会因为形状问题抛 ValueError", "准确率正好下降 1/C"],
       "correct": 1,
-      "explanation": "PyTorch's cross_entropy expects raw logits — it fuses log_softmax and NLL internally for numerical stability. Applying softmax first gives softmax(softmax(x)), which compresses logits toward uniform and makes gradients nearly zero. Training loss looks plausible for a few steps then stalls. Always pass raw logits."
+      "explanation": "PyTorch's cross_entropy expects raw logits — it fuses log_softmax and NLL internally for numerical stability. Applying softmax first gives softmax(softmax(x)), which compresses logits toward uniform and makes gradients nearly zero. Training loss looks plausible for a few steps then stalls. Always pass raw logits.",
+      "explanation_zh": "PyTorch 的 cross_entropy 期望接收的是原始 logits——它内部把 log_softmax 和 NLL 融合在一起以保证数值稳定。如果你在外面再做一次 softmax，结果是 softmax(softmax(x))，logits 被压向均匀分布，梯度几乎为 0。训练 loss 前几步看着还像样，之后就不动了。永远直接传 raw logits。"
     },
     {
       "stage": "pre",
       "question": "You evaluate a 10-class classifier and get 92% accuracy. Class 0 has 9,000 examples; classes 1-9 share 1,000 examples (roughly 111 each, 10,000 total). What does the headline number hide?",
+      "question_zh": "你在 10 类分类任务上得到 92% 准确率。类别 0 有 9,000 个样本，类别 1-9 共有 1,000 个（每类约 111 个，总共 10,000），这个看起来漂亮的数字掩盖了什么？",
       "options": ["Nothing — accuracy is accuracy", "The model could be predicting class 0 for every input and still score 90% (9000/10000); the remaining 2% could come from any other class. Per-class precision/recall tells you what is really happening", "The validation loss is wrong", "The model is definitely over-fitting"],
+      "options_zh": ["什么也没掩盖——准确率就是准确率", "模型即使把所有输入都预测成类别 0，也能得到 90%（9000/10000），剩下的 2% 可能来自任何其他类别。要看每类的 precision/recall 才能知道真实情况", "验证 loss 错了", "模型一定在过拟合"],
       "correct": 1,
-      "explanation": "On a 9000/1000 split (90/10 imbalance with 10,000 total examples), always predicting the majority class gets 9000/10000 = 90% accuracy. A 92% number could hide nine minority classes at roughly 20% accuracy each. Per-class precision, recall, F1, and the confusion matrix are the diagnostics that surface this, which is why aggregate accuracy alone never justifies shipping a classifier."
+      "explanation": "On a 9000/1000 split (90/10 imbalance with 10,000 total examples), always predicting the majority class gets 9000/10000 = 90% accuracy. A 92% number could hide nine minority classes at roughly 20% accuracy each. Per-class precision, recall, F1, and the confusion matrix are the diagnostics that surface this, which is why aggregate accuracy alone never justifies shipping a classifier.",
+      "explanation_zh": "在 9000/1000 这种 9:1 的不均衡上（共 10,000 样本），只要永远预测多数类就有 9000/10000 = 90% 的准确率。92% 完全可以掩盖 9 个少数类各自只有约 20% 的准确率。每类的 precision、recall、F1 和 confusion matrix 才是真正能暴露问题的诊断指标——这也是为什么单看整体 accuracy 永远不足以决定一个分类器是否能上线。"
     },
     {
       "stage": "post",
       "question": "Mixup replaces one-hot labels with interpolated soft targets like lambda * y_i + (1-lambda) * y_j. Why does this help generalisation?",
+      "question_zh": "Mixup 把 one-hot 标签换成 lambda * y_i + (1-lambda) * y_j 这样的插值软标签，为什么这样做能提升泛化？",
       "options": ["It doubles the effective batch size", "The model is forced to produce smooth predictions between classes instead of memorising hard one-hot targets, which improves both calibration and test accuracy", "It lets you train with a larger learning rate", "It guarantees zero train loss"],
+      "options_zh": ["把有效 batch size 翻倍", "强迫模型在类别之间产生平滑的预测，而不是死记硬背 one-hot 目标，这能同时改善 calibration 和测试准确率", "可以用更大的学习率训练", "保证训练 loss 为 0"],
       "correct": 1,
-      "explanation": "Training against hard one-hot targets pushes logits to be arbitrarily sharp at each training point, which hurts calibration and invites overfitting. Mixup's convex combination of inputs and labels forces the classifier to behave smoothly between training points, which is a reasonable prior for natural image classes and consistently improves test accuracy without extra data."
+      "explanation": "Training against hard one-hot targets pushes logits to be arbitrarily sharp at each training point, which hurts calibration and invites overfitting. Mixup's convex combination of inputs and labels forces the classifier to behave smoothly between training points, which is a reasonable prior for natural image classes and consistently improves test accuracy without extra data.",
+      "explanation_zh": "用硬 one-hot 目标训练会让 logits 在每个训练样本上变得极度尖锐，损害 calibration，也容易过拟合。Mixup 在输入和标签上做凸组合，迫使分类器在训练样本之间表现平滑——这对自然图像类别是个合理的先验，不需要额外数据就能稳定提升测试准确率。"
     },
     {
       "stage": "post",
       "question": "You swap `RandomCrop(32, padding=4, padding_mode='zeros')` for `padding_mode='reflect'` on CIFAR-10. Why is reflect better here?",
+      "question_zh": "你在 CIFAR-10 上把 `RandomCrop(32, padding=4, padding_mode='zeros')` 换成 `padding_mode='reflect'`，为什么 reflect 更好？",
       "options": ["Reflect pad is faster", "Zero padding creates hard black borders that the model learns to depend on; reflect pad mirrors the edge pixels so augmented crops look like natural photographs", "Reflect pad changes the output size", "Reflect pad is required by batch normalization"],
+      "options_zh": ["reflect pad 更快", "zero padding 会产生明显的黑边，模型会依赖它；reflect pad 把边缘像素镜像过来，让增广出来的 crop 看起来仍像自然照片", "reflect pad 会改变输出尺寸", "batch normalization 要求使用 reflect pad"],
       "correct": 1,
-      "explanation": "Zero-padded crops have visible black borders that leak information about crop position into the features. The network can learn to look at the corner and implicitly undo the augmentation. Reflect pad mirrors real content, so every crop still looks like a natural image and the network cannot cheat on the augmentation."
+      "explanation": "Zero-padded crops have visible black borders that leak information about crop position into the features. The network can learn to look at the corner and implicitly undo the augmentation. Reflect pad mirrors real content, so every crop still looks like a natural image and the network cannot cheat on the augmentation.",
+      "explanation_zh": "zero pad 出来的 crop 上有清晰的黑边，等于把 crop 位置的信息泄露到特征里。网络可以学着只盯角落，从而把增广反推回去。reflect pad 镜像的是真实内容，每一张 crop 看起来仍是自然图像，网络就没法在增广上作弊。"
     },
     {
       "stage": "post",
       "question": "You train a classifier and the confusion matrix shows most errors are class 3 predicted as class 5 and class 5 predicted as class 3. What is the single most impactful next step?",
+      "question_zh": "训练一个分类器后，confusion matrix 显示绝大部分错误是类别 3 被预测成类别 5、类别 5 被预测成类别 3，下一步最有效的动作是什么？",
       "options": ["Add more training data across all classes equally", "Increase batch size", "Look at a sample of class-3 and class-5 images that confuse the model; the two classes may be genuinely ambiguous, mislabelled, or visually similar in a way that calls for a targeted augmentation or a re-labelled training set", "Switch from SGD to Adam"],
+      "options_zh": ["在所有类别上等量增加训练数据", "增大 batch size", "去抽样看一些被混淆的类别 3 和类别 5 图像，两个类别可能本身就模糊、标注有错，或者视觉上极相似，需要针对性的增广或重新标注", "把优化器从 SGD 换成 Adam"],
       "correct": 2,
-      "explanation": "A confusion matrix concentrated on one off-diagonal pair means the failure mode is specific. The right action is to inspect those images: you often find mislabelled data, near-duplicate classes, or a simple invariance the model has not learnt. Blanket changes (more data, new optimizer) rarely help when the failure is this localised."
+      "explanation": "A confusion matrix concentrated on one off-diagonal pair means the failure mode is specific. The right action is to inspect those images: you often find mislabelled data, near-duplicate classes, or a simple invariance the model has not learnt. Blanket changes (more data, new optimizer) rarely help when the failure is this localised.",
+      "explanation_zh": "confusion matrix 上错误集中在一对非对角元素，说明失败模式非常具体。正确做法是去看那些图：往往会发现标错的数据、几乎重复的类别，或模型没学到的某种简单不变性。当问题这么局部时，加数据、换优化器这类「广撒网」的改动通常没什么用。"
     }
   ]
 }

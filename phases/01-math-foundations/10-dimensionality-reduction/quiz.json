@@ -3,37 +3,52 @@
     {
       "stage": "pre",
       "question": "What is the 'curse of dimensionality'?",
+      "question_zh": "什么是「维度灾难」？",
       "options": ["High-dimensional data takes too long to download", "As dimensions grow, distances become meaningless, volume concentrates in corners, and you need exponentially more data", "Neural networks cannot process data with more than 100 features", "High-dimensional data always contains noise"],
+      "options_zh": ["高维数据下载太慢", "随着维度增加，距离逐渐失去区分度，体积集中在角落，所需数据量指数级增长", "神经网络无法处理超过 100 个特征的数据", "高维数据一定包含噪声"],
       "correct": 1,
-      "explanation": "In high dimensions, all pairwise distances converge to similar values, data points spread to corners, and maintaining sample density requires exponentially more data. Dimensionality reduction counteracts these effects."
+      "explanation": "In high dimensions, all pairwise distances converge to similar values, data points spread to corners, and maintaining sample density requires exponentially more data. Dimensionality reduction counteracts these effects.",
+      "explanation_zh": "在高维空间里，两两距离会趋近一致，数据点都散到角落，要维持同样的样本密度就要指数级增长的数据量。降维就是用来抵消这些问题的。"
     },
     {
       "stage": "pre",
       "question": "What does PCA find?",
+      "question_zh": "PCA 找到的是什么？",
       "options": ["The most important features by name", "The orthogonal directions of maximum variance in the data", "Clusters of similar data points", "The optimal number of features to keep"],
+      "options_zh": ["按名称给出最重要的特征", "数据中方差最大的若干个正交方向", "相似数据点构成的簇", "最佳保留的特征数量"],
       "correct": 1,
-      "explanation": "PCA computes the eigenvectors of the covariance matrix, which are orthogonal directions ranked by how much data variance they capture. The first principal component points along the direction of maximum spread."
+      "explanation": "PCA computes the eigenvectors of the covariance matrix, which are orthogonal directions ranked by how much data variance they capture. The first principal component points along the direction of maximum spread.",
+      "explanation_zh": "PCA 计算协方差矩阵的特征向量，得到一组按解释方差大小排序的正交方向。第一主成分指向数据散布最大的方向。"
     },
     {
       "stage": "post",
       "question": "After running PCA on 784-dimensional MNIST data with k=50 components, you find 95% of variance is captured. What does this tell you?",
+      "question_zh": "对 784 维的 MNIST 数据做 PCA，取 k=50 个主成分时，发现解释了 95% 的方差。这说明什么？",
       "options": ["Only 50 pixels matter in each image", "The data effectively lives in a ~50-dimensional subspace; the remaining 734 dimensions are mostly noise or redundancy", "95% of images belong to the same class", "The model will achieve 95% accuracy"],
+      "options_zh": ["每张图只有 50 个像素重要", "数据实际上只活在大约 50 维的子空间里，剩下 734 维主要是噪声或冗余", "95% 的图像属于同一个类别", "模型能达到 95% 的准确率"],
       "correct": 1,
-      "explanation": "95% explained variance with 50 components means the essential structure of 784-dimensional data is captured by just 50 directions. The rest carries only 5% of the variation -- mostly noise."
+      "explanation": "95% explained variance with 50 components means the essential structure of 784-dimensional data is captured by just 50 directions. The rest carries only 5% of the variation -- mostly noise.",
+      "explanation_zh": "50 个主成分就能解释 95% 的方差，意味着 784 维数据的主要结构只需 50 个方向就能刻画清楚，剩下的方向只贡献了 5% 的变化，多半是噪声。"
     },
     {
       "stage": "post",
       "question": "Why should you NOT use t-SNE as preprocessing before training a classifier?",
+      "question_zh": "为什么不应该把 t-SNE 当作训练分类器前的预处理？",
       "options": ["t-SNE is too slow for large datasets", "t-SNE is designed for visualization only: it distorts global distances, is stochastic, and the output coordinates have no consistent meaning across runs", "t-SNE reduces data to exactly 2 dimensions which is too few", "t-SNE requires the labels to be known in advance"],
+      "options_zh": ["t-SNE 在大数据集上太慢", "t-SNE 只为可视化而设计：会扭曲全局距离、结果随机，每次运行得到的坐标都没有一致含义", "t-SNE 只能降到 2 维，太少了", "t-SNE 需要事先知道 label"],
       "correct": 1,
-      "explanation": "t-SNE preserves local neighborhoods but distorts global structure. Distances between clusters are meaningless, and different runs produce different layouts. Use PCA for preprocessing and t-SNE/UMAP only for visualization."
+      "explanation": "t-SNE preserves local neighborhoods but distorts global structure. Distances between clusters are meaningless, and different runs produce different layouts. Use PCA for preprocessing and t-SNE/UMAP only for visualization.",
+      "explanation_zh": "t-SNE 保留的是局部邻近关系，但扭曲了全局结构，簇之间的距离没有可解释意义，多次运行结果还会不同。预处理用 PCA，t-SNE/UMAP 只用来可视化。"
     },
     {
       "stage": "post",
       "question": "When would you choose kernel PCA over standard PCA?",
+      "question_zh": "什么情况下应该选 kernel PCA 而不是标准 PCA？",
       "options": ["When you have more samples than features", "When the data lies on a nonlinear manifold that standard PCA cannot separate, like concentric circles", "When you need the fastest possible computation", "When you want interpretable principal components"],
+      "options_zh": ["样本数多于特征数时", "数据落在非线性流形上、标准 PCA 没法分开的时候，比如同心圆", "要追求最快的计算速度时", "希望主成分具有可解释性时"],
       "correct": 1,
-      "explanation": "Standard PCA finds linear subspaces. If data has nonlinear structure (e.g., two concentric rings), PCA projects both onto the same line. Kernel PCA maps data to a higher-dimensional space where the structure becomes linear."
+      "explanation": "Standard PCA finds linear subspaces. If data has nonlinear structure (e.g., two concentric rings), PCA projects both onto the same line. Kernel PCA maps data to a higher-dimensional space where the structure becomes linear.",
+      "explanation_zh": "标准 PCA 找的是线性子空间。如果数据是非线性结构（比如两个同心环），PCA 会把它们都投到同一条线上。kernel PCA 先把数据映到更高维空间，让结构变得线性可分。"
     }
   ]
 }

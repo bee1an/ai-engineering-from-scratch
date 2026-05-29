@@ -12,7 +12,15 @@
         "Translate pronouns to nouns"
       ],
       "correct": 0,
-      "explanation": "Coref clusters mention spans that all refer to the same entity."
+      "explanation": "Coref clusters mention spans that all refer to the same entity.",
+      "question_zh": "共指消解的目标是什么？",
+      "options_zh": [
+        "把指向同一现实实体的所有 mention（命名、名词性、代词性）聚成簇",
+        "标注词性",
+        "抽取关系",
+        "把代词翻译成名词"
+      ],
+      "explanation_zh": "共指把所有指向同一实体的 mention span 聚成一类。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "A verb"
       ],
       "correct": 1,
-      "explanation": "Nominal mentions are noun phrases like 'the company'; pronominal mentions are pronouns."
+      "explanation": "Nominal mentions are noun phrases like 'the company'; pronominal mentions are pronouns.",
+      "question_zh": "'nominal' mention 指的是哪种表达？",
+      "options_zh": [
+        "仅限专有名词",
+        "像 'the CEO' 或 'the company' 这样的名词短语",
+        "像 'she' 这样的代词",
+        "动词"
+      ],
+      "explanation_zh": "Nominal mention 是 'the company' 这种名词短语；代词 mention 则是 pronominal。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "End-to-end span-based: enumerate spans, score mentions, then score antecedent probabilities and cluster greedily"
       ],
       "correct": 3,
-      "explanation": "End-to-end neural coref enumerates spans and learns mention + antecedent scoring jointly."
+      "explanation": "End-to-end neural coref enumerates spans and learns mention + antecedent scoring jointly.",
+      "question_zh": "Lee et al. 2017 提出的现代共指架构是怎样的？",
+      "options_zh": [
+        "BM25 检索",
+        "纯基于规则的句法分析",
+        "决策树",
+        "端到端基于 span：枚举 span，先打分 mention，再打分 antecedent 概率，并贪心聚类"
+      ],
+      "explanation_zh": "端到端神经共指联合学习 mention 打分和 antecedent 打分。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Precision and recall"
       ],
       "correct": 1,
-      "explanation": "CoNLL F1 is the mean of MUC, B-cubed, and CEAF-phi4 metrics."
+      "explanation": "CoNLL F1 is the mean of MUC, B-cubed, and CEAF-phi4 metrics.",
+      "question_zh": "CoNLL F1 是哪几项的平均？",
+      "options_zh": [
+        "跨语言的 F1",
+        "MUC、B-cubed、CEAF-phi4 三种 F1",
+        "token 和 span 的 F1",
+        "precision 和 recall"
+      ],
+      "explanation_zh": "CoNLL F1 是 MUC、B-cubed、CEAF-phi4 三个指标的均值。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "A pronoun without an antecedent"
       ],
       "correct": 1,
-      "explanation": "Bridging links a mention to a part-of or related entity that was implied but not explicitly stated."
+      "explanation": "Bridging links a mention to a part-of or related entity that was implied but not explicitly stated.",
+      "question_zh": "什么是 bridging anaphora？",
+      "options_zh": [
+        "误译",
+        "像 'the wheels' 这样隐式引用前面提到的车的轮子",
+        "代词出现在指称对象之前",
+        "没有先行词的代词"
+      ],
+      "explanation_zh": "Bridging 把一个 mention 链到隐含但未被显式说出的相关或部分实体。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Coref requires a CFG"
       ],
       "correct": 2,
-      "explanation": "Long-doc LLM coref degrades; sliding-window with cross-window merging mitigates."
+      "explanation": "Long-doc LLM coref degrades; sliding-window with cross-window merging mitigates.",
+      "question_zh": "为什么仅靠 LLM 在长文档上做共指不可靠？",
+      "options_zh": [
+        "LLM 不能读文本",
+        "tokenizer 出错",
+        "单次调用的 LLM 在跨 50+ 段时会过度合并或悄悄漏掉 mention，需要滑动窗口加合并",
+        "共指需要 CFG"
+      ],
+      "explanation_zh": "长文档上 LLM 一次性共指会退化；滑动窗口加跨窗口合并能缓解。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "So downstream tasks see one entity per cluster rather than one per surface mention, dramatically improving coverage"
       ],
       "correct": 3,
-      "explanation": "Without merging, NER counts each surface form separately and misses 60-80% of entity mentions."
+      "explanation": "Without merging, NER counts each surface form separately and misses 60-80% of entity mentions.",
+      "question_zh": "为什么要把共指簇合并到 NER 结果再喂给下游任务？",
+      "options_zh": [
+        "Wikidata 要求",
+        "增加 token 数",
+        "降低延迟",
+        "下游任务能按簇看到一个实体而不是每个表面 mention 一个，覆盖率显著提升"
+      ],
+      "explanation_zh": "不合并的话，NER 把每个表面形式都算成单独实体，会漏掉 60-80% 的实体 mention。"
     },
     {
       "stage": "post",
@@ -96,7 +152,15 @@
         "They cannot use POS tags"
       ],
       "correct": 0,
-      "explanation": "Gender heuristics fail in demographically diverse text; learned models are preferred."
+      "explanation": "Gender heuristics fail in demographically diverse text; learned models are preferred.",
+      "question_zh": "为什么硬编码的性别规则在共指系统里很脆弱？",
+      "options_zh": [
+        "对非二元指称、组织、动物会失效；学到的打分更稳健",
+        "需要 GPU",
+        "运行太快",
+        "不能用 POS 标签"
+      ],
+      "explanation_zh": "性别启发式在多元化文本里失效；学到的模型更可靠。"
     }
   ]
 }

@@ -12,7 +12,15 @@
         "A sentence"
       ],
       "correct": 1,
-      "explanation": "KGs store information as (s, r, o) triples; aggregated triples form the graph."
+      "explanation": "KGs store information as (s, r, o) triples; aggregated triples form the graph.",
+      "question_zh": "知识图谱的原子单元是什么？",
+      "options_zh": [
+        "POS 标签",
+        "(subject, relation, object) 三元组",
+        "token",
+        "句子"
+      ],
+      "explanation_zh": "KG 把信息存成 (s, r, o) 三元组，三元组聚合成图。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Aggregated Entity-Value Schema"
       ],
       "correct": 0,
-      "explanation": "AEVS is the 2026 hallucination-mitigation framework for grounded RE."
+      "explanation": "AEVS is the 2026 hallucination-mitigation framework for grounded RE.",
+      "question_zh": "在 2026 年的关系抽取里，AEVS 代表什么？",
+      "options_zh": [
+        "Anchor-Extraction-Verification-Supplement：先锚定 span，再抽取三元组，对照原文校验，最后补全覆盖",
+        "Auto-Encoder Vector Search",
+        "Async Entity Validation Service",
+        "Aggregated Entity-Value Schema"
+      ],
+      "explanation_zh": "AEVS 是 2026 年用于 grounded RE 的幻觉抑制框架。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Provenance is required by SPARQL"
       ],
       "correct": 0,
-      "explanation": "Provenance enables auditing and is the core of AEVS-style hallucination detection."
+      "explanation": "Provenance enables auditing and is the core of AEVS-style hallucination detection.",
+      "question_zh": "为什么每个三元组都要带 source provenance（doc id 加 span）？",
+      "options_zh": [
+        "有 provenance 才能审计三元组、拒绝那些 span 与原文不一致的幻觉",
+        "能加快抽取",
+        "provenance 改变了本体",
+        "SPARQL 要求"
+      ],
+      "explanation_zh": "Provenance 让审计成为可能，是 AEVS 风格幻觉检测的核心。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Translates the document"
       ],
       "correct": 0,
-      "explanation": "Canonicalization collapses paraphrases into canonical KG property ids."
+      "explanation": "Canonicalization collapses paraphrases into canonical KG property ids.",
+      "question_zh": "关系的 canonicalization 是做什么的？",
+      "options_zh": [
+        "把表面动词短语（如 'was born in'、'is a native of'）映射到固定的属性 id，让图变得可查询",
+        "删除三元组",
+        "添加 embedding",
+        "翻译文档"
+      ],
+      "explanation_zh": "Canonicalization 把同义说法收敛到 KG 里规范的 property id。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Coref normalizes case"
       ],
       "correct": 0,
-      "explanation": "Without coref, RE attaches relations to pronouns instead of the underlying named entity."
+      "explanation": "Without coref, RE attaches relations to pronouns instead of the underlying named entity.",
+      "question_zh": "为什么关系抽取通常要先做共指消解？",
+      "options_zh": [
+        "像 'he founded Apple' 里的代词必须先解析到具名实体，才能抽出三元组",
+        "共指能加 embedding",
+        "共指能提供位置信息",
+        "共指能规范大小写"
+      ],
+      "explanation_zh": "不做共指，RE 会把关系挂到代词上而不是底层的具名实体。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Mapping open-IE relations onto a closed ontology (e.g. Wikidata properties) before merging into the KG"
       ],
       "correct": 3,
-      "explanation": "Closed ontologies make the graph queryable; the canonicalization step pays for itself downstream."
+      "explanation": "Closed ontologies make the graph queryable; the canonicalization step pays for itself downstream.",
+      "question_zh": "哪种选择是用 open IE 的 recall 换图的可查询性？",
+      "options_zh": [
+        "跳过 NER",
+        "随机抽样三元组",
+        "只用 embedding 的图",
+        "把 open-IE 的关系映射到封闭本体（比如 Wikidata 属性），再合并入 KG"
+      ],
+      "explanation_zh": "封闭本体让图可查询；canonicalization 步骤的成本会在下游回本。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "To remove NIL entities"
       ],
       "correct": 2,
-      "explanation": "Time-bounded relations need qualifiers (e.g. Wikidata P580/P582) or facts go silently stale."
+      "explanation": "Time-bounded relations need qualifiers (e.g. Wikidata P580/P582) or facts go silently stale.",
+      "question_zh": "为什么很多生产 KG 都用时间限定符（开始/结束时间）？",
+      "options_zh": [
+        "SPARQL 更快",
+        "RDF 要求",
+        "很多关系都是有时效的（雇主、配偶、职位），限定符避免出现 “永远成立” 的过期事实",
+        "用来去掉 NIL 实体"
+      ],
+      "explanation_zh": "有时效的关系需要限定符（比如 Wikidata 的 P580/P582），否则事实会悄悄过期。"
     },
     {
       "stage": "post",
@@ -96,7 +152,15 @@
         "A coreference model"
       ],
       "correct": 1,
-      "explanation": "REBEL (Babelscape) is a seq2seq RE model trained on distantly supervised Wikidata triples."
+      "explanation": "REBEL (Babelscape) is a seq2seq RE model trained on distantly supervised Wikidata triples.",
+      "question_zh": "REBEL 是什么？",
+      "options_zh": [
+        "向量数据库",
+        "一个 seq2seq 关系抽取器，输出已经是 Wikidata property id 的三元组",
+        "tokenizer",
+        "共指模型"
+      ],
+      "explanation_zh": "REBEL（Babelscape）是一个 seq2seq RE 模型，在远监督的 Wikidata 三元组上训练。"
     }
   ]
 }

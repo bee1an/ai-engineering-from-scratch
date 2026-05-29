@@ -12,7 +12,15 @@
         "Generates target tokens"
       ],
       "correct": 2,
-      "explanation": "The encoder RNN compresses the source into a final hidden state used by the decoder."
+      "explanation": "The encoder RNN compresses the source into a final hidden state used by the decoder.",
+      "question_zh": "在 2014 年风格的 seq2seq 模型中，encoder 的角色是什么？",
+      "options_zh": [
+        "计算 attention 权重",
+        "执行 beam search",
+        "读源序列并产生一个固定大小的 context vector 作为它的总结",
+        "生成目标 token"
+      ],
+      "explanation_zh": "encoder RNN 把源序列压缩成 decoder 使用的最终 hidden state。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Manually labeling each decoder step"
       ],
       "correct": 2,
-      "explanation": "Teacher forcing stabilizes training by using true previous tokens; without it early errors cascade."
+      "explanation": "Teacher forcing stabilizes training by using true previous tokens; without it early errors cascade.",
+      "question_zh": "seq2seq 训练中的 teacher forcing 是什么？",
+      "options_zh": [
+        "推理时加一个教师网络",
+        "把 batch size 加倍",
+        "把真值的上一 token（而不是模型自己的预测）作为 decoder 输入",
+        "手工标注每个 decoder 步骤"
+      ],
+      "explanation_zh": "teacher forcing 用真实上一 token 稳定训练；不用它的话早期错误会级联。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Vocabulary becomes too large"
       ],
       "correct": 2,
-      "explanation": "The fixed context-vector bottleneck means long inputs cannot be losslessly summarized."
+      "explanation": "The fixed context-vector bottleneck means long inputs cannot be losslessly summarized.",
+      "question_zh": "为什么固定 context-vector 的 seq2seq 在输入越长时精度越低？",
+      "options_zh": [
+        "padding token 累积",
+        "交叉熵发散",
+        "源的所有信息必须装进一个固定大小的 encoder hidden state，长输入因此丢细节",
+        "词表变得太大"
+      ],
+      "explanation_zh": "固定 context-vector 瓶颈意味着长输入无法被无损总结。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "The train/inference gap from training on ground-truth tokens but generating from the model's own predictions at inference"
       ],
       "correct": 3,
-      "explanation": "The model never practiced recovering from its own mistakes during training, so errors cascade at inference."
+      "explanation": "The model never practiced recovering from its own mistakes during training, so errors cascade at inference.",
+      "question_zh": "exposure bias 是什么？",
+      "options_zh": [
+        "类别不平衡导致的偏差",
+        "encoder embedding 中的偏差",
+        "标注者分歧",
+        "训练时用真值 token，但推理时从模型自身预测生成，造成的训练/推理差距"
+      ],
+      "explanation_zh": "模型在训练中从未练过从自己的错误中恢复，所以推理时错误会级联。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Beam search lowers the loss"
       ],
       "correct": 0,
-      "explanation": "Greedy commits per step; beam search explores multiple hypotheses, then picks the best complete one."
+      "explanation": "Greedy commits per step; beam search explores multiple hypotheses, then picks the best complete one.",
+      "question_zh": "为什么 beam search 通常优于 greedy 解码？",
+      "options_zh": [
+        "beam search 在每步保留 top-k 部分序列，而不是不可逆地选定一个 token",
+        "beam search 避免 exposure bias",
+        "beam search 更快",
+        "beam search 降低 loss"
+      ],
+      "explanation_zh": "greedy 每步定死；beam search 探索多个假设，最后挑最佳完整序列。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "1D CNNs"
       ],
       "correct": 0,
-      "explanation": "Transformer encoder-decoders dropped recurrence and now dominate generation tasks."
+      "explanation": "Transformer encoder-decoders dropped recurrence and now dominate generation tasks.",
+      "question_zh": "在通用生成任务上，是哪个架构家族取代了 RNN seq2seq？",
+      "options_zh": [
+        "Transformer encoder-decoder 模型（BART、T5、mBART、NLLB）",
+        "图神经网络",
+        "Naive Bayes",
+        "1D CNN"
+      ],
+      "explanation_zh": "Transformer encoder-decoder 抛弃了递归，现在主导生成任务。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Adds random noise to embeddings"
       ],
       "correct": 0,
-      "explanation": "Scheduled sampling gradually mixes in model predictions to close the train/inference gap."
+      "explanation": "Scheduled sampling gradually mixes in model predictions to close the train/inference gap.",
+      "question_zh": "scheduled sampling 做什么？",
+      "options_zh": [
+        "训练中逐步降低 teacher-forcing 比例，让模型学会从自己的预测中恢复",
+        "调度学习率衰减",
+        "重排训练集",
+        "向 embedding 添加随机噪声"
+      ],
+      "explanation_zh": "scheduled sampling 逐渐混入模型自身预测，缩小训练/推理差距。"
     },
     {
       "stage": "post",
@@ -96,7 +152,15 @@
         "It requires more memory"
       ],
       "correct": 2,
-      "explanation": "Greedy decoding's irrevocable per-step choice causes loops and repetition without beam search or sampling."
+      "explanation": "Greedy decoding's irrevocable per-step choice causes loops and repetition without beam search or sampling.",
+      "question_zh": "为什么单纯 greedy 解码在用户面向生成中常常失败？",
+      "options_zh": [
+        "它不能用 embedding",
+        "它总是先选 <EOS>",
+        "greedy 可能重复或循环，且不能从局部优但全局差的 token 选择回退",
+        "它需要更多内存"
+      ],
+      "explanation_zh": "greedy 解码每步不可逆的选择会导致循环和重复，除非用 beam search 或采样。"
     }
   ]
 }

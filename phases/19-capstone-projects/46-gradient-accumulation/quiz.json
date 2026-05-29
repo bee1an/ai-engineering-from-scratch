@@ -12,7 +12,15 @@
         "effective_batch = world_size only"
       ],
       "correct": 1,
-      "explanation": "Micro batch is what fits in memory; accumulation steps are how many forward + backward passes pile gradients into the same buffer before one optimizer step."
+      "explanation": "Micro batch is what fits in memory; accumulation steps are how many forward + backward passes pile gradients into the same buffer before one optimizer step.",
+      "question_zh": "梯度累积表达的有效 batch 等式是?",
+      "options_zh": [
+        "effective_batch = micro_batch / accum_steps",
+        "effective_batch = micro_batch * accum_steps",
+        "effective_batch = micro_batch + accum_steps",
+        "effective_batch = world_size 单独决定"
+      ],
+      "explanation_zh": "Micro batch 是显存能装下的; accumulation steps 是把多少次 forward+backward 的梯度堆进同一个 buffer,然后才走一次 optimizer step。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "It is required for mixed precision only"
       ],
       "correct": 1,
-      "explanation": "The accumulation buffer is a sum. Per-micro-batch scaling by 1/N pushes that sum back into the same scale a single full-batch backward would produce."
+      "explanation": "The accumulation buffer is a sum. Per-micro-batch scaling by 1/N pushes that sum back into the same scale a single full-batch backward would produce.",
+      "question_zh": "为什么每个 micro batch 的 loss 在 backward 前必须除以 accum_steps?",
+      "options_zh": [
+        "loss 曲线更好看",
+        "PyTorch 默认把梯度累加到 param.grad,不除会让累积梯度大 N 倍,优化器步长也大 N 倍",
+        "避免 NaN",
+        "只在 mixed precision 时需要"
+      ],
+      "explanation_zh": "Accumulation buffer 是求和。把每个 micro batch 缩 1/N 把这个和拉回与一次完整 backward 相同的尺度。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Never; the optimizer is replaced"
       ],
       "correct": 1,
-      "explanation": "Stepping mid-accumulation contaminates every parameter the rest of the run depends on. The optimizer step fires once per effective batch."
+      "explanation": "Stepping mid-accumulation contaminates every parameter the rest of the run depends on. The optimizer step fires once per effective batch.",
+      "question_zh": "在累积循环中,optimizer step 何时运行?",
+      "options_zh": [
+        "每个 micro batch 之后",
+        "只在累积窗口的最后一个 micro batch 之后",
+        "每个窗口运行两次以保险",
+        "永不; optimizer 被替换"
+      ],
+      "explanation_zh": "在累积中途 step 会污染后续运行依赖的所有参数。每个 effective batch 触发一次 optimizer step。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "The data loader"
       ],
       "correct": 2,
-      "explanation": "DDP's no_sync skips the gradient collective. Wrapping all but the last micro batch turns N collectives per effective step into one."
+      "explanation": "DDP's no_sync skips the gradient collective. Wrapping all but the last micro batch turns N collectives per effective step into one.",
+      "question_zh": "在真实多 GPU 运行中,no_sync 上下文包住的是?",
+      "options_zh": [
+        "forward 过程",
+        "optimizer step",
+        "非最终的 micro batch,使梯度 all-reduce 在最后一次 backward 后才触发,而不是 N 次",
+        "data loader"
+      ],
+      "explanation_zh": "DDP 的 no_sync 跳过梯度集体通信。把除最后一个之外的 micro batch 都包住,可把每个 effective step 的 N 次集体调用变成一次。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "That gradients are zero"
       ],
       "correct": 1,
-      "explanation": "The assertion bound is max-abs-diff under 1e-4. Without the loss scaling the diff blows up; with the scaling it sits at floating point noise."
+      "explanation": "The assertion bound is max-abs-diff under 1e-4. Without the loss scaling the diff blows up; with the scaling it sits at floating point noise.",
+      "question_zh": "main.py 中 equivalence_check 函数断言的是?",
+      "options_zh": [
+        "loss 收敛",
+        "完整 batch 的一次 backward,与按 accum_steps 切块、loss/N 后的 backward,在梯度 buffer 与 step 后的参数上数值差在小容忍范围内一致",
+        "吞吐量恒定",
+        "梯度为零"
+      ],
+      "explanation_zh": "断言界限是 max-abs-diff 小于 1e-4。不做 loss 缩放时差别会爆炸; 做了之后就是浮点噪声。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Throughput goes up because the model gets faster"
       ],
       "correct": 1,
-      "explanation": "Each micro batch costs the same forward + backward. Accumulation buys statistical smoothing per optimizer step, not raw throughput; the curve is a useful reality check against folklore."
+      "explanation": "Each micro batch costs the same forward + backward. Accumulation buys statistical smoothing per optimizer step, not raw throughput; the curve is a useful reality check against folklore.",
+      "question_zh": "看「吞吐 vs 有效 batch」曲线,什么大致不变,什么会变?",
+      "options_zh": [
+        "samples/second 随更大 effective batch 下降",
+        "samples/second 趋近硬件极限保持稳定; 而每次 optimizer step 的 wall time 与 accum_steps 成线性关系; 下降的是 optimizer steps/second",
+        "两个指标都随 accum 线性变化",
+        "因为模型变快,吞吐增加"
+      ],
+      "explanation_zh": "每个 micro batch 的 forward+backward 成本相同。累积换来的是每 optimizer step 更多统计平滑,而不是裸吞吐; 这条曲线是对民间说法的现实校验。"
     }
   ]
 }

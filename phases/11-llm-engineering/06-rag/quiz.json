@@ -1,37 +1,52 @@
 [
   {
     "question": "What does RAG stand for and what problem does it solve?",
+    "question_zh": "RAG 是什么的缩写，它解决了什么问题？",
     "options": ["Random Augmented Generation -- generating random outputs", "Retrieval-Augmented Generation -- giving LLMs access to external knowledge they weren't trained on", "Recurrent Attention Generation -- improving attention mechanisms", "Reduced Architecture Generation -- making models smaller"],
+    "options_zh": ["Random Augmented Generation：生成随机输出", "Retrieval-Augmented Generation：让 LLM 能用上训练时没见过的外部知识", "Recurrent Attention Generation：改进注意力机制", "Reduced Architecture Generation：缩小模型"],
     "correct": 1,
     "explanation": "RAG retrieves relevant documents from an external knowledge base and adds them to the prompt. This gives the LLM access to up-to-date, domain-specific information without retraining.",
+    "explanation_zh": "RAG 从外部知识库中检索相关文档并加入 prompt，让 LLM 不必重新训练就能用上最新的、领域特定的信息。",
     "stage": "pre"
   },
   {
     "question": "Why is RAG preferred over fine-tuning for most knowledge-grounded applications?",
+    "question_zh": "为什么大多数基于知识的应用更倾向于 RAG 而不是 fine-tuning？",
     "options": ["RAG produces better models", "RAG is cheaper, instantly updatable when documents change, and provides source attribution -- fine-tuning is expensive and becomes stale", "Fine-tuning doesn't work", "RAG uses less memory"],
+    "options_zh": ["RAG 训出来的模型更好", "RAG 更便宜，文档一变就能即时更新，还能给出来源；fine-tuning 昂贵且会迅速过时", "fine-tuning 行不通", "RAG 占用更少内存"],
     "correct": 1,
     "explanation": "Fine-tuning costs thousands of dollars, produces a static model that becomes stale as documents change, and offers no source attribution. RAG updates instantly (just update the document store), costs only embedding + storage, and can cite its sources.",
+    "explanation_zh": "fine-tuning 要花几千美元，得到的是静态模型，文档一变就过时，也没法给出引用。RAG 只要更新文档库就能即时生效，成本主要是 embedding 和存储，还能给出引用来源。",
     "stage": "pre"
   },
   {
     "question": "What is the correct order of steps in a basic RAG pipeline?",
+    "question_zh": "基础 RAG 流水线的正确步骤顺序是什么？",
     "options": ["Generate, retrieve, embed, chunk", "Chunk documents, embed chunks, store in vector DB, embed query, retrieve similar chunks, generate answer with context", "Embed query, generate answer, retrieve documents", "Store documents, query the LLM, add documents to response"],
+    "options_zh": ["生成、检索、embedding、分块", "把文档分块、对块做 embedding、存入向量库、对查询做 embedding、检索相似块、用上下文生成答案", "对查询做 embedding、生成答案、检索文档", "存入文档、向 LLM 提问、再把文档拼进回复"],
     "correct": 1,
     "explanation": "Ingestion: chunk documents -> embed chunks -> store in vector DB. Query time: embed the user's query -> retrieve top-K similar chunks -> add chunks to prompt -> generate answer grounded in retrieved context.",
+    "explanation_zh": "入库阶段：文档分块 → 对块 embedding → 存入向量库。查询阶段：对用户查询 embedding → 检索 top-K 相似块 → 把块拼入 prompt → 基于检索上下文生成答案。",
     "stage": "post"
   },
   {
     "question": "What is a common failure mode in basic RAG systems?",
+    "question_zh": "基础 RAG 系统常见的失效模式是什么？",
     "options": ["The LLM refuses to answer", "The retrieved chunks are semantically similar to the query but don't contain the actual answer (e.g., returning 'revenue strategy' when asked for 'Q3 revenue numbers')", "The vector database crashes", "The embeddings are too large"],
+    "options_zh": ["LLM 拒绝回答", "检索到的块在语义上与查询相似但不包含真正的答案（比如问'Q3 营收数字'，返回的却是'营收策略'）", "向量数据库挂了", "embedding 太大"],
     "correct": 1,
     "explanation": "Semantic search finds text that 'sounds like' the query, not necessarily text that 'answers' it. A query about revenue might retrieve chunks discussing revenue strategy rather than the chunk containing the actual number.",
+    "explanation_zh": "语义检索找的是'像'查询的文本，不一定是'回答'查询的文本。问营收的查询可能会召回讨论营收策略的块，而不是包含真正数字的块。",
     "stage": "post"
   },
   {
     "question": "How do you evaluate RAG quality?",
+    "question_zh": "如何评估 RAG 的质量？",
     "options": ["By checking if the LLM produces any output", "Using both retrieval metrics (did we find the right chunks?) and generation metrics (is the answer faithful to the retrieved context?)", "By measuring response time only", "By counting the number of retrieved documents"],
+    "options_zh": ["看 LLM 有没有产出回复", "同时使用检索指标（是否找对了块？）和生成指标（答案是否忠于检索到的上下文？）", "只测响应时间", "数检索到的文档数量"],
     "correct": 1,
     "explanation": "RAG evaluation has two parts: retrieval quality (precision/recall of retrieved chunks against ground truth) and generation quality (faithfulness to context, relevance to query, no hallucination beyond retrieved information).",
+    "explanation_zh": "RAG 评估分两部分：检索质量（相对于 ground truth 的 precision/recall）和生成质量（答案是否忠于上下文、是否切题、是否在检索范围之外产生幻觉）。",
     "stage": "post"
   }
 ]

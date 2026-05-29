@@ -12,7 +12,15 @@
         "Agents, skills, workflows"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "MCP server 暴露的三种 primitive 是什么？",
+      "options_zh": [
+        "functions、types、classes",
+        "tools、resources、prompts",
+        "endpoints、webhooks、queues",
+        "agents、skills、workflows"
+      ],
+      "explanation_zh": "MCP 把 server 能力抽象为 tools、resources、prompts 三种 primitive。"
     },
     {
       "stage": "post",
@@ -24,7 +32,15 @@
         "REST with OpenAPI"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "MCP 使用的线缆格式是什么？",
+      "options_zh": [
+        "GraphQL over HTTP",
+        "gRPC + protobuf",
+        "JSON-RPC 2.0",
+        "REST + OpenAPI"
+      ],
+      "explanation_zh": "MCP 协议在 JSON-RPC 2.0 之上构建。"
     },
     {
       "stage": "post",
@@ -36,7 +52,15 @@
         "requiresAuth: true"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "哪个元数据字段表示某 tool 会修改状态、需要人工审批？",
+      "options_zh": [
+        "readonly: false",
+        "mutating: true",
+        "destructiveHint: true",
+        "requiresAuth: true"
+      ],
+      "explanation_zh": "destructiveHint: true 是 MCP 用来标识需要人工审批的破坏性 tool 的元数据。"
     },
     {
       "stage": "post",
@@ -48,7 +72,15 @@
         "gRPC bidi"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "2025-06-18 中替代早期 SSE-only 远程传输的是哪种？",
+      "options_zh": [
+        "WebTransport",
+        "Streamable HTTP",
+        "WebSocket-only",
+        "gRPC 双向流"
+      ],
+      "explanation_zh": "Streamable HTTP 取代了 SSE-only 的远程传输，统一了远程通信。"
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "Never; MCP is only for local dev"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "什么时候应该把一个 tool 拆成独立的 MCP server，而不是内联实现？",
+      "options_zh": [
+        "每天调用少于 10 次",
+        "被两个或更多 host 调用，并且是只读/可缓存的",
+        "返回数据超过 1KB",
+        "永远不要拆分；MCP 只用于本地开发"
+      ],
+      "explanation_zh": "当 tool 被多个 host 调用、又是只读可缓存时，拆成独立 MCP server 能让多端复用并集中维护。"
     }
   ]
 }

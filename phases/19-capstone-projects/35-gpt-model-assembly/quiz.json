@@ -12,7 +12,15 @@
         "vocab 50000, context 4096, d_model 4096, 32 heads, 32 layers"
       ],
       "correct": 1,
-      "explanation": "GPT-2 small is the 124M parameter configuration; matching it confirms the wiring is correct."
+      "explanation": "GPT-2 small is the 124M parameter configuration; matching it confirms the wiring is correct.",
+      "question_zh": "本节复现的 GPT-2 small 参考配置是什么?",
+      "options_zh": [
+        "vocab 30000、context 512、d_model 512、6 head、6 层",
+        "vocab 50257、context 1024、d_model 768、12 head、12 层,参数量约 1.24 亿",
+        "vocab 100000、context 2048、d_model 1024、16 head、24 层",
+        "vocab 50000、context 4096、d_model 4096、32 head、32 层"
+      ],
+      "explanation_zh": "GPT-2 small 是 124M 参数配置; 对齐它能确认接线无误。"
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "A constraint on attention heads"
       ],
       "correct": 0,
-      "explanation": "Setting lm_head.weight = tok_embed.weight shares storage; copying does not. Saves vocab times d_model parameters."
+      "explanation": "Setting lm_head.weight = tok_embed.weight shares storage; copying does not. Saves vocab times d_model parameters.",
+      "question_zh": "model assembly 中的 weight tying 指什么?",
+      "options_zh": [
+        "token embedding 与 LM head 共享同一个参数张量; 优化器更新这一个矩阵,既用于查找也用于输出投影",
+        "两个形状相同的不同张量,每步互相拷贝",
+        "跨层共享一个 bias 项",
+        "对 attention head 的某种约束"
+      ],
+      "explanation_zh": "lm_head.weight = tok_embed.weight 共享存储; 拷贝则不共享。能省下 vocab × d_model 个参数。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Restarts from the prompt every step"
       ],
       "correct": 1,
-      "explanation": "Sliding window drops the oldest tokens once the running sequence overflows the context length."
+      "explanation": "Sliding window drops the oldest tokens once the running sequence overflows the context length.",
+      "question_zh": "生成阶段的滑动上下文窗口如何工作?",
+      "options_zh": [
+        "每步把上下文截断到一半",
+        "每步取当前序列 (prompt + 已生成) 的最后 context_length 个 token,送入模型",
+        "用零 padding 到最大上下文",
+        "每步都从 prompt 重新开始"
+      ],
+      "explanation_zh": "滑动窗口在序列超出 context length 后,丢掉最早的 token。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Top-k sampling needs smaller weights"
       ],
       "correct": 1,
-      "explanation": "Without the scaling, the residual stream grows with depth and pushes the final LayerNorm into a hot regime."
+      "explanation": "Without the scaling, the residual stream grows with depth and pushes the final LayerNorm into a hot regime.",
+      "question_zh": "为什么 attention 的输出投影与 MLP 第二个 linear 用更小的 std 初始化?",
+      "options_zh": [
+        "节省内存",
+        "两者都直接喂给一次 residual 加; 把它们的 std 按 1/sqrt(2 × num_layers) 缩放,可在 12 层中保持 residual stream 的尺度稳定",
+        "数据集要求",
+        "top-k 采样需要更小的权重"
+      ],
+      "explanation_zh": "如果不缩放,residual stream 会随深度增长,把最终 LayerNorm 推到饱和区。"
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "Scales the embeddings"
       ],
       "correct": 1,
-      "explanation": "Temperature is the simplest knob; combined with top-k it controls how exploratory the generation is."
+      "explanation": "Temperature is the simplest knob; combined with top-k it controls how exploratory the generation is.",
+      "question_zh": "采样时 temperature 做什么?",
+      "options_zh": [
+        "选择优化器学习率",
+        "在 softmax 前对 logits 除一个值。T<1 让分布更尖锐趋向贪心,T=1 保持模型自然分布,T>1 让分布更平坦",
+        "在 head 上加 dropout",
+        "缩放 embedding"
+      ],
+      "explanation_zh": "Temperature 是最简单的旋钮; 与 top-k 配合控制生成的探索性。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Caps the logits at k"
       ],
       "correct": 1,
-      "explanation": "Top-k truncates the long tail before softmax; top_k=1 is greedy, larger k retains more diversity."
+      "explanation": "Top-k truncates the long tail before softmax; top_k=1 is greedy, larger k retains more diversity.",
+      "question_zh": "采样前的 top-k 过滤做什么?",
+      "options_zh": [
+        "选 logits 最低的 k 个",
+        "保留最大的 k 个 logits,把其余置为 -inf,然后对幸存者 softmax,multinomial 采样只看到这 top k 个 token",
+        "去掉所有小于 0 的 logits",
+        "把 logits 截断到 k"
+      ],
+      "explanation_zh": "Top-k 在 softmax 前截断长尾; top_k=1 是贪心,k 越大保留越多多样性。"
     }
   ]
 }

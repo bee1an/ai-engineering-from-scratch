@@ -12,7 +12,15 @@
         "It maps each detected mention to a unique entry in a knowledge base (Wikidata, Wikipedia, or a domain KB)"
       ],
       "correct": 3,
-      "explanation": "EL turns a mention into a canonical KB id, disambiguating between same-name entities."
+      "explanation": "EL turns a mention into a canonical KB id, disambiguating between same-name entities.",
+      "question_zh": "实体链接在 NER 之上多做了什么？",
+      "options_zh": [
+        "翻译",
+        "情感极性",
+        "词性标签",
+        "把每个检测到的 mention 映射到知识库（Wikidata、Wikipedia 或领域 KB）里的一个唯一条目"
+      ],
+      "explanation_zh": "EL 把 mention 转成规范的 KB id，并在同名实体之间消歧。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Candidate generation (shortlist of plausible KB entries) and disambiguation (pick the right one given context)"
       ],
       "correct": 3,
-      "explanation": "EL decomposes into proposing candidates then ranking them by contextual fit."
+      "explanation": "EL decomposes into proposing candidates then ranking them by contextual fit.",
+      "question_zh": "实体链接的两个主要子任务是？",
+      "options_zh": [
+        "分词和句法分析",
+        "POS 标注和词形还原",
+        "embedding 和聚类",
+        "候选生成（给出可能的 KB 候选短列表）和消歧（结合上下文挑出正确的那个）"
+      ],
+      "explanation_zh": "EL 拆成 “提候选” 和 “按上下文打分排序” 两步。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Recall is required by spaCy"
       ],
       "correct": 2,
-      "explanation": "If candidates miss the gold entity, no disambiguator can fix it; recall floors pipeline quality."
+      "explanation": "If candidates miss the gold entity, no disambiguator can fix it; recall floors pipeline quality.",
+      "question_zh": "为什么必须在汇报消歧 accuracy 时同时汇报 mention recall？",
+      "options_zh": [
+        "GDPR 要求",
+        "recall 替代 precision",
+        "消歧无法挽救漏掉的候选；候选生成 recall 是 pipeline 的天花板",
+        "spaCy 要求"
+      ],
+      "explanation_zh": "如果候选里没有 gold 实体，再好的消歧器都救不了；recall 是 pipeline 质量的下界。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "By PageRank"
       ],
       "correct": 0,
-      "explanation": "GENRE generates the canonical KB name with constrained decoding to guarantee a valid id."
+      "explanation": "GENRE generates the canonical KB name with constrained decoding to guarantee a valid id.",
+      "question_zh": "GENRE 是怎么做实体链接的？",
+      "options_zh": [
+        "在合法 KB id 的 trie 上做约束解码，逐 token 解出实体的规范名",
+        "靠 BM25",
+        "靠 TF-IDF",
+        "靠 PageRank"
+      ],
+      "explanation_zh": "GENRE 用约束解码生成规范 KB 名，保证产出合法 id。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Skipping every mention"
       ],
       "correct": 0,
-      "explanation": "NIL prediction prevents guessing wrong KB ids for entities the KB does not cover."
+      "explanation": "NIL prediction prevents guessing wrong KB ids for entities the KB does not cover.",
+      "question_zh": "实体链接里的 NIL 处理指什么？",
+      "options_zh": [
+        "在没有候选真正匹配时（新兴实体、冷门人物）预测 'not in KB' 标签",
+        "返回整个候选列表",
+        "把输入小写化",
+        "跳过每个 mention"
+      ],
+      "explanation_zh": "NIL 预测避免给 KB 没收录的实体瞎猜一个 id。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Popularity helps recall"
       ],
       "correct": 0,
-      "explanation": "Popularity priors skew predictions away from less-common, domain-specific name-clashes."
+      "explanation": "Popularity priors skew predictions away from less-common, domain-specific name-clashes.",
+      "question_zh": "为什么 popularity bias 会损害专业领域的实体链接？",
+      "options_zh": [
+        "在网络数据上训练的模型会过度预测高频实体（比如选篮球的 Jordan 而不是 ML 学者 Michael I. Jordan）",
+        "只偏向更老的实体",
+        "popularity 会去掉 NIL",
+        "popularity 会提升 recall"
+      ],
+      "explanation_zh": "Popularity prior 会偏向通用高频实体，对领域内不那么常见的同名实体不利。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Skip candidate generation"
       ],
       "correct": 0,
-      "explanation": "Constraining the LLM to a valid candidate list prevents made-up KB ids and keeps output queryable."
+      "explanation": "Constraining the LLM to a valid candidate list prevents made-up KB ids and keeps output queryable.",
+      "question_zh": "2026 年安全的 LLM-EL 模式是什么？",
+      "options_zh": [
+        "提供候选列表，再用受约束的 JSON 输出，让 LLM 只能从合法 KB id 中选",
+        "直接 prompt '找出实体'",
+        "自由生成",
+        "跳过候选生成"
+      ],
+      "explanation_zh": "把 LLM 限制在合法候选列表里，能避免编造 KB id，并保证输出可查询。"
     },
     {
       "stage": "post",
@@ -96,7 +152,15 @@
         "Boundaries break Wikipedia lookups"
       ],
       "correct": 0,
-      "explanation": "Mis-bounded mentions retrieve the wrong alias set, propagating errors into disambiguation."
+      "explanation": "Mis-bounded mentions retrieve the wrong alias set, propagating errors into disambiguation.",
+      "question_zh": "为什么 NER 的 mention 边界必须精确，否则 EL 会失败？",
+      "options_zh": [
+        "边界错误会传播：'Bank of America' 被截成 'Bank' 会调出错误的候选，让 EL recall 大跌",
+        "边界精度只影响 NER 指标，不影响 EL 候选质量",
+        "边界改变分词",
+        "边界破坏 Wikipedia 查询"
+      ],
+      "explanation_zh": "边界错的 mention 调出的别名集是错的，错误会一路传到消歧。"
     }
   ]
 }

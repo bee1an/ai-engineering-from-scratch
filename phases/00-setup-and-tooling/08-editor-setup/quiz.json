@@ -3,37 +3,52 @@
     {
       "stage": "pre",
       "question": "What is a Language Server Protocol (LSP)?",
+      "question_zh": "Language Server Protocol（LSP）是什么？",
       "options": ["A protocol for transferring files between editors", "A standard for editors to receive type info, completions, and diagnostics from a language-specific server", "A compression format for source code files", "A network protocol for remote pair programming"],
+      "options_zh": ["在编辑器之间传输文件的协议", "让编辑器从某种语言对应的 server 获取类型信息、补全和诊断的标准协议", "源码文件的压缩格式", "用于远程结对编程的网络协议"],
       "correct": 1,
-      "explanation": "LSP is a standardized protocol that lets editors communicate with language servers for features like autocomplete, type checking, and error diagnostics, regardless of the editor used."
+      "explanation": "LSP is a standardized protocol that lets editors communicate with language servers for features like autocomplete, type checking, and error diagnostics, regardless of the editor used.",
+      "explanation_zh": "LSP 是一种标准化协议，让编辑器与 language server 沟通，从而获得自动补全、类型检查、错误诊断等功能，且与具体编辑器无关。"
     },
     {
       "stage": "pre",
       "question": "Why is format-on-save useful for team projects?",
+      "question_zh": "对团队项目而言，保存时自动格式化（format-on-save）为什么有用？",
       "options": ["It reduces file sizes by removing whitespace", "It ensures consistent code style across all contributors without manual formatting", "It catches runtime bugs before the code is executed", "It compresses the code for faster git operations"],
+      "options_zh": ["通过去掉空白字符减小文件体积", "确保所有贡献者的代码风格一致，无需手动格式化", "在代码执行之前就抓出运行时 bug", "压缩代码让 git 操作更快"],
       "correct": 1,
-      "explanation": "Format-on-save runs a formatter (like Black or Ruff) every time you save, ensuring all code follows the same style conventions regardless of who wrote it."
+      "explanation": "Format-on-save runs a formatter (like Black or Ruff) every time you save, ensuring all code follows the same style conventions regardless of who wrote it.",
+      "explanation_zh": "保存时自动格式化会在每次保存时调用 Black、Ruff 之类的格式化工具，让代码无论是谁写的都遵循同一套风格规范。"
     },
     {
       "stage": "post",
       "question": "Which VS Code extension enables editing code on a remote GPU machine as if it were local?",
+      "question_zh": "哪个 VS Code 插件可以让你像编辑本地代码一样，编辑远端 GPU 机器上的代码？",
       "options": ["GitLens", "Pylance", "Remote SSH", "Debugpy"],
+      "options_zh": ["GitLens", "Pylance", "Remote SSH", "Debugpy"],
       "correct": 2,
-      "explanation": "Remote SSH installs a lightweight VS Code server on the remote machine and streams the UI to your local editor, letting you edit files, run terminals, and debug remotely."
+      "explanation": "Remote SSH installs a lightweight VS Code server on the remote machine and streams the UI to your local editor, letting you edit files, run terminals, and debug remotely.",
+      "explanation_zh": "Remote SSH 会在远端机器上装一个轻量的 VS Code server，把 UI 流到本地编辑器，让你可以远程编辑文件、开终端和调试。"
     },
     {
       "stage": "post",
       "question": "Why should 'notebook.output.scrolling' be enabled in VS Code settings for AI work?",
+      "question_zh": "做 AI 工作时为什么应该在 VS Code 里开启 notebook.output.scrolling？",
       "options": ["It enables horizontal scrolling for wide dataframes", "It prevents training loop output (thousands of lines) from exploding the output panel", "It allows scrolling between notebook cells with the mouse wheel", "It enables smooth scrolling animations in the editor"],
+      "options_zh": ["让宽 dataframe 可以横向滚动", "防止训练 loop 输出几千行后把输出面板撑爆", "允许用滚轮在 cell 之间滚动", "在编辑器里启用平滑滚动动画"],
       "correct": 1,
-      "explanation": "Training loops can print thousands of lines of output. Without output scrolling, the notebook output panel grows unbounded, making the notebook unusable."
+      "explanation": "Training loops can print thousands of lines of output. Without output scrolling, the notebook output panel grows unbounded, making the notebook unusable.",
+      "explanation_zh": "训练 loop 经常会打印成千上万行输出。如果不开输出滚动，notebook 的输出面板会无限制地变大，最终让 notebook 没法用。"
     },
     {
       "stage": "post",
       "question": "What does setting 'python.analysis.typeCheckingMode' to 'basic' in VS Code accomplish?",
+      "question_zh": "在 VS Code 里把 python.analysis.typeCheckingMode 设为 basic 有什么作用？",
       "options": ["It enables syntax highlighting for Python files", "It catches wrong argument types and tensor shape mismatches before running the code", "It formats Python code according to PEP 8 standards", "It enables Python 3.12 language features"],
+      "options_zh": ["为 Python 文件启用语法高亮", "在代码运行之前就抓出参数类型错误以及 tensor 形状不匹配的问题", "按照 PEP 8 规范格式化 Python 代码", "启用 Python 3.12 的语言特性"],
       "correct": 1,
-      "explanation": "Basic type checking with Pylance flags type mismatches, wrong argument types, and incorrect API parameters at edit time, catching bugs before you run a potentially expensive training script."
+      "explanation": "Basic type checking with Pylance flags type mismatches, wrong argument types, and incorrect API parameters at edit time, catching bugs before you run a potentially expensive training script.",
+      "explanation_zh": "Pylance 开启 basic 类型检查后，会在编辑时就标出类型不匹配、参数类型错误、API 用法错误，让你在跑昂贵的训练脚本之前就把 bug 揪出来。"
     }
   ]
 }

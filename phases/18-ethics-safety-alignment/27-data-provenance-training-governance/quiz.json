@@ -12,7 +12,15 @@
         "Once data enters model weights, surgical erasure is not possible; retraining from scratch is the only complete remediation and is prohibitively expensive"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么训练数据治理的合规窗口在数据收集阶段,而不是训练之后?",
+      "options_zh": [
+        "因为监管机构不审计已部署的模型",
+        "因为 cookie 同意框架禁止收集后再使用",
+        "因为 GDPR 的删除权不适用于 AI",
+        "数据一旦进入模型权重,精确擦除就不可能了; 从头重新训练是唯一彻底的补救手段,且代价高得难以承受"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "7"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "California AB 2013 大致要求开发者在数据集摘要中公布多少项法定内容?",
+      "options_zh": [
+        "3",
+        "30",
+        "12",
+        "7"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Time period during which data was collected"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "AB 2013 的哪一项相对于 Gebru et al. 2018 的 datasheet 结构是新增的?",
+      "options_zh": [
+        "数据集的来源或所有者",
+        "系统是否使用或持续使用合成数据生成",
+        "清洗、处理或其他修改",
+        "数据收集的时间段"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Legitimate interest can justify training on publicly available first-party content with opt-out and appropriate safeguards; consent is not required"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "对于 LLM 在公开发布的第一方内容上训练,2025 年各家 DPA 趋同的原则是什么?",
+      "options_zh": [
+        "在任何情况下都禁止训练",
+        "只能使用合成数据",
+        "始终需要用户的明示同意",
+        "正当利益可以为在公开发布的第一方内容上训练提供合法依据,前提是提供 opt-out 和恰当的保障; 不需要额外同意"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "Fine-tune-suppression of outputs derived from the data"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "下列哪一项不是课程中列出的针对不可逆性问题的部分补救手段?",
+      "options_zh": [
+        "Unlearning (用 MIA 衡量的近似删除)",
+        "基于 influence-function 的定位与选择性更新",
+        "GDPR 强制规定的自动权重删除",
+        "对源自该数据的输出做 Fine-tune-suppression"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Robots.txt restrictions are decreasing year over year"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Data Provenance Initiative 的「Consent in Crisis」(2024 年 7 月) 发现了什么?",
+      "options_zh": [
+        "出版方正在以加速的速度添加 robots.txt 限制; 可公开训练的素材池正快速收缩,2023 到 2024 年顶级训练源中约 25% 新增了限制",
+        "合成数据已彻底取代网络数据",
+        "各类来源的同意率保持稳定",
+        "robots.txt 限制逐年减少"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

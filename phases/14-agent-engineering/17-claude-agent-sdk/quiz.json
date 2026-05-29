@@ -12,7 +12,15 @@
         "There is no difference"
       ],
       "correct": 0,
-      "explanation": "Client SDK gives you the loop; Agent SDK ships the loop pre-built."
+      "explanation": "Client SDK gives you the loop; Agent SDK ships the loop pre-built.",
+      "question_zh": "Anthropic Client SDK 与 Claude Agent SDK 有什么区别？",
+      "options_zh": [
+        "Client SDK 是裸的 Messages API；Agent SDK 是 Claude Code harness 形态，自带工具、MCP、hooks、subagent 和 session store",
+        "Client SDK 收费；Agent SDK 免费",
+        "Client SDK 仅支持 Python",
+        "两者没有区别"
+      ],
+      "explanation_zh": "Client SDK 给你 loop 的原料；Agent SDK 直接交付一个搭好的 loop。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Authn and authz"
       ],
       "correct": 0,
-      "explanation": "Subagents run independent work concurrently and preserve the orchestrator's context budget by isolating context."
+      "explanation": "Subagents run independent work concurrently and preserve the orchestrator's context budget by isolating context.",
+      "question_zh": "Subagent 在文档中标注的两个用途是什么？",
+      "options_zh": [
+        "并行化和上下文隔离",
+        "缓存和限流",
+        "日志和指标",
+        "认证和授权"
+      ],
+      "explanation_zh": "Subagent 并行执行独立工作，并通过隔离上下文来保护主 agent 的上下文预算。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "compile_prompt"
       ],
       "correct": 3,
-      "explanation": "Session store ships append, load, list_sessions, delete, list_subkeys; compile_prompt is not a session API."
+      "explanation": "Session store ships append, load, list_sessions, delete, list_subkeys; compile_prompt is not a session API.",
+      "question_zh": "以下哪个方法不在 session store 表面 API 中？",
+      "options_zh": [
+        "append",
+        "load",
+        "list_subkeys",
+        "compile_prompt"
+      ],
+      "explanation_zh": "Session store 提供 append、load、list_sessions、delete、list_subkeys；compile_prompt 不是 session API。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "PreEmbedding"
       ],
       "correct": 3,
-      "explanation": "Hooks include PreToolUse, PostToolUse, SessionStart/End, UserPromptSubmit, PreCompact, Stop, Notification. PreEmbedding is not a hook."
+      "explanation": "Hooks include PreToolUse, PostToolUse, SessionStart/End, UserPromptSubmit, PreCompact, Stop, Notification. PreEmbedding is not a hook.",
+      "question_zh": "以下哪个不是 Claude Agent SDK 的生命周期 hook？",
+      "options_zh": [
+        "PreToolUse",
+        "PostToolUse",
+        "PreCompact",
+        "PreEmbedding"
+      ],
+      "explanation_zh": "Hook 包括 PreToolUse、PostToolUse、SessionStart/End、UserPromptSubmit、PreCompact、Stop、Notification。PreEmbedding 不是 hook。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Through environment variables only"
       ],
       "correct": 1,
-      "explanation": "OTel spans on the caller propagate into the CLI subprocess via W3C trace context, so the whole multi-process run is one trace."
+      "explanation": "OTel spans on the caller propagate into the CLI subprocess via W3C trace context, so the whole multi-process run is one trace.",
+      "question_zh": "Trace 上下文如何在 agent 与 CLI 子进程之间传播？",
+      "options_zh": [
+        "通过文件系统",
+        "通过 W3C trace context 头传入 CLI 子进程",
+        "只能通过供应商面板",
+        "只能通过环境变量"
+      ],
+      "explanation_zh": "调用方的 OTel span 通过 W3C trace context 传到 CLI 子进程，整个多进程运行就在同一个 trace 里。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Spawning more subagents than CPU cores"
       ],
       "correct": 0,
-      "explanation": "Subagents have overhead; batch small tasks instead of spawning one each."
+      "explanation": "Subagents have overhead; batch small tasks instead of spawning one each.",
+      "question_zh": "什么是 subagent over-spawn，它什么时候发生？",
+      "options_zh": [
+        "为 100 个微小任务派出 100 个 subagent，开销占主导；改为批处理",
+        "忘了关闭 subagent",
+        "在 SessionStart 之前派 subagent",
+        "派出的 subagent 数量超过 CPU 核数"
+      ],
+      "explanation_zh": "Subagent 有开销；微任务应该批处理而不是每个都开一个 subagent。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Tracing for streaming"
       ],
       "correct": 0,
-      "explanation": "Managed Agents is the hosted alternative for long-running async work; less control, less ops surface."
+      "explanation": "Managed Agents is the hosted alternative for long-running async work; less control, less ops surface.",
+      "question_zh": "Claude Managed Agents 相对自托管 SDK 让出了什么、换来了什么？",
+      "options_zh": [
+        "让出控制权，换取托管基础设施（长时间异步、内置 prompt caching、内置 compaction）",
+        "用延迟换成本",
+        "用 tools 换 memory",
+        "用 tracing 换 streaming"
+      ],
+      "explanation_zh": "Managed Agents 是托管选项，适合长时间异步任务；控制权更少，运维面更小。"
     }
   ]
 }

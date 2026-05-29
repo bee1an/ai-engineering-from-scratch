@@ -3,37 +3,52 @@
     {
       "stage": "pre",
       "question": "Why is a GPU faster than a CPU for training neural networks?",
+      "question_zh": "训练神经网络时，GPU 为什么比 CPU 快？",
       "options": ["GPUs have higher clock speeds than CPUs", "GPUs can perform thousands of parallel matrix operations simultaneously", "GPUs have more RAM than CPUs", "GPUs use a more efficient programming language"],
+      "options_zh": ["GPU 的主频比 CPU 高", "GPU 可以同时并行执行成千上万次矩阵运算", "GPU 的内存比 CPU 大", "GPU 使用了更高效的编程语言"],
       "correct": 1,
-      "explanation": "GPUs have thousands of cores optimized for parallel computation, making them ideal for the matrix multiplications that dominate neural network training."
+      "explanation": "GPUs have thousands of cores optimized for parallel computation, making them ideal for the matrix multiplications that dominate neural network training.",
+      "explanation_zh": "GPU 拥有数千个为并行计算优化过的核心，正好适合神经网络训练里占主导地位的矩阵乘法。"
     },
     {
       "stage": "pre",
       "question": "What does VRAM refer to?",
+      "question_zh": "VRAM 指的是什么？",
       "options": ["Virtual RAM used by the operating system for swap space", "Video RAM on the GPU, separate from system RAM", "The total RAM available across all devices", "A type of CPU cache memory"],
+      "options_zh": ["操作系统用作交换空间的虚拟内存", "GPU 上的显存，与系统内存相互独立", "所有设备上可用的总内存", "一种 CPU 缓存"],
       "correct": 1,
-      "explanation": "VRAM (Video RAM) is the dedicated memory on a GPU. It limits the size of models and batch sizes you can use during training, separate from your system's main RAM."
+      "explanation": "VRAM (Video RAM) is the dedicated memory on a GPU. It limits the size of models and batch sizes you can use during training, separate from your system's main RAM.",
+      "explanation_zh": "VRAM（显存）是 GPU 上的专用内存，与系统内存分开，决定了训练时模型规模和 batch size 的上限。"
     },
     {
       "stage": "post",
       "question": "What command verifies that your NVIDIA GPU is detected and shows its current status?",
+      "question_zh": "哪个命令可以验证 NVIDIA GPU 已被识别并查看当前状态？",
       "options": ["gpu --status", "nvidia-smi", "torch.cuda.list_devices()", "lspci | grep gpu"],
+      "options_zh": ["gpu --status", "nvidia-smi", "torch.cuda.list_devices()", "lspci | grep gpu"],
       "correct": 1,
-      "explanation": "nvidia-smi (NVIDIA System Management Interface) displays GPU utilization, memory usage, temperature, and running processes. It is the standard tool for verifying GPU availability."
+      "explanation": "nvidia-smi (NVIDIA System Management Interface) displays GPU utilization, memory usage, temperature, and running processes. It is the standard tool for verifying GPU availability.",
+      "explanation_zh": "nvidia-smi（NVIDIA System Management Interface）会显示 GPU 利用率、显存占用、温度以及正在运行的进程，是验证 GPU 是否可用的标准工具。"
     },
     {
       "stage": "post",
       "question": "When benchmarking GPU vs CPU matrix multiplication, why must you call torch.cuda.synchronize() before measuring GPU time?",
+      "question_zh": "对比 GPU 和 CPU 矩阵乘法性能时，为什么要在测量 GPU 时间前调用 torch.cuda.synchronize()？",
       "options": ["To transfer data from CPU to GPU memory", "To ensure all GPU operations have completed before stopping the timer", "To reset the GPU clock speed to its base frequency", "To free unused GPU memory"],
+      "options_zh": ["把数据从 CPU 传到 GPU 显存", "确保停止计时前所有 GPU 操作都已完成", "把 GPU 时钟频率重置为基础频率", "释放未使用的 GPU 显存"],
       "correct": 1,
-      "explanation": "GPU operations are asynchronous -- Python returns immediately while the GPU is still computing. synchronize() blocks until all GPU operations finish, giving accurate timing."
+      "explanation": "GPU operations are asynchronous -- Python returns immediately while the GPU is still computing. synchronize() blocks until all GPU operations finish, giving accurate timing.",
+      "explanation_zh": "GPU 操作是异步的，Python 会在 GPU 还在计算时立即返回。synchronize() 会阻塞直到所有 GPU 操作完成，才能得到准确的耗时。"
     },
     {
       "stage": "post",
       "question": "Using the fp16 rule of thumb, approximately how many parameters can fit in 24 GB of VRAM?",
+      "question_zh": "按照 fp16 的经验法则，24 GB 显存大约能装下多少参数？",
       "options": ["24 billion parameters", "12 billion parameters", "6 billion parameters", "48 billion parameters"],
+      "options_zh": ["240 亿参数", "120 亿参数", "60 亿参数", "480 亿参数"],
       "correct": 1,
-      "explanation": "In fp16, each parameter uses 2 bytes. 24 GB / 2 bytes = 12 billion parameters. This is a rough estimate; actual usage includes activations, gradients, and optimizer states."
+      "explanation": "In fp16, each parameter uses 2 bytes. 24 GB / 2 bytes = 12 billion parameters. This is a rough estimate; actual usage includes activations, gradients, and optimizer states.",
+      "explanation_zh": "fp16 下每个参数占 2 字节，24 GB ÷ 2 字节 = 120 亿参数。这是粗略估算，实际还要考虑激活值、梯度和 optimizer state 的开销。"
     }
   ]
 }

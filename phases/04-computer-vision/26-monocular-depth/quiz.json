@@ -10,7 +10,15 @@
         "Relative depth gives only ordered distances without real-world units; metric depth gives distances in metres and requires the model to have learnt absolute scale from training data"
       ],
       "correct": 3,
-      "explanation": "Relative depth preserves ordering and ratios but has no anchor to real-world units \u2014 a MiDaS or Depth Anything prediction needs alignment before you can compare it to a ground-truth measurement in metres. Metric depth models (ZoeDepth, UniDepth, Metric3D) output calibrated distances at the cost of sensitivity to camera intrinsics and training data coverage."
+      "explanation": "Relative depth preserves ordering and ratios but has no anchor to real-world units — a MiDaS or Depth Anything prediction needs alignment before you can compare it to a ground-truth measurement in metres. Metric depth models (ZoeDepth, UniDepth, Metric3D) output calibrated distances at the cost of sensitivity to camera intrinsics and training data coverage.",
+      "question_zh": "相对深度和度量深度的主要区别是什么？",
+      "options_zh": [
+        "相对深度总是分辨率更低",
+        "没有区别",
+        "度量深度输出灰度，相对深度输出彩色",
+        "相对深度只给出有序的距离而无现实单位；度量深度给出米为单位的距离，要求模型从训练数据中学到了绝对尺度"
+      ],
+      "explanation_zh": "相对深度保留顺序和比例，但没有锚定到现实单位——MiDaS 或 Depth Anything 的预测在与米制真值对比前需要做对齐。度量深度模型（ZoeDepth、UniDepth、Metric3D）输出标定后的距离，代价是对相机内参和训练数据覆盖更敏感。"
     },
     {
       "stage": "pre",
@@ -22,19 +30,35 @@
         "Freezing is a legal requirement"
       ],
       "correct": 1,
-      "explanation": "Self-supervised ViTs like DINOv2 / DINOv3 already have features that transfer to dense tasks with minimal fine-tuning. A frozen encoder plus a lightweight depth decoder means you train a tiny number of parameters on depth data, and you inherit DINOv2's cross-domain generalisation (indoor, outdoor, medical, satellite) for free. Fine-tuning the backbone sometimes hurts if the depth dataset is narrower than DINOv2's pretraining distribution."
+      "explanation": "Self-supervised ViTs like DINOv2 / DINOv3 already have features that transfer to dense tasks with minimal fine-tuning. A frozen encoder plus a lightweight depth decoder means you train a tiny number of parameters on depth data, and you inherit DINOv2's cross-domain generalisation (indoor, outdoor, medical, satellite) for free. Fine-tuning the backbone sometimes hurts if the depth dataset is narrower than DINOv2's pretraining distribution.",
+      "question_zh": "Depth Anything V3 用冻结的 DINOv2 编码器加 DPT 风格解码器。为什么冻结编码器？",
+      "options_zh": [
+        "否则 DINOv2 会学到坏特征",
+        "DINOv2 的自监督特征已经编码了与深度相关的场景结构、纹理梯度和物体语义；冻结它能让解码器只用小 head 在有限的深度监督数据上训练，同时保留编码器强大的泛化能力",
+        "只是训练时省算力",
+        "冻结是法律要求"
+      ],
+      "explanation_zh": "DINOv2 / DINOv3 这类自监督 ViT 已有可用最少微调就迁移到密集任务的特征。冻结编码器加轻量深度解码器，意味着只在深度数据上训少量参数，并免费继承 DINOv2 跨域（室内、户外、医疗、卫星）的泛化能力。如果深度数据集比 DINOv2 预训练分布更窄，微调 backbone 反而可能降低性能。"
     },
     {
       "stage": "post",
       "question": "To lift a pixel (u, v) with predicted depth d to 3D, you use X = (u - cx) * d / fx, Y = (v - cy) * d / fy, Z = d. What are fx, fy, cx, cy?",
       "options": [
-        "Pinhole camera intrinsics \u2014 focal lengths and principal point in pixels, from EXIF metadata or camera calibration",
+        "Pinhole camera intrinsics — focal lengths and principal point in pixels, from EXIF metadata or camera calibration",
         "Training loss weights",
         "Normalisation constants",
         "Weights learned by the depth decoder"
       ],
       "correct": 0,
-      "explanation": "The pinhole-camera formula needs the camera intrinsics. fx, fy are the focal lengths in pixel units; cx, cy are the principal point (usually near image centre). Without intrinsics you can only assume a generic FOV (~60 degrees) which is enough for visualisation but not for measurement. Many 2026 pipelines estimate intrinsics automatically from image content (Perspective Fields, UniDepth)."
+      "explanation": "The pinhole-camera formula needs the camera intrinsics. fx, fy are the focal lengths in pixel units; cx, cy are the principal point (usually near image centre). Without intrinsics you can only assume a generic FOV (~60 degrees) which is enough for visualisation but not for measurement. Many 2026 pipelines estimate intrinsics automatically from image content (Perspective Fields, UniDepth).",
+      "question_zh": "把像素 (u, v) 用预测深度 d 抬升到 3D：X = (u - cx) * d / fx, Y = (v - cy) * d / fy, Z = d。fx、fy、cx、cy 是什么？",
+      "options_zh": [
+        "针孔相机内参——以像素为单位的焦距和主点，来自 EXIF 元数据或相机标定",
+        "训练 loss 权重",
+        "归一化常数",
+        "深度解码器学到的权重"
+      ],
+      "explanation_zh": "针孔相机公式需要相机内参。fx、fy 是像素单位的焦距；cx、cy 是主点（通常接近图像中心）。没有内参只能假设一个通用 FOV（约 60 度），够做可视化但不能做测量。许多 2026 年管线会从图像内容自动估计内参（Perspective Fields、UniDepth）。"
     },
     {
       "stage": "post",
@@ -46,7 +70,15 @@
         "Pytorch cannot compute AbsRel without alignment"
       ],
       "correct": 1,
-      "explanation": "MiDaS-style models produce outputs where only the ordering and ratios are meaningful. Directly computing AbsRel without alignment measures the scale mismatch, not the model's actual quality. Least-squares alignment fits a linear transform that minimises squared error; the residual after alignment is what you report. Every MiDaS / Depth Anything paper uses this protocol."
+      "explanation": "MiDaS-style models produce outputs where only the ordering and ratios are meaningful. Directly computing AbsRel without alignment measures the scale mismatch, not the model's actual quality. Least-squares alignment fits a linear transform that minimises squared error; the residual after alignment is what you report. Every MiDaS / Depth Anything paper uses this protocol.",
+      "question_zh": "评估相对深度模型（MiDaS、Depth Anything）时，为什么计算 AbsRel 之前要做 scale-and-shift 对齐？",
+      "options_zh": [
+        "为了刷高指标",
+        "相对深度预测尺度和偏移任意；用最小二乘拟合 a * pred + b = target 与真值对齐，能公正地衡量这些模型实际训练的排序质量",
+        "为了在 GPU 上推理",
+        "PyTorch 没对齐就不能算 AbsRel"
+      ],
+      "explanation_zh": "MiDaS 类模型只让顺序和比例有意义。不对齐直接算 AbsRel 衡量的是尺度不匹配，而不是模型真实质量。最小二乘对齐拟合一个最小化平方误差的线性变换；对齐后的残差才是要报告的。所有 MiDaS / Depth Anything 论文都用这个协议。"
     },
     {
       "stage": "post",
@@ -58,7 +90,15 @@
         "Your image resolution is wrong"
       ],
       "correct": 2,
-      "explanation": "Monocular depth relies on texture gradients, occlusion ordering, and perspective cues. Reflective or transparent surfaces confuse all of them: a mirror shows a scene with its own depth; glass shows content behind it. The model fills in a plausible depth and is confidently wrong. This is a fundamental limit of monocular depth, not a bug. Fix by fusing with stereo, LiDAR, or polarisation cameras when materials like glass matter."
+      "explanation": "Monocular depth relies on texture gradients, occlusion ordering, and perspective cues. Reflective or transparent surfaces confuse all of them: a mirror shows a scene with its own depth; glass shows content behind it. The model fills in a plausible depth and is confidently wrong. This is a fundamental limit of monocular depth, not a bug. Fix by fusing with stereo, LiDAR, or polarisation cameras when materials like glass matter.",
+      "question_zh": "你在玻璃幕墙的接待台上跑 Depth Anything，玻璃区域得到看似合理但明显错误的深度。为什么？",
+      "options_zh": [
+        "模型坏了",
+        "模型训练时没有玻璃数据",
+        "玻璃、镜子、强反射表面破坏了模型依赖的单目线索；网络看到的是玻璃后的内容/纹理，给出与之一致的合理深度，而不是真实玻璃面距离",
+        "图像分辨率有问题"
+      ],
+      "explanation_zh": "单目深度依赖纹理梯度、遮挡顺序和透视线索。反射或透明表面会破坏所有这些：镜子显示的是它自己深度的另一个场景；玻璃显示的是它后面的内容。模型补出一个合理的深度，并且很自信地错。这是单目深度的根本限制，不是 bug。当玻璃等材质重要时，请用 stereo、LiDAR 或偏振相机融合修正。"
     }
   ]
 }

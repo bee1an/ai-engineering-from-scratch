@@ -12,7 +12,15 @@
         "Because schemas must be compiled"
       ],
       "correct": 1,
-      "explanation": "Keeping the schema as data and the handler as code lets the validator be a pure function over the schema tree."
+      "explanation": "Keeping the schema as data and the handler as code lets the validator be a pure function over the schema tree.",
+      "question_zh": "为什么把工具的 schema 与 handler 分开注册?",
+      "options_zh": [
+        "因为 schema 必须放在 YAML 里",
+        "让 validator 保持纯数据,handler 保持不透明的代码",
+        "因为 handler 不能返回 JSON",
+        "因为 schema 必须先编译"
+      ],
+      "explanation_zh": "把 schema 当作数据、handler 当作代码,validator 就能成为对 schema 树的纯函数。"
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "items, enum"
       ],
       "correct": 2,
-      "explanation": "The omitted keywords add cycles and reference resolution. We keep the subset linear so the validator stays a single recursive walk."
+      "explanation": "The omitted keywords add cycles and reference resolution. We keep the subset linear so the validator stays a single recursive walk.",
+      "question_zh": "本节有意未实现哪些关键字?",
+      "options_zh": [
+        "type、properties、required",
+        "minLength、maxLength、pattern",
+        "oneOf、anyOf、$ref、allOf",
+        "items、enum"
+      ],
+      "explanation_zh": "被省略的关键字会引入循环和引用解析。我们让子集保持线性,validator 就只是一次递归遍历。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Because handlers cannot be replaced"
       ],
       "correct": 1,
-      "explanation": "Forcing override=True surfaces the case where two parts of the code intend to own the same tool name."
+      "explanation": "Forcing override=True surfaces the case where two parts of the code intend to own the same tool name.",
+      "question_zh": "为什么 register() 默认拒绝重复名称?",
+      "options_zh": [
+        "因为 registry 不能为同一名字保存多条记录",
+        "静默覆盖是生产工具目录漂移的根源",
+        "因为 schema 不能重新校验",
+        "因为 handler 不能被替换"
+      ],
+      "explanation_zh": "强制传 override=True 会暴露出代码两处都想拥有同一工具名的情况。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Coerces to integer silently"
       ],
       "correct": 1,
-      "explanation": "Python bool is a subclass of int, but the validator filters bool out of the integer check. JSON booleans and integers are distinct."
+      "explanation": "Python bool is a subclass of int, but the validator filters bool out of the integer check. JSON booleans and integers are distinct.",
+      "question_zh": "当 schema 指定 type=integer 但收到值 True 时,validator 怎么处理?",
+      "options_zh": [
+        "把 True 当作 1 通过校验",
+        "返回类型错误,因为本 validator 不把 bool 当作 integer",
+        "抛出未捕获异常",
+        "静默地把它转为 integer"
+      ],
+      "explanation_zh": "Python 中 bool 是 int 的子类,但 validator 在 integer 检查中过滤掉了 bool。JSON 中 boolean 与 integer 是两类。"
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "user.email"
       ],
       "correct": 2,
-      "explanation": "JSON pointer encodes the descent through user then email as /user/email."
+      "explanation": "JSON pointer encodes the descent through user then email as /user/email.",
+      "question_zh": "当输入对象是 {'user': {'email': 0}}、schema 要求 user.email 为 string 时,错误路径是什么?",
+      "options_zh": [
+        "/",
+        "/user",
+        "/user/email",
+        "user.email"
+      ],
+      "explanation_zh": "JSON pointer 用 /user/email 表示沿 user 再到 email 的下钻路径。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Because the registry is in-process"
       ],
       "correct": 0,
-      "explanation": "The registry checks shape. Behavior, timeouts, and isolation belong to the dispatcher and the sandbox."
+      "explanation": "The registry checks shape. Behavior, timeouts, and isolation belong to the dispatcher and the sandbox.",
+      "question_zh": "为什么 registry 不是安全边界?",
+      "options_zh": [
+        "因为校验通过后 handler 仍可能行为不当",
+        "因为 handler 是 async 的",
+        "因为 schema 是 JSON",
+        "因为 registry 在进程内"
+      ],
+      "explanation_zh": "Registry 检查的是结构。行为、超时与隔离属于 dispatcher 和 sandbox。"
     }
   ]
 }

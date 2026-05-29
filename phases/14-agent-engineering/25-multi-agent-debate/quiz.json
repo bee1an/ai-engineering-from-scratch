@@ -12,7 +12,15 @@
         "Negotiate prices"
       ],
       "correct": 1,
-      "explanation": "N proposers, R rounds, cross-critique, convergence is the canonical Du et al. debate."
+      "explanation": "N proposers, R rounds, cross-critique, convergence is the canonical Du et al. debate.",
+      "question_zh": "Society of Minds 协议让 N 个模型实例做什么？",
+      "options_zh": [
+        "每个跑不同的 benchmark",
+        "各自独立给出答案，再用 R 轮阅读并互相批评对方的方案，直到收敛",
+        "在共享数据集上训练",
+        "讨价还价"
+      ],
+      "explanation_zh": "N 个 proposer、R 轮、互相批评、收敛——这就是 Du 等人提出的标准 debate。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Vendors share weights"
       ],
       "correct": 1,
-      "explanation": "Mixing models brings independent error distributions, which raises the ceiling of debate."
+      "explanation": "Mixing models brings independent error distributions, which raises the ceiling of debate.",
+      "question_zh": "为什么跨模型 debate（例如 ChatGPT + Bard）比单模型 debate 表现更好？",
+      "options_zh": [
+        "不同厂商讨价还价",
+        "异构性减少了共享盲点，互相批评能抓住更多错误",
+        "更便宜",
+        "厂商共享权重"
+      ],
+      "explanation_zh": "混合不同模型带来的是独立的错误分布，从而提高 debate 的上限。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "It removes the LLM"
       ],
       "correct": 1,
-      "explanation": "Sparse (star, ring, hub-and-spoke) reduces critique ops without losing accuracy on many tasks."
+      "explanation": "Sparse (star, ring, hub-and-spoke) reduces critique ops without losing accuracy on many tasks.",
+      "question_zh": "稀疏拓扑相对全连接拓扑在 token 成本上的主要优势是什么？",
+      "options_zh": [
+        "稀疏拓扑不需要模型",
+        "每个 debater 只读一部分对等方，批评操作数减少，准确率往往不变",
+        "稀疏拓扑会让轮数翻倍",
+        "它移除了 LLM"
+      ],
+      "explanation_zh": "稀疏（star、ring、hub-and-spoke）减少了批评操作数，在很多任务上准确率不掉。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Biography generation"
       ],
       "correct": 1,
-      "explanation": "Latency- and cost-sensitive trivial lookups do not benefit from N x R debate."
+      "explanation": "Latency- and cost-sensitive trivial lookups do not benefit from N x R debate.",
+      "question_zh": "本课列出的 debate 反而有害的场景是什么？",
+      "options_zh": [
+        "开放式推理",
+        "简单的事实查找，因为查一次比 debate 五次便宜",
+        "国际象棋走子合法性",
+        "传记生成"
+      ],
+      "explanation_zh": "对延迟和成本敏感的简单查找根本受不了 N x R 的 debate。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "TLS handshake failure"
       ],
       "correct": 1,
-      "explanation": "Early agreement on a wrong answer is mitigated by forcing distinct round-1 proposals."
+      "explanation": "Early agreement on a wrong answer is mitigated by forcing distinct round-1 proposals.",
+      "question_zh": "什么是 convergence collapse？",
+      "options_zh": [
+        "网络故障",
+        "所有 agent 收敛到第一个错误答案；可以通过强制不一致轮来缓解",
+        "进程崩溃",
+        "TLS 握手失败"
+      ],
+      "explanation_zh": "提前在错误答案上达成一致，可以通过强制第 1 轮提交不同方案来缓解。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "It bypasses the supervisor"
       ],
       "correct": 1,
-      "explanation": "Diverse prompts (and ideally diverse models) keep the proposal distribution wide."
+      "explanation": "Diverse prompts (and ideally diverse models) keep the proposal distribution wide.",
+      "question_zh": "为什么 prompt 同质化会破坏 debate？",
+      "options_zh": [
+        "违反 Apache 2.0",
+        "相同 prompt 会产生几乎相同的答案，互相批评的信号就消失了",
+        "用了太多 token",
+        "绕过了 supervisor"
+      ],
+      "explanation_zh": "多样化的 prompt（最好再加多样化的模型）才能维持宽的提案分布。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Vector indexing"
       ],
       "correct": 0,
-      "explanation": "Orchestrator-workers with synthesis is a debate-shaped pattern in production."
+      "explanation": "Orchestrator-workers with synthesis is a debate-shaped pattern in production.",
+      "question_zh": "根据本课，哪种生产模式可以视作 debate 的变体？",
+      "options_zh": [
+        "Anthropic 的 orchestrator-workers，附带 synthesis 步骤",
+        "纯单次 RAG",
+        "仅 cron 调度",
+        "向量索引"
+      ],
+      "explanation_zh": "Orchestrator-workers + synthesis 在生产环境里就是 debate 形态的模式。"
     }
   ]
 }

@@ -5,86 +5,142 @@
     {
       "stage": "pre",
       "question": "Why cannot the builder reliably grade its own work?",
+      "question_zh": "为什么 builder 不能可靠地给自己的工作打分？",
       "options": [
         "It runs out of tokens",
         "Acceptance is necessary but not sufficient; problem-fit, scope discipline, documented assumptions, and handoff readiness need a different role with different inputs",
         "It loses authentication",
         "The model rejects self-grading"
       ],
+      "options_zh": [
+        "Token 用光了",
+        "通过验收是必要但不充分；问题契合度、范围纪律、有文档的假设、交接就绪度，需要由另一个角色用不同的输入来评估",
+        "它丢失了认证",
+        "模型拒绝自评"
+      ],
       "correct": 1,
-      "explanation": "The gap between builder and reviewer is where reliability lives; acceptance only proves a weaker version."
+      "explanation": "The gap between builder and reviewer is where reliability lives; acceptance only proves a weaker version.",
+      "explanation_zh": "Builder 和 reviewer 之间的缺口才是可靠性的栖身之处；仅仅通过验收只证明了一个较弱的版本。"
     },
     {
       "stage": "pre",
       "question": "Which is NOT one of the five rubric dimensions?",
+      "question_zh": "下列哪个不是五个 rubric 维度之一？",
       "options": [
         "Problem fit",
         "Scope discipline",
         "Verification quality",
         "Inference latency"
       ],
+      "options_zh": [
+        "问题契合度",
+        "范围纪律",
+        "验证质量",
+        "推理延迟"
+      ],
       "correct": 3,
-      "explanation": "The five are problem fit, scope discipline, assumptions, verification quality, handoff readiness."
+      "explanation": "The five are problem fit, scope discipline, assumptions, verification quality, handoff readiness.",
+      "explanation_zh": "五个维度是：问题契合度、范围纪律、假设、验证质量、交接就绪度。"
     },
     {
       "stage": "check",
       "question": "What does role separation require?",
+      "question_zh": "角色分离需要什么？",
       "options": [
         "A different model",
         "A different system prompt and different inputs; the same model can play both roles if posture changes and the reviewer has no write access to the diff",
         "Different physical hardware",
         "A new account"
       ],
+      "options_zh": [
+        "一个不同的模型",
+        "不同的 system prompt 和不同的输入；只要姿态切换、且 reviewer 对 diff 没有写权限，同一个模型可以分饰两角",
+        "不同的物理硬件",
+        "一个新账号"
+      ],
       "correct": 1,
-      "explanation": "Discipline is in posture and inputs, not in the model identity."
+      "explanation": "Discipline is in posture and inputs, not in the model identity.",
+      "explanation_zh": "纪律来自姿态和输入，而不是模型身份。"
     },
     {
       "stage": "check",
       "question": "What does Cloudflare's 2026 review architecture look like?",
+      "question_zh": "Cloudflare 2026 年的评审架构长什么样？",
       "options": [
         "One big reviewer",
         "Up to seven specialist reviewers in parallel under a Review Coordinator that deduplicates findings; top-tier model only for the coordinator, cheaper tiers for specialists",
         "Round-robin two reviewers",
         "Single sequential LLM"
       ],
+      "options_zh": [
+        "一个大 reviewer",
+        "在 Review Coordinator 之下并行运行最多七个专家 reviewer，由 Coordinator 去重；只有 Coordinator 用顶级模型，专家用更便宜的层级",
+        "两个 reviewer 轮询",
+        "单条串行的 LLM"
+      ],
       "correct": 1,
-      "explanation": "Cloudflare ran 131,246 review runs in 30 days using specialist + coordinator architecture."
+      "explanation": "Cloudflare ran 131,246 review runs in 30 days using specialist + coordinator architecture.",
+      "explanation_zh": "Cloudflare 用「专家 + 协调者」架构在 30 天内跑了 131,246 次评审。"
     },
     {
       "stage": "check",
       "question": "Which of these is NOT one of the four LLM-judge biases the lesson lists?",
+      "question_zh": "下列哪一项不是课程列出的四种 LLM 评审偏差之一？",
       "options": [
         "Position bias (A,B vs B,A ordering inconsistency)",
         "Verbosity bias (longer outputs score higher)",
         "Self-preference (same model family)",
         "Vector locality"
       ],
+      "options_zh": [
+        "位置偏差（A,B 与 B,A 顺序不一致）",
+        "啰嗦偏差（输出越长分越高）",
+        "自我偏好（同模型家族）",
+        "向量局部性"
+      ],
       "correct": 3,
-      "explanation": "The four are position, verbosity, self-preference, authority; vector locality is not one of them."
+      "explanation": "The four are position, verbosity, self-preference, authority; vector locality is not one of them.",
+      "explanation_zh": "四种偏差是：位置、啰嗦、自我偏好、权威；向量局部性不在其中。"
     },
     {
       "stage": "post",
       "question": "What is a calibration set?",
+      "question_zh": "什么是校准集（calibration set）？",
       "options": [
         "A new training corpus",
         "10-20 historical task close-outs with known correct verdicts; rerun on every prompt change; if reviewer agreement falls below 80%, fix the rubric before shipping",
         "An A/B test fixture",
         "A vector index"
       ],
+      "options_zh": [
+        "一个新的训练语料库",
+        "10–20 个已知正确判定的历史任务收尾样本；每次修改 prompt 都重跑；如果 reviewer 一致率低于 80%，先修 rubric 再发布",
+        "一个 A/B 测试夹具",
+        "一个向量索引"
+      ],
       "correct": 1,
-      "explanation": "Calibration sets keep the reviewer honest; if agreement drifts you fix the rubric, not the data."
+      "explanation": "Calibration sets keep the reviewer honest; if agreement drifts you fix the rubric, not the data.",
+      "explanation_zh": "校准集让 reviewer 保持诚实；一致率漂移时该修的是 rubric，不是数据。"
     },
     {
       "stage": "post",
       "question": "Where does the reviewer's report integrate with the rest of the workbench?",
+      "question_zh": "Reviewer 的报告如何融入 workbench 其他部分？",
       "options": [
         "It replaces verification",
         "It bundles into the handoff packet (Lesson 40); human review starts from the report, not from a blank page",
         "It overrides the gate",
         "It only goes to the manager"
       ],
+      "options_zh": [
+        "它取代验证",
+        "它打包进交接包（第 40 课）；人类评审从报告开始，而不是从一张白纸开始",
+        "它覆盖 gate",
+        "只交给经理"
+      ],
       "correct": 1,
-      "explanation": "The review report feeds the handoff so the next session and the human reviewer start from a written verdict."
+      "explanation": "The review report feeds the handoff so the next session and the human reviewer start from a written verdict.",
+      "explanation_zh": "评审报告喂给交接包，下一次会话和人类评审者都从一份成文的判定开始。"
     }
   ]
 }

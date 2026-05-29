@@ -5,74 +5,122 @@
     {
       "stage": "pre",
       "question": "Roughly what is the per-million-tokens cost gap the lesson reports between Blackwell + TRT-LLM + Dynamo and H100 + vLLM on a comparable 120B-class workload?",
+      "question_zh": "在可比的 120B 级别工作负载下，本课报告 Blackwell + TRT-LLM + Dynamo 与 H100 + vLLM 之间每百万 token 的成本大致差多少？",
       "options": [
         "About 100x",
         "About 7x",
         "About 2x",
         "About 1.1x"
       ],
+      "options_zh": [
+        "约 100 倍",
+        "约 7 倍",
+        "约 2 倍",
+        "约 1.1 倍"
+      ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "Why does the lesson recommend keeping KV cache in FP8 rather than NVFP4 on Blackwell?",
+      "question_zh": "本课为什么建议在 Blackwell 上把 KV cache 保留为 FP8 而非 NVFP4？",
       "options": [
         "NVFP4 KV cache is not yet supported in any engine",
         "FP8 is the only precision NVLink 5 supports",
         "KV cache spans a wide dynamic range; FP4 quantization causes catastrophic accuracy loss in attention scores",
         "FP8 uses less memory than FP4"
       ],
+      "options_zh": [
+        "目前没有任何引擎支持 NVFP4 的 KV cache",
+        "NVLink 5 只支持 FP8 这种精度",
+        "KV cache 的动态范围很宽；FP4 量化会让 attention 分数出现灾难性的精度损失",
+        "FP8 比 FP4 更省显存"
+      ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "Which Blackwell feature does TRT-LLM exploit so models can be loaded without a post-training conversion step?",
+      "question_zh": "TRT-LLM 利用了 Blackwell 的哪一项特性，使得模型无需后训练转换即可加载？",
       "options": [
         "Day-0 FP4 weights shipped by model providers",
         "INT2 weights via bitsandbytes",
         "FP64 attention",
         "BF16 KV cache"
       ],
+      "options_zh": [
+        "模型提供方在 Day 0 就发布的 FP4 权重",
+        "通过 bitsandbytes 提供的 INT2 权重",
+        "FP64 attention",
+        "BF16 KV cache"
+      ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "What is the dominant tradeoff of choosing the TRT-LLM stack per the lesson?",
+      "question_zh": "本课认为选择 TRT-LLM 技术栈最主要的代价是什么？",
       "options": [
         "It cannot serve MoE models",
         "It requires fully autonomous remediation",
         "It locks you into NVIDIA hardware — no AMD, no Intel, no ARM",
         "It only works at small scale"
       ],
+      "options_zh": [
+        "无法服务 MoE 模型",
+        "需要完全自主的修复机制",
+        "把你锁定在 NVIDIA 硬件上 — 没有 AMD、Intel、ARM",
+        "只能在小规模下工作"
+      ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "post",
       "question": "Which precision combination does the lesson describe as the typical Blackwell config?",
+      "question_zh": "本课描述的 Blackwell 典型精度组合是什么？",
       "options": [
         "Weights FP4, KV cache FP4, attention in INT8",
         "Everything in BF16",
         "Weights NVFP4, activations NVFP4, KV cache FP8, attention accumulator FP32",
         "Weights INT8, activations FP32, KV cache INT4"
       ],
+      "options_zh": [
+        "权重 FP4，KV cache FP4，attention 用 INT8",
+        "全部使用 BF16",
+        "权重 NVFP4，激活 NVFP4，KV cache FP8，attention 累加器 FP32",
+        "权重 INT8，激活 FP32，KV cache INT4"
+      ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "post",
       "question": "For reasoning-heavy workloads where NVFP4 weight conversion drops MATH accuracy a few points, what does the lesson advise?",
+      "question_zh": "对于推理密集型工作负载，NVFP4 权重转换会让 MATH 准确率掉几个点，本课建议怎么做？",
       "options": [
         "Switch to AMD MI300X",
         "Disable speculative decoding",
         "Validate task quality on your eval set per model; teams often use FP8 weights + FP4 activations or stay on H200 with FP8 throughout",
         "Ship NVFP4 anyway because the cost win dominates"
       ],
+      "options_zh": [
+        "切换到 AMD MI300X",
+        "禁用 speculative decoding",
+        "针对每个模型在自己的 eval 集上验证任务质量；很多团队会改用 FP8 权重 + FP4 激活，或者干脆留在 H200 上全程 FP8",
+        "管它呢，反正成本优势压倒一切，照样上 NVFP4"
+      ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     }
   ]
 }

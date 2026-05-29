@@ -12,7 +12,15 @@
         "Supervisor agent that breaks the incident into sub-queries for specialized log, metric, and runbook agents, then synthesizes and presents to a human"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本课为 AI SRE 推荐哪种多 agent 形态？",
+      "options_zh": [
+        "在 3 个 agent 中随机选 1 个",
+        "两个 agent 串联，没有 supervisor",
+        "一个大一统的 agent 包揽所有",
+        "Supervisor agent 把事故拆成子查询，分给专门的 log、metric、runbook agent，再综合后呈给人类"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "Restart pod, revert a specific deploy, scale a pool within pre-approved bounds, enable a pre-approved feature flag"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本课认为哪一组自动修复操作是安全的？",
+      "options_zh": [
+        "重新设计服务拓扑",
+        "改动数据库",
+        "修改 IAM 策略",
+        "重启 pod、回滚指定的 deploy、按预批边界扩缩容池、启用预批的 feature flag"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Runs the same model twice on the same input"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "NeuBird Hawkeye 怎样用对抗式评估过滤掉幻觉式根因？",
+      "options_zh": [
+        "两个模型独立分析同一事故；意见一致 = 高置信，分歧 = 升级到人类并附两套假设",
+        "使用 GAN 风格训练",
+        "永远选高置信模型的答案",
+        "把同一个模型在同一输入上跑两次"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Token cost attribution"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "operational memory 在 AI SRE 中解决了什么问题？",
+      "options_zh": [
+        "推理 pod 的冷启动",
+        "网络出口过滤",
+        "团队轮换造成的 tribal knowledge 流失 —— runbook 和 postmortem 落进向量数据库，agent 在每次事故时都从中检索",
+        "Token 成本归因"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "10% with no lead time"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本课为预先发现事故引用了哪个 MIT 2025 年的结果？",
+      "options_zh": [
+        "1 秒提前量、100% 预测",
+        "用日志 + GPU 温度 + API 错误模式提前 10-15 分钟预测了 89% 的故障",
+        "预测仍未解决",
+        "10% 准确率、零提前量"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Predictions are always accurate"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本课强调预测式探测的运营约束是什么？",
+      "options_zh": [
+        "预测能替代 runbook",
+        "预测永远不应该接到动作上",
+        "没有动作的预测只是仪表盘 —— 运营层面的关键问题是预测应触发什么动作（pre-drain、page、自动扩容）",
+        "预测一直是准的"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

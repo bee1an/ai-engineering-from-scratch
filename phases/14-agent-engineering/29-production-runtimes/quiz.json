@@ -12,7 +12,15 @@
         "Map, filter, reduce, fold, scan, group"
       ],
       "correct": 0,
-      "explanation": "These are the six runtime shapes; pick a shape before picking a framework."
+      "explanation": "These are the six runtime shapes; pick a shape before picking a framework.",
+      "question_zh": "本课列出的六种运行时形态是什么？",
+      "options_zh": [
+        "Request-response、streaming、durable execution、queue-based、event-driven、scheduled",
+        "Read、write、exec、fork、exit、wait",
+        "REST、gRPC、GraphQL、WebSocket、SSE、MQTT",
+        "Map、filter、reduce、fold、scan、group"
+      ],
+      "explanation_zh": "这六种就是运行时形态；先选形态再选框架。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "On internal services"
       ],
       "correct": 1,
-      "explanation": "Synchronous HTTP is only viable for short tasks; long tasks need queue/durable/event shapes."
+      "explanation": "Synchronous HTTP is only viable for short tasks; long tasks need queue/durable/event shapes.",
+      "question_zh": "什么时候 request-response 不合适？",
+      "options_zh": [
+        "处理 1 秒的分类",
+        "任务超过约 30 秒，用户挂断而 worker 还在堆积",
+        "REST API 上",
+        "内部服务上"
+      ],
+      "explanation_zh": "同步 HTTP 只对短任务可用；长任务需要 queue/durable/event 形态。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Native voice support"
       ],
       "correct": 1,
-      "explanation": "Checkpoint-and-resume is the differentiator; LangGraph is the lesson's reference."
+      "explanation": "Checkpoint-and-resume is the differentiator; LangGraph is the lesson's reference.",
+      "question_zh": "Durable execution 的核心特性是什么？",
+      "options_zh": [
+        "推理更快",
+        "每一步之后都会保存状态检查点，失败时可以从最后一个成功步骤恢复",
+        "Token 成本更低",
+        "原生语音支持"
+      ],
+      "explanation_zh": "Checkpoint-and-resume 是它的差异点；本课的参考实现是 LangGraph。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Cron solves everything"
       ],
       "correct": 1,
-      "explanation": "Anthropic flagged dozens-to-hundreds of steps per task as normal; that workload needs queues or durable runtimes."
+      "explanation": "Anthropic flagged dozens-to-hundreds of steps per task as normal; that workload needs queues or durable runtimes.",
+      "question_zh": "Anthropic 的哪条观察证明 long-horizon agent 需要 queue-based 运行时？",
+      "options_zh": [
+        "任务总能在 5 秒内完成",
+        "Computer use 公告：每个任务做几十到上百步是正常的",
+        "任务必须同步运行",
+        "Cron 解决一切"
+      ],
+      "explanation_zh": "Anthropic 标注每任务几十到上百步是常态；这种工作量需要 queue 或 durable 运行时。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Providers require it for billing"
       ],
       "correct": 1,
-      "explanation": "Observability is not optional for multi-step agents; it is the difference between debugging and replaying from scratch."
+      "explanation": "Observability is not optional for multi-step agents; it is the difference between debugging and replaying from scratch.",
+      "question_zh": "本课说 “observability is load-bearing” 是什么意思？",
+      "options_zh": [
+        "日志好看",
+        "没有 OTel GenAI span 和 Langfuse/Phoenix/Opik 之类的后端，你根本调不动一个在第 40 步失败的多步 agent",
+        "磁盘会写满",
+        "供应商按可观测性收费"
+      ],
+      "explanation_zh": "对多步 agent，可观测性不是可选项；它决定你是能 debug 还是只能从头重放。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "DLQ is encrypted"
       ],
       "correct": 0,
-      "explanation": "Failed jobs without DLQ disappear; DLQ is the parking lot for failed jobs."
+      "explanation": "Failed jobs without DLQ disappear; DLQ is the parking lot for failed jobs.",
+      "question_zh": "为什么 queue worker 必须配 dead-letter queue（DLQ）？",
+      "options_zh": [
+        "没有 DLQ，失败任务会无声消失",
+        "AWS 强制要求 DLQ",
+        "DLQ 让任务更快",
+        "DLQ 是加密的"
+      ],
+      "explanation_zh": "失败任务没有 DLQ 就消失了；DLQ 是失败任务的停车场。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "WebRTC"
       ],
       "correct": 1,
-      "explanation": "Cron + durable execution recovers cleanly from failed scheduled runs."
+      "explanation": "Cron + durable execution recovers cleanly from failed scheduled runs.",
+      "question_zh": "本课建议把 cron 形态的 agent 配上什么？",
+      "options_zh": [
+        "GPU 自动扩缩",
+        "Durable execution，让失败的夜间任务在下个 tick 干净恢复",
+        "SSE 流",
+        "WebRTC"
+      ],
+      "explanation_zh": "Cron + durable execution 能从失败的定时任务中干净地恢复。"
     }
   ]
 }

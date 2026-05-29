@@ -3,37 +3,52 @@
     {
       "stage": "pre",
       "question": "What does 'optimization' mean in the context of training a neural network?",
+      "question_zh": "在训练神经网络的语境下，「优化」指的是什么？",
       "options": ["Making the code run faster", "Finding the model weights that minimize the loss function", "Reducing the number of parameters in the model", "Choosing the best hardware for training"],
+      "options_zh": ["让代码跑得更快", "找到使 loss 函数最小的模型权重", "减少模型参数数量", "选择最适合训练的硬件"],
       "correct": 1,
-      "explanation": "Training a neural network IS optimization. The loss function measures how wrong the model is, and optimization finds the weight values that make it as small as possible."
+      "explanation": "Training a neural network IS optimization. The loss function measures how wrong the model is, and optimization finds the weight values that make it as small as possible.",
+      "explanation_zh": "训练神经网络本身就是一个优化过程。loss 函数衡量模型有多差，优化就是找一组权重让它尽可能小。"
     },
     {
       "stage": "pre",
       "question": "What happens if the learning rate is too large during gradient descent?",
+      "question_zh": "如果梯度下降中的学习率太大，会怎么样？",
       "options": ["Training converges faster to the global minimum", "The optimizer overshoots the minimum and the loss diverges (bounces or increases)", "The gradients become zero", "The model automatically reduces the learning rate"],
+      "options_zh": ["训练能更快收敛到全局最优", "优化器会越过最优点，loss 发散（来回震荡或越变越大）", "梯度会变成 0", "模型会自动降低学习率"],
       "correct": 1,
-      "explanation": "A learning rate that is too large causes each step to overshoot the valley, potentially bouncing between walls or diverging entirely. The loss increases instead of decreasing."
+      "explanation": "A learning rate that is too large causes each step to overshoot the valley, potentially bouncing between walls or diverging entirely. The loss increases instead of decreasing.",
+      "explanation_zh": "学习率过大会让每一步都越过山谷，可能在两侧来回震荡甚至彻底发散，loss 不降反升。"
     },
     {
       "stage": "post",
       "question": "How does Adam differ from vanilla gradient descent?",
+      "question_zh": "Adam 与原始的梯度下降相比有什么不同？",
       "options": ["Adam uses a fixed learning rate while GD uses adaptive rates", "Adam tracks running averages of gradients and squared gradients to give each weight its own adaptive learning rate", "Adam computes exact second derivatives while GD uses first derivatives", "Adam processes the full dataset per step while GD uses mini-batches"],
+      "options_zh": ["Adam 使用固定学习率，普通梯度下降用自适应学习率", "Adam 维护梯度和梯度平方的滑动平均，让每个权重都有自己的自适应学习率", "Adam 计算精确的二阶导，普通梯度下降只用一阶导", "Adam 每步用整份数据，梯度下降用 mini-batch"],
       "correct": 1,
-      "explanation": "Adam maintains per-weight first moment (gradient direction) and second moment (gradient magnitude) estimates. Dividing by sqrt(second moment) gives small steps for weights with large gradients and large steps for weights with small gradients."
+      "explanation": "Adam maintains per-weight first moment (gradient direction) and second moment (gradient magnitude) estimates. Dividing by sqrt(second moment) gives small steps for weights with large gradients and large steps for weights with small gradients.",
+      "explanation_zh": "Adam 为每个权重分别估计一阶矩（梯度方向）和二阶矩（梯度大小）。除以 sqrt(二阶矩) 后，梯度大的权重步长变小，梯度小的权重步长变大。"
     },
     {
       "stage": "post",
       "question": "Why is the noise in mini-batch SGD considered beneficial rather than just a nuisance?",
+      "question_zh": "为什么 mini-batch SGD 中的噪声被视为有益，而不是单纯的麻烦？",
       "options": ["Noise reduces memory usage during training", "Noise helps the optimizer escape shallow local minima and saddle points that a noiseless optimizer would get stuck in", "Noise is not beneficial; it always slows convergence", "Noise makes the loss function convex"],
+      "options_zh": ["噪声能减少训练时的内存占用", "噪声有助于优化器跳出浅的局部极小值和鞍点，否则没有噪声的优化器会卡在那里", "噪声没有好处，它只会拖慢收敛", "噪声让 loss 函数变成凸函数"],
       "correct": 1,
-      "explanation": "The stochastic noise from random mini-batches provides random perturbations that can push the optimizer out of shallow local minima and saddle points, leading to better generalization."
+      "explanation": "The stochastic noise from random mini-batches provides random perturbations that can push the optimizer out of shallow local minima and saddle points, leading to better generalization.",
+      "explanation_zh": "随机 mini-batch 带来的随机扰动可以把优化器从浅的局部极小值和鞍点中推出来，最终往往还能带来更好的泛化。"
     },
     {
       "stage": "post",
       "question": "What does a cosine annealing learning rate schedule do?",
+      "question_zh": "cosine annealing 学习率调度是怎么回事？",
       "options": ["Increases the learning rate throughout training following a cosine curve", "Starts with a high learning rate and smoothly decreases it following a cosine curve, with optional warmup", "Alternates the learning rate between two fixed values", "Sets the learning rate to the cosine of the current epoch number"],
+      "options_zh": ["训练过程中按 cosine 曲线不断提升学习率", "从较高学习率出发，按 cosine 曲线平滑下降，可选先做一段 warmup", "在两个固定值之间来回切换学习率", "把学习率设为当前 epoch 的余弦值"],
       "correct": 1,
-      "explanation": "Cosine annealing smoothly reduces the learning rate from lr_max to lr_min following a half-cosine curve. This provides large steps early for fast progress and small steps late for fine convergence."
+      "explanation": "Cosine annealing smoothly reduces the learning rate from lr_max to lr_min following a half-cosine curve. This provides large steps early for fast progress and small steps late for fine convergence.",
+      "explanation_zh": "cosine annealing 沿半个 cosine 曲线把学习率从 lr_max 平滑降到 lr_min。前期步长大、收敛快，后期步长小、收敛细。"
     }
   ]
 }

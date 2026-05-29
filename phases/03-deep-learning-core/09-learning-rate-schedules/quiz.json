@@ -1,37 +1,52 @@
 [
   {
     "question": "Why is a constant learning rate usually suboptimal for training neural networks?",
+    "question_zh": "为什么固定学习率对神经网络训练来说通常不是最优的？",
     "options": ["It uses too much memory", "It's either too high for late training (causes oscillation) or too low for early training (wastes compute)", "Constant learning rates cause overfitting", "They only work with SGD"],
+    "options_zh": ["占用太多内存", "训练后期它太大会导致震荡，训练前期又太小浪费算力", "固定学习率会导致过拟合", "只能配合 SGD 使用"],
     "correct": 1,
     "explanation": "The optimal step size changes during training. Early on, large steps cover ground quickly. Late in training, small steps are needed to settle into a minimum. A constant rate can't serve both needs.",
+    "explanation_zh": "训练过程中最优步长会变化。早期大步可以快速覆盖。后期需要小步才能稳定收敛到极小值。固定学习率没法兼顾两边。",
     "stage": "pre"
   },
   {
     "question": "What is the purpose of learning rate warmup?",
+    "question_zh": "学习率 warmup 的目的是什么？",
     "options": ["To prevent overfitting", "To let adaptive optimizer statistics (momentum, variance) stabilize before taking large steps", "To increase the batch size gradually", "To initialize weights properly"],
+    "options_zh": ["防止过拟合", "让自适应优化器的统计量（动量、方差）先稳定下来，再开始迈大步", "逐步增大 batch size", "正确初始化权重"],
     "correct": 1,
     "explanation": "Adam's moment estimates are initialized to zero. Early gradient updates are based on unreliable statistics. Warmup starts with a tiny LR and ramps up, giving Adam time to accumulate meaningful estimates.",
+    "explanation_zh": "Adam 的矩估计初始化为零，早期梯度更新基于不可靠的统计量。warmup 从极小的学习率开始逐步上升，给 Adam 时间积累有意义的估计。",
     "stage": "pre"
   },
   {
     "question": "What learning rate schedule do Llama 3, GPT-3, and most modern LLMs use?",
+    "question_zh": "Llama 3、GPT-3 等大多数现代 LLM 使用什么学习率调度？",
     "options": ["Constant learning rate", "Step decay every 30 epochs", "Linear warmup followed by cosine decay", "Exponential decay"],
+    "options_zh": ["固定学习率", "每 30 个 epoch 阶梯衰减", "线性 warmup 后接余弦衰减", "指数衰减"],
     "correct": 2,
     "explanation": "Linear warmup + cosine decay is the standard for transformer training. Llama 3 used 2000 warmup steps with cosine decay from 3e-4 to 3e-5. This schedule requires no milestone tuning.",
+    "explanation_zh": "线性 warmup + 余弦衰减是 transformer 训练的标准配置。Llama 3 用了 2000 步 warmup，然后从 3e-4 余弦衰减到 3e-5。这种调度不需要调里程碑参数。",
     "stage": "post"
   },
   {
     "question": "What makes the 1cycle policy different from other schedules?",
+    "question_zh": "1cycle 策略与其他调度有什么不同？",
     "options": ["It uses a constant learning rate", "It ramps the learning rate UP in the first half of training, then back down -- the high LR phase acts as regularization", "It only works with SGD", "It requires no hyperparameter tuning"],
+    "options_zh": ["使用固定学习率", "训练前半段把学习率「升上去」，后半段再降下来，高学习率阶段起到正则化作用", "只能配合 SGD 使用", "不需要任何超参调优"],
     "correct": 1,
     "explanation": "Leslie Smith's 1cycle ramps LR from low to high (first half) then high to very low (second half). The high-LR phase helps the model explore more of the loss landscape before settling into the best basin.",
+    "explanation_zh": "Leslie Smith 的 1cycle 在前半段把学习率从低升到高，后半段再从高降到很低。高学习率阶段帮助模型先探索更大的损失曲面，再稳定到最好的盆地里。",
     "stage": "post"
   },
   {
     "question": "If training loss suddenly spikes and diverges, what is the most likely learning rate issue?",
+    "question_zh": "如果训练损失突然飙升并发散，最可能的学习率问题是什么？",
     "options": ["Learning rate is too low", "Learning rate is too high, causing the optimizer to overshoot the minimum", "The warmup period is too long", "The schedule decays too slowly"],
+    "options_zh": ["学习率太低", "学习率太高，优化器越过了最小值", "warmup 阶段太长", "调度衰减得太慢"],
     "correct": 1,
     "explanation": "A learning rate that's too high causes the optimizer to take steps larger than the loss basin, overshooting the minimum and causing the loss to increase. This manifests as sudden divergence.",
+    "explanation_zh": "学习率太高会让优化器迈出比损失盆地还大的步子，越过最小值导致损失上升。表现就是突然发散。",
     "stage": "post"
   }
 ]

@@ -5,86 +5,142 @@
     {
       "stage": "pre",
       "question": "What is the durability test that decides whether a piece of information belongs in repo memory?",
+      "question_zh": "用什么 “持久性测试” 来判断某条信息是否应当存入仓库内存？",
       "options": [
         "Whether it is JSON",
         "Whether it would be useful three months from now in a CI rerun; if yes, repo; if no, telemetry",
         "Whether the user marked it as important",
         "Whether it fits in 4 kB"
       ],
+      "options_zh": [
+        "它是不是 JSON",
+        "它在三个月后的 CI 重跑里是否还有用；有用就放仓库，没用就当遥测",
+        "用户是否把它标记为重要",
+        "是否能塞进 4 kB 内"
+      ],
       "correct": 1,
-      "explanation": "Repo memory is for durable, three-months-from-now-useful state; transient data is telemetry."
+      "explanation": "Repo memory is for durable, three-months-from-now-useful state; transient data is telemetry.",
+      "explanation_zh": "仓库内存放的是持久的、三个月后还有用的状态；临时数据应当走遥测。"
     },
     {
       "stage": "pre",
       "question": "What schema field carries the agent's contract version?",
+      "question_zh": "哪个 schema 字段承载 agent 的契约版本？",
       "options": [
         "schema_version",
         "build_hash",
         "model_id",
         "session_uuid"
       ],
+      "options_zh": [
+        "schema_version",
+        "build_hash",
+        "model_id",
+        "session_uuid"
+      ],
       "correct": 0,
-      "explanation": "schema_version is the integer contract; the manager refuses to load from an unknown version."
+      "explanation": "schema_version is the integer contract; the manager refuses to load from an unknown version.",
+      "explanation_zh": "schema_version 是整数契约；遇到未知版本时管理器会拒绝加载。"
     },
     {
       "stage": "check",
       "question": "How does atomic write work?",
+      "question_zh": "原子写入是如何实现的？",
       "options": [
         "tempfile.mkstemp in the same directory, write, fsync, os.replace (atomic rename) over the target",
         "Truncate-then-write to the target",
         "Append-only with a CRC",
         "Encrypt and overwrite"
       ],
+      "options_zh": [
+        "在同目录下用 tempfile.mkstemp 创建临时文件，写入，fsync，再用 os.replace（原子 rename）覆盖目标文件",
+        "对目标文件 truncate 后再写入",
+        "只追加并校验 CRC",
+        "加密后再覆盖"
+      ],
       "correct": 0,
-      "explanation": "Atomic rename on POSIX and Windows is what prevents partial-write corruption."
+      "explanation": "Atomic rename on POSIX and Windows is what prevents partial-write corruption.",
+      "explanation_zh": "POSIX 和 Windows 上的原子 rename 才能避免半写损坏。"
     },
     {
       "stage": "check",
       "question": "Why are idempotency keys required for non-idempotent tool calls?",
+      "question_zh": "为什么非幂等的工具调用必须使用幂等键？",
       "options": [
         "For billing",
         "If the agent crashes after a tool call but before checkpointing the result, retry safely; log call ID before execution and skip the call on retry",
         "To deduplicate logs",
         "To shorten output"
       ],
+      "options_zh": [
+        "为了计费",
+        "如果 agent 在工具调用后、但在写入 checkpoint 之前崩溃，需要安全地重试；先记录 call ID 再执行，重试时跳过已执行的调用",
+        "为了日志去重",
+        "为了缩短输出"
+      ],
       "correct": 1,
-      "explanation": "pending_calls.jsonl carries the call IDs; recovery checks and skips already-executed work."
+      "explanation": "pending_calls.jsonl carries the call IDs; recovery checks and skips already-executed work.",
+      "explanation_zh": "pending_calls.jsonl 记录 call ID；恢复时检查并跳过已执行的工作。"
     },
     {
       "stage": "check",
       "question": "Where should large artifacts (CSVs, long transcripts, generated files) live relative to state?",
+      "question_zh": "大型产物（CSV、长对话记录、生成文件）相对 state 应当放在哪里？",
       "options": [
         "Inline in agent_state.json",
         "As separate files (or object storage) with only the path kept in state, so checkpoints stay small and fast",
         "In environment variables",
         "Concatenated into one giant log"
       ],
+      "options_zh": [
+        "内联进 agent_state.json",
+        "作为独立文件（或对象存储），state 里只保留路径，从而让 checkpoint 保持小而快",
+        "放在环境变量里",
+        "拼接成一个巨型日志"
+      ],
       "correct": 1,
-      "explanation": "Separate artifacts grow independently of state; checkpoints stay cheap to read and write."
+      "explanation": "Separate artifacts grow independently of state; checkpoints stay cheap to read and write.",
+      "explanation_zh": "独立产物的体积可以独立增长，不影响 state；checkpoint 的读写开销保持低廉。"
     },
     {
       "stage": "post",
       "question": "What does event sourcing for audit + snapshots for resume buy you?",
+      "question_zh": "“事件溯源做审计 + 快照做恢复” 这种组合带来了什么？",
       "options": [
         "Lower disk usage",
         "Replay agent decisions verbatim by reading the snapshot then replaying events after it; same shape as Postgres WAL",
         "Faster inference",
         "Native voice support"
       ],
+      "options_zh": [
+        "更低的磁盘占用",
+        "可以通过读取快照、再回放其后的事件来逐字复演 agent 的决策；形态与 Postgres WAL 一致",
+        "更快的推理",
+        "原生语音支持"
+      ],
       "correct": 1,
-      "explanation": "Append to state.events.jsonl on every mutation; periodically snapshot to state.json; replay events after the snapshot timestamp."
+      "explanation": "Append to state.events.jsonl on every mutation; periodically snapshot to state.json; replay events after the snapshot timestamp.",
+      "explanation_zh": "每次变更都追加到 state.events.jsonl；定期把状态快照到 state.json；从快照时间戳之后回放事件。"
     },
     {
       "stage": "post",
       "question": "What does the lesson say happens when schema_version mismatches?",
+      "question_zh": "当 schema_version 不匹配时，本课说会发生什么？",
       "options": [
         "The manager silently upgrades",
         "The manager refuses to load until a migration script in tools/migrate_state.py runs",
         "The state is deleted",
         "The agent retries"
       ],
+      "options_zh": [
+        "管理器会静默升级",
+        "管理器拒绝加载，直到运行 tools/migrate_state.py 中的迁移脚本",
+        "state 会被删除",
+        "agent 会重试"
+      ],
       "correct": 1,
-      "explanation": "Schema migrations or refuse-to-load; never silent upgrade."
+      "explanation": "Schema migrations or refuse-to-load; never silent upgrade.",
+      "explanation_zh": "要么迁移 schema，要么拒绝加载；绝不静默升级。"
     }
   ]
 }

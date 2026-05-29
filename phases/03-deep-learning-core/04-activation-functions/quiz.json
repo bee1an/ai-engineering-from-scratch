@@ -1,37 +1,52 @@
 [
   {
     "question": "Why can't you build a useful deep network using only linear layers (no activation functions)?",
+    "question_zh": "为什么只用线性层（不加激活函数）建不出有用的深度网络？",
     "options": ["Linear layers are too slow", "Stacking linear layers collapses to a single linear transformation, giving no benefit from depth", "Linear layers don't have biases", "Linear layers can't handle batched data"],
+    "options_zh": ["线性层太慢", "堆叠多个线性层会退化成单个线性变换，深度没带来任何好处", "线性层没有偏置", "线性层不能处理批数据"],
     "correct": 1,
     "explanation": "y = W2(W1*x + b1) + b2 simplifies to y = Ax + c. No matter how many linear layers you stack, the result is equivalent to one linear layer. Activation functions break this composability.",
+    "explanation_zh": "y = W2(W1*x + b1) + b2 可以化简为 y = Ax + c。不管你堆多少线性层，结果都等价于单个线性层。激活函数打破了这种可组合性。",
     "stage": "pre"
   },
   {
     "question": "What is the output range of the ReLU activation function?",
+    "question_zh": "ReLU 激活函数的输出范围是什么？",
     "options": ["(-1, 1)", "(0, 1)", "[0, infinity)", "(-infinity, infinity)"],
+    "options_zh": ["(-1, 1)", "(0, 1)", "[0, +∞)", "(-∞, +∞)"],
     "correct": 2,
     "explanation": "ReLU(x) = max(0, x). It outputs 0 for all negative inputs and passes positive inputs unchanged, giving a range of [0, infinity).",
+    "explanation_zh": "ReLU(x) = max(0, x)。所有负值输入都输出 0，正值则原样传过去，所以范围是 [0, +∞)。",
     "stage": "pre"
   },
   {
     "question": "What is the 'dead neuron' problem in ReLU networks?",
+    "question_zh": "ReLU 网络中的「死神经元」问题指的是什么？",
     "options": ["Neurons that compute too slowly", "Neurons whose input is permanently negative, producing zero output and zero gradient forever", "Neurons that produce NaN values", "Neurons with zero bias"],
+    "options_zh": ["计算太慢的神经元", "输入永远为负的神经元，输出恒为零，梯度也恒为零", "输出 NaN 的神经元", "偏置为零的神经元"],
     "correct": 1,
     "explanation": "If a ReLU neuron's weighted input is always negative (due to bad initialization or large negative bias), it outputs 0 with gradient 0. It can never recover because zero gradient means zero update.",
+    "explanation_zh": "如果一个 ReLU 神经元的加权输入始终为负（由于初始化不当或偏置过于负），它的输出恒为 0，梯度也是 0。它再也无法恢复，因为梯度为零意味着没有任何更新。",
     "stage": "post"
   },
   {
     "question": "Which activation function is the default for hidden layers in modern transformers like GPT and BERT?",
+    "question_zh": "在 GPT、BERT 等现代 transformer 的隐藏层中，默认使用哪种激活函数？",
     "options": ["Sigmoid", "ReLU", "GELU", "Tanh"],
+    "options_zh": ["Sigmoid", "ReLU", "GELU", "Tanh"],
     "correct": 2,
     "explanation": "GELU (Gaussian Error Linear Unit) is the default activation in transformers. It provides smooth gradient flow, avoids dead neurons, and has been shown to outperform ReLU in language models.",
+    "explanation_zh": "GELU（高斯误差线性单元）是 transformer 的默认激活函数。它提供平滑的梯度流，避免死神经元，并且在语言模型上效果优于 ReLU。",
     "stage": "post"
   },
   {
     "question": "Why is softmax used only in the output layer and never in hidden layers?",
+    "question_zh": "为什么 softmax 只用在输出层，不用在隐藏层？",
     "options": ["It's too slow for hidden layers", "It converts a vector into a probability distribution (values sum to 1), which is needed for classification output but not for intermediate representations", "It causes exploding gradients", "It only works with two classes"],
+    "options_zh": ["对隐藏层来说太慢", "它把向量转换成概率分布（和为 1），分类输出需要这种形式，中间表示并不需要", "会导致梯度爆炸", "只适用于二分类"],
     "correct": 1,
     "explanation": "Softmax normalizes a vector so all values are in (0,1) and sum to 1, creating a probability distribution. Hidden layers need to preserve and transform information, not compress it into probabilities.",
+    "explanation_zh": "softmax 把向量归一化为 (0,1) 区间且总和为 1，得到一个概率分布。隐藏层需要保留并变换信息，而不是把它压缩成概率。",
     "stage": "post"
   }
 ]

@@ -3,37 +3,52 @@
     {
       "stage": "pre",
       "question": "For matrix multiplication (m x n) @ (n x p), what must be true about the dimensions?",
+      "question_zh": "矩阵乘法 (m x n) @ (n x p) 中，维度必须满足什么条件？",
       "options": ["m must equal p", "The inner dimensions n must match", "All dimensions must be equal", "m must be greater than p"],
+      "options_zh": ["m 必须等于 p", "中间的内层维度 n 必须相同", "所有维度都必须相等", "m 必须大于 p"],
       "correct": 1,
-      "explanation": "Matrix multiplication requires the number of columns in the first matrix (n) to equal the number of rows in the second matrix (n). The result has shape (m x p)."
+      "explanation": "Matrix multiplication requires the number of columns in the first matrix (n) to equal the number of rows in the second matrix (n). The result has shape (m x p).",
+      "explanation_zh": "矩阵乘法要求第一个矩阵的列数（n）等于第二个矩阵的行数（n），结果形状是 (m x p)。"
     },
     {
       "stage": "pre",
       "question": "What is the identity matrix?",
+      "question_zh": "什么是单位矩阵？",
       "options": ["A matrix of all ones", "A square matrix with ones on the diagonal and zeros elsewhere that acts as the multiplicative identity", "A matrix where every element is unique", "The transpose of any given matrix"],
+      "options_zh": ["全是 1 的矩阵", "对角线为 1、其余元素为 0 的方阵，乘法的单位元", "每个元素都唯一的矩阵", "任意矩阵的转置"],
       "correct": 1,
-      "explanation": "The identity matrix I has ones on the diagonal and zeros everywhere else. Multiplying any matrix by I returns the original matrix unchanged, like multiplying a number by 1."
+      "explanation": "The identity matrix I has ones on the diagonal and zeros everywhere else. Multiplying any matrix by I returns the original matrix unchanged, like multiplying a number by 1.",
+      "explanation_zh": "单位矩阵 I 对角线为 1，其他位置都是 0。任何矩阵乘以 I 都保持不变，就像数字乘以 1 一样。"
     },
     {
       "stage": "post",
       "question": "What is the key difference between element-wise multiplication and matrix multiplication?",
+      "question_zh": "逐元素乘法与矩阵乘法的关键区别是什么？",
       "options": ["Element-wise is faster while matrix multiplication is more accurate", "Element-wise multiplies matching positions (same shape required), matrix multiplication takes dot products of rows and columns (inner dimensions must match)", "They produce the same result but use different notation", "Element-wise only works on vectors while matrix multiplication works on matrices"],
+      "options_zh": ["逐元素更快，矩阵乘法更精确", "逐元素是对应位置相乘（形状必须一致），矩阵乘法是行列之间做点积（内层维度必须匹配）", "结果相同，只是写法不同", "逐元素只适用于向量，矩阵乘法只适用于矩阵"],
       "correct": 1,
-      "explanation": "Element-wise (Hadamard) product multiplies corresponding elements and requires identical shapes. Matrix multiplication computes dot products between rows and columns with the rule (m,n)@(n,p)=(m,p)."
+      "explanation": "Element-wise (Hadamard) product multiplies corresponding elements and requires identical shapes. Matrix multiplication computes dot products between rows and columns with the rule (m,n)@(n,p)=(m,p).",
+      "explanation_zh": "逐元素积（Hadamard 积）把对应位置的元素相乘，要求形状完全一致。矩阵乘法是行与列做点积，规则为 (m,n)@(n,p)=(m,p)。"
     },
     {
       "stage": "post",
       "question": "In the expression 'output = relu(W @ x + b)', what role does broadcasting play?",
+      "question_zh": "在表达式 output = relu(W @ x + b) 中，broadcasting 起什么作用？",
       "options": ["It broadcasts the computation across multiple GPUs", "It automatically stretches the bias vector b to match the shape of W @ x so they can be added", "It converts the data types of W and x to match", "It repeats the relu activation across all elements"],
+      "options_zh": ["把计算「广播」到多张 GPU 上", "自动把 bias 向量 b 扩展成与 W @ x 相同形状，从而可以相加", "把 W 和 x 的数据类型对齐", "把 relu 激活在所有元素上重复一遍"],
       "correct": 1,
-      "explanation": "W @ x produces a column vector, and b is also a vector. Broadcasting stretches b across the batch dimension if needed, allowing element-wise addition without explicit shape matching."
+      "explanation": "W @ x produces a column vector, and b is also a vector. Broadcasting stretches b across the batch dimension if needed, allowing element-wise addition without explicit shape matching.",
+      "explanation_zh": "W @ x 得到一个列向量，b 也是向量。broadcasting 会在需要时把 b 沿 batch 维扩展开，从而可以直接相加，不必手动对齐形状。"
     },
     {
       "stage": "post",
       "question": "What does a determinant of zero for a matrix indicate?",
+      "question_zh": "矩阵行列式为 0 意味着什么？",
       "options": ["The matrix has all zero entries", "The matrix is singular: it crushes at least one dimension, cannot be inverted, and has no unique solution", "The matrix is the identity matrix", "The matrix performs a rotation"],
+      "options_zh": ["矩阵全部元素都是 0", "矩阵是奇异矩阵：至少压扁了一个维度，不可逆，对应的线性方程组没有唯一解", "矩阵是单位矩阵", "矩阵执行的是旋转"],
       "correct": 1,
-      "explanation": "A zero determinant means the transformation collapses space by at least one dimension (e.g., mapping 2D to a line). The matrix has no inverse, and linear systems using it have either no solution or infinitely many."
+      "explanation": "A zero determinant means the transformation collapses space by at least one dimension (e.g., mapping 2D to a line). The matrix has no inverse, and linear systems using it have either no solution or infinitely many.",
+      "explanation_zh": "行列式为 0 表示这种变换至少压扁了一个维度（比如把 2D 压成一条线）。矩阵不可逆，对应的线性方程组要么无解，要么有无穷多解。"
     }
   ]
 }

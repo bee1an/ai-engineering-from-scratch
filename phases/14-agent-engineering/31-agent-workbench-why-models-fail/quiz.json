@@ -12,7 +12,15 @@
         "Outdated training data"
       ],
       "correct": 1,
-      "explanation": "The model is not wrong about Python; it is wrong about the work. Surfaces around the model are missing."
+      "explanation": "The model is not wrong about Python; it is wrong about the work. Surfaces around the model are missing.",
+      "question_zh": "本课认为 agent 在真实任务上失败的根本原因是什么？",
+      "options_zh": [
+        "模型参数不够多",
+        "Workbench 失败：模型周围的支撑面缺失，而不是 LLM 自身的局限",
+        "网络慢",
+        "训练数据过时"
+      ],
+      "explanation_zh": "模型并不是不会 Python；它只是不了解这件工作。它周围的支撑面缺了。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Read, write, exec, fork, exit, wait, kill"
       ],
       "correct": 0,
-      "explanation": "The seven surfaces are instructions, state, scope, feedback, verification, review, handoff."
+      "explanation": "The seven surfaces are instructions, state, scope, feedback, verification, review, handoff.",
+      "question_zh": "本课给出的七个 workbench 支撑面是什么？",
+      "options_zh": [
+        "Instructions、state、scope、feedback、verification、review、handoff",
+        "Train、eval、deploy、monitor、retrain、scale、retire",
+        "Plan、act、reflect、refine、debate、vote、ship",
+        "Read、write、exec、fork、exit、wait、kill"
+      ],
+      "explanation_zh": "七个支撑面就是 instructions、state、scope、feedback、verification、review、handoff。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Backpropagation"
       ],
       "correct": 3,
-      "explanation": "The eight primitives are function, worker, trigger, runtime, HTTP/RPC, queue, session persistence, authorization policy."
+      "explanation": "The eight primitives are function, worker, trigger, runtime, HTTP/RPC, queue, session persistence, authorization policy.",
+      "question_zh": "以下哪个不是本课把支撑面映射到的 8 个分布式系统原语之一？",
+      "options_zh": [
+        "Function",
+        "Worker",
+        "Trigger",
+        "反向传播"
+      ],
+      "explanation_zh": "8 个原语是 function、worker、trigger、runtime、HTTP/RPC、queue、session 持久化、authorization policy。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "50% to 70%, by adding RAG"
       ],
       "correct": 1,
-      "explanation": "Deleting 80% of tools moved Vercel's agent from 80% to 100% success."
+      "explanation": "Deleting 80% of tools moved Vercel's agent from 80% to 100% success.",
+      "question_zh": "Vercel 报告的 harness 改造把成功率从多少提到了多少？",
+      "options_zh": [
+        "20% 到 60%",
+        "从 80% 提到 100%，靠的是删掉 agent 80% 的工具",
+        "从 0% 到 100%，靠换模型",
+        "从 50% 到 70%，靠加 RAG"
+      ],
+      "explanation_zh": "删掉 80% 的工具，让 Vercel 的 agent 从 80% 提升到 100%。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Only GPUs matter"
       ],
       "correct": 1,
-      "explanation": "LangChain's Anatomy of an Agent Harness: same model, harness change, 25+ rank jump."
+      "explanation": "LangChain's Anatomy of an Agent Harness: same model, harness change, 25+ rank jump.",
+      "question_zh": "Terminal Bench 2.0 显示了模型 vs harness 的什么关系？",
+      "options_zh": [
+        "排名只看模型",
+        "同一个模型仅靠改 harness，从前 30 之外冲到第 5 名",
+        "改 harness 没用",
+        "只有 GPU 重要"
+      ],
+      "explanation_zh": "LangChain 的 Anatomy of an Agent Harness：同一模型，改 harness，名次跳了 25+。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Wait for OpenAI to standardize it"
       ],
       "correct": 1,
-      "explanation": "Reason from primitives, not vendor taxonomies; the vocabulary changes but the engineering does not."
+      "explanation": "Reason from primitives, not vendor taxonomies; the vocabulary changes but the engineering does not.",
+      "question_zh": "当听到新的 harness 词汇时，本课建议怎么做？",
+      "options_zh": [
+        "原样照搬词汇",
+        "采用之前先把它翻译回原语（function、worker、trigger、runtime、HTTP/RPC、queue、persistence、policy）",
+        "拒绝它",
+        "等 OpenAI 标准化"
+      ],
+      "explanation_zh": "从原语出发推理，而不是从厂商分类法；词汇会变，工程不变。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Neither matters"
       ],
       "correct": 1,
-      "explanation": "The loop closes on the state file, not on chat history."
+      "explanation": "The loop closes on the state file, not on chat history.",
+      "question_zh": "聊天历史相对 workbench 处于什么位置？",
+      "options_zh": [
+        "聊天就是真理之源",
+        "聊天是易失的；repo 才是真理之源",
+        "两者等价",
+        "都不重要"
+      ],
+      "explanation_zh": "循环闭合在状态文件上，而不是聊天历史上。"
     }
   ]
 }

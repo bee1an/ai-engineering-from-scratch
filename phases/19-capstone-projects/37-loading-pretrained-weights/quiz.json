@@ -12,7 +12,15 @@
         "Torch requires it"
       ],
       "correct": 1,
-      "explanation": "The two naming conventions are different histories; the map is a literal dict expanded per layer."
+      "explanation": "The two naming conventions are different histories; the map is a literal dict expanded per layer.",
+      "question_zh": "loader 为什么需要 name map?",
+      "options_zh": [
+        "预训练张量与本地参数同名",
+        "公开的 GPT-2 权重用 wte、wpe、h.N.attn.c_attn 这类名字; 本地模型用 tok_embed、pos_embed、blocks.N.attn.qkv; loader 把一个翻译到另一个",
+        "safetensors 文件被加密",
+        "torch 强制要求"
+      ],
+      "explanation_zh": "两套命名约定来自不同历史; map 就是按层展开的字面 dict。"
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "Only the LayerNorm scales"
       ],
       "correct": 1,
-      "explanation": "Three suffixes need transposing; biases and LayerNorms are already shaped correctly."
+      "explanation": "Three suffixes need transposing; biases and LayerNorms are already shaped correctly.",
+      "question_zh": "什么是 conv1d 转置,哪些张量需要它?",
+      "options_zh": [
+        "所有权重张量",
+        "公开的 GPT-2 把 c_attn、c_proj、c_fc 的权重以 tensorflow conv1d 布局存放,这是 nn.Linear.weight 期望的转置; loader 在赋值时对它们调用 .t()",
+        "只有 embedding",
+        "只有 LayerNorm 的 scale"
+      ],
+      "explanation_zh": "三个后缀需要转置; bias 与 LayerNorm 已经是正确形状。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "It is loaded from a separate file"
       ],
       "correct": 1,
-      "explanation": "Setting lm_head.weight = tok_embed.weight after wte lands restores the alias; copying instead doubles the parameter count."
+      "explanation": "Setting lm_head.weight = tok_embed.weight after wte lands restores the alias; copying instead doubles the parameter count.",
+      "question_zh": "为什么 LM head 不在 safetensors 文件里?",
+      "options_zh": [
+        "它在运行时由 logits 计算",
+        "Weight tying: LM head 与 token embedding (wte) 共享存储,加载 wte 后再做 lm_head.weight = tok_embed.weight 即可重建 head",
+        "它太大了",
+        "它从单独的文件加载"
+      ],
+      "explanation_zh": "在 wte 落位后设 lm_head.weight = tok_embed.weight 恢复别名; 改成拷贝则会让参数量翻倍。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Truncates the larger tensor"
       ],
       "correct": 1,
-      "explanation": "Half loaded models are silent failure machines; refusing to assign keeps the report honest."
+      "explanation": "Half loaded models are silent failure machines; refusing to assign keeps the report honest.",
+      "question_zh": "shape 不匹配时 loader 怎么处理?",
+      "options_zh": [
+        "把较小的张量 padding",
+        "把不匹配记录到 LoadReport.shape_mismatch,拒绝赋值,让本地参数保持不变",
+        "让进程崩溃",
+        "把较大的张量截断"
+      ],
+      "explanation_zh": "半加载模型是静默失败的源头; 拒绝赋值保证报告诚实。"
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "Safetensors cannot store large tensors"
       ],
       "correct": 1,
-      "explanation": "Same code path, smaller payload; the loader works on either."
+      "explanation": "Same code path, smaller payload; the loader works on either.",
+      "question_zh": "为什么 demo 的桩 fixture 不是真正的 GPT-2 下载?",
+      "options_zh": [
+        "真实文件不是 safetensors 格式",
+        "demo 必须离线、快速运行; 桩使用与预训练完全一致的命名约定,因此 loader 代码路径相同,换上真实文件不会改变 loader",
+        "真实权重被加密",
+        "safetensors 不能存大张量"
+      ],
+      "explanation_zh": "代码路径相同,载荷更小; loader 在两者上都能工作。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "To set the random seed"
       ],
       "correct": 1,
-      "explanation": "Sanity generation is the cheapest gate: a sample fingerprint that fails to change exposes a broken load that the LoadReport summary would not catch on its own."
+      "explanation": "Sanity generation is the cheapest gate: a sample fingerprint that fails to change exposes a broken load that the LoadReport summary would not catch on its own.",
+      "question_zh": "为什么在加载前后各生成一段样本?",
+      "options_zh": [
+        "测推理速度",
+        "如果加载后样本与加载前完全相同,说明加载没有改变模型,意味着 mapping 把所有张量都漏了",
+        "为了热身 GPU 缓存",
+        "为了设定随机种子"
+      ],
+      "explanation_zh": "Sanity 生成是最便宜的检查: 样本指纹没变就揭示了 LoadReport 摘要无法捕捉的损坏加载。"
     }
   ]
 }

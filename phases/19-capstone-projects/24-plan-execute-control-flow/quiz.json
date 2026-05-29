@@ -12,7 +12,15 @@
         "To handle the JSON-RPC transport"
       ],
       "correct": 1,
-      "explanation": "Planner emits structured plans. The executor runs them. Mixing the two is the chain-of-thought trap this lesson is moving away from."
+      "explanation": "Planner emits structured plans. The executor runs them. Mixing the two is the chain-of-thought trap this lesson is moving away from.",
+      "question_zh": "在 plan-execute agent 里,planner 的职责是什么?",
+      "options_zh": [
+        "在每一步调用 dispatcher",
+        "产出一个有序的、结构化 step 列表,供 executor 运行",
+        "强制超时",
+        "处理 JSON-RPC 传输"
+      ],
+      "explanation_zh": "Planner 输出结构化计划,executor 执行它。混在一起就是本节要摆脱的 chain-of-thought 陷阱。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Because the model trains on it"
       ],
       "correct": 1,
-      "explanation": "The replanner reads it when revising. The tracer renders it on the timeline. It is a human-readable contract on the step."
+      "explanation": "The replanner reads it when revising. The tracer renders it on the timeline. It is a human-readable contract on the step.",
+      "question_zh": "为什么 expected_outcome 是 Step 形状的一部分,即便 executor 并不检查它?",
+      "options_zh": [
+        "因为 dispatcher 用它做 cache key",
+        "因为它给 replanner 与 tracer 提供一个可读的成功条件",
+        "因为 registry 要求它",
+        "因为模型在它上面训练"
+      ],
+      "explanation_zh": "Replanner 在改写时读取它,tracer 在时间线上渲染它。它是 step 上人类可读的契约。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "tool.error followed by session.start"
       ],
       "correct": 2,
-      "explanation": "plan.diff makes the revision visible. A silent rewrite is the bug we are avoiding."
+      "explanation": "plan.diff makes the revision visible. A silent rewrite is the bug we are avoiding.",
+      "question_zh": "当一步失败、replanner 返回新计划后,executor 在事件流上发出什么?",
+      "options_zh": [
+        "什么也不发——replan 是静默的",
+        "session.complete,status=failed",
+        "plan.diff,带有 removed/added/revised 的 step id",
+        "tool.error,后接 session.start"
+      ],
+      "explanation_zh": "plan.diff 让改写可见。静默改写正是要避免的 bug。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Because the registry counts replans"
       ],
       "correct": 0,
-      "explanation": "max_replans catches a planner that keeps returning the same broken plan. max_steps catches a runaway plan that keeps growing."
+      "explanation": "max_replans catches a planner that keeps returning the same broken plan. max_steps catches a runaway plan that keeps growing.",
+      "question_zh": "为什么把 max_steps 与 max_replans 设成两个独立预算?",
+      "options_zh": [
+        "因为它们衡量不同的单位。Steps 限制总执行步数; replans 限制 planner 被调用的次数。",
+        "因为 asyncio 要求两者",
+        "因为 dispatcher 拒绝无界计划",
+        "因为 registry 计数 replan"
+      ],
+      "explanation_zh": "max_replans 抓的是不停产出同一个坏计划的 planner。max_steps 抓的是不停膨胀的失控计划。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "no_plan"
       ],
       "correct": 3,
-      "explanation": "No plan, no execution. The session ends with reason=no_plan and status=failed."
+      "explanation": "No plan, no execution. The session ends with reason=no_plan and status=failed.",
+      "question_zh": "当 planner 在第一次调用时返回空列表,会得到哪个 reason?",
+      "options_zh": [
+        "step_budget",
+        "replan_budget",
+        "goal_met",
+        "no_plan"
+      ],
+      "explanation_zh": "没有计划就没有执行。会话结束,reason=no_plan,status=failed。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Step ids the planner asked to skip"
       ],
       "correct": 2,
-      "explanation": "revised is the set of ids whose (tool_name, args) signature changed across the revision."
+      "explanation": "revised is the set of ids whose (tool_name, args) signature changed across the revision.",
+      "question_zh": "PlanDiff.revised 中放的是什么?",
+      "options_zh": [
+        "在旧计划里、不在新计划里的 step id",
+        "在新计划里、不在旧计划里的 step id",
+        "(tool_name 或 args) 在改写前后发生变化的 step id",
+        "planner 要求跳过的 step id"
+      ],
+      "explanation_zh": "revised 是 (tool_name, args) 签名跨改写发生变化的 id 集合。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "no_plan"
       ],
       "correct": 2,
-      "explanation": "replan_budget. The status is failed. History carries every step that ran, including the failures that triggered replans."
+      "explanation": "replan_budget. The status is failed. History carries every step that ran, including the failures that triggered replans.",
+      "question_zh": "当 executor 用尽 max_replans 时,SessionResult.reason 是什么?",
+      "options_zh": [
+        "goal_met",
+        "step_budget",
+        "replan_budget",
+        "no_plan"
+      ],
+      "explanation_zh": "replan_budget。状态是 failed。history 保留所有运行过的 step,包括触发 replan 的失败。"
     }
   ]
 }

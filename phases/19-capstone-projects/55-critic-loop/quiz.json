@@ -12,7 +12,15 @@
         "Because the reviser only accepts JSON"
       ],
       "correct": 1,
-      "explanation": "A fixed dimension vector turns critique into structured data the harness can compare across rounds. Freeform criticism is unverifiable; vectors make regressions visible."
+      "explanation": "A fixed dimension vector turns critique into structured data the harness can compare across rounds. Freeform criticism is unverifiable; vectors make regressions visible.",
+      "question_zh": "为什么 critic 在五个固定维度上打分,而不是返回自由格式的段落?",
+      "options_zh": [
+        "因为模型不能可靠地生成段落",
+        "因为固定向量让 harness 能跨轮检测每个维度的回归",
+        "因为 LaTeX 要求一个 score 字段",
+        "因为 reviser 只接受 JSON"
+      ],
+      "explanation_zh": "固定维度向量把批评变成可在跨轮比较的结构化数据。自由格式批评无法验证,向量让回归可见。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Whichever fires first by random tie-break"
       ],
       "correct": 1,
-      "explanation": "Target met wins (the work is done). Then plateau (no more progress is achievable). Then budget (hard cap). The order makes the result deterministic when more than one condition could fire."
+      "explanation": "Target met wins (the work is done). Then plateau (no more progress is achievable). Then budget (hard cap). The order makes the result deterministic when more than one condition could fire.",
+      "question_zh": "在每轮结束时,循环按什么顺序检查停止条件?",
+      "options_zh": [
+        "Budget,然后 plateau,然后 target",
+        "Target,然后 plateau,然后 budget",
+        "Plateau,然后 target,然后 budget",
+        "由随机平局决定先后"
+      ],
+      "explanation_zh": "Target met 优先 (工作完成); 然后 plateau (再无进展可期); 最后 budget (硬性上限)。这一顺序在多个条件可能同时触发时让结果保持确定。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Because the dashboard expects two points"
       ],
       "correct": 1,
-      "explanation": "Even a deterministic scorer's output changes round to round depending on which suggestions were applied. Requiring two flat rounds filters that noise."
+      "explanation": "Even a deterministic scorer's output changes round to round depending on which suggestions were applied. Requiring two flat rounds filters that noise.",
+      "question_zh": "为什么 plateau 检测要求两轮连续平,而不是一轮?",
+      "options_zh": [
+        "因为 dataclass 需要列表",
+        "因为即便确定性打分,每轮仍会因应用不同建议而波动; 一轮平不够说明问题",
+        "因为模型返回非确定性分数",
+        "因为 dashboard 需要两个点"
+      ],
+      "explanation_zh": "即便是确定性打分器,输出也会因每轮采纳的建议不同而波动。要求两轮平能滤掉这种噪声。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "The raw LaTeX source"
       ],
       "correct": 1,
-      "explanation": "Reviser.__call__ takes (paper, suggestions). Each Suggestion carries a dimension, target section, and an edit instruction. The reviser does not see scores. That separation lets either side be swapped without touching the other."
+      "explanation": "Reviser.__call__ takes (paper, suggestions). Each Suggestion carries a dimension, target section, and an edit instruction. The reviser does not see scores. That separation lets either side be swapped without touching the other.",
+      "question_zh": "每轮 reviser 接收什么作为输入?",
+      "options_zh": [
+        "包含分数的完整 Critique 对象",
+        "paper 与 Suggestion 记录列表",
+        "由模型生成的段落",
+        "原始 LaTeX 源"
+      ],
+      "explanation_zh": "Reviser.__call__ 接 (paper, suggestions)。每个 Suggestion 携带 dimension、目标 section 与一条编辑指令。Reviser 看不到分数,这种分离让两侧任一边都能在不动另一边的前提下被替换。"
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "Only the convergence verdict"
       ],
       "correct": 1,
-      "explanation": "The trace is the per-round event log. Dashboards render it as a score-over-time chart; the next stage reads it to decide whether the branch is worth keeping."
+      "explanation": "The trace is the per-round event log. Dashboards render it as a score-over-time chart; the next stage reads it to decide whether the branch is worth keeping.",
+      "question_zh": "trace 中每轮记录什么?",
+      "options_zh": [
+        "只有最终的论文草稿",
+        "轮次编号、分数向量、均值、应用的建议、verdict",
+        "模型 prompt 与 completion",
+        "只有收敛 verdict"
+      ],
+      "explanation_zh": "trace 是每轮事件日志。Dashboard 把它渲染成随时间的分数曲线; 下一阶段读它来决定该分支是否值得保留。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "An exception, because the loop crashes"
       ],
       "correct": 1,
-      "explanation": "Either plateau (two flat rounds) or budget (hard cap) fires. Both verdicts surface the bug. The loop never silently succeeds."
+      "explanation": "Either plateau (two flat rounds) or budget (hard cap) fires. Both verdicts surface the bug. The loop never silently succeeds.",
+      "question_zh": "一直发出从不改善任何分数的建议的 critic 会得到哪种 terminal verdict?",
+      "options_zh": [
+        "target,因为预算遮掩了 bug",
+        "plateau 或 budget,因为 harness 会捕捉到没有进展",
+        "converged,因为建议被应用了",
+        "异常,因为循环崩溃"
+      ],
+      "explanation_zh": "要么 plateau (两轮平) 要么 budget (硬上限) 触发。两种 verdict 都暴露这个 bug,循环不会静默成功。"
     }
   ]
 }

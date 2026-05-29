@@ -12,7 +12,15 @@
         "Failures are due to network outages"
       ],
       "correct": 1,
-      "explanation": "Berkeley's MASFT categorizes failures as design flaws; they do not disappear by scaling the base model."
+      "explanation": "Berkeley's MASFT categorizes failures as design flaws; they do not disappear by scaling the base model.",
+      "question_zh": "MASFT 的核心论点是什么？",
+      "options_zh": [
+        "失败是随机噪声",
+        "多 agent 失败是根本性的设计缺陷，不是靠更好的基础模型就能修掉的 LLM 局限",
+        "更大的模型就让失败消失",
+        "失败由网络故障引起"
+      ],
+      "explanation_zh": "Berkeley 的 MASFT 把失败归类为设计缺陷；不会因为基础模型变大而消失。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Embedding versioning"
       ],
       "correct": 3,
-      "explanation": "The five are hallucinated actions, scope creep, cascading errors, context loss, tool misuse."
+      "explanation": "The five are hallucinated actions, scope creep, cascading errors, context loss, tool misuse.",
+      "question_zh": "以下哪个不是本课列出的五个反复出现的行业失败模式？",
+      "options_zh": [
+        "幻觉操作",
+        "范围蔓延",
+        "级联错误",
+        "embedding 版本管理"
+      ],
+      "explanation_zh": "五种是 hallucinated actions、scope creep、cascading errors、context loss、tool misuse。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "A YAML parser error"
       ],
       "correct": 1,
-      "explanation": "Cascades amplify a single bad call into a multi-system incident; especially severe when agents fake success."
+      "explanation": "Cascades amplify a single bad call into a multi-system incident; especially severe when agents fake success.",
+      "question_zh": "本课中所谓 cascading error 是什么？",
+      "options_zh": [
+        "LLM 限流级联",
+        "一次错误调用在多个系统之间触发下游影响（一个虚构的 SKU 触发了 4 个下游 API 调用）",
+        "Cron 失败",
+        "YAML 解析错误"
+      ],
+      "explanation_zh": "级联会把一次糟糕的调用放大成跨系统事故；agent 假装成功时尤其严重。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Soft and hard prompts"
       ],
       "correct": 1,
-      "explanation": "Hallucinations show up as either ignoring system prompt or forgetting/misapplying earlier-turn context."
+      "explanation": "Hallucinations show up as either ignoring system prompt or forgetting/misapplying earlier-turn context.",
+      "question_zh": "LLM Agent Hallucinations Survey 列出了哪两种表现？",
+      "options_zh": [
+        "热 token 和冷 token",
+        "Instruction-following Deviation 和 Long-range Contextual Misuse",
+        "贪心搜索和 beam search",
+        "Soft prompt 和 hard prompt"
+      ],
+      "explanation_zh": "幻觉表现为要么忽略 system prompt，要么遗忘或误用早先轮次的上下文。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "A unit test passed"
       ],
       "correct": 1,
-      "explanation": "Re-probe environment state; agents commonly fake completion when they cannot distinguish 'I failed' from 'impossible'."
+      "explanation": "Re-probe environment state; agents commonly fake completion when they cannot distinguish 'I failed' from 'impossible'.",
+      "question_zh": "什么是 success hallucination？",
+      "options_zh": [
+        "模型在 benchmark 上过度自信",
+        "Agent 返回成功消息，但目标状态其实没有改变（往往是工具返回 400 时）",
+        "用户以为成功其实没有",
+        "单元测试通过"
+      ],
+      "explanation_zh": "应该重新探测环境状态；当 agent 分不清『我失败了』和『不可能完成』时，会假装完成。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Logging is paid"
       ],
       "correct": 1,
-      "explanation": "Crash-based monitoring misses the bulk of agent failures, which are content-shaped."
+      "explanation": "Crash-based monitoring misses the bulk of agent failures, which are content-shaped.",
+      "question_zh": "为什么只标记 crash 是不够的？",
+      "options_zh": [
+        "Crash 慢",
+        "大多数 agent 失败会输出看似合理、不会 crash 的内容；需要内容层面的检查",
+        "Crash 会泄漏 PII",
+        "日志要付费"
+      ],
+      "explanation_zh": "基于 crash 的监控会漏掉绝大多数 agent 失败，因为这些失败是内容形态的。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Lower temperature only"
       ],
       "correct": 1,
-      "explanation": "Per-step gates (safety classifier, argument validation, CRITIC, state re-probe) catch failures before they cascade."
+      "explanation": "Per-step gates (safety classifier, argument validation, CRITIC, state re-probe) catch failures before they cascade.",
+      "question_zh": "本课建议在推理链的每一步上加什么缓解措施？",
+      "options_zh": [
+        "加一个 sleep()",
+        "自动化的验证 gate，对照环境状态做事实 grounding 检查",
+        "禁用重试",
+        "只是降低 temperature"
+      ],
+      "explanation_zh": "Per-step gate（安全分类器、参数校验、CRITIC、状态重新探测）能在级联前抓住失败。"
     }
   ]
 }

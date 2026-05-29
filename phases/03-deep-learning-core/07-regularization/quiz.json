@@ -1,37 +1,52 @@
 [
   {
     "question": "What is overfitting in neural networks?",
+    "question_zh": "神经网络中的过拟合是什么？",
     "options": ["The model is too small to learn the data", "The model memorizes training data instead of learning generalizable patterns, showing a large gap between train and test accuracy", "The model trains too slowly", "The loss function is wrong"],
+    "options_zh": ["模型太小，学不下数据", "模型把训练数据死记硬背下来，没有学到可泛化的模式，训练精度和测试精度差距很大", "模型训练太慢", "损失函数选错了"],
     "correct": 1,
     "explanation": "Overfitting occurs when a model achieves high training accuracy but poor test accuracy. It has memorized the training data's noise rather than learning the underlying patterns.",
+    "explanation_zh": "过拟合指模型在训练集上精度很高，但测试集上精度很差。它记住了训练数据中的噪声，而不是学到了背后的模式。",
     "stage": "pre"
   },
   {
     "question": "How does dropout regularize a neural network?",
+    "question_zh": "dropout 是怎么对神经网络进行正则化的？",
     "options": ["It removes the worst-performing neurons permanently", "It randomly zeroes neurons during training, forcing the network to learn redundant representations", "It reduces the learning rate", "It removes outliers from the training data"],
+    "options_zh": ["永久去掉表现最差的神经元", "训练时随机把神经元置零，迫使网络学习冗余的表示", "降低学习率", "把训练数据中的异常值删掉"],
     "correct": 1,
     "explanation": "During each forward pass, dropout randomly sets neuron outputs to zero with probability p. This prevents co-adaptation (neurons relying on specific others) and is equivalent to training an ensemble of 2^N subnetworks.",
+    "explanation_zh": "每次前向传播时，dropout 以概率 p 把神经元输出随机置零。这能防止协同适应（神经元依赖于特定的其他神经元），等价于训练了 2^N 个子网络的集成。",
     "stage": "pre"
   },
   {
     "question": "Why do transformers use LayerNorm instead of BatchNorm?",
+    "question_zh": "为什么 transformer 用 LayerNorm 而不是 BatchNorm？",
     "options": ["LayerNorm is faster to compute", "LayerNorm normalizes across features per sample (batch-independent), which works with variable sequence lengths and small batch sizes", "BatchNorm causes gradient explosion", "LayerNorm was invented more recently"],
+    "options_zh": ["LayerNorm 计算更快", "LayerNorm 对每个样本的特征做归一化（与 batch 无关），能处理变长序列和小 batch", "BatchNorm 会导致梯度爆炸", "LayerNorm 发明得更晚"],
     "correct": 1,
     "explanation": "BatchNorm depends on batch statistics, which are noisy with small batches and meaningless with batch size 1 (common during generation). LayerNorm normalizes across features within each sample, independent of batch size.",
+    "explanation_zh": "BatchNorm 依赖 batch 统计量，小 batch 时统计噪声大，batch size 为 1 时（生成阶段常见）就完全没意义了。LayerNorm 在每个样本内部对特征做归一化，与 batch 大小无关。",
     "stage": "post"
   },
   {
     "question": "What is the key difference between RMSNorm and LayerNorm?",
+    "question_zh": "RMSNorm 和 LayerNorm 的关键区别是什么？",
     "options": ["RMSNorm uses batch statistics", "RMSNorm skips the mean subtraction, only dividing by the root mean square, giving ~10% speedup with equal accuracy", "RMSNorm adds learnable parameters", "RMSNorm only works on CNNs"],
+    "options_zh": ["RMSNorm 用 batch 统计量", "RMSNorm 省掉了减均值这一步，只除以均方根，精度相当但速度快约 10%", "RMSNorm 增加了可学习参数", "RMSNorm 只能用在 CNN 上"],
     "correct": 1,
     "explanation": "RMSNorm removes the mean subtraction step from LayerNorm, which contributes little to accuracy but adds computation. LLaMA, Mistral, and most modern LLMs use RMSNorm for this efficiency gain.",
+    "explanation_zh": "RMSNorm 去掉了 LayerNorm 中减均值的那一步，这步对精度贡献很小，却增加计算量。LLaMA、Mistral 以及大多数现代 LLM 都用 RMSNorm 来获得这点效率提升。",
     "stage": "post"
   },
   {
     "question": "Why is it critical to call model.eval() before running inference in PyTorch?",
+    "question_zh": "在 PyTorch 中做推理前为什么必须调用 model.eval()？",
     "options": ["It speeds up computation", "It disables dropout and switches BatchNorm to use running statistics instead of batch statistics, giving deterministic outputs", "It frees GPU memory", "It enables gradient computation"],
+    "options_zh": ["加速计算", "关闭 dropout，并让 BatchNorm 使用运行时统计量而不是 batch 统计量，从而给出确定的输出", "释放 GPU 内存", "启用梯度计算"],
     "correct": 1,
     "explanation": "Without model.eval(), dropout randomly zeroes neurons during inference (causing random output variation) and BatchNorm uses current-batch statistics instead of the stable running averages accumulated during training.",
+    "explanation_zh": "如果不调用 model.eval()，dropout 会在推理时随机把神经元置零（导致输出随机波动），BatchNorm 也会用当前 batch 的统计量，而不是训练时积累下来的稳定运行均值。",
     "stage": "post"
   }
 ]

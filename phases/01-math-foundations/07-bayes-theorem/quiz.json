@@ -3,37 +3,52 @@
     {
       "stage": "pre",
       "question": "In Bayes' theorem, what is the 'prior'?",
+      "question_zh": "在贝叶斯定理中，「prior（先验）」指的是什么？",
       "options": ["The probability of the evidence", "Your belief about a hypothesis before observing any evidence", "The probability of the evidence given the hypothesis", "The final updated probability after seeing evidence"],
+      "options_zh": ["证据的概率", "在看到任何证据之前，你对一个假设的信念", "在假设成立的条件下观察到证据的概率", "看到证据之后更新得到的最终概率"],
       "correct": 1,
-      "explanation": "The prior P(A) represents your initial belief about hypothesis A before seeing any data. It gets updated to the posterior P(A|B) after observing evidence B."
+      "explanation": "The prior P(A) represents your initial belief about hypothesis A before seeing any data. It gets updated to the posterior P(A|B) after observing evidence B.",
+      "explanation_zh": "先验 P(A) 表示在没有任何数据的情况下，你对假设 A 的初始信念。看到证据 B 之后，它会更新为后验 P(A|B)。"
     },
     {
       "stage": "pre",
       "question": "A rare disease affects 1 in 10,000 people. A 99% accurate test returns positive. What is the approximate probability you have the disease?",
+      "question_zh": "某罕见病发病率是 1/10000。一个 99% 准确的检测返回阳性。那么你真的患病的大致概率是多少？",
       "options": ["99%", "About 1%", "50%", "10%"],
+      "options_zh": ["99%", "大约 1%", "50%", "10%"],
       "correct": 1,
-      "explanation": "Despite 99% test accuracy, the disease is so rare (0.01%) that most positive results come from healthy people (false positives). Bayes' theorem gives P(sick|positive) = ~0.98%, not 99%."
+      "explanation": "Despite 99% test accuracy, the disease is so rare (0.01%) that most positive results come from healthy people (false positives). Bayes' theorem gives P(sick|positive) = ~0.98%, not 99%.",
+      "explanation_zh": "尽管检测准确率有 99%，但发病率只有 0.01%，绝大多数阳性结果其实来自健康人群（假阳性）。贝叶斯定理算出来 P(患病|阳性) ≈ 0.98%，并不是 99%。"
     },
     {
       "stage": "post",
       "question": "What is Laplace smoothing in a Naive Bayes classifier and why is it necessary?",
+      "question_zh": "在朴素贝叶斯分类器里，Laplace 平滑是什么，为什么需要它？",
       "options": ["It normalizes feature values to have zero mean and unit variance", "It adds a small count to every feature to prevent zero probabilities from unseen words, which would zero out the entire product", "It smooths the decision boundary between classes", "It reduces the dimensionality of the feature space"],
+      "options_zh": ["把特征归一化到均值 0、方差 1", "给每个特征都加一个小计数，避免没出现过的词概率为 0，否则整个连乘就直接变 0 了", "对类别之间的决策边界做平滑", "降低特征空间的维度"],
       "correct": 1,
-      "explanation": "Without smoothing, a word never seen in spam training data gets P(word|spam)=0, making the entire product zero regardless of other strong spam indicators. Adding 1 to each count prevents this."
+      "explanation": "Without smoothing, a word never seen in spam training data gets P(word|spam)=0, making the entire product zero regardless of other strong spam indicators. Adding 1 to each count prevents this.",
+      "explanation_zh": "不做平滑的话，训练时没在垃圾邮件中出现过的词会得到 P(word|spam)=0，无论其他特征多么强烈地指向垃圾邮件，整个连乘都会变成 0。给每个计数加 1 就能避免这种情况。"
     },
     {
       "stage": "post",
       "question": "How does MAP (Maximum A Posteriori) estimation differ from MLE (Maximum Likelihood Estimation)?",
+      "question_zh": "MAP（最大后验估计）与 MLE（最大似然估计）有什么区别？",
       "options": ["MAP uses a larger dataset than MLE", "MAP incorporates a prior distribution over parameters, equivalent to adding regularization, while MLE only uses the likelihood", "MAP is faster to compute than MLE", "MLE always produces better results than MAP"],
+      "options_zh": ["MAP 使用的数据集比 MLE 更大", "MAP 在参数上引入了先验分布，相当于加了一项正则；MLE 只用 likelihood", "MAP 算起来比 MLE 更快", "MLE 总是比 MAP 效果好"],
       "correct": 1,
-      "explanation": "MAP maximizes P(data|params) * P(params) while MLE maximizes P(data|params) alone. The prior P(params) acts as regularization -- a Gaussian prior equals L2 regularization, a Laplace prior equals L1."
+      "explanation": "MAP maximizes P(data|params) * P(params) while MLE maximizes P(data|params) alone. The prior P(params) acts as regularization -- a Gaussian prior equals L2 regularization, a Laplace prior equals L1.",
+      "explanation_zh": "MAP 最大化的是 P(data|params) * P(params)，MLE 只最大化 P(data|params)。先验 P(params) 起到正则化的作用：高斯先验对应 L2 正则，Laplace 先验对应 L1。"
     },
     {
       "stage": "post",
       "question": "In sequential Bayesian updating, you start with Beta(1,1) and observe 7 heads and 3 tails. What is the posterior?",
+      "question_zh": "在序贯贝叶斯更新中，先验是 Beta(1,1)，观察到 7 次正面、3 次反面，后验是什么？",
       "options": ["Beta(7, 3)", "Beta(8, 4)", "Beta(1.7, 1.3)", "Normal(0.7, 0.1)"],
+      "options_zh": ["Beta(7, 3)", "Beta(8, 4)", "Beta(1.7, 1.3)", "Normal(0.7, 0.1)"],
       "correct": 1,
-      "explanation": "The Beta-Binomial conjugate update adds successes to the first parameter and failures to the second: Beta(1+7, 1+3) = Beta(8, 4). The posterior mean is 8/12 = 0.667."
+      "explanation": "The Beta-Binomial conjugate update adds successes to the first parameter and failures to the second: Beta(1+7, 1+3) = Beta(8, 4). The posterior mean is 8/12 = 0.667.",
+      "explanation_zh": "Beta-Binomial 共轭先验的更新规则是把成功次数加到第一个参数、失败次数加到第二个参数：Beta(1+7, 1+3) = Beta(8, 4)。后验均值是 8/12 = 0.667。"
     }
   ]
 }

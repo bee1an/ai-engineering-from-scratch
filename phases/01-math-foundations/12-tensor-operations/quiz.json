@@ -3,62 +3,102 @@
     {
       "stage": "pre",
       "question": "What does the 'shape' of a tensor describe?",
+      "question_zh": "tensor 的 shape 描述的是什么？",
       "options": [
         "A tuple listing the size along each axis",
         "The total number of elements in the tensor",
         "The data type of the tensor elements",
         "The memory address of the tensor"
       ],
+      "options_zh": [
+        "一个元组，列出每个轴上的大小",
+        "tensor 中元素总数",
+        "tensor 元素的数据类型",
+        "tensor 在内存中的地址"
+      ],
       "correct": 0,
-      "explanation": "The shape is a tuple listing the size along each axis. For example, a tensor with shape (2, 3, 4) has 2 elements along axis 0, 3 along axis 1, and 4 along axis 2."
+      "explanation": "The shape is a tuple listing the size along each axis. For example, a tensor with shape (2, 3, 4) has 2 elements along axis 0, 3 along axis 1, and 4 along axis 2.",
+      "explanation_zh": "shape 是一个元组，列出每个轴的尺寸。例如 shape 为 (2, 3, 4) 的 tensor，axis 0 有 2 个元素，axis 1 有 3 个，axis 2 有 4 个。"
     },
     {
       "stage": "pre",
       "question": "In PyTorch, what layout does an image batch tensor use by default?",
+      "question_zh": "在 PyTorch 中，图像 batch tensor 默认使用什么布局？",
       "options": [
         "NHWC (batch, height, width, channels)",
         "NCHW (batch, channels, height, width)",
         "CHWN (channels, height, width, batch)",
         "WHCN (width, height, channels, batch)"
       ],
+      "options_zh": [
+        "NHWC（batch, height, width, channels）",
+        "NCHW（batch, channels, height, width）",
+        "CHWN（channels, height, width, batch）",
+        "WHCN（width, height, channels, batch）"
+      ],
       "correct": 1,
-      "explanation": "PyTorch defaults to NCHW (channels-first) layout. TensorFlow defaults to NHWC (channels-last). Mismatched layouts cause silent errors or performance issues."
+      "explanation": "PyTorch defaults to NCHW (channels-first) layout. TensorFlow defaults to NHWC (channels-last). Mismatched layouts cause silent errors or performance issues.",
+      "explanation_zh": "PyTorch 默认是 NCHW（channels-first）布局，TensorFlow 默认是 NHWC（channels-last）。布局不匹配会导致隐蔽错误或性能问题。"
     },
     {
       "stage": "post",
       "question": "What is the result shape when broadcasting tensors of shape (8, 1, 6, 1) and (7, 1, 5)?",
+      "question_zh": "对 shape 为 (8, 1, 6, 1) 和 (7, 1, 5) 的 tensor 做 broadcasting 后，结果 shape 是多少？",
       "options": [
         "(8, 7, 6, 1)",
         "(8, 1, 6, 5)",
         "(8, 7, 6, 5)",
         "Broadcasting fails — shapes are incompatible"
       ],
+      "options_zh": [
+        "(8, 7, 6, 1)",
+        "(8, 1, 6, 5)",
+        "(8, 7, 6, 5)",
+        "broadcasting 失败：形状不兼容"
+      ],
       "correct": 2,
-      "explanation": "Align shapes from the right: (8,1,6,1) and (1,7,1,5). Dimensions are compatible when equal or one is 1. The result takes the maximum along each axis: (8, 7, 6, 5)."
+      "explanation": "Align shapes from the right: (8,1,6,1) and (1,7,1,5). Dimensions are compatible when equal or one is 1. The result takes the maximum along each axis: (8, 7, 6, 5).",
+      "explanation_zh": "从右往左对齐：(8,1,6,1) 与 (1,7,1,5)。每一维要么相等、要么有一个是 1 才兼容。最终每个轴取较大者：(8, 7, 6, 5)。"
     },
     {
       "stage": "post",
       "question": "In the einsum expression 'bhtd,bhsd->bhts', what happens to the index 'd'?",
+      "question_zh": "在 einsum 表达式 'bhtd,bhsd->bhts' 中，索引 d 经历了什么？",
       "options": [
         "It is kept in the output as a new axis",
         "It is summed over (contracted) because it appears in both inputs but not the output",
         "It is broadcast across both tensors",
         "It is transposed between the two input tensors"
       ],
+      "options_zh": [
+        "保留在输出中，作为新的轴",
+        "被求和收缩了（contraction），因为它在两个输入中都出现，但输出中没有",
+        "在两个 tensor 上做了 broadcasting",
+        "在两个输入 tensor 之间做了转置"
+      ],
       "correct": 1,
-      "explanation": "In einsum, any index that appears in the inputs but not the output is summed over. Index 'd' appears in both 'bhtd' and 'bhsd' but not in the output 'bhts', so it is contracted (multiplied and summed)."
+      "explanation": "In einsum, any index that appears in the inputs but not the output is summed over. Index 'd' appears in both 'bhtd' and 'bhsd' but not in the output 'bhts', so it is contracted (multiplied and summed).",
+      "explanation_zh": "在 einsum 中，凡是出现在输入但不出现在输出的索引都会被求和。d 同时出现在 bhtd 和 bhsd 里，但输出 bhts 中没有它，因此 d 被收缩掉（先相乘后求和）。"
     },
     {
       "stage": "post",
       "question": "Why does calling .view() fail on a transposed tensor in PyTorch?",
+      "question_zh": "在 PyTorch 中，对转置后的 tensor 调用 .view() 为什么会失败？",
       "options": [
         "Transposed tensors have a different data type",
         "The tensor is non-contiguous in memory after transpose, and view requires contiguous data",
         "View only works on 2D tensors",
         "Transpose changes the total number of elements"
       ],
+      "options_zh": [
+        "转置后的 tensor 数据类型变了",
+        "转置后 tensor 在内存中变成非连续的，而 view 要求数据是连续的",
+        "view 只能用于 2D tensor",
+        "转置会改变元素总数"
+      ],
       "correct": 1,
-      "explanation": "Transpose swaps strides without moving data, making the tensor non-contiguous. The .view() operation requires contiguous memory layout. Use .reshape() or call .contiguous() first."
+      "explanation": "Transpose swaps strides without moving data, making the tensor non-contiguous. The .view() operation requires contiguous memory layout. Use .reshape() or call .contiguous() first.",
+      "explanation_zh": "转置只是交换 stride，并不真正搬动数据，结果就变成了非连续。.view() 要求内存布局连续。可以改用 .reshape()，或者先调用 .contiguous()。"
     }
   ]
 }

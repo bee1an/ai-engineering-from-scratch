@@ -1,37 +1,102 @@
 [
   {
     "question": "Why do AI startups often fail from cost issues rather than model quality?",
-    "options": ["Models are always good enough", "Per-call costs compound rapidly: 10K users making 10 calls/day costs $250/day in tokens before charging a single dollar", "Cost optimization is easy", "API providers offer unlimited free tiers"],
+    "options": [
+      "Models are always good enough",
+      "Per-call costs compound rapidly: 10K users making 10 calls/day costs $250/day in tokens before charging a single dollar",
+      "Cost optimization is easy",
+      "API providers offer unlimited free tiers"
+    ],
     "correct": 1,
     "explanation": "LLM API costs scale linearly with usage. A feature that costs $0.003 per call seems cheap until it's called 100K times/day ($300/day, $9K/month). Without cost optimization, many AI products are unprofitable at scale.",
-    "stage": "pre"
+    "stage": "pre",
+    "question_zh": "为什么 AI 创业公司更常死于成本而不是模型质量？",
+    "options_zh": [
+      "模型总是够用",
+      "单次调用的成本会迅速堆积：1 万用户每天各调 10 次，光 token 就要 250 美元/天，还没收一分钱",
+      "成本优化很容易",
+      "API 厂商提供无限免费额度"
+    ],
+    "explanation_zh": "LLM API 成本随用量线性增长。一个看似便宜的 $0.003/次的功能，每天调 10 万次就是 $300/天、$9K/月。没有成本优化，许多 AI 产品在规模化后无法盈利。"
   },
   {
     "question": "What is semantic caching for LLM applications?",
-    "options": ["Caching model weights", "Storing responses for previous queries and serving cached responses when a new query is semantically similar (not just exactly matching)", "Caching embeddings only", "Pre-generating all possible responses"],
+    "options": [
+      "Caching model weights",
+      "Storing responses for previous queries and serving cached responses when a new query is semantically similar (not just exactly matching)",
+      "Caching embeddings only",
+      "Pre-generating all possible responses"
+    ],
     "correct": 1,
     "explanation": "Exact-match caching only helps with identical queries. Semantic caching embeds queries and serves cached responses when cosine similarity exceeds a threshold. 'What's the weather in NYC?' matches 'NYC weather today?'.",
-    "stage": "pre"
+    "stage": "pre",
+    "question_zh": "面向 LLM 应用的语义缓存是什么？",
+    "options_zh": [
+      "缓存模型权重",
+      "保存已查询的回答，当新 query 与历史 query 语义相近（不仅是完全一致）时，直接返回缓存结果",
+      "只缓存 embedding",
+      "预生成所有可能的回答"
+    ],
+    "explanation_zh": "精确匹配缓存只在 query 完全一致时命中。语义缓存对 query 做 embedding，余弦相似度超过阈值时返回缓存。'What\\'s the weather in NYC?' 与 'NYC weather today?' 就能匹配。"
   },
   {
     "question": "What is model routing as a cost optimization strategy?",
-    "options": ["Load balancing across servers", "Sending simple queries to cheap/fast models and complex queries to expensive/powerful models based on query classification", "Routing between different API providers", "Caching responses from multiple models"],
+    "options": [
+      "Load balancing across servers",
+      "Sending simple queries to cheap/fast models and complex queries to expensive/powerful models based on query classification",
+      "Routing between different API providers",
+      "Caching responses from multiple models"
+    ],
     "correct": 1,
     "explanation": "Not every query needs GPT-4. A classifier routes simple questions (FAQ, greetings) to a cheap model (GPT-3.5, Haiku) and complex questions (reasoning, analysis) to an expensive model. This can cut costs 50-80%.",
-    "stage": "post"
+    "stage": "post",
+    "question_zh": "把模型路由当作一种降本策略具体是什么？",
+    "options_zh": [
+      "在多台服务器之间做负载均衡",
+      "通过 query 分类，把简单 query 发给便宜/快的模型，把复杂 query 发给昂贵/强大的模型",
+      "在不同 API 厂商之间路由",
+      "缓存多个模型的回答"
+    ],
+    "explanation_zh": "不是每个 query 都需要 GPT-4。一个分类器把简单问题（FAQ、问候）路由到便宜模型（GPT-3.5、Haiku），把复杂问题（推理、分析）路由到强模型，能省 50-80% 成本。"
   },
   {
     "question": "What is prompt compression and how does it reduce costs?",
-    "options": ["Making prompts shorter by removing words", "Removing redundant tokens, summarizing long contexts, and eliminating boilerplate to reduce input token count while preserving essential information", "Compressing prompts with gzip", "Using shorter variable names"],
+    "options": [
+      "Making prompts shorter by removing words",
+      "Removing redundant tokens, summarizing long contexts, and eliminating boilerplate to reduce input token count while preserving essential information",
+      "Compressing prompts with gzip",
+      "Using shorter variable names"
+    ],
     "correct": 1,
     "explanation": "Input tokens dominate cost in RAG applications (large retrieved contexts). Prompt compression removes filler words, summarizes verbose passages, and trims low-relevance chunks to reduce token count without losing key information.",
-    "stage": "post"
+    "stage": "post",
+    "question_zh": "什么是 prompt compression，它怎么降本？",
+    "options_zh": [
+      "靠删词缩短 prompt",
+      "去掉冗余 token、汇总长上下文、剔除模板化文本，从而在保留关键信息的前提下降低输入 token 数",
+      "用 gzip 压缩 prompt",
+      "用更短的变量名"
+    ],
+    "explanation_zh": "在 RAG 应用里输入 token 占成本大头（巨大的检索上下文）。Prompt compression 删除填充词、汇总冗长段落、裁掉低相关 chunk，降低 token 数而不丢核心信息。"
   },
   {
     "question": "What is prefix caching and which provider feature enables it?",
-    "options": ["Caching the first word of each response", "Reusing KV-cache computation for shared prompt prefixes (system prompt + tool definitions), reducing latency and cost for repeated patterns", "Caching DNS lookups", "Browser caching of API responses"],
+    "options": [
+      "Caching the first word of each response",
+      "Reusing KV-cache computation for shared prompt prefixes (system prompt + tool definitions), reducing latency and cost for repeated patterns",
+      "Caching DNS lookups",
+      "Browser caching of API responses"
+    ],
     "correct": 1,
     "explanation": "If your system prompt + tool definitions are 5000 tokens and identical across requests, prefix caching computes the KV-cache once and reuses it. Anthropic's prompt caching and OpenAI's cached tokens both support this.",
-    "stage": "post"
+    "stage": "post",
+    "question_zh": "什么是 prefix caching，哪个厂商的功能支持它？",
+    "options_zh": [
+      "缓存每条回答的第一个词",
+      "对共享的 prompt 前缀（system prompt + tool 定义）复用 KV-cache 计算，减少重复模式下的延迟和成本",
+      "缓存 DNS 解析",
+      "浏览器缓存 API 响应"
+    ],
+    "explanation_zh": "如果 system prompt + tool 定义是 5000 token 且每次请求都一样，prefix caching 只算一次 KV-cache 然后复用。Anthropic 的 prompt caching 和 OpenAI 的 cached tokens 都支持。"
   }
 ]

@@ -3,37 +3,52 @@
     {
       "stage": "pre",
       "question": "Why did Mask R-CNN replace RoIPool with RoIAlign?",
+      "question_zh": "Mask R-CNN 为什么用 RoIAlign 替换 RoIPool？",
       "options": ["RoIAlign is faster on GPUs", "RoIPool rounds box coordinates to integers at multiple steps, misaligning the feature map from the input pixels by up to a feature-map pixel; RoIAlign uses bilinear sampling with no rounding, preserving localisation", "RoIPool only works on CPU", "RoIPool was a copyright issue"],
+      "options_zh": ["RoIAlign 在 GPU 上更快", "RoIPool 在多个步骤里把框坐标取整成整数，使特征图相对输入像素最多错位一个 feature-map 像素；RoIAlign 用 bilinear 采样、不取整，能保留定位精度", "RoIPool 只能在 CPU 上跑", "RoIPool 有版权问题"],
       "correct": 1,
-      "explanation": "RoIPool's rounding costs up to a stride-sized misalignment (e.g. 32 pixels on a stride-32 feature map). RoIAlign samples at exact float coordinates via bilinear interpolation. The change lifted mask AP by 3-4 points on COCO in the original paper and is now standard in every detector that cares about localisation."
+      "explanation": "RoIPool's rounding costs up to a stride-sized misalignment (e.g. 32 pixels on a stride-32 feature map). RoIAlign samples at exact float coordinates via bilinear interpolation. The change lifted mask AP by 3-4 points on COCO in the original paper and is now standard in every detector that cares about localisation.",
+      "explanation_zh": "RoIPool 的取整最多会带来一个 stride 大小的错位（比如 stride=32 的特征图就是 32 个像素）。RoIAlign 通过 bilinear 插值在精确的浮点坐标上采样。原论文里这一改动把 COCO 的 mask AP 提升了 3 到 4 个点，如今所有在意定位的检测器都默认这么做。"
     },
     {
       "stage": "pre",
       "question": "Mask R-CNN's mask head outputs a 28x28 mask per class per proposal. Why per class?",
+      "question_zh": "Mask R-CNN 的 mask 头为每个 proposal、每个类别都输出一张 28x28 的 mask，为什么要按类别输出？",
       "options": ["Because binary masks need per-class channels for backprop", "Decoupling mask prediction from classification: the mask head only has to learn the shape for each class separately, so the classifier's decision does not affect which mask is produced, only which channel is read at inference", "Binary masks overflow in a single channel", "The paper required it"],
+      "options_zh": ["因为二值 mask 反向传播需要按类别分通道", "把 mask 预测和分类解耦：mask 头只负责为每个类别分别学形状，分类器的决策不会影响生成哪个 mask，只决定推理时读哪个通道", "二值 mask 在单通道里会溢出", "论文要求这么做"],
       "correct": 1,
-      "explanation": "Producing one mask per class per proposal decouples mask shape learning from classification. At inference you read only the channel matching the predicted class. This multi-task decoupling matters because mask shape and class probability are different targets that train with different gradients."
+      "explanation": "Producing one mask per class per proposal decouples mask shape learning from classification. At inference you read only the channel matching the predicted class. This multi-task decoupling matters because mask shape and class probability are different targets that train with different gradients.",
+      "explanation_zh": "为每个 proposal 的每个类别分别生成一张 mask，把 mask 形状学习和分类解耦。推理时只读对应预测类别的那个通道。这种多任务解耦很关键，因为 mask 形状和类别概率是两个不同目标，梯度也不同。"
     },
     {
       "stage": "post",
       "question": "torchvision's Mask R-CNN prediction dict has `labels` that start at 1, not 0. Why?",
+      "question_zh": "torchvision 的 Mask R-CNN 预测字典里 `labels` 从 1 开始而不是 0，为什么？",
       "options": ["Legacy bug", "Class 0 is reserved for background; user classes are always 1-based so the classifier head can treat background as a real class with its own logits and gradients", "torchvision uses 1-based indexing throughout", "Training data determined it"],
+      "options_zh": ["遗留 bug", "类别 0 留给背景；用户类别从 1 开始，这样分类头能把背景当作一个有自己 logits 和梯度的真实类别", "torchvision 全局都用从 1 开始的索引", "由训练数据决定的"],
       "correct": 1,
-      "explanation": "Most detectors treat background as class 0 and explicit foreground classes as 1..C. The softmax over (C+1) classes lets the network learn to actively predict 'no object here' rather than just low confidence on all classes. A dataset with 4 real classes needs num_classes = 5 when swapping the predictor."
+      "explanation": "Most detectors treat background as class 0 and explicit foreground classes as 1..C. The softmax over (C+1) classes lets the network learn to actively predict 'no object here' rather than just low confidence on all classes. A dataset with 4 real classes needs num_classes = 5 when swapping the predictor.",
+      "explanation_zh": "大多数检测器把背景作为类别 0，前景类别从 1 编到 C。在 (C+1) 类上做 softmax 让网络能主动预测「这里没物体」，而不是单靠所有类别都低置信度。如果数据集有 4 个真实类别，替换 predictor 时 num_classes 要设成 5。"
     },
     {
       "stage": "post",
       "question": "You fine-tune Mask R-CNN on a 500-image dataset and val mAP plateaus while train loss keeps dropping. What is the first thing to try?",
+      "question_zh": "在 500 张图的数据集上微调 Mask R-CNN，验证 mAP 平台化但训练 loss 还在下降，第一步该试什么？",
       "options": ["Add more epochs", "Freeze the backbone and FPN so the model only fine-tunes the RPN and heads; 500 images is too few to update 23M backbone parameters without overfitting", "Switch to segmentation U-Net", "Use a higher learning rate"],
+      "options_zh": ["再多训几轮", "冻结 backbone 和 FPN，只微调 RPN 和各个头；500 张图根本不够在不过拟合的前提下更新 23M backbone 参数", "改用 U-Net 分割", "用更高的学习率"],
       "correct": 1,
-      "explanation": "On small datasets you do not have enough signal to fine-tune every parameter. Freezing the pretrained backbone and FPN (ImageNet + COCO features) and training only the RPN objectness head and the two classifier/mask heads is the standard recipe and usually fixes this plateau in one training run."
+      "explanation": "On small datasets you do not have enough signal to fine-tune every parameter. Freezing the pretrained backbone and FPN (ImageNet + COCO features) and training only the RPN objectness head and the two classifier/mask heads is the standard recipe and usually fixes this plateau in one training run.",
+      "explanation_zh": "数据集小，根本没有足够的信号去微调所有参数。把预训练 backbone 和 FPN（ImageNet + COCO 的特征）冻住，只训练 RPN 的 objectness 头以及分类/mask 两个头，这是标准做法，通常一次训练就能解决这种平台。"
     },
     {
       "stage": "post",
       "question": "The FPN inside Mask R-CNN has four levels (P2, P3, P4, P5) at strides 4, 8, 16, 32. Why not just use one level?",
+      "question_zh": "Mask R-CNN 内部的 FPN 有 P2、P3、P4、P5 四级，stride 分别是 4、8、16、32，为什么不只用一级？",
       "options": ["To use more GPU memory", "Objects in natural images span a range of scales; routing each proposal to the FPN level matching its size gives the head a feature map with the right receptive field for that object, which is strictly better than always using one scale", "Four levels is arbitrary", "To reduce parameter count"],
+      "options_zh": ["为了占更多 GPU 显存", "自然图像里的物体大小跨度很大；把每个 proposal 路由到与其尺寸匹配的 FPN 层，让头在合适的感受野上工作，比始终用同一个 scale 严格更好", "四级是随便定的", "为了减少参数量"],
       "correct": 1,
-      "explanation": "A small object on a stride-32 feature map occupies a single cell, which has almost no spatial information. FPN routes small objects to the high-resolution, shallow levels (P2) and large objects to the low-resolution, deep levels (P5), matching receptive field to object size. This is why every modern detector has a pyramid."
+      "explanation": "A small object on a stride-32 feature map occupies a single cell, which has almost no spatial information. FPN routes small objects to the high-resolution, shallow levels (P2) and large objects to the low-resolution, deep levels (P5), matching receptive field to object size. This is why every modern detector has a pyramid.",
+      "explanation_zh": "一个小目标在 stride 32 的特征图上只占一个格子，几乎没有空间信息。FPN 把小物体路由到高分辨率、浅层（P2），把大物体路由到低分辨率、深层（P5），让感受野匹配物体大小。这就是所有现代检测器都带金字塔结构的原因。"
     }
   ]
 }

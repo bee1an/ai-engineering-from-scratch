@@ -12,7 +12,15 @@
         "Prompting cannot describe schemas"
       ],
       "correct": 2,
-      "explanation": "Prompt-only structure works ~80% of the time on frontier models; production needs harder guarantees."
+      "explanation": "Prompt-only structure works ~80% of the time on frontier models; production needs harder guarantees.",
+      "question_zh": "为什么单纯靠 prompt 写 'return JSON' 在生产中不够？",
+      "options_zh": [
+        "JSON 太冗长",
+        "prompt 太长",
+        "前沿模型大多数时候遵守，但不是总能；少数畸形输出会让下游 parser 崩溃",
+        "prompt 不能描述 schema"
+      ],
+      "explanation_zh": "纯 prompt 结构化在前沿模型上约 80% 可靠；生产需要更硬的保证。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "The logit vector, masking tokens that would invalidate the target grammar so only valid continuations can be sampled"
       ],
       "correct": 3,
-      "explanation": "A logit processor sets invalid tokens to -inf so the softmax cannot sample them."
+      "explanation": "A logit processor sets invalid tokens to -inf so the softmax cannot sample them.",
+      "question_zh": "约束解码在每一步生成时修改什么？",
+      "options_zh": [
+        "KV cache",
+        "tokenizer",
+        "训练 loss",
+        "logit 向量，把会破坏目标语法的 token 屏蔽掉，使采样只能选有效续接"
+      ],
+      "explanation_zh": "logit processor 把无效 token 设为 -inf，softmax 因此采样不到。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "It skips backprop"
       ],
       "correct": 1,
-      "explanation": "Determined tokens skip sampling and reduced valid-token sets shrink the decode cost."
+      "explanation": "Determined tokens skip sampling and reduced valid-token sets shrink the decode cost.",
+      "question_zh": "为什么约束解码可能比自由生成更快？",
+      "options_zh": [
+        "模型更小",
+        "强制的脚手架 token（例如 '{\"name\": \"'）可直接发出无需采样，且有效 token 搜索空间也变小",
+        "它完全跳过 softmax",
+        "它跳过反向传播"
+      ],
+      "explanation_zh": "确定性 token 跳过采样，缩减的有效 token 集合也降低解码开销。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Use snake_case"
       ],
       "correct": 2,
-      "explanation": "Field order is logic: putting reasoning first lets the model think before locking in an answer."
+      "explanation": "Field order is logic: putting reasoning first lets the model think before locking in an answer.",
+      "question_zh": "哪个 schema 设计选择能防止模型过早 commit？",
+      "options_zh": [
+        "把 'answer' 放最前",
+        "用更短的键",
+        "把 reasoning 字段放在 answer/decision 字段之前，让模型先思考再给出结论",
+        "用 snake_case"
+      ],
+      "explanation_zh": "字段顺序就是逻辑：让 reasoning 在前，模型才能在锁定答案之前思考。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "They only support enums"
       ],
       "correct": 2,
-      "explanation": "FSMs cannot represent unbounded recursion; CFG engines handle it."
+      "explanation": "FSMs cannot represent unbounded recursion; CFG engines handle it.",
+      "question_zh": "Outlines 这类基于 FSM 的约束解码工具的限制是什么？",
+      "options_zh": [
+        "它们不是确定性的",
+        "它们把你锁死在 OpenAI",
+        "递归 schema 必须扁平化；真正递归的结构需要 CFG 引擎，例如 XGrammar",
+        "它们只支持 enum"
+      ],
+      "explanation_zh": "FSM 不能表达无界递归；CFG 引擎能处理。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "It edits the prompt"
       ],
       "correct": 0,
-      "explanation": "Instructor uses provider-side structured output plus client-side validation and retries, not logit masking."
+      "explanation": "Instructor uses provider-side structured output plus client-side validation and retries, not logit masking.",
+      "question_zh": "为什么说 Instructor 不修改 logit？",
+      "options_zh": [
+        "Instructor 把 schema 嵌入 prompt 并解析/重试输出；logit 屏蔽要么发生在服务端，要么没有",
+        "它使用梯度更新",
+        "Anthropic 要求",
+        "它编辑 prompt"
+      ],
+      "explanation_zh": "Instructor 用提供商侧结构化输出加客户端验证和重试，不做 logit 屏蔽。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Regex is slow"
       ],
       "correct": 1,
-      "explanation": "Over-strict grammars force the model to invent values; always allow null/sentinel for unknowns."
+      "explanation": "Over-strict grammars force the model to invent values; always allow null/sentinel for unknowns.",
+      "question_zh": "像 date='YYYY-MM-DD' 这样严格的正则会引入什么问题？",
+      "options_zh": [
+        "它需要 CFG 支持",
+        "它去掉了未知值的逃生通道，模型会捏造日期而不是返回 null/sentinel",
+        "它会破坏 JSON 解析",
+        "regex 慢"
+      ],
+      "explanation_zh": "过严的语法迫使模型瞎编值；总要为未知值留 null/sentinel。"
     },
     {
       "stage": "post",
@@ -96,7 +152,15 @@
         "Self-hosted inference where you control the model and want logit-level guarantees without retries"
       ],
       "correct": 3,
-      "explanation": "vLLM guided decoding fits self-hosted serving with logit-level constraints; vendor APIs lock you to their stack."
+      "explanation": "vLLM guided decoding fits self-hosted serving with logit-level constraints; vendor APIs lock you to their stack.",
+      "question_zh": "什么时候应该用 vLLM guided decoding 而不是供应商结构化输出 API？",
+      "options_zh": [
+        "总是用供应商",
+        "只对极小 schema",
+        "只在用字节级 BPE 时",
+        "在你掌控模型的自托管推理上，且想要无需重试的 logit 级保证"
+      ],
+      "explanation_zh": "vLLM guided decoding 适合自托管服务，能在 logit 级强制约束；供应商 API 把你绑定到他们的栈。"
     }
   ]
 }

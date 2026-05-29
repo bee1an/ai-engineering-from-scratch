@@ -12,7 +12,15 @@
         "Because subprocess is faster than import"
       ],
       "correct": 1,
-      "explanation": "A separate process is the simplest isolation the language ships. The parent retains a kill handle and an independent address space, so a crashing experiment cannot take the orchestrator with it."
+      "explanation": "A separate process is the simplest isolation the language ships. The parent retains a kill handle and an independent address space, so a crashing experiment cannot take the orchestrator with it.",
+      "question_zh": "为什么 runner 派生子进程,而不是在进程内 import 实验脚本?",
+      "options_zh": [
+        "因为 Python 不允许嵌套 import",
+        "因为单独的进程让 runner 在超时或内存超限时拥有 kill 句柄,并把崩溃与编排器隔离",
+        "因为 metric 格式要求",
+        "因为 subprocess 比 import 快"
+      ],
+      "explanation_zh": "另起一个进程是这门语言提供的最简单隔离方式。父进程保留 kill 句柄和独立地址空间,实验崩溃不会拖垮编排器。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Because numpy ignores the cap"
       ],
       "correct": 1,
-      "explanation": "The cap is enforced by polling, not by an in kernel limit. The poller interval is the resolution of the cap, and short spikes can briefly exceed the cap before the next observation."
+      "explanation": "The cap is enforced by polling, not by an in kernel limit. The poller interval is the resolution of the cap, and short spikes can briefly exceed the cap before the next observation.",
+      "question_zh": "为什么把内存上限描述为「软」限制?",
+      "options_zh": [
+        "只对堆,不对栈生效",
+        "poller 间隔非零,进程在两次轮询之间可以飙到上限之上,runner 只能在下次观察时反应",
+        "操作系统总会覆盖它",
+        "numpy 忽略上限"
+      ],
+      "explanation_zh": "上限通过轮询执行,不靠内核内限制。轮询间隔就是上限的分辨率,短暂尖峰会在下次观察前短暂超出。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "crash"
       ],
       "correct": 3,
-      "explanation": "Terminal is ok only when exit code is zero and metrics parsed. A non zero exit code is crash even if some metrics were captured before the failure."
+      "explanation": "Terminal is ok only when exit code is zero and metrics parsed. A non zero exit code is crash even if some metrics were captured before the failure.",
+      "question_zh": "当 stdout 中含有 metric 但 exit code 非零时,runner 返回哪个 terminal 标签?",
+      "options_zh": [
+        "ok",
+        "timeout",
+        "oom",
+        "crash"
+      ],
+      "explanation_zh": "只有 exit code 为 0 且 metric 解析成功时才是 ok。即便失败前已捕获到一些 metric,非零 exit code 仍是 crash。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "It expects exactly one line of output"
       ],
       "correct": 1,
-      "explanation": "Final metrics are the last line that parses as json and includes every required key. Earlier covering lines are kept as intermediate metrics for learning curves."
+      "explanation": "Final metrics are the last line that parses as json and includes every required key. Earlier covering lines are kept as intermediate metrics for learning curves.",
+      "question_zh": "runner 如何在 stdout 中识别最终 metrics blob?",
+      "options_zh": [
+        "读第一条 json 行",
+        "读最后一条满足所有 required metric_keys 的 json 行; 较早的覆盖行作为 intermediate metric",
+        "扫 stderr 找 json",
+        "期望恰好一行输出"
+      ],
+      "explanation_zh": "最终 metric 是最后一行能解析为 json 且包含全部必需 key 的内容。较早覆盖行作为 intermediate metric 留作学习曲线。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Because the seed only varies along one knob"
       ],
       "correct": 1,
-      "explanation": "Single knob sweeps keep the result interpretable. Full factorial costs scale exponentially with the number of knobs and the resulting table is hard to read."
+      "explanation": "Single knob sweeps keep the result interpretable. Full factorial costs scale exponentially with the number of knobs and the resulting table is hard to read.",
+      "question_zh": "为什么消融助手一次只扫一个旋钮,而不是做完整因子设计?",
+      "options_zh": [
+        "因为 runner 不能启动多于一个子进程",
+        "因为单旋钮扫描产出 evaluator 易绘制的清晰轴; 全因子随旋钮数指数膨胀,解读会混乱",
+        "因为 numpy 不支持笛卡儿积",
+        "因为 seed 只在一个旋钮上变化"
+      ],
+      "explanation_zh": "单旋钮扫描让结果可解释。全因子代价随旋钮数呈指数增长,得到的表也难以读。"
     },
     {
       "stage": "check",
@@ -72,7 +112,15 @@
         "A free significance test"
       ],
       "correct": 2,
-      "explanation": "The seed pins random initialisation in the experiment. Two runs with the same seed produce identical metrics, which is what lets the evaluator distinguish a real regression from a different draw."
+      "explanation": "The seed pins random initialisation in the experiment. Two runs with the same seed produce identical metrics, which is what lets the evaluator distinguish a real regression from a different draw.",
+      "question_zh": "把 spec.seed 转发进 config['__seed'] 给 evaluator 带来什么保证?",
+      "options_zh": [
+        "更快的 wall time",
+        "更低的内存消耗",
+        "确定性: 同 seed 重跑产生相同 metric,evaluator 才能区分真正变化与随机噪声",
+        "免费的显著性检验"
+      ],
+      "explanation_zh": "seed 钉住实验中的随机初始化。同 seed 两次运行产生相同 metric,这正是 evaluator 区分真实回归与不同抽样的依据。"
     }
   ]
 }

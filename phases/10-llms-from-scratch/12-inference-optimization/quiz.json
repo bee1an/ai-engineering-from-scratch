@@ -1,37 +1,52 @@
 [
   {
     "question": "What are the two phases of LLM inference?",
+    "question_zh": "LLM 推理的两个阶段是什么？",
     "options": ["Training and evaluation", "Prefill (processes the prompt in parallel, compute-bound) and decode (generates tokens one at a time, memory-bound)", "Encoding and decoding", "Forward and backward"],
+    "options_zh": ["训练和评估", "Prefill（并行处理 prompt，受算力限制）与 decode（一次生成一个 token，受内存带宽限制）", "编码和解码", "前向和反向"],
     "correct": 1,
     "explanation": "Prefill processes all prompt tokens in parallel (limited by compute). Decode generates tokens autoregressively one at a time (limited by memory bandwidth for loading model weights). Different optimizations target each phase.",
+    "explanation_zh": "Prefill 并行处理所有 prompt token（受算力限制）。Decode 逐个自回归生成 token（受加载模型权重的内存带宽限制）。两个阶段各有不同的优化方向。",
     "stage": "pre"
   },
   {
     "question": "What does KV-cache eliminate during autoregressive generation?",
+    "question_zh": "在自回归生成时，KV-cache 消除了什么？",
     "options": ["The need for attention masks", "Redundant recomputation of key and value vectors for all previous tokens at each generation step", "The embedding lookup", "The softmax computation"],
+    "options_zh": ["attention mask 的需要", "每一步生成时对所有先前 token 的 key 和 value 向量的重复计算", "embedding 查找", "softmax 计算"],
     "correct": 1,
     "explanation": "Without KV-cache, generating token N requires recomputing attention keys and values for all N-1 previous tokens. KV-cache stores these vectors, so each new token only computes its own K and V, saving O(N) computation per step.",
+    "explanation_zh": "没有 KV-cache 时，生成第 N 个 token 需要重新计算前 N-1 个 token 的 attention key 和 value。KV-cache 把这些向量存下来，每个新 token 只算自己的 K 和 V，每步省下 O(N) 的计算。",
     "stage": "pre"
   },
   {
     "question": "What is continuous batching and why does it improve throughput?",
+    "question_zh": "什么是 continuous batching，它为什么能提升吞吐量？",
     "options": ["Processing all requests in one large batch", "Dynamically adding and removing requests from the running batch as they start and finish, instead of waiting for the entire batch to complete", "Using larger batch sizes", "Batching across multiple models"],
+    "options_zh": ["把所有请求放进一个大 batch 处理", "随着请求开始与结束动态地从运行中的 batch 中加入或移出请求，而不是等整个 batch 完成", "使用更大的 batch size", "跨多个模型组 batch"],
     "correct": 1,
     "explanation": "In static batching, a short request holds its batch slot until the longest request finishes. Continuous batching immediately fills completed slots with new requests, keeping the GPU busy and improving overall throughput.",
+    "explanation_zh": "在静态 batching 中，短请求要占着 batch 槽位，等最长的请求结束才释放。Continuous batching 一旦有槽位空出就立刻补入新请求，让 GPU 保持忙碌，从而提升整体吞吐量。",
     "stage": "post"
   },
   {
     "question": "What problem does PagedAttention (used in vLLM) solve?",
+    "question_zh": "PagedAttention（vLLM 中使用）解决了什么问题？",
     "options": ["It speeds up the attention computation", "It manages KV-cache memory in fixed-size blocks like virtual memory, eliminating fragmentation from variable-length sequences", "It reduces model size", "It improves tokenization speed"],
+    "options_zh": ["加速 attention 计算", "像虚拟内存一样以固定大小的块管理 KV-cache 内存，消除变长序列带来的碎片", "减小模型体积", "加快分词速度"],
     "correct": 1,
     "explanation": "KV-cache for variable-length sequences causes memory fragmentation (wasted gaps between allocations). PagedAttention allocates KV-cache in fixed blocks and maps them with a page table, like OS virtual memory.",
+    "explanation_zh": "变长序列的 KV-cache 会造成内存碎片（分配之间留下浪费的空隙）。PagedAttention 以固定块分配 KV-cache，并用类似操作系统虚拟内存的页表来映射。",
     "stage": "post"
   },
   {
     "question": "What is speculative decoding?",
+    "question_zh": "什么是 speculative decoding？",
     "options": ["Generating multiple responses and picking the best", "Using a small draft model to propose multiple tokens that the large model verifies in parallel, speeding up generation", "Predicting which tokens the user wants", "Caching frequently generated sequences"],
+    "options_zh": ["生成多个回复并挑出最好的", "用一个小的 draft 模型一次性提出多个候选 token，由大模型并行校验，从而加速生成", "预测用户想要哪些 token", "缓存常生成的序列"],
     "correct": 1,
     "explanation": "A small fast model generates N candidate tokens. The large model verifies all N in a single forward pass (parallel). If K tokens are accepted, you've generated K tokens in the time of roughly 1 large-model step.",
+    "explanation_zh": "一个小而快的模型生成 N 个候选 token，大模型在一次前向传播中并行校验全部 N 个。如果接受了 K 个 token，相当于在大约一次大模型步的时间里生成了 K 个 token。",
     "stage": "post"
   }
 ]

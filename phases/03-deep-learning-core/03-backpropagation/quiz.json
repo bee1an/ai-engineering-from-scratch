@@ -1,37 +1,52 @@
 [
   {
     "question": "What is the chain rule in the context of neural networks?",
+    "question_zh": "在神经网络语境下，链式法则是什么？",
     "options": ["A rule for chaining layers together", "If y = f(g(x)), then dy/dx = f'(g(x)) * g'(x) -- multiply derivatives along the path", "A method for initializing weights", "A technique for batching data"],
+    "options_zh": ["把多层链接到一起的规则", "如果 y = f(g(x))，那么 dy/dx = f'(g(x)) * g'(x)，沿路径把导数相乘", "一种权重初始化方法", "一种批处理数据的技巧"],
     "correct": 1,
     "explanation": "The chain rule lets you compute the derivative of a composite function by multiplying the local derivatives at each step. Backpropagation applies this systematically through the computational graph.",
+    "explanation_zh": "链式法则让你能通过把每一步的局部导数相乘来计算复合函数的导数。反向传播就是把这个法则系统化地应用到计算图上。",
     "stage": "pre"
   },
   {
     "question": "Why is backpropagation more efficient than computing each gradient independently?",
+    "question_zh": "为什么反向传播比逐个独立计算梯度更高效？",
     "options": ["It uses less memory", "It computes all gradients in a single backward pass instead of one forward pass per parameter", "It only works on small networks", "It avoids using the chain rule"],
+    "options_zh": ["占用更少内存", "在一次反向传播中计算所有梯度，而不是每个参数都跑一次前向传播", "只在小网络上有效", "避免使用链式法则"],
     "correct": 1,
     "explanation": "Computing gradients independently requires one forward pass per parameter (millions of passes for a large network). Backpropagation computes all gradients in one backward pass by reusing intermediate values stored during the forward pass.",
+    "explanation_zh": "独立计算梯度需要每个参数跑一次前向传播（大网络要跑数百万次）。反向传播只需要一次反向遍历，复用前向传播时存下的中间值就能算出所有梯度。",
     "stage": "pre"
   },
   {
     "question": "In the backward pass, why do we use '+=' instead of '=' when accumulating gradients?",
+    "question_zh": "在反向传播中累加梯度时，为什么用 `+=` 而不是 `=`？",
     "options": ["It's a Python convention", "A value might be used in multiple operations, so its gradient is the sum of gradients from all paths", "It prevents overflow", "It makes the code run faster"],
+    "options_zh": ["这是 Python 的惯例", "一个值可能参与了多次运算，它的梯度是所有路径梯度的总和", "防止溢出", "让代码跑得更快"],
     "correct": 1,
     "explanation": "When a Value is used as input to multiple operations (e.g., x used in both x*w1 and x*w2), its total gradient is the sum of the gradients flowing back from each operation. Using += accumulates these correctly.",
+    "explanation_zh": "当一个 Value 作为多个运算的输入时（比如 x 同时参与 x*w1 和 x*w2），它的总梯度等于从每个运算回传的梯度之和。用 `+=` 才能正确累加。",
     "stage": "post"
   },
   {
     "question": "What causes the vanishing gradient problem in deep sigmoid networks?",
+    "question_zh": "深层 sigmoid 网络中的梯度消失问题是什么造成的？",
     "options": ["The learning rate is too small", "Sigmoid's derivative has a maximum of 0.25, so gradients shrink exponentially through layers", "The network has too many parameters", "The loss function is poorly chosen"],
+    "options_zh": ["学习率太小", "sigmoid 的导数最大只有 0.25，梯度会随层数指数级缩小", "网络参数太多", "损失函数选得不好"],
     "correct": 1,
     "explanation": "The sigmoid derivative peaks at 0.25 (when z=0). Each layer multiplies the gradient by at most 0.25, so after 10 layers the gradient is at most 0.25^10 = ~0.000001 of the original signal.",
+    "explanation_zh": "sigmoid 的导数峰值是 0.25（在 z=0 处）。每一层最多把梯度乘以 0.25，10 层之后梯度最多只剩原始信号的 0.25^10 ≈ 0.000001。",
     "stage": "post"
   },
   {
     "question": "Why does topological sort matter in the backward pass?",
+    "question_zh": "在反向传播中，拓扑排序为什么重要？",
     "options": ["It makes the code cleaner", "It ensures each node's gradient is fully accumulated before propagating to its children", "It speeds up the forward pass", "It reduces memory usage"],
+    "options_zh": ["让代码更整洁", "保证每个节点的梯度在传播到其子节点之前已经累加完整", "加速前向传播", "减少内存占用"],
     "correct": 1,
     "explanation": "Topological sort ensures we process nodes in the correct order: a node's gradient must be fully accumulated from all downstream paths before we propagate through it. Without this ordering, gradients would be incomplete.",
+    "explanation_zh": "拓扑排序保证我们以正确的顺序处理节点：必须先把一个节点从所有下游路径回传的梯度全部累加完，才能再向它前面的节点传播。没有这个顺序，梯度会不完整。",
     "stage": "post"
   }
 ]

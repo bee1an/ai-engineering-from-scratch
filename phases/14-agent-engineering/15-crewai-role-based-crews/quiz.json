@@ -12,7 +12,15 @@
         "Tool, Prompt, Model, Memory"
       ],
       "correct": 0,
-      "explanation": "Agent, Task, Crew, and Process are the four primitives."
+      "explanation": "Agent, Task, Crew, and Process are the four primitives.",
+      "question_zh": "CrewAI 的四个原语是什么？",
+      "options_zh": [
+        "Agent、Task、Crew、Process",
+        "Node、Edge、Reducer、Checkpointer",
+        "Actor、Message、Inbox、Runtime",
+        "Tool、Prompt、Model、Memory"
+      ],
+      "explanation_zh": "Agent、Task、Crew 和 Process 是这四个原语。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Hierarchical process"
       ],
       "correct": 1,
-      "explanation": "The docs say start production apps with Flows; fold Crews in as sub-steps when autonomy earns its cost."
+      "explanation": "The docs say start production apps with Flows; fold Crews in as sub-steps when autonomy earns its cost.",
+      "question_zh": "CrewAI 文档推荐的生产起点是什么？",
+      "options_zh": [
+        "Crew",
+        "Flow",
+        "Sequential process",
+        "Hierarchical process"
+      ],
+      "explanation_zh": "文档建议生产应用从 Flow 起步；当 agent 自治真的值回成本时，再把 Crew 作为子步骤折进来。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Flow has no agents"
       ],
       "correct": 1,
-      "explanation": "Crew is autonomy-first; Flow is determinism-first."
+      "explanation": "Crew is autonomy-first; Flow is determinism-first.",
+      "question_zh": "Crew 和 Flow 的区别是什么？",
+      "options_zh": [
+        "Crew 收费，Flow 免费",
+        "Crew 由 LLM 驱动、自治；Flow 是事件驱动、代码主导、确定性且可测试",
+        "Crew 仅在 GPU 上运行",
+        "Flow 没有 agent"
+      ],
+      "explanation_zh": "Crew 以自治为先；Flow 以确定性为先。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Quantized"
       ],
       "correct": 3,
-      "explanation": "Short-term, long-term, entity, and contextual are the four. Quantized memory is not a CrewAI concept."
+      "explanation": "Short-term, long-term, entity, and contextual are the four. Quantized memory is not a CrewAI concept.",
+      "question_zh": "以下哪一项不是 CrewAI 内置的四种 memory 类型？",
+      "options_zh": [
+        "Short-term",
+        "Long-term",
+        "Entity",
+        "Quantized"
+      ],
+      "explanation_zh": "四种是 short-term、long-term、entity 和 contextual。Quantized memory 不是 CrewAI 的概念。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Slow Bedrock calls; switch regions"
       ],
       "correct": 1,
-      "explanation": "Backstories shape tone and judgment but eat context if oversized."
+      "explanation": "Backstories shape tone and judgment but eat context if oversized.",
+      "question_zh": "什么是 backstory bloat，本课建议如何处理？",
+      "options_zh": [
+        "保存了太多 crew；归档旧的",
+        "2000 字的 agent backstory 把上下文预算挤爆；把 backstory 写紧凑",
+        "工具太多；删掉一些",
+        "Bedrock 调用慢；切换 region"
+      ],
+      "explanation_zh": "Backstory 影响 agent 的语气和判断，但写得过长会吃掉上下文。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "When you do not have any tools"
       ],
       "correct": 1,
-      "explanation": "Hierarchical adds a manager Agent; only worthwhile when several specialists need dynamic routing."
+      "explanation": "Hierarchical adds a manager Agent; only worthwhile when several specialists need dynamic routing.",
+      "question_zh": "什么时候选择 Hierarchical 流程比 Sequential 更值得？",
+      "options_zh": [
+        "任何时候都值得",
+        "当你有 4 个以上专家 agent 需要一个 manager Agent 在它们之间路由时",
+        "当你只有一个任务时",
+        "当你没有任何工具时"
+      ],
+      "explanation_zh": "Hierarchical 增加一个 manager Agent；只有在多个专家需要动态路由时才划算。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Crews lack memory"
       ],
       "correct": 1,
-      "explanation": "Crew autonomy makes prod replay and audit painful; wrap with a Flow when shipping."
+      "explanation": "Crew autonomy makes prod replay and audit painful; wrap with a Flow when shipping.",
+      "question_zh": "为什么本课不建议在生产环境中使用自由形态的 Crew？",
+      "options_zh": [
+        "Crew 不被支持",
+        "输出波动大，没有 Flow 包装时调试非常痛苦",
+        "Crew 比 Flow 更贵",
+        "Crew 没有 memory"
+      ],
+      "explanation_zh": "Crew 的自治让生产环境的回放和审计很麻烦；上线时用 Flow 把它包起来。"
     }
   ]
 }

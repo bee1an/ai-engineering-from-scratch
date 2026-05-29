@@ -2685,12 +2685,17 @@
         var buildH2 = article.querySelector('#build-it, #build');
         var keyTermsH2 = article.querySelector('#key-terms');
 
-        var preQuizHtml = buildQuizHtml(questions.filter(function (q) { return q.stage === 'pre'; }), 'pre', 'Pre-Lesson Check');
-        var checkQuizHtml = buildQuizHtml(questions.filter(function (q) { return q.stage === 'check'; }), 'check', 'Mid-Lesson Check');
-        var postQuizHtml = buildQuizHtml(questions.filter(function (q) { return q.stage === 'post'; }), 'post', 'Post-Lesson Quiz');
+        var t = (window.AIFS_LANG && AIFS_LANG.t) ? AIFS_LANG.t : function(k){return null;};
+        var preTitle = t('lesson.quiz.pre') || 'Pre-Lesson Check';
+        var midTitle = t('lesson.quiz.mid') || 'Mid-Lesson Check';
+        var postTitle = t('lesson.quiz.post') || 'Post-Lesson Quiz';
+        var quizTitle = t('lesson.quiz.title') || 'Quiz';
+        var preQuizHtml = buildQuizHtml(questions.filter(function (q) { return q.stage === 'pre'; }), 'pre', preTitle);
+        var checkQuizHtml = buildQuizHtml(questions.filter(function (q) { return q.stage === 'check'; }), 'check', midTitle);
+        var postQuizHtml = buildQuizHtml(questions.filter(function (q) { return q.stage === 'post'; }), 'post', postTitle);
 
         if (!preQuizHtml && !checkQuizHtml && !postQuizHtml) {
-          var allHtml = buildQuizHtml(questions, 'all', 'Quiz');
+          var allHtml = buildQuizHtml(questions, 'all', quizTitle);
           if (allHtml && keyTermsH2) {
             keyTermsH2.insertAdjacentHTML('beforebegin', allHtml);
           } else if (allHtml) {
@@ -2731,23 +2736,31 @@
 
       function buildQuizHtml(questions, id, title) {
         if (!questions.length) return '';
+        var lang = (window.AIFS_LANG && AIFS_LANG.get) ? AIFS_LANG.get() : 'en';
+        var pickField = function (q, base) {
+          if (lang === 'zh' && q[base + '_zh']) return q[base + '_zh'];
+          return q[base];
+        };
         var html = '<div class="quiz-section" id="quiz-' + id + '">';
         html += '<div class="quiz-title">&#9989; ' + escapeHtml(title) + '</div>';
         for (var qi = 0; qi < questions.length; qi++) {
           var q = questions[qi];
           var qid = id + '-q' + qi;
+          var question = pickField(q, 'question');
+          var options = pickField(q, 'options');
+          var explanation = pickField(q, 'explanation');
           html += '<div class="quiz-question" data-correct="' + q.correct + '" id="' + qid + '">';
-          html += '<div class="quiz-question-text">' + (qi + 1) + '. ' + escapeHtml(q.question) + '</div>';
+          html += '<div class="quiz-question-text">' + (qi + 1) + '. ' + escapeHtml(question) + '</div>';
           html += '<div class="quiz-options">';
-          for (var oi = 0; oi < q.options.length; oi++) {
+          for (var oi = 0; oi < options.length; oi++) {
             html += '<div class="quiz-option" data-index="' + oi + '" onclick="handleQuizClick(this)">';
             html += '<span class="quiz-marker"></span>';
-            html += '<span>' + escapeHtml(q.options[oi]) + '</span>';
+            html += '<span>' + escapeHtml(options[oi]) + '</span>';
             html += '</div>';
           }
           html += '</div>';
-          if (q.explanation) {
-            html += '<div class="quiz-explanation" id="' + qid + '-exp">' + escapeHtml(q.explanation) + '</div>';
+          if (explanation) {
+            html += '<div class="quiz-explanation" id="' + qid + '-exp">' + escapeHtml(explanation) + '</div>';
           }
           html += '</div>';
         }

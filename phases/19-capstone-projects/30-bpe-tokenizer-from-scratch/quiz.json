@@ -12,7 +12,15 @@
         "It removes the need to store a merge table"
       ],
       "correct": 0,
-      "explanation": "The 256 raw byte ids cover every possible UTF-8 input. No unknown token is ever required because any input can be expressed as a sequence of bytes."
+      "explanation": "The 256 raw byte ids cover every possible UTF-8 input. No unknown token is ever required because any input can be expressed as a sequence of bytes.",
+      "question_zh": "为什么字节级 BPE tokenizer 从 256 个符号的 alphabet 起步?",
+      "options_zh": [
+        "保证任何 UTF-8 输入在学习任何 merge 之前就能被表达",
+        "这是支持英语的最小 alphabet",
+        "这与多数加速器上的 GPU warp size 相同",
+        "免去存 merge 表的需要"
+      ],
+      "explanation_zh": "256 个原始字节 id 覆盖任何可能的 UTF-8 输入。任何输入都能表达为字节序列,因此永远不需要 unknown token。"
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "Trains a small neural network to score subwords"
       ],
       "correct": 1,
-      "explanation": "Each step finds the highest-frequency adjacent pair across the corpus, merges it into a new symbol, and records the merge."
+      "explanation": "Each step finds the highest-frequency adjacent pair across the corpus, merges it into a new symbol, and records the merge.",
+      "question_zh": "BPE 的每一个训练步做什么?",
+      "options_zh": [
+        "随机切一个词并赋予新 id",
+        "在语料上统计相邻符号对,把出现频率最高的一对合并",
+        "通过移除最不常见的 id 来缩小词表",
+        "训练一个小神经网络给 subword 打分"
+      ],
+      "explanation_zh": "每一步找到语料中频率最高的相邻对,把它合并成一个新符号,并记录这次 merge。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "By the bytes of the pair, sorted alphabetically"
       ],
       "correct": 2,
-      "explanation": "Inference applies merges in the order they were learned. The earliest merge in the table wins when multiple merges could apply."
+      "explanation": "Inference applies merges in the order they were learned. The earliest merge in the table wins when multiple merges could apply.",
+      "question_zh": "在编码新文本时,merge 按什么顺序应用?",
+      "options_zh": [
+        "随机顺序,直到没有可应用的 merge",
+        "按输入位置从左到右,与训练时的 rank 无关",
+        "按训练时获得的 rank,rank 最低的优先",
+        "按 pair 的字节,字典序排序"
+      ],
+      "explanation_zh": "推理时按 merge 学习时的顺序应用。当多个 merge 都能应用时,merge 表中最早出现的胜出。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "It silently skips the string"
       ],
       "correct": 2,
-      "explanation": "With allow_special off, a string like <|endoftext|> is treated as raw bytes and goes through the merge loop like any other input."
+      "explanation": "With allow_special off, a string like <|endoftext|> is treated as raw bytes and goes through the merge loop like any other input.",
+      "question_zh": "当 allow_special 为 False 时,encoder 对一个 special-token 字符串的行为是?",
+      "options_zh": [
+        "抛出错误",
+        "把它映射到保留的 id",
+        "对它的字面字节做编码",
+        "静默跳过这个字符串"
+      ],
+      "explanation_zh": "关闭 allow_special 时,像 <|endoftext|> 这样的字符串被当作原始字节,与其他输入一样进入 merge 循环。"
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "The decoder always returns the empty string for unknown ids"
       ],
       "correct": 0,
-      "explanation": "Every id resolves either to a raw byte or to two previously known ids. Recursive expansion always terminates in bytes, which decode to UTF-8."
+      "explanation": "Every id resolves either to a raw byte or to two previously known ids. Recursive expansion always terminates in bytes, which decode to UTF-8.",
+      "question_zh": "为什么 decoder 永远不需要 unknown-token id?",
+      "options_zh": [
+        "每一个学到的 token 都是两个已知 token 的拼接,递归下降到单字节",
+        "encoder 在 decode 之前先剥离 unknown token",
+        "模型在采样时拒绝 unknown id",
+        "decoder 对 unknown id 总是返回空字符串"
+      ],
+      "explanation_zh": "每个 id 要么解析成一个原始字节,要么解析成两个先前已知的 id。递归展开总会终止于字节,字节再解码为 UTF-8。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "It oscillates randomly because BPE is non-deterministic"
       ],
       "correct": 2,
-      "explanation": "Larger vocabularies learn more merges, so common subwords collapse into single ids and the encoded sequence gets shorter."
+      "explanation": "Larger vocabularies learn more merges, so common subwords collapse into single ids and the encoded sequence gets shorter.",
+      "question_zh": "随着目标词表增大,固定句子的 encoded 长度会怎么变化?",
+      "options_zh": [
+        "随词表大小线性增长",
+        "保持不变,因为每个 id 都编码单个字节",
+        "倾向于变短,因为更大的词表覆盖更多 subword",
+        "随机震荡,因为 BPE 是非确定性的"
+      ],
+      "explanation_zh": "更大的词表学到更多 merge,常见 subword 被合并为单个 id,编码序列因此变短。"
     }
   ]
 }

@@ -5,86 +5,142 @@
     {
       "stage": "pre",
       "question": "What three files form the smallest useful workbench?",
+      "question_zh": "构成最小可用工作台的三个文件是什么？",
       "options": [
         "AGENTS.md (router), agent_state.json (state), task_board.json (queue)",
         "README.md, CHANGELOG.md, LICENSE",
         "model.py, prompts.py, tools.py",
         "Dockerfile, Makefile, .gitignore"
       ],
+      "options_zh": [
+        "AGENTS.md（路由），agent_state.json（状态），task_board.json（任务队列）",
+        "README.md，CHANGELOG.md，LICENSE",
+        "model.py，prompts.py，tools.py",
+        "Dockerfile，Makefile，.gitignore"
+      ],
       "correct": 0,
-      "explanation": "A short router, durable state, and a task queue are the floor."
+      "explanation": "A short router, durable state, and a task queue are the floor.",
+      "explanation_zh": "一个简短的路由、持久化的状态和一个任务队列是最低底线。"
     },
     {
       "stage": "pre",
       "question": "What is the lesson's framing of AGENTS.md?",
+      "question_zh": "本课对 AGENTS.md 的定位是什么？",
       "options": [
         "A 3000-line onboarding manual",
         "A short router that points at deeper docs and the state and board",
         "A pure prompt-cache key",
         "A secret kept out of the repo"
       ],
+      "options_zh": [
+        "一份 3000 行的新人入门手册",
+        "一个简短的路由，指向更深入的文档以及 state 和 board",
+        "一个纯粹的 prompt 缓存键",
+        "一个不放进仓库的密钥"
+      ],
       "correct": 1,
-      "explanation": "AGENTS.md is a router, not a manual; long manuals get ignored."
+      "explanation": "AGENTS.md is a router, not a manual; long manuals get ignored.",
+      "explanation_zh": "AGENTS.md 是路由而非手册；冗长的手册会被忽略。"
     },
     {
       "stage": "check",
       "question": "What does Augment Code's data say about a good AGENTS.md?",
+      "question_zh": "Augment Code 的数据对一份好的 AGENTS.md 有何结论？",
       "options": [
         "It has no measurable effect",
         "A good AGENTS.md gives a quality jump equivalent to upgrading from Haiku to Opus; a bad one is worse than no file",
         "Length always helps",
         "Only Claude reads it"
       ],
+      "options_zh": [
+        "没有可测量的效果",
+        "一份好的 AGENTS.md 带来的质量提升相当于从 Haiku 升级到 Opus；糟糕的反而比没有文件更差",
+        "篇幅越长效果越好",
+        "只有 Claude 会读它"
+      ],
       "correct": 1,
-      "explanation": "Augment Code's measurement: best files are model-upgrade-shaped, worst are worse than nothing."
+      "explanation": "Augment Code's measurement: best files are model-upgrade-shaped, worst are worse than nothing.",
+      "explanation_zh": "Augment Code 的测量结果：最好的文件提升幅度相当于换更强的模型，最差的还不如没有。"
     },
     {
       "stage": "check",
       "question": "Why does the lesson recommend file-backed state over chat-history state?",
+      "question_zh": "本课为什么推荐用文件支撑的 state 而不是聊天历史里的 state？",
       "options": [
         "Disk is cheaper",
         "Chat history is volatile; the file survives session death, conversation trimming, and tool resets",
         "Files are smaller",
         "It is required by SOC 2"
       ],
+      "options_zh": [
+        "磁盘更便宜",
+        "聊天历史是易失的；文件能在会话终止、对话裁剪和工具重置后依然存在",
+        "文件更小",
+        "SOC 2 要求"
+      ],
       "correct": 1,
-      "explanation": "Sessions die and chat gets trimmed; the file is the durable system of record."
+      "explanation": "Sessions die and chat gets trimmed; the file is the durable system of record.",
+      "explanation_zh": "会话会终止，聊天会被裁剪；文件才是持久的真相之源。"
     },
     {
       "stage": "check",
       "question": "What does the lesson say happens when conflicting instructions land in AGENTS.md?",
+      "question_zh": "本课指出，当 AGENTS.md 中出现互相冲突的指令时会发生什么？",
       "options": [
         "Latency drops",
         "Conflicting instructions silently drop the agent from interactive to greedy mode (AMBIG-SWE: 48.8% to 28% resolve rate)",
         "Cost rises slightly",
         "Nothing"
       ],
+      "options_zh": [
+        "延迟下降",
+        "冲突指令会让 agent 悄无声息地从交互模式退化到贪婪模式（AMBIG-SWE：解决率从 48.8% 降到 28%）",
+        "成本略有上升",
+        "什么都不会发生"
+      ],
       "correct": 1,
-      "explanation": "AMBIG-SWE measured a large resolve-rate drop when contradictions appear; number priorities instead."
+      "explanation": "AMBIG-SWE measured a large resolve-rate drop when contradictions appear; number priorities instead.",
+      "explanation_zh": "AMBIG-SWE 测量到一旦出现矛盾，解决率会大幅下降；应该用编号标明优先级。"
     },
     {
       "stage": "post",
       "question": "Why does the lesson recommend cross-tool symlinks like CLAUDE.md -> AGENTS.md?",
+      "question_zh": "本课为什么推荐跨工具的符号链接，比如 CLAUDE.md -> AGENTS.md？",
       "options": [
         "To save bytes",
         "So a single source of truth fans out to every coding agent without forking",
         "To pass auditing",
         "To satisfy MIT"
       ],
+      "options_zh": [
+        "为了节省字节",
+        "让单一的真相之源能扇出到每一个 coding agent，而不需要分叉维护",
+        "为了通过审计",
+        "为了满足 MIT 协议"
+      ],
       "correct": 1,
-      "explanation": "Symlinks (or Nx-style generators) keep one canonical source across Claude Code, Codex, Cursor, Copilot, etc."
+      "explanation": "Symlinks (or Nx-style generators) keep one canonical source across Claude Code, Codex, Cursor, Copilot, etc.",
+      "explanation_zh": "符号链接（或 Nx 风格的生成器）让 Claude Code、Codex、Cursor、Copilot 等共享同一份权威源文件。"
     },
     {
       "stage": "post",
       "question": "What pattern do nested AGENTS.md files follow?",
+      "question_zh": "嵌套的 AGENTS.md 文件遵循什么模式？",
       "options": [
         "Only the root file is read",
         "Walk from the working file toward the repo root, concatenate every AGENTS.md found on the way (nearest wins; sub-directories extend root)",
         "Random selection",
         "Alphabetical merge"
       ],
+      "options_zh": [
+        "只读根目录的文件",
+        "从当前工作文件向仓库根目录回溯，把途中遇到的每个 AGENTS.md 拼接起来（最近的优先生效；子目录是对根目录的扩展）",
+        "随机选取",
+        "按字母顺序合并"
+      ],
       "correct": 1,
-      "explanation": "OpenAI ships 88 AGENTS.md files across its main repo; tools concatenate nearest-up-tree."
+      "explanation": "OpenAI ships 88 AGENTS.md files across its main repo; tools concatenate nearest-up-tree.",
+      "explanation_zh": "OpenAI 在主仓库里散布着 88 个 AGENTS.md 文件；工具按从近到远的顺序向上拼接。"
     }
   ]
 }

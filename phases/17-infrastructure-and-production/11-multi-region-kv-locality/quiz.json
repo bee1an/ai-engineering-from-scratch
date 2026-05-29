@@ -5,74 +5,122 @@
     {
       "stage": "pre",
       "question": "Why is round-robin load balancing actively harmful for cached LLM inference?",
+      "question_zh": "对于带缓存的 LLM 推理，为什么 round-robin 负载均衡反而是有害的？",
       "options": [
         "A request that does not land on the node holding its prefix pays full prefill cost instead of a cache hit",
         "Round-robin requires sticky sessions",
         "Round-robin breaks TLS",
         "Round-robin is only valid for stateful databases"
       ],
+      "options_zh": [
+        "请求如果没落到持有其前缀的节点上，就要付出完整 prefill 的代价，而不是命中缓存",
+        "round-robin 需要会话粘连",
+        "round-robin 会破坏 TLS",
+        "round-robin 只适用于有状态数据库"
+      ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "What two inputs does a cache-aware router consume?",
+      "question_zh": "cache-aware 路由器消费哪两个输入？",
       "options": [
         "Random shuffles and request size",
         "Only the user_id and tenant_id",
         "Round-robin counters and TLS keys",
         "KV-cache events from replicas and a prefix hash on the incoming request"
       ],
+      "options_zh": [
+        "随机打乱和请求大小",
+        "仅 user_id 和 tenant_id",
+        "round-robin 计数器与 TLS 密钥",
+        "来自各副本的 KV cache 事件，以及对到来请求计算的前缀哈希"
+      ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "Roughly what is the TTFT gap between a cache hit and a cold prefill on a 2K-token prompt for Llama 3.3 70B FP8?",
+      "question_zh": "在 Llama 3.3 70B FP8 上，2K token 的 prompt 命中缓存和冷 prefill 之间的 TTFT 大致差多少？",
       "options": [
         "Identical",
         "About 10x (~80 ms vs ~800 ms)",
         "About 1.1x",
         "About 1000x"
       ],
+      "options_zh": [
+        "几乎相同",
+        "约 10 倍（~80 ms vs ~800 ms）",
+        "约 1.1 倍",
+        "约 1000 倍"
+      ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "Why does cross-region routing not always beat regional routing for cache hits?",
+      "question_zh": "为什么对缓存命中而言，跨 region 路由并不总能胜过本地 region 路由？",
       "options": [
         "Cache-aware routing is impossible across regions",
         "GORGO research found cache hits do not help latency",
         "Inter-region routing is forbidden by all hyperscalers",
         "Saved prefill can be dwarfed by network RTT, e.g. 440 ms round-trip can dwarf an 800-to-80 ms prefill saving"
       ],
+      "options_zh": [
+        "跨 region 不可能做 cache-aware 路由",
+        "GORGO 的研究发现缓存命中并不降低延迟",
+        "所有超大规模云商都禁止跨 region 路由",
+        "节省下来的 prefill 可能被网络 RTT 吞掉，例如 440 ms 的往返就能盖过 800 ms 降到 80 ms 的 prefill 节省"
+      ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "post",
       "question": "What does the lesson cite as the 32% LLM DR failure driver?",
+      "question_zh": "本课指出 LLM 灾备故障中 32% 的根因是什么？",
       "options": [
         "Backups that include weights but miss tokenizer files or quantization configs",
         "Region quota exhaustion",
         "Misconfigured load balancers",
         "Unencrypted backups"
       ],
+      "options_zh": [
+        "备份只包含权重，却漏掉了 tokenizer 文件或量化配置",
+        "region 配额耗尽",
+        "负载均衡器配置错误",
+        "备份未加密"
+      ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "post",
       "question": "What does the lesson say about commercial cross-region inference offerings such as Bedrock CRI?",
+      "question_zh": "本课如何评价 Bedrock CRI 等商业跨 region 推理产品？",
       "options": [
         "They are KV-cache-aware and replace app-layer routing",
         "They only work in us-east-1",
         "They optimize availability, not TTFT, and treat inference as opaque — you still need an app-layer cache-aware router",
         "They are forbidden under GDPR"
       ],
+      "options_zh": [
+        "它们感知 KV cache，可以替代应用层路由",
+        "只能在 us-east-1 工作",
+        "它们优化的是可用性而非 TTFT，并把推理视为不透明的黑盒 — 你仍然需要应用层的 cache-aware 路由器",
+        "GDPR 禁用它们"
+      ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     }
   ]
 }

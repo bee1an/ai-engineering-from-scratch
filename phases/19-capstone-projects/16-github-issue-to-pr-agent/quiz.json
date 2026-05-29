@@ -12,7 +12,15 @@
         "A manual file upload"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "异步云端 coding agent 在生产中如何被触发?",
+      "options_zh": [
+        "向虚拟机长开 SSH 会话",
+        "由 issue label 或 PR comment 触发的 GitHub webhook,派发给 sandbox worker",
+        "对仓库的定时 cron 任务",
+        "手工上传文件"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Apps require less code than PATs"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么 agent 必须使用短生命周期的 GitHub App installation token,而不是 personal access token?",
+      "options_zh": [
+        "App 完全规避 GitHub 速率限制",
+        "App token 提供细粒度、按 scope、短生命周期的凭证,适合按任务分配的 worker",
+        "Personal access token 不能开 PR",
+        "App 比 PAT 需要更少的代码"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Disabling git on the worker"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "哪两种保护防止 agent 破坏 main 分支?",
+      "options_zh": [
+        "每次 push 都要求 captcha",
+        "分支保护禁止直接 push 或 force-push 到 main,且 app 不在豁免名单",
+        "克隆前对仓库加密",
+        "在 worker 上禁用 git"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         ".github/workflows is a virtual path"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么针对 .github/workflows 的路径作用域保护在 worker 上,而不是作为 GitHub App 权限来执行?",
+      "options_zh": [
+        "workflow 存放在仓库之外",
+        "任何形式的路径作用域都不可能",
+        "GitHub App 权限不支持路径作用域,因此 worker 在提议 diff 上的 allow-list 检查才是合适的执行点",
+        ".github/workflows 是一个虚拟路径"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "The repo is force-pushed to main"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "在 agent 循环结束、开 PR 之前发生什么 gating?",
+      "options_zh": [
+        "reviewer 模型重写 diff",
+        "在 sandbox 内跑完整 CI,计算覆盖率差异,超过阈值的 PR 被打上 needs-review 标签",
+        "PR 立即打开,无任何检查",
+        "仓库被 force-push 到 main"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Only a turn cap"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "派发器对每个仓库每天强制的预算控制项是?",
+      "options_zh": [
+        "仅 wall-clock 上限",
+        "PR 数无限,成本无限",
+        "每个 PR 的美元上限,加上每仓库每天的 PR 数上限",
+        "仅 turn 上限"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Nothing; the PR has an empty body"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "agent 发布的 PR 正文里包含什么?",
+      "options_zh": [
+        "只有 diff",
+        "理由、diff 摘要、trace URL、成本和 turn 数,方便 reviewer 审计与跟进",
+        "只生成的 changelog",
+        "什么都没有,PR 正文为空"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

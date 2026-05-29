@@ -5,74 +5,122 @@
     {
       "stage": "pre",
       "question": "What is the core constraint that makes mobile LLM inference slower than datacenter, per the lesson?",
+      "question_zh": "本课认为，让移动端 LLM 推理慢于数据中心的核心瓶颈是什么？",
       "options": [
         "Wi-Fi latency",
         "Compute throughput",
         "Memory bandwidth (mobile DRAM at 50-90 GB/s vs HBM3 at 2-3 TB/s)",
         "Storage capacity"
       ],
+      "options_zh": [
+        "Wi-Fi 延迟",
+        "算力",
+        "显存带宽（移动 DRAM 50-90 GB/s 对比 HBM3 的 2-3 TB/s）",
+        "存储容量"
+      ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "Why does Apple's Neural Engine avoid CPU-NPU copy overhead?",
+      "question_zh": "苹果的 Neural Engine 为什么能省去 CPU 到 NPU 的拷贝开销？",
       "options": [
         "It uses PCIe 5.0",
         "Core ML disables KV cache",
         "It transcodes weights to FP4 before copy",
         "Apple Silicon ships unified memory — CPU and ANE share the same pool"
       ],
+      "options_zh": [
+        "使用 PCIe 5.0",
+        "Core ML 禁用了 KV cache",
+        "拷贝前先把权重转成 FP4",
+        "Apple Silicon 自带 unified memory — CPU 和 ANE 共享同一块内存池"
+      ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "Which quantization format does the lesson recommend for WebGPU + WebLLM in the browser?",
+      "question_zh": "对于浏览器中的 WebGPU + WebLLM，本课推荐哪种量化格式？",
       "options": [
         "NVFP4",
         "FP8",
         "Q4 MLC (q4f16_1) compiled via mlc_llm convert_weight",
         "GGUF Q4_K_M"
       ],
+      "options_zh": [
+        "NVFP4",
+        "FP8",
+        "通过 mlc_llm convert_weight 编译的 Q4 MLC（q4f16_1）",
+        "GGUF Q4_K_M"
+      ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "Roughly what WebGPU mobile coverage does the lesson report for 2026?",
+      "question_zh": "本课报告 2026 年 WebGPU 在移动端的覆盖率大约是多少？",
       "options": [
         "100% across all browsers",
         "Only iOS Safari",
         "Under 10%",
         "About 70-75%, with Firefox Android still catching up"
       ],
+      "options_zh": [
+        "全浏览器 100% 覆盖",
+        "只有 iOS Safari",
+        "不到 10%",
+        "约 70-75%，Firefox Android 仍在追赶"
+      ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "post",
       "question": "Why is keeping 128K context impractical on a typical phone?",
+      "question_zh": "为什么在普通手机上保留 128K 上下文不现实？",
       "options": [
         "Tokenizers fail above 8K",
         "Model weights plus KV cache for 32K tokens plus OS overhead easily exceed the 8 GB RAM budget",
         "WebGPU caps context at 4K",
         "iOS forbids long context"
       ],
+      "options_zh": [
+        "tokenizer 在 8K 以上会失败",
+        "模型权重 + 32K tokens 的 KV cache + 操作系统开销，很容易就超过 8 GB 的 RAM 预算",
+        "WebGPU 把上下文限制在 4K",
+        "iOS 禁用长上下文"
+      ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "post",
       "question": "Why is voice highlighted as the killer app for edge inference?",
+      "question_zh": "为什么语音被本课点名为边缘推理的杀手级应用？",
       "options": [
         "Voice agents are latency-sensitive (first token < 500 ms) and local inference eliminates network latency entirely",
         "Voice models do not need KV cache",
         "Voice models always fit in 50 MB",
         "Voice runs in WebAssembly only"
       ],
+      "options_zh": [
+        "语音 agent 对延迟极其敏感（首 token < 500 ms），本地推理可以彻底消除网络延迟",
+        "语音模型不需要 KV cache",
+        "语音模型一定能塞进 50 MB",
+        "语音只能在 WebAssembly 里跑"
+      ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     }
   ]
 }

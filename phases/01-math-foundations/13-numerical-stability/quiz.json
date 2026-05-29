@@ -3,62 +3,102 @@
     {
       "stage": "pre",
       "question": "What is the approximate range of numbers that float32 can represent?",
+      "question_zh": "float32 大约能表示多大范围的数？",
       "options": [
         "+/- 65,504",
         "+/- 3.4e38",
         "+/- 1.8e308",
         "+/- 1.0e10"
       ],
+      "options_zh": [
+        "±65,504",
+        "±3.4e38",
+        "±1.8e308",
+        "±1.0e10"
+      ],
       "correct": 1,
-      "explanation": "Float32 has an 8-bit exponent giving a range of approximately +/- 3.4e38. Float16 is limited to +/- 65,504, and float64 reaches +/- 1.8e308."
+      "explanation": "Float32 has an 8-bit exponent giving a range of approximately +/- 3.4e38. Float16 is limited to +/- 65,504, and float64 reaches +/- 1.8e308.",
+      "explanation_zh": "float32 有 8 位指数，能表示约 ±3.4e38 范围内的数。float16 的上限是 ±65,504，float64 则可达 ±1.8e308。"
     },
     {
       "stage": "pre",
       "question": "Why does 0.1 + 0.2 not equal 0.3 in floating-point arithmetic?",
+      "question_zh": "为什么浮点运算里 0.1 + 0.2 不等于 0.3？",
       "options": [
         "Python rounds all decimals to integers",
         "0.1 and 0.2 cannot be represented exactly in binary floating point",
         "The CPU has a bug in its addition circuit",
         "0.3 is not a valid floating-point number"
       ],
+      "options_zh": [
+        "Python 会把所有小数四舍五入成整数",
+        "0.1 和 0.2 在二进制浮点中无法精确表示",
+        "CPU 的加法电路有 bug",
+        "0.3 不是合法的浮点数"
+      ],
       "correct": 1,
-      "explanation": "The number 0.1 is a repeating fraction in binary (like 1/3 in decimal). Float32 truncates it, so the stored value is approximately 0.100000001490116. The accumulated error makes the sum differ from 0.3."
+      "explanation": "The number 0.1 is a repeating fraction in binary (like 1/3 in decimal). Float32 truncates it, so the stored value is approximately 0.100000001490116. The accumulated error makes the sum differ from 0.3.",
+      "explanation_zh": "0.1 在二进制中是无限循环的小数（就像十进制下的 1/3 一样）。float32 必然会截断，存下来的值约为 0.100000001490116。累计的误差让总和与 0.3 不一致。"
     },
     {
       "stage": "post",
       "question": "In the stable softmax implementation, why do you subtract max(logits) before exponentiating?",
+      "question_zh": "在数值稳定的 softmax 实现里，为什么要在 exp 之前减去 max(logits)？",
       "options": [
         "It makes the output probabilities more uniform",
         "It prevents exp() from overflowing by ensuring the largest exponent is 0",
         "It converts logits from float16 to float32",
         "It normalizes the logits to have zero mean"
       ],
+      "options_zh": [
+        "让输出概率更均匀",
+        "把最大的指数压到 0，防止 exp() 溢出",
+        "把 logits 从 float16 转成 float32",
+        "把 logits 归一化到均值为 0"
+      ],
       "correct": 1,
-      "explanation": "After subtracting max(logits), the largest value is 0 and exp(0) = 1, which cannot overflow. All other values are negative, so their exponentials are less than 1. The probabilities are mathematically identical to the naive version."
+      "explanation": "After subtracting max(logits), the largest value is 0 and exp(0) = 1, which cannot overflow. All other values are negative, so their exponentials are less than 1. The probabilities are mathematically identical to the naive version.",
+      "explanation_zh": "减去 max(logits) 后，最大值变为 0，exp(0)=1 不可能溢出；其他值都是负的，exp 后小于 1。归一化后得到的概率与朴素版本完全一致。"
     },
     {
       "stage": "post",
       "question": "When using centered finite differences for gradient checking, what happens if the step size h is too small (e.g., 1e-15)?",
+      "question_zh": "在 gradient checking 中使用中心差分时，如果步长 h 取得过小（比如 1e-15），会发生什么？",
       "options": [
         "The approximation becomes more accurate",
         "Catastrophic cancellation destroys the result because f(x+h) and f(x-h) are nearly identical",
         "The function evaluation becomes faster",
         "The gradient automatically becomes zero"
       ],
+      "options_zh": [
+        "近似会更精确",
+        "灾难性相消（catastrophic cancellation）会毁掉结果，因为 f(x+h) 和 f(x-h) 几乎相等",
+        "函数求值会更快",
+        "梯度会自动变成 0"
+      ],
       "correct": 1,
-      "explanation": "When h is extremely small, f(x+h) and f(x-h) differ only in their last few significant digits. Subtracting them cancels the leading digits, leaving mostly rounding noise. Typical good values are h = 1e-5 to 1e-7."
+      "explanation": "When h is extremely small, f(x+h) and f(x-h) differ only in their last few significant digits. Subtracting them cancels the leading digits, leaving mostly rounding noise. Typical good values are h = 1e-5 to 1e-7.",
+      "explanation_zh": "h 极小时，f(x+h) 与 f(x-h) 只在末几位有效数字上有差别。相减会把前面的位数相互抵消，剩下的几乎全是舍入噪声。常用的好取值是 h = 1e-5 到 1e-7。"
     },
     {
       "stage": "post",
       "question": "Why is bfloat16 generally preferred over float16 for neural network training?",
+      "question_zh": "训练神经网络时，为什么通常更偏好 bfloat16 而不是 float16？",
       "options": [
         "bfloat16 has more mantissa bits, giving better precision",
         "bfloat16 has the same exponent range as float32, avoiding overflow on large activations without loss scaling",
         "bfloat16 uses less memory than float16",
         "bfloat16 is supported by more GPU architectures than float16"
       ],
+      "options_zh": [
+        "bfloat16 的尾数位更多，精度更高",
+        "bfloat16 的指数位与 float32 相同，激活值很大时也不会溢出，不需要 loss scaling",
+        "bfloat16 比 float16 占用内存更少",
+        "支持 bfloat16 的 GPU 架构比 float16 多"
+      ],
       "correct": 1,
-      "explanation": "bfloat16 has 8 exponent bits (same as float32, range up to 3.4e38) while float16 has only 5 exponent bits (max ~65,504). During training, activations and gradients can exceed 65,504, causing float16 overflow. bfloat16 handles this without loss scaling."
+      "explanation": "bfloat16 has 8 exponent bits (same as float32, range up to 3.4e38) while float16 has only 5 exponent bits (max ~65,504). During training, activations and gradients can exceed 65,504, causing float16 overflow. bfloat16 handles this without loss scaling.",
+      "explanation_zh": "bfloat16 有 8 位指数（与 float32 一样，范围可达 3.4e38），而 float16 只有 5 位指数，最大约 65,504。训练时激活和梯度可能超过 65,504 让 float16 溢出，bfloat16 不需 loss scaling 就能处理。"
     }
   ]
 }

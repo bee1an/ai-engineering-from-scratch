@@ -12,7 +12,15 @@
         "JSON in, SQL out"
       ],
       "correct": 1,
-      "explanation": "Claude reads pixels and emits keyboard/mouse actions; no OS accessibility API is used."
+      "explanation": "Claude reads pixels and emits keyboard/mouse actions; no OS accessibility API is used.",
+      "question_zh": "Claude computer use 接受什么输入、输出什么？",
+      "options_zh": [
+        "输入辅助功能树，输出键鼠命令",
+        "输入截图（基于视觉），输出键鼠命令",
+        "输入 DOM XML，输出 JavaScript",
+        "输入 JSON，输出 SQL"
+      ],
+      "explanation_zh": "Claude 读像素、输出键鼠操作；不使用任何 OS 辅助功能 API。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Read-only mode by default"
       ],
       "correct": 0,
-      "explanation": "Gemini 2.5 Computer Use ships a per-step safety classifier as a defining feature."
+      "explanation": "Gemini 2.5 Computer Use ships a per-step safety classifier as a defining feature.",
+      "question_zh": "Gemini 2.5 Computer Use 标志性的安全特性是什么？",
+      "options_zh": [
+        "每步都会经过的安全服务，对每个动作执行前进行评估并拒绝不安全的",
+        "硬编码的 WAF 规则",
+        "强制 CAPTCHA",
+        "默认只读模式"
+      ],
+      "explanation_zh": "Gemini 2.5 Computer Use 自带的 per-step 安全分类器是它的标志性特性。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Nothing; everything is trusted"
       ],
       "correct": 1,
-      "explanation": "Only direct user instructions count as permission; everything else is untrusted."
+      "explanation": "Only direct user instructions count as permission; everything else is untrusted.",
+      "question_zh": "本课指出三家模型都把哪些内容视作不可信输入？",
+      "options_zh": [
+        "仅 HTTPS 响应",
+        "截图、DOM 文本、tool 输出、PDF 内容，凡是检索回来的都算",
+        "仅 PDF 内容",
+        "都信任，没有任何不可信输入"
+      ],
+      "explanation_zh": "只有用户的直接指令才算授权；其他一切都是不可信输入。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Numbers not reported"
       ],
       "correct": 0,
-      "explanation": "Those were the launch numbers cited."
+      "explanation": "Those were the launch numbers cited.",
+      "question_zh": "本课为 OpenAI CUA 发布时引用了哪些 OSWorld / WebArena 数字？",
+      "options_zh": [
+        "OSWorld 38.1%、WebArena 58.1%、WebVoyager 87%",
+        "OSWorld 0%、WebArena 0%",
+        "OSWorld 99%、WebArena 99%",
+        "数字未公布"
+      ],
+      "explanation_zh": "这些就是发布时引用的数字。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Auto-clicking through dialogs to save time"
       ],
       "correct": 3,
-      "explanation": "Auto-clicking dialogs is the opposite of safe; the lesson recommends explicit confirmation."
+      "explanation": "Auto-clicking dialogs is the opposite of safe; the lesson recommends explicit confirmation.",
+      "question_zh": "以下哪一项不在 2026 年趋同的防御模式列表中？",
+      "options_zh": [
+        "Per-step 安全分类器",
+        "导航目标的允许/拒绝清单",
+        "敏感动作的人工介入",
+        "为了省时间自动点过对话框"
+      ],
+      "explanation_zh": "自动点过对话框恰好相反；本课建议显式确认。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "OS update lag"
       ],
       "correct": 1,
-      "explanation": "Trusting screenshots or DOM text as permission is the canonical indirect-prompt-injection failure."
+      "explanation": "Trusting screenshots or DOM text as permission is the canonical indirect-prompt-injection failure.",
+      "question_zh": "本课指出针对 computer-use agent 的主要攻击是什么？",
+      "options_zh": [
+        "网络中断",
+        "恶意页面或 PDF 在检索内容里嵌入指令，模型会把它当成用户意图",
+        "渲染慢",
+        "操作系统更新滞后"
+      ],
+      "explanation_zh": "把截图或 DOM 文本当作授权，是典型的间接 prompt injection 失败。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Never"
       ],
       "correct": 1,
-      "explanation": "Sensitive actions (money, data exposure, new logins) require explicit human confirmation."
+      "explanation": "Sensitive actions (money, data exposure, new logins) require explicit human confirmation.",
+      "question_zh": "什么时候明确推荐人工介入确认？",
+      "options_zh": [
+        "在只读浏览时",
+        "在登录、付款、删文件这类敏感动作上",
+        "只有模型主动询问时",
+        "永远不需要"
+      ],
+      "explanation_zh": "敏感动作（涉及金钱、数据暴露、新登录）需要明确的人工确认。"
     }
   ]
 }

@@ -12,7 +12,15 @@
         "Because idempotency keys are slow"
       ],
       "correct": 1,
-      "explanation": "Retrying a db.write that timed out at 4.9s can produce a second write. The dispatcher refuses unless the handler tells it the call is safe to repeat."
+      "explanation": "Retrying a db.write that timed out at 4.9s can produce a second write. The dispatcher refuses unless the handler tells it the call is safe to repeat.",
+      "question_zh": "为什么对非幂等工具的超时默认不重试?",
+      "options_zh": [
+        "因为 dispatcher 无法对非幂等调用计时",
+        "因为该工具可能已部分提交; 重试会重复其副作用",
+        "因为非幂等 handler 跑得更快",
+        "因为 idempotency key 太慢"
+      ],
+      "explanation_zh": "重试一个在 4.9 秒超时的 db.write 可能产生第二次写入。除非 handler 声明该调用可安全重试,dispatcher 拒绝重试。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Process restarts"
       ],
       "correct": 1,
-      "explanation": "Without dedupe, a retry at 5s races a slow original still pending. The cache collapses both into one handler invocation."
+      "explanation": "Without dedupe, a retry at 5s races a slow original still pending. The cache collapses both into one handler invocation.",
+      "question_zh": "idempotency-key 去重是为了防止什么?",
+      "options_zh": [
+        "网络慢",
+        "在原调用还在进行时,重试又被触发",
+        "Schema 校验错误",
+        "进程重启"
+      ],
+      "explanation_zh": "没有去重时,5 秒触发的重试会与还未完成的原调用产生竞争。缓存把两者折叠为一次 handler 调用。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "All of them"
       ],
       "correct": 2,
-      "explanation": "Schema and not_found are deterministic. Internal masks an unknown handler bug. Budget exceeded is a yield. Only timeout-on-idempotent and explicit TransientError retry."
+      "explanation": "Schema and not_found are deterministic. Internal masks an unknown handler bug. Budget exceeded is a yield. Only timeout-on-idempotent and explicit TransientError retry.",
+      "question_zh": "在本 dispatcher 中,哪些错误类别可以重试?",
+      "options_zh": [
+        "schema 与 not_found",
+        "internal 与 budget_exceeded",
+        "幂等下的 timeout 与 transient",
+        "全部"
+      ],
+      "explanation_zh": "schema 和 not_found 是确定性的; internal 掩盖未知 handler bug; budget_exceeded 是让步。只有「幂等下的 timeout」和显式 TransientError 会重试。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "The retry counter"
       ],
       "correct": 1,
-      "explanation": "A gather of forty calls would open forty concurrent dispatches without the limit. The semaphore caps the wave."
+      "explanation": "A gather of forty calls would open forty concurrent dispatches without the limit. The semaphore caps the wave.",
+      "question_zh": "_run_with_retries 周围的 semaphore 在保护什么?",
+      "options_zh": [
+        "保护 handler 不被自己影响",
+        "保护后端不被 gather() 扇出的太多并发调用淹没",
+        "保护 validator",
+        "保护重试计数器"
+      ],
+      "explanation_zh": "如果不限制,gather 40 个调用就会同时打开 40 个派发。Semaphore 限制这股浪潮。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Because the cache cannot store strings"
       ],
       "correct": 1,
-      "explanation": "The caller knows the step id, the planner intent, the user. Args alone are not enough context to safely dedupe."
+      "explanation": "The caller knows the step id, the planner intent, the user. Args alone are not enough context to safely dedupe.",
+      "question_zh": "为什么 idempotency key 由调用方派生,而不是 dispatcher 派生?",
+      "options_zh": [
+        "因为 Python 的 hash 不稳定",
+        "因为仅从 args 派生会让两个语义不同但 args 恰好相同的调用相互覆盖",
+        "因为 registry 拿不到这个 key",
+        "因为 cache 不能存字符串"
+      ],
+      "explanation_zh": "调用方知道 step id、planner 意图和用户。仅靠 args 的上下文不足以安全去重。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "-32700"
       ],
       "correct": 1,
-      "explanation": "-32602 Invalid params. The dispatcher returns it before any handler runs."
+      "explanation": "-32602 Invalid params. The dispatcher returns it before any handler runs.",
+      "question_zh": "派发时 schema 校验失败映射到哪个 JSON-RPC 错误码?",
+      "options_zh": [
+        "-32601",
+        "-32602",
+        "-32603",
+        "-32700"
+      ],
+      "explanation_zh": "-32602 Invalid params。dispatcher 在任何 handler 运行前返回它。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "DispatchError with kind=internal"
       ],
       "correct": 2,
-      "explanation": "The dispatcher returns a typed error envelope. The kind reflects the last failure mode, attempts reflects how many tries it made."
+      "explanation": "The dispatcher returns a typed error envelope. The kind reflects the last failure mode, attempts reflects how many tries it made.",
+      "question_zh": "在幂等工具上达到 max_attempts 仍然超时后,返回什么?",
+      "options_zh": [
+        "抛出异常",
+        "DispatchOk,但没有结果",
+        "DispatchError,kind=timeout 且 attempts==max_attempts",
+        "DispatchError,kind=internal"
+      ],
+      "explanation_zh": "Dispatcher 返回带类型的错误信封。kind 反映最后一次失败模式,attempts 反映尝试次数。"
     }
   ]
 }

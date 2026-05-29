@@ -4,34 +4,49 @@
     "options": ["Python doesn't support large arrays", "Pre-training corpora are terabytes in size, far exceeding available RAM, requiring streaming pipelines", "Loading data into memory is slower", "Memory is only needed for model weights"],
     "correct": 1,
     "explanation": "LLM pre-training data is typically 1-15 TB of text. Even with 256GB of RAM, you can't hold the full dataset. Streaming pipelines process data on-the-fly, loading only what's needed for the current batch.",
-    "stage": "pre"
+    "stage": "pre",
+    "question_zh": "为什么不能直接把所有预训练数据加载进内存？",
+    "options_zh": ["Python 不支持大数组", "预训练语料是 TB 量级，远超可用内存，必须用流式管线处理", "加载到内存反而更慢", "内存只用来放模型权重"],
+    "explanation_zh": "LLM 预训练数据通常是 1-15 TB 文本。哪怕有 256GB 内存也装不下完整数据集。流式管线边读边处理，只加载当前 batch 需要的内容。"
   },
   {
     "question": "Why is data deduplication important for pre-training?",
     "options": ["It saves disk space", "Duplicate documents cause the model to memorize specific text verbatim and waste training compute on repeated content", "It speeds up tokenization", "It reduces the vocabulary size"],
     "correct": 1,
     "explanation": "Near-duplicate content (boilerplate, scraped duplicates) causes the model to memorize rather than generalize. Deduplication reduces training compute waste and improves model quality by ensuring diverse training signal.",
-    "stage": "pre"
+    "stage": "pre",
+    "question_zh": "为什么数据去重对预训练很重要？",
+    "options_zh": ["节省磁盘空间", "重复文档会让模型逐字记住特定文本，并把训练算力浪费在重复内容上", "加快 tokenization 速度", "减小词表大小"],
+    "explanation_zh": "近似重复内容（模板文本、抓取重复）会让模型走向死记硬背而不是泛化。去重既减少训练算力浪费，又能通过保证训练信号多样性来提升模型质量。"
   },
   {
     "question": "What is the purpose of creating fixed-length training sequences from variable-length documents?",
     "options": ["It makes the text easier to read", "GPU training requires uniform tensor shapes, so documents must be packed or padded into fixed-length sequences", "Fixed-length sequences are more accurate", "It reduces the total number of tokens"],
     "correct": 1,
     "explanation": "GPUs process batches of tensors with identical shapes. Variable-length documents must be chunked into fixed-length sequences (e.g., 2048 or 4096 tokens) with proper attention masks at document boundaries.",
-    "stage": "post"
+    "stage": "post",
+    "question_zh": "为什么要把变长文档拼成固定长度的训练序列？",
+    "options_zh": ["让文本更易读", "GPU 训练需要张量形状一致，所以文档必须被打包或 padding 成固定长度序列", "固定长度的序列更准确", "减少 token 总数"],
+    "explanation_zh": "GPU 处理的是形状一致的张量批次。变长文档必须被切成固定长度序列（如 2048 或 4096 token），并在文档边界处加上正确的 attention mask。"
   },
   {
     "question": "What happens if the data pipeline is slower than GPU training speed?",
     "options": ["Training automatically slows down to match", "The GPU sits idle waiting for batches, wasting expensive compute time", "The model trains on the same batch repeatedly", "Nothing -- the pipeline runs asynchronously"],
     "correct": 1,
     "explanation": "If the dataloader can't serve batches fast enough, the GPU stalls between steps. On A100 clusters costing $30+/hour, pipeline bottlenecks directly waste money. Profiling pipeline throughput is essential.",
-    "stage": "post"
+    "stage": "post",
+    "question_zh": "如果数据管线比 GPU 训练还慢，会发生什么？",
+    "options_zh": ["训练会自动放慢匹配速度", "GPU 会空转等 batch，浪费昂贵的算力时间", "模型会反复在同一个 batch 上训练", "什么也不会，因为管线是异步运行的"],
+    "explanation_zh": "如果 dataloader 供不上 batch，GPU 在每步之间会空转。在每小时 30 美元以上的 A100 集群上，管线瓶颈就是直接烧钱。剖析管线吞吐量是必做的事。"
   },
   {
     "question": "Why is data quality filtering (language detection, content filtering) applied before tokenization?",
     "options": ["Tokenizers can't handle low-quality text", "Low-quality data (spam, boilerplate, toxic content) degrades model capabilities proportional to its share of training data", "Filtering after tokenization is impossible", "It reduces tokenization time"],
     "correct": 1,
     "explanation": "The model learns from whatever data it sees. If 10% of training data is spam or low-quality content, the model allocates 10% of its capacity to reproducing those patterns. Filtering early ensures only high-quality signal reaches the model.",
-    "stage": "post"
+    "stage": "post",
+    "question_zh": "为什么数据质量过滤（语言识别、内容过滤）要放在 tokenization 之前？",
+    "options_zh": ["tokenizer 处理不了低质量文本", "低质量数据（垃圾内容、模板文本、有害内容）会按其在训练数据中的占比拖累模型能力", "tokenization 之后就没法过滤了", "缩短 tokenization 时间"],
+    "explanation_zh": "模型只会从看到的数据里学。如果 10% 的训练数据是垃圾或低质量内容，模型就会分配 10% 的容量去复刻这些模式。提早过滤能确保只有高质量信号进入模型。"
   }
 ]

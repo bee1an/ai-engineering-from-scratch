@@ -12,7 +12,15 @@
         "Decode requires more network bandwidth"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么 prefill 和 decode 想要不同的最优 GPU 配置？",
+      "options_zh": [
+        "Prefill 必须在 AMD 上跑、decode 必须在 NVIDIA 上",
+        "Prefill 受 matmul 吞吐限制（compute-bound）；decode 受 HBM 带宽限制（memory-bound），把它们放一起会浪费一种资源",
+        "它们用不同的模型权重",
+        "Decode 需要更多网络带宽"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "NIXL (RDMA/InfiniBand when available, TCP fallback)"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "NVIDIA Dynamo 用什么传输方式在 prefill 池和 decode 池之间搬运 KV cache？",
+      "options_zh": [
+        "纯 HTTP",
+        "仅 gRPC bidi",
+        "NFS 共享文件系统",
+        "NIXL（可用时走 RDMA/InfiniBand，否则回退到 TCP）"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Prompts under 512 tokens and outputs under 200 tokens, where the KV transfer tax dominates the gain"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "根据本课，什么时候 disaggregation 不划算？",
+      "options_zh": [
+        "Blackwell 上的 MoE 工作负载",
+        "共享 system prompt 的多租户服务",
+        "前缀 8K+ 的 RAG",
+        "Prompt 不到 512 token、输出不到 200 token 的场景，KV 传输税会盖过收益"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Dynamo requires AMD; llm-d requires NVIDIA"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Dynamo 与 llm-d 在架构上的核心区别是什么？",
+      "options_zh": [
+        "Dynamo 开源，llm-d 闭源",
+        "Dynamo 跑在 CPU，llm-d 跑在 GPU",
+        "Dynamo 是叠在 vLLM/SGLang/TRT-LLM 之上的 stack-above 编排器；llm-d 是 Kubernetes 原生的，把 prefill/decode/router 拆成独立 Service",
+        "Dynamo 要求 AMD，llm-d 要求 NVIDIA"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "Marlin kernels"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Dynamo 中哪些组件能根据 SLO 自动调 prefill:decode 比例？",
+      "options_zh": [
+        "Sidecar 代理和 Envoy filter",
+        "Planner Profiler 和 SLA Planner",
+        "Cluster Autoscaler",
+        "Marlin kernel"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Cache-aware routing is only for colocated serving"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Disaggregation 与 Phase 17 · 11 的 cache-aware routing 怎么相互作用？",
+      "options_zh": [
+        "Disaggregation 完全禁用了 KV cache 复用",
+        "Cache-aware 路由器可以把请求落到已经有它前缀的 decode 池；命中失败时再走 prefill -> decode，两者叠加",
+        "二者互斥",
+        "Cache-aware 路由仅适用于 colocated 服务"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

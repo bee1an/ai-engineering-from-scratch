@@ -12,7 +12,15 @@
         "Because the parser fails otherwise"
       ],
       "correct": 1,
-      "explanation": "Each pass catches what the other misses. Lexical covers shared vocabulary; the graph covers ancestor and descendant papers regardless of vocabulary."
+      "explanation": "Each pass catches what the other misses. Lexical covers shared vocabulary; the graph covers ancestor and descendant papers regardless of vocabulary.",
+      "question_zh": "为什么检索客户端要同时跑一遍 BM25 和一遍引用图遍历?",
+      "options_zh": [
+        "因为 BM25 需要图来构建索引",
+        "因为词法命中漏掉用词不同的奠基性论文,而图命中漏掉与 seed 没有共享引用的论文",
+        "因为 mock API 要求",
+        "因为否则 parser 会失败"
+      ],
+      "explanation_zh": "两路各补另一路的盲点。词法覆盖共享词汇; 图覆盖与 seed 在祖先 / 子孙关系上的论文,无论用词如何。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Because the corpus only stores two layers of citations"
       ],
       "correct": 0,
-      "explanation": "Two hops is the practical ceiling. Three hops blows up the result set on a connected graph and rarely returns more on topic papers."
+      "explanation": "Two hops is the practical ceiling. Three hops blows up the result set on a connected graph and rarely returns more on topic papers.",
+      "question_zh": "为什么引用图遍历限制为两跳?",
+      "options_zh": [
+        "因为超过两跳后结果集容易跑题,并淹没下游排序",
+        "因为 Python 的递归上限禁止三跳",
+        "因为 BM25 只在两跳处打分",
+        "因为语料只存了两层引用"
+      ],
+      "explanation_zh": "两跳是实用上限。三跳在连通图上结果集会爆炸,而很少多带来主题相关的论文。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Undefined; the BM25 implementation skips it"
       ],
       "correct": 1,
-      "explanation": "When df equals N the numerator and denominator inside the log are close, and the +1 keeps the term non negative but small. The contribution of universally common terms is near zero."
+      "explanation": "When df equals N the numerator and denominator inside the log are close, and the +1 keeps the term non negative but small. The contribution of universally common terms is near zero.",
+      "question_zh": "对于在每篇文档都出现的词项,idf 的取值是?",
+      "options_zh": [
+        "一个较大的正值",
+        "接近 0 的值",
+        "负无穷",
+        "未定义; BM25 实现会跳过它"
+      ],
+      "explanation_zh": "当 df 等于 N,log 内部分子分母接近,且 +1 让该项保持非负但很小。普遍常见词的贡献接近 0。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "BM25 score bucket"
       ],
       "correct": 1,
-      "explanation": "Paper id is the stable handle. Title and author are duplicated across versions, year alone is ambiguous."
+      "explanation": "Paper id is the stable handle. Title and author are duplicated across versions, year alone is ambiguous.",
+      "question_zh": "合并步骤用什么键去重两路结果?",
+      "options_zh": [
+        "标题文本",
+        "稳定的论文 id",
+        "年份与第一作者",
+        "BM25 分数桶"
+      ],
+      "explanation_zh": "论文 id 是稳定句柄。标题和作者可能跨版本重复,年份单独不够区分。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "The BM25 score divided by ten"
       ],
       "correct": 1,
-      "explanation": "The default graph score schedule is 1.0 at zero hops, 0.6 at one hop, 0.3 at two hops, and zero beyond that."
+      "explanation": "The default graph score schedule is 1.0 at zero hops, 0.6 at one hop, 0.3 at two hops, and zero beyond that.",
+      "question_zh": "graph_score 对距 seed 集 2 跳的论文返回什么?",
+      "options_zh": [
+        "0",
+        "默认 0.3",
+        "默认 1.0",
+        "BM25 分除以 10"
+      ],
+      "explanation_zh": "默认图分时间表是 0 跳为 1.0、1 跳为 0.6、2 跳为 0.3,再远为 0。"
     },
     {
       "stage": "check",
@@ -72,7 +112,15 @@
         "Because the recency score requires it"
       ],
       "correct": 1,
-      "explanation": "Index construction is the expensive step. Reusing the index amortises that cost across every query the client handles."
+      "explanation": "Index construction is the expensive step. Reusing the index amortises that cost across every query the client handles.",
+      "question_zh": "为什么把语料一次性载入 RetrievalClient,而不是每次查询都重新拉取?",
+      "options_zh": [
+        "因为 mock API 每次调用都很慢",
+        "因为 BM25 索引和引用图在构造时建一次,之后跨查询复用",
+        "因为 parser 是全局的",
+        "因为 recency 分数需要它"
+      ],
+      "explanation_zh": "建索引是昂贵的步骤。复用索引把这部分成本摊到客户端处理的每次查询。"
     }
   ]
 }

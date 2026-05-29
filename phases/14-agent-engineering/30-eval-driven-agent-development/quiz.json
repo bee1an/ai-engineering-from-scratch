@@ -12,7 +12,15 @@
         "Pre, check, post"
       ],
       "correct": 0,
-      "explanation": "Static (SWE-bench, GAIA), custom offline (LLM-judge, exec, trajectory), online (replays, alerts, cost/latency)."
+      "explanation": "Static (SWE-bench, GAIA), custom offline (LLM-judge, exec, trajectory), online (replays, alerts, cost/latency).",
+      "question_zh": "本课命名的三层评测是什么？",
+      "options_zh": [
+        "静态 benchmark、定制离线 eval、在线生产 eval",
+        "Unit、integration、end-to-end",
+        "Smoke、regression、acceptance",
+        "Pre、check、post"
+      ],
+      "explanation_zh": "静态（SWE-bench、GAIA）、定制离线（LLM-judge、execution、轨迹）、在线（回放、告警、成本/延迟）。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Start with a frontier model only"
       ],
       "correct": 1,
-      "explanation": "Anthropic explicitly says evaluation is the outer loop that drives every other choice."
+      "explanation": "Anthropic explicitly says evaluation is the outer loop that drives every other choice.",
+      "question_zh": "Anthropic 推荐的起点是什么？",
+      "options_zh": [
+        "从多 agent debate 起步",
+        "从简单 prompt 起步，用全面的评测把它优化到位，仅在需要时再引入多步 agent 系统",
+        "从 hierarchical 编排起步",
+        "只用前沿模型起步"
+      ],
+      "explanation_zh": "Anthropic 明确说：评测是驱动其他一切选择的外层循环。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Cache, retry, fail"
       ],
       "correct": 1,
-      "explanation": "It is Self-Refine generalized: any flow can wrap in propose-judge-refine."
+      "explanation": "It is Self-Refine generalized: any flow can wrap in propose-judge-refine.",
+      "question_zh": "evaluator-optimizer 紧循环是什么？",
+      "options_zh": [
+        "训练、评测、部署",
+        "Proposer 生成输出，evaluator 打分，反复打磨直到 evaluator 通过（Self-Refine 的泛化）",
+        "采样、排序、去重",
+        "缓存、重试、失败"
+      ],
+      "explanation_zh": "这是 Self-Refine 的泛化：任何流程都能套上 propose-judge-refine。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Owned exclusively by the QA team"
       ],
       "correct": 1,
-      "explanation": "Co-located with code, CI-gated, regression-tracked is the standard."
+      "explanation": "Co-located with code, CI-gated, regression-tracked is the standard.",
+      "question_zh": "2026 年 eval 应该放在哪里的最佳实践是什么？",
+      "options_zh": [
+        "只放在另一家供应商的面板里",
+        "和代码放在一起，每个 PR 都在 CI 上跑，并把 eval 分数作为 merge 门",
+        "只季度跑一次",
+        "完全交给 QA 团队"
+      ],
+      "explanation_zh": "和代码同居、CI 卡门、回归追踪是标准做法。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "It only works on GPUs"
       ],
       "correct": 1,
-      "explanation": "CRITIC (Lesson 5) applies: tool-grounded verification keeps the judge honest."
+      "explanation": "CRITIC (Lesson 5) applies: tool-grounded verification keeps the judge honest.",
+      "question_zh": "为什么本课对没有 grounding 的 LLM-judge 提出警告？",
+      "options_zh": [
+        "太慢",
+        "Judge 本身也会幻觉；要配合 CRITIC 模式，让评判 ground 在外部工具上",
+        "违反 Apache 2.0",
+        "只在 GPU 上能跑"
+      ],
+      "explanation_zh": "CRITIC（第 5 课）同样适用：基于工具 grounding 的核实让 judge 保持诚实。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Latency drops too far"
       ],
       "correct": 1,
-      "explanation": "Eval set rotation keeps the optimization aligned with production reality."
+      "explanation": "Eval set rotation keeps the optimization aligned with production reality.",
+      "question_zh": "过度拟合 eval 的危险是什么？",
+      "options_zh": [
+        "计算成本上升",
+        "为 eval 集做优化会偏离生产可用性；要轮换 case",
+        "向量索引碎片化",
+        "延迟被压得太低"
+      ],
+      "explanation_zh": "Eval 集轮换让优化与生产现实保持一致。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "They exceed the context window"
       ],
       "correct": 1,
-      "explanation": "Flake makes regressions unreadable; determinism (seeds, state snapshots) is required."
+      "explanation": "Flake makes regressions unreadable; determinism (seeds, state snapshots) is required.",
+      "question_zh": "为什么 flaky eval 会带来问题？",
+      "options_zh": [
+        "让推理成本翻倍",
+        "非确定性 case 会触发误报；要钉死随机种子并快照状态",
+        "无法连接数据库",
+        "超出上下文窗口"
+      ],
+      "explanation_zh": "Flake 让回归不可读；确定性（种子、状态快照）是必需的。"
     }
   ]
 }

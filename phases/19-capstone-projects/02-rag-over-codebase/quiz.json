@@ -12,7 +12,15 @@
         "Embedding models do not see code as tokens"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么对原始 chunk 直接做 cosine 检索不足以支撑跨仓库代码检索?",
+      "options_zh": [
+        "对生成代码、monorepo 重复以及很少被 import 的符号,结果会被毒化",
+        "Cosine 相似度在代码 embedding 上未定义",
+        "向量索引无法存储超过 1KB 的 payload",
+        "Embedding 模型不会把代码视为 token"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Splitting code into fixed 256-token windows"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "在入库流水线中,AST-aware chunking 指什么?",
+      "options_zh": [
+        "在存储前用 gzip 压缩 chunk",
+        "在 embedding 之前去掉注释和空白",
+        "按 tree-sitter 节点边界 (例如函数和类的范围) 切分",
+        "把代码切成固定 256 token 的窗口"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Dense embedding, BM25 terms, and a natural-language summary"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本流水线给每个 chunk 附带哪三种可检索模态?",
+      "options_zh": [
+        "Token id、语法树和调用图",
+        "AST、IR 和字节码",
+        "原始文本、gzip 和 hash",
+        "Dense embedding、BM25 词项,以及一段自然语言摘要"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "It scores each query-candidate pair together for higher accuracy than cosine alone"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "在 hybrid 检索之后,cross-encoder reranker 的作用是什么?",
+      "options_zh": [
+        "重写 chunk 以去掉生成代码",
+        "用另一个模型重新对 query 做 embedding",
+        "在送给合成器之前压缩 chunk",
+        "对每对 (query, candidate) 联合打分,准确度高于仅用 cosine"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Anchors are required by the vector database schema"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么 synthesizer 拒绝没有 (repo/path:start-end) 锚点的回答?",
+      "options_zh": [
+        "引用可信度门控住答案,让用户能逐条核验",
+        "锚点能降低合成调用的 token 成本",
+        "下游 BM25 reranking 需要锚点",
+        "向量数据库 schema 要求带锚点"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Throwing away the BM25 index and rebuilding it from scratch"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "在 50 个文件的 push 上,增量重建索引要在 60 秒内完成,需要做什么?",
+      "options_zh": [
+        "只对文本变化的 chunk 做重新 embedding,并重算受影响的符号边",
+        "每次 commit 都对完整 200 万 LOC 语料重新 embedding",
+        "完全丢弃符号图",
+        "丢掉 BM25 索引并从零重建"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "p95 query latency"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "哪个指标衡量检索得到的论断在源码中是否可验证?",
+      "options_zh": [
+        "MRR@10",
+        "Citation faithfulness (引用可信度)",
+        "nDCG@10",
+        "p95 query latency"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

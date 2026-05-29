@@ -12,7 +12,15 @@
         "Beam search latency"
       ],
       "correct": 1,
-      "explanation": "Attention lets the decoder consult every encoder state, not just the last one."
+      "explanation": "Attention lets the decoder consult every encoder state, not just the last one.",
+      "question_zh": "Bahdanau attention 解决了 seq2seq 中的什么问题？",
+      "options_zh": [
+        "tokenization 不匹配",
+        "decoder 只能看到 encoder 最后状态的固定大小 context-vector 瓶颈",
+        "encoder 中的梯度消失",
+        "beam search 延迟"
+      ],
+      "explanation_zh": "attention 让 decoder 查阅每个 encoder 状态，而不只是最后一个。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "A random projection"
       ],
       "correct": 1,
-      "explanation": "Context = sum of alpha_i * h_i, a step-dependent weighted average of encoder states."
+      "explanation": "Context = sum of alpha_i * h_i, a step-dependent weighted average of encoder states.",
+      "question_zh": "decoder 第 t 步的 attention context vector 是什么？",
+      "options_zh": [
+        "decoder 的输入 embedding",
+        "encoder hidden state 的加权平均，权重来自 query-key 分数",
+        "encoder 的最终 hidden state",
+        "随机投影"
+      ],
+      "explanation_zh": "Context = sum_i alpha_i * h_i，是 encoder 状态的步相关加权平均。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "It biases the softmax"
       ],
       "correct": 1,
-      "explanation": "v_a dot-products with tanh(W_a s + U_a h) to collapse a d_attn vector into a scalar score."
+      "explanation": "v_a dot-products with tanh(W_a s + U_a h) to collapse a d_attn vector into a scalar score.",
+      "question_zh": "在 Bahdanau（加性）attention 中，向量 v_a 起什么作用？",
+      "options_zh": [
+        "它控制 dropout",
+        "它是把 attention 维的 hidden 组合塌缩为每个 encoder 位置标量分数的投影",
+        "它编码位置",
+        "它对 softmax 加偏置"
+      ],
+      "explanation_zh": "v_a 与 tanh(W_a s + U_a h) 做点积，把 d_attn 维向量塌缩为标量分数。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Beam search is required"
       ],
       "correct": 0,
-      "explanation": "dot uses s^T h with no projection, so dimensions must match exactly."
+      "explanation": "dot uses s^T h with no projection, so dimensions must match exactly.",
+      "question_zh": "在 Luong 的 'dot' attention 变体中，必须满足什么约束？",
+      "options_zh": [
+        "decoder 状态与 encoder 状态必须共享同一维度（d_s == d_h）",
+        "encoder 必须双向",
+        "softmax 必须在对数空间",
+        "必须用 beam search"
+      ],
+      "explanation_zh": "dot 用 s^T h 没有投影，所以维度必须完全相同。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Q = decoder state; K and V = encoder states (same tensor)"
       ],
       "correct": 3,
-      "explanation": "In classical attention, keys and values are both encoder states; transformers split K and V via learned projections."
+      "explanation": "In classical attention, keys and values are both encoder states; transformers split K and V via learned projections.",
+      "question_zh": "下列哪个 Q/K/V 映射描述了经典（Bahdanau/Luong）attention？",
+      "options_zh": [
+        "Q、K、V 是源的三个独立学到的投影",
+        "Q 随机，K 与 V 学到",
+        "Q 来自 encoder，K 与 V 来自 decoder",
+        "Q = decoder 状态；K 与 V = encoder 状态（同一张张量）"
+      ],
+      "explanation_zh": "经典 attention 中，K 和 V 都是 encoder 状态；transformer 通过学到的投影把 K、V 拆开。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Attention weights are not differentiable"
       ],
       "correct": 2,
-      "explanation": "Attention weights are correlated with predictions but not faithful explanations without ablation/counterfactual checks."
+      "explanation": "Attention weights are correlated with predictions but not faithful explanations without ablation/counterfactual checks.",
+      "question_zh": "为什么把原始 attention 权重当作 '解释' 被认为是脆弱的？",
+      "options_zh": [
+        "attention 权重泄露标签",
+        "它们太小不好画",
+        "研究（如 Jain & Wallace 2019）显示某些任务上 attention 分布可以被置换而不改变预测",
+        "attention 权重不可微"
+      ],
+      "explanation_zh": "attention 权重与预测相关，但不是忠实解释，需要消融/反事实检验。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Querying a sequence against itself with separately learned Q, K, and V projections, run in parallel heads"
       ],
       "correct": 3,
-      "explanation": "Self-attention queries the same sequence, with split K and V projections, parallelized across heads."
+      "explanation": "Self-attention queries the same sequence, with split K and V projections, parallelized across heads.",
+      "question_zh": "哪一步把 Bahdanau attention 桥接到 transformer 的 self-attention？",
+      "options_zh": [
+        "去掉 beam search",
+        "增加 RNN 层",
+        "把 softmax 换成 sigmoid",
+        "在序列上对自身做 query，使用各自学到的 Q、K、V 投影，并以并行多头运行"
+      ],
+      "explanation_zh": "self-attention 让序列对自身做 query，K、V 用独立投影，并跨多头并行化。"
     },
     {
       "stage": "post",
@@ -96,7 +152,15 @@
         "Reducing model size"
       ],
       "correct": 1,
-      "explanation": "Masking padding (or future tokens in a decoder) prevents the softmax from spreading weight onto invalid positions."
+      "explanation": "Masking padding (or future tokens in a decoder) prevents the softmax from spreading weight onto invalid positions.",
+      "question_zh": "attention 中 masking 的一个实际用法是什么？",
+      "options_zh": [
+        "替代 dropout",
+        "把 padding token 的 attention 权重设为零，让它们不贡献到 context vector",
+        "编码位置",
+        "缩小模型规模"
+      ],
+      "explanation_zh": "对 padding（或 decoder 中的未来 token）做 mask 阻止 softmax 把权重分配到无效位置。"
     }
   ]
 }

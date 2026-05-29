@@ -1,37 +1,102 @@
 [
   {
     "question": "What three responsibilities does the Module abstraction have in a deep learning framework?",
-    "options": ["Load data, preprocess data, augment data", "forward() for computation, backward() for gradients, parameters() for trainable weights", "Compile, optimize, deploy", "Tokenize, embed, decode"],
+    "options": [
+      "Load data, preprocess data, augment data",
+      "forward() for computation, backward() for gradients, parameters() for trainable weights",
+      "Compile, optimize, deploy",
+      "Tokenize, embed, decode"
+    ],
     "correct": 1,
     "explanation": "Every Module implements forward() to compute output, backward() to propagate gradients, and parameters() to expose trainable weights. This uniform interface lets any module be composed with any other.",
-    "stage": "pre"
+    "stage": "pre",
+    "question_zh": "在深度学习框架中，Module 抽象承担哪三项职责？",
+    "options_zh": [
+      "加载数据、预处理数据、增强数据",
+      "forward() 负责计算，backward() 负责梯度，parameters() 暴露可训练权重",
+      "编译、优化、部署",
+      "tokenize、embedding、解码"
+    ],
+    "explanation_zh": "每个 Module 都实现 forward() 计算输出、backward() 反传梯度、parameters() 暴露可训练权重。这种统一接口让任何 Module 都能与其他 Module 自由组合。"
   },
   {
     "question": "Why does Sequential process modules in reverse order during the backward pass?",
-    "options": ["It's arbitrary -- either direction works", "Gradients flow from the loss backward through the network, so the last layer computes gradients first", "Reverse order uses less memory", "It prevents gradient explosion"],
+    "options": [
+      "It's arbitrary -- either direction works",
+      "Gradients flow from the loss backward through the network, so the last layer computes gradients first",
+      "Reverse order uses less memory",
+      "It prevents gradient explosion"
+    ],
     "correct": 1,
     "explanation": "The backward pass starts at the loss and propagates gradients toward the input. The last layer receives the loss gradient first, computes its local gradients, and passes them to the previous layer.",
-    "stage": "pre"
+    "stage": "pre",
+    "question_zh": "为什么 Sequential 在反向传播时按相反顺序处理各 Module？",
+    "options_zh": [
+      "纯属随意，正反方向都行",
+      "梯度从 loss 反向流过整个网络，所以最后一层最先得到梯度",
+      "反向顺序占用更少内存",
+      "可以防止梯度爆炸"
+    ],
+    "explanation_zh": "反向传播从 loss 出发，把梯度向输入端传递。最后一层最先收到 loss 梯度，先算出局部梯度再传给前一层。"
   },
   {
     "question": "Why is optimizer.zero_grad() a separate call instead of being done automatically?",
-    "options": ["It's a PyTorch design mistake", "It allows gradient accumulation across multiple batches before taking a single optimizer step", "It saves memory", "It makes debugging easier"],
+    "options": [
+      "It's a PyTorch design mistake",
+      "It allows gradient accumulation across multiple batches before taking a single optimizer step",
+      "It saves memory",
+      "It makes debugging easier"
+    ],
     "correct": 1,
     "explanation": "Separating zero_grad from step enables gradient accumulation: you can run backward() multiple times (across mini-batches) and sum the gradients before calling step(). This simulates larger batch sizes.",
-    "stage": "post"
+    "stage": "post",
+    "question_zh": "为什么 optimizer.zero_grad() 是单独的调用，而不是自动完成？",
+    "options_zh": [
+      "这是 PyTorch 的设计失误",
+      "便于跨多个 batch 累积梯度，再做一次参数更新",
+      "为了节省内存",
+      "为了方便调试"
+    ],
+    "explanation_zh": "把 zero_grad 和 step 拆开，就能做梯度累积：你可以多次调用 backward()（跨小 batch）让梯度相加，然后再调 step()。这样能模拟更大的 batch size。"
   },
   {
     "question": "What is the correct order of operations in a training loop?",
-    "options": ["backward, forward, zero_grad, step", "forward, loss, zero_grad, backward, step", "zero_grad, forward, loss, backward, step", "forward, zero_grad, backward, loss, step"],
+    "options": [
+      "backward, forward, zero_grad, step",
+      "forward, loss, zero_grad, backward, step",
+      "zero_grad, forward, loss, backward, step",
+      "forward, zero_grad, backward, loss, step"
+    ],
     "correct": 2,
     "explanation": "The standard pattern: zero_grad (clear old gradients), forward (compute predictions), loss (compute scalar loss), backward (compute gradients), step (update parameters). Getting this order wrong causes subtle bugs.",
-    "stage": "post"
+    "stage": "post",
+    "question_zh": "训练循环里正确的操作顺序是？",
+    "options_zh": [
+      "backward, forward, zero_grad, step",
+      "forward, loss, zero_grad, backward, step",
+      "zero_grad, forward, loss, backward, step",
+      "forward, zero_grad, backward, loss, step"
+    ],
+    "explanation_zh": "标准模式：zero_grad（清旧梯度）、forward（算预测）、loss（算标量 loss）、backward（算梯度）、step（更新参数）。顺序错了会引发非常隐蔽的 bug。"
   },
   {
     "question": "What is the role of the DataLoader in the framework?",
-    "options": ["It trains the model", "It splits data into batches and optionally shuffles between epochs for mini-batch gradient descent", "It computes the loss function", "It initializes the weights"],
+    "options": [
+      "It trains the model",
+      "It splits data into batches and optionally shuffles between epochs for mini-batch gradient descent",
+      "It computes the loss function",
+      "It initializes the weights"
+    ],
     "correct": 1,
     "explanation": "The DataLoader handles two practical concerns: batching (you can't fit all data in memory) and shuffling (random order prevents the model from memorizing data sequence).",
-    "stage": "post"
+    "stage": "post",
+    "question_zh": "DataLoader 在框架里扮演什么角色？",
+    "options_zh": [
+      "训练模型",
+      "把数据切成 batch，并可在每个 epoch 之间打乱顺序，用于 mini-batch 梯度下降",
+      "计算 loss 函数",
+      "初始化权重"
+    ],
+    "explanation_zh": "DataLoader 处理两个实际问题：分 batch（数据放不进内存）和打乱顺序（随机化避免模型记住数据顺序）。"
   }
 ]

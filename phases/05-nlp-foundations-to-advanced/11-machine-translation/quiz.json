@@ -12,7 +12,15 @@
         "Embedding cosine similarity"
       ],
       "correct": 1,
-      "explanation": "BLEU is the geometric mean of 1-4-gram precision against references, plus a brevity penalty."
+      "explanation": "BLEU is the geometric mean of 1-4-gram precision against references, plus a brevity penalty.",
+      "question_zh": "BLEU 衡量什么？",
+      "options_zh": [
+        "语种识别准确率",
+        "假设和参考之间的 n-gram 精确率（通常 1-4）加上简短惩罚",
+        "字符级 F-score",
+        "embedding cosine similarity"
+      ],
+      "explanation_zh": "BLEU 是 1-4-gram 精确率对参考的几何平均加上简短惩罚。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "It supports streaming"
       ],
       "correct": 2,
-      "explanation": "sacrebleu freezes tokenization, removing a common source of incomparable BLEU numbers."
+      "explanation": "sacrebleu freezes tokenization, removing a common source of incomparable BLEU numbers.",
+      "question_zh": "为什么用 sacrebleu 而不是自己实现 BLEU？",
+      "options_zh": [
+        "它更准",
+        "它在 GPU 上运行",
+        "它对 tokenization 做了归一化，让分数在论文和实验间可比",
+        "它支持流式"
+      ],
+      "explanation_zh": "sacrebleu 冻结 tokenization，消除了 BLEU 不可比的常见来源。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "src_lang"
       ],
       "correct": 1,
-      "explanation": "NLLB forces the first decoded token to a target-language code via forced_bos_token_id."
+      "explanation": "NLLB forces the first decoded token to a target-language code via forced_bos_token_id.",
+      "question_zh": "NLLB 的哪个特定设置控制解码时的目标语言？",
+      "options_zh": [
+        "length_penalty",
+        "把 forced_bos_token_id 设置为目标语言代码的 token id",
+        "num_beams",
+        "src_lang"
+      ],
+      "explanation_zh": "NLLB 通过 forced_bos_token_id 强制第一个解码 token 为目标语言代码。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Latency"
       ],
       "correct": 2,
-      "explanation": "Learned metrics like COMET correlate more strongly with human judgment than BLEU/chrF alone."
+      "explanation": "Learned metrics like COMET correlate more strongly with human judgment than BLEU/chrF alone.",
+      "question_zh": "在有标签数据的生产 MT 质量评估中，2026 年默认的指标家族是哪种？",
+      "options_zh": [
+        "只用 BLEU",
+        "Token 编辑距离",
+        "在人评数据上训练的学习型指标如 COMET（以及 BERTScore/BLEURT）",
+        "延迟"
+      ],
+      "explanation_zh": "COMET 等学习型指标比 BLEU/chrF 与人评的相关性更强。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Whenever a reference exists"
       ],
       "correct": 0,
-      "explanation": "Character F-score captures partial morphological matches that word-level BLEU undercounts."
+      "explanation": "Character F-score captures partial morphological matches that word-level BLEU undercounts.",
+      "question_zh": "什么时候 chrF 通常比 BLEU 更具信息量？",
+      "options_zh": [
+        "对形态丰富的语言，字符级匹配能捕捉 BLEU 漏掉的屈折变体",
+        "用 beam search 时",
+        "在很短的句子上",
+        "只要存在参考"
+      ],
+      "explanation_zh": "字符 F-score 能捕获词级 BLEU 低估的部分形态匹配。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Output that is too short"
       ],
       "correct": 2,
-      "explanation": "Off-target generation is common on rare language pairs; a post-translation language-ID check catches it."
+      "explanation": "Off-target generation is common on rare language pairs; a post-translation language-ID check catches it.",
+      "question_zh": "多语 MT 中的 off-target generation 是什么？",
+      "options_zh": [
+        "输出丢失命名实体",
+        "输出漏掉标点",
+        "模型解码到错误的目标语言（例如要法语却 NLLB 输出西班牙语）",
+        "输出过短"
+      ],
+      "explanation_zh": "罕见语对上常见 off-target；翻译后做语种识别检查可发现。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Quality and domain match dominate volume; noisy parallel data introduces drift and hallucination"
       ],
       "correct": 3,
-      "explanation": "Clean domain-aligned pairs are the largest production lever; noisy data degrades adaptation."
+      "explanation": "Clean domain-aligned pairs are the largest production lever; noisy data degrades adaptation.",
+      "question_zh": "为什么在几千条高质量领域对上微调常常胜过更大但更脏的网络数据？",
+      "options_zh": [
+        "更大的数据会撑爆 GPU 显存",
+        "小数据集训练更快",
+        "网络数据非法",
+        "质量与领域匹配比规模更重要；脏的平行数据带来漂移和幻觉"
+      ],
+      "explanation_zh": "干净的领域对齐对是生产中最关键的杠杆；脏数据降低适配。"
     },
     {
       "stage": "post",
@@ -96,7 +152,15 @@
         "Small-language pairs with millions of parallel sentences"
       ],
       "correct": 2,
-      "explanation": "LLMs win on idiomatic, long-context, or style-controlled translation; specialized MT wins on throughput and latency."
+      "explanation": "LLMs win on idiomatic, long-context, or style-controlled translation; specialized MT wins on throughput and latency.",
+      "question_zh": "在 2026 年，LLM（例如 GPT-4）什么时候可能胜过专用 MT 模型？",
+      "options_zh": [
+        "最高吞吐量批量翻译",
+        "延迟关键的浏览器翻译",
+        "习语内容、长上下文、通过 prompt 进行的风格适配，或需要语气控制的内容",
+        "有数百万平行句对的小语种"
+      ],
+      "explanation_zh": "LLM 在习语、长上下文或风格控制的翻译上胜出；专用 MT 在吞吐量和延迟上胜出。"
     }
   ]
 }

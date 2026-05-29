@@ -12,7 +12,15 @@
         "Because the embedding requires more than one input"
       ],
       "correct": 1,
-      "explanation": "The point of generating a queue is to amortise sampling cost across the loop. When the first hypothesis fails the runner pops the next without a fresh sampling pass."
+      "explanation": "The point of generating a queue is to amortise sampling cost across the loop. When the first hypothesis fails the runner pops the next without a fresh sampling pass.",
+      "question_zh": "为什么 generator 产出一个排好序的队列,而不是单个假设?",
+      "options_zh": [
+        "因为 parser 读不了单一块",
+        "因为 runner 需要纵深: 当第一个假设失败时可以弹出下一个",
+        "因为 mock 模型只能输出列表",
+        "因为 embedding 需要超过一个输入"
+      ],
+      "explanation_zh": "生成队列的意义在于把采样成本摊给整个循环。第一个假设失败时,runner 弹出下一个,无需再做一次采样。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "It triples the seed value"
       ],
       "correct": 1,
-      "explanation": "Higher temperature widens the sampling distribution. The ramp encourages each pass to drift further so the novelty filter has something to do."
+      "explanation": "Higher temperature widens the sampling distribution. The ramp encourages each pass to drift further so the novelty filter has something to do.",
+      "question_zh": "每一遍的 temperature 渐升起到什么作用?",
+      "options_zh": [
+        "提高 parser 容忍度",
+        "拓宽采样分布,让后续草稿能离 seed 更远",
+        "增加 embedding 维度",
+        "把 seed 值乘三"
+      ],
+      "explanation_zh": "更高的 temperature 拓宽采样分布。渐升让每一遍倾向于漂得更远,novelty 过滤器才有事可做。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "When its draft pass is greater than the queue length"
       ],
       "correct": 1,
-      "explanation": "Novelty is the minimum distance to prior survivors. If that distance is below the threshold the draft is a near duplicate and is dropped."
+      "explanation": "Novelty is the minimum distance to prior survivors. If that distance is below the threshold the draft is a near duplicate and is dropped.",
+      "question_zh": "novelty 过滤器在什么时候拒绝草稿?",
+      "options_zh": [
+        "当 rank 分低于阈值时",
+        "当它与所有先前幸存者的最小 cosine 距离低于 novelty 阈值时",
+        "当它通过 parser 但 tag 数不对时",
+        "当它的 draft pass 大于队列长度时"
+      ],
+      "explanation_zh": "Novelty 是与先前幸存者的最小距离。低于阈值意味着近似重复,被丢弃。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Variables, metric, baseline length"
       ],
       "correct": 1,
-      "explanation": "The rank score is a weighted sum of novelty, specificity, and testability. Each sub score lives between zero and one."
+      "explanation": "The rank score is a weighted sum of novelty, specificity, and testability. Each sub score lives between zero and one.",
+      "question_zh": "rank 分由哪三部分组合?",
+      "options_zh": [
+        "延迟、吞吐、成本",
+        "Novelty、specificity、testability",
+        "Temperature、seed、pass index",
+        "Variables、metric、baseline 长度"
+      ],
+      "explanation_zh": "Rank 分是 novelty、specificity 和 testability 的加权和; 每个子分数都在 0 到 1 之间。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Because the embedding requires it"
       ],
       "correct": 1,
-      "explanation": "Buckets discretise the continuous schedule. Two adjacent temperatures can map to different buckets and pull different drafts from the scripted bank, which is how the mock simulates varied sampling."
+      "explanation": "Buckets discretise the continuous schedule. Two adjacent temperatures can map to different buckets and pull different drafts from the scripted bank, which is how the mock simulates varied sampling.",
+      "question_zh": "为什么 mock 语言模型按 temperature 桶而不是原始 float 来索引?",
+      "options_zh": [
+        "float 不可哈希",
+        "桶把渐升离散化,微小的 temperature 改变也能选出不同的脚本草稿",
+        "parser 需要 integer",
+        "embedding 要求"
+      ],
+      "explanation_zh": "桶把连续的渐升离散化。两个相邻 temperature 可能落入不同桶,从脚本库中拉出不同草稿,这就是 mock 模拟多样采样的方式。"
     },
     {
       "stage": "check",
@@ -72,7 +112,15 @@
         "The novelty threshold is lowered automatically"
       ],
       "correct": 1,
-      "explanation": "Parser failures are recorded as logs with a parse reject reason. The queue can come back empty without crashing the loop, and the logs explain why."
+      "explanation": "Parser failures are recorded as logs with a parse reject reason. The queue can come back empty without crashing the loop, and the logs explain why.",
+      "question_zh": "如果 mock 模型的每条草稿都被 parser 拒绝,会发生什么?",
+      "options_zh": [
+        "generator 抛出硬错误",
+        "队列为空,且每一遍都记录 parse 拒绝日志,失败模式可审计",
+        "runner 用新 prompt 重试",
+        "novelty 阈值被自动降低"
+      ],
+      "explanation_zh": "Parser 失败被记录为带 parse reject 原因的日志。队列可以为空但循环不会崩溃,日志解释为什么。"
     }
   ]
 }

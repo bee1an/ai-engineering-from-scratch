@@ -12,7 +12,15 @@
         "Random restart"
       ],
       "correct": 1,
-      "explanation": "Clipping is the safety belt that keeps a noisy batch from wrecking the loss curve."
+      "explanation": "Clipping is the safety belt that keeps a noisy batch from wrecking the loss curve.",
+      "question_zh": "全局 L2 梯度裁剪解决了什么问题?",
+      "options_zh": [
+        "训练慢",
+        "单个坏 batch 可能让梯度范数飙升数个数量级; 裁剪限制最坏 case 的优化器步长,使一个 batch 不能毁掉数小时学习",
+        "词表漂移",
+        "随机重启"
+      ],
+      "explanation_zh": "裁剪是安全带,防止噪声 batch 把 loss 曲线撞坏。"
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "Any order; the scaler reorders internally"
       ],
       "correct": 1,
-      "explanation": "Clip on unscaled gradients between unscale_ and step; update always runs."
+      "explanation": "Clip on unscaled gradients between unscale_ and step; update always runs.",
+      "question_zh": "GradScaler 的步骤正确顺序是?",
+      "options_zh": [
+        "step、scale、unscale、backward、update",
+        "scaler.scale(loss).backward(); scaler.unscale_(optimizer); clip_grad_norm_; scaler.step(optimizer); scaler.update()",
+        "backward、step、scale、update",
+        "任意顺序; scaler 内部会重排"
+      ],
+      "explanation_zh": "在 unscale_ 与 step 之间对未缩放的梯度做裁剪; update 总是要调用。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Closes the run"
       ],
       "correct": 1,
-      "explanation": "The scaler tunes its factor based on the skip / clean ratio across recent steps."
+      "explanation": "The scaler tunes its factor based on the skip / clean ratio across recent steps.",
+      "question_zh": "scaler.update() 在跳过的步上做什么?",
+      "options_zh": [
+        "什么都不做",
+        "把 scaling 因子折半并重置无 inf 计数; 跳过路径上忘了调用它就是「scaling 因子从不变化」这个 bug",
+        "把 scaling 因子翻倍",
+        "结束本次运行"
+      ],
+      "explanation_zh": "Scaler 根据近期跳过 / 干净步比率调整因子。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "PyTorch requires it"
       ],
       "correct": 1,
-      "explanation": "Loss check covers forward-pass failures; scaler covers backward-pass failures."
+      "explanation": "Loss check covers forward-pass failures; scaler covers backward-pass failures.",
+      "question_zh": "即便已用 GradScaler,为什么仍要做 loss 有限性检查?",
+      "options_zh": [
+        "GradScaler 慢",
+        "GradScaler 处理 backward 中的溢出,但不有限的 loss 不会产生有用梯度; 在 backward 之前跳过既省算力,也避免污染 scaler 状态",
+        "装饰性的",
+        "PyTorch 要求"
+      ],
+      "explanation_zh": "Loss 检查覆盖 forward 失败,scaler 覆盖 backward 失败。"
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "Page only on consecutive skips"
       ],
       "correct": 1,
-      "explanation": "Rate-based alerting catches silent failure modes that occasional-skip pages would not."
+      "explanation": "Rate-based alerting catches silent failure modes that occasional-skip pages would not.",
+      "question_zh": "rolling skip rate 在生产中的信号是什么?",
+      "options_zh": [
+        "任何 skip 都报警",
+        "每次运行有少量 skip 是健康的; 每个 epoch 上百次 skip (rolling 速率超过约 5%) 是硬告警,意味着模型处于 FP16 撑不住的区间",
+        "Skip rate 无关紧要",
+        "只对连续 skip 报警"
+      ],
+      "explanation_zh": "基于速率的告警能抓到偶发 skip 报警漏掉的静默失败。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Random tradition"
       ],
       "correct": 1,
-      "explanation": "FP16 favors mantissa precision over range; BF16 trades the other way, removing the overflow class entirely."
+      "explanation": "FP16 favors mantissa precision over range; BF16 trades the other way, removing the overflow class entirely.",
+      "question_zh": "在 skip 频繁时,为什么从 FP16 切到 BF16 autocast?",
+      "options_zh": [
+        "BF16 更新",
+        "BF16 比 FP16 指数范围更大,几乎不需要 loss scaling; 在同一模型上 skip 速率往往降到 0",
+        "BF16 慢所以 skip 更少",
+        "随机传统"
+      ],
+      "explanation_zh": "FP16 偏向尾数精度,BF16 偏向范围,后者去掉了整类溢出问题。"
     }
   ]
 }

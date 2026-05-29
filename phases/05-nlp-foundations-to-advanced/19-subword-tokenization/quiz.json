@@ -12,7 +12,15 @@
         "Better embeddings"
       ],
       "correct": 0,
-      "explanation": "Subword tokens cover any input by decomposition, removing the OOV problem of word-level vocab."
+      "explanation": "Subword tokens cover any input by decomposition, removing the OOV problem of word-level vocab.",
+      "question_zh": "subword tokenization 相对词级词表带来了什么？",
+      "options_zh": [
+        "稀有词被分解为已知的 subword 片段，消除 OOV 同时保持词表有界",
+        "更小的模型",
+        "更快的训练",
+        "更好的 embedding"
+      ],
+      "explanation_zh": "subword token 通过分解覆盖任意输入，去除词级词表的 OOV 问题。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Bytes are smaller"
       ],
       "correct": 2,
-      "explanation": "Byte-level BPE starts from 256 bytes so every input encodes; nothing is OOV."
+      "explanation": "Byte-level BPE starts from 256 bytes so every input encodes; nothing is OOV.",
+      "question_zh": "GPT-2 为什么用字节级 BPE 而不是字符级 BPE？",
+      "options_zh": [
+        "transformer 要求",
+        "字节 BPE 跳过 merge",
+        "256 字节的基础词表覆盖任何 UTF-8 输入，保证不会有 [UNK]",
+        "字节更小"
+      ],
+      "explanation_zh": "字节级 BPE 从 256 字节起步，所以任何输入都能编码；不会 OOV。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Random sampling"
       ],
       "correct": 1,
-      "explanation": "Unigram fits a unigram LM and iteratively removes the least useful tokens to reach target vocab size."
+      "explanation": "Unigram fits a unigram LM and iteratively removes the least useful tokens to reach target vocab size.",
+      "question_zh": "Unigram tokenizer 怎么构建词表？",
+      "options_zh": [
+        "贪心 IDF 加权",
+        "从大候选集开始，反复剪掉去除后对语料对数似然损害最小的 token",
+        "贪心地合并最频繁的 pair",
+        "随机采样"
+      ],
+      "explanation_zh": "Unigram 拟合一个 unigram LM，反复移除最无用的 token 直到目标词表大小。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "WordPiece skips merges"
       ],
       "correct": 2,
-      "explanation": "WordPiece picks merges by likelihood; BPE picks by raw frequency."
+      "explanation": "WordPiece picks merges by likelihood; BPE picks by raw frequency.",
+      "question_zh": "WordPiece 的 merge 准则与 BPE 的区别是什么？",
+      "options_zh": [
+        "WordPiece 用字节",
+        "WordPiece 是无监督的",
+        "WordPiece 选择最大化训练语料似然的 pair 合并；BPE 合并最频繁的 pair",
+        "WordPiece 跳过 merge"
+      ],
+      "explanation_zh": "WordPiece 按似然挑 merge；BPE 按原始频率挑。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "SentencePiece (encodes whitespace as a special marker and trains BPE or Unigram)"
       ],
       "correct": 3,
-      "explanation": "SentencePiece trains BPE/Unigram on raw text without pre-tokenization; tiktoken only encodes."
+      "explanation": "SentencePiece trains BPE/Unigram on raw text without pre-tokenization; tiktoken only encodes.",
+      "question_zh": "哪个工具能直接在原始多语言 Unicode 文本上训练 tokenizer？",
+      "options_zh": [
+        "spaCy",
+        "tiktoken",
+        "tokenizers-lite",
+        "SentencePiece（把空白编码为特殊标记，并训练 BPE 或 Unigram）"
+      ],
+      "explanation_zh": "SentencePiece 在原始文本上训练 BPE/Unigram 而无需预 tokenization；tiktoken 只做编码。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "It reduces vocabulary size"
       ],
       "correct": 0,
-      "explanation": "Even small tokenizer changes shift IDs; a hash check catches drift before it reaches users."
+      "explanation": "Even small tokenizer changes shift IDs; a hash check catches drift before it reaches users.",
+      "question_zh": "为什么生产 CI 要对部署的 tokenizer.json 做 hash 校验？",
+      "options_zh": [
+        "tokenizer 漂移会产生与训练时不同的 token ID，悄悄破坏输出",
+        "Hugging Face 要求",
+        "为了压缩存储",
+        "它降低词表大小"
+      ],
+      "explanation_zh": "即使是微小的 tokenizer 变化也会改变 ID；hash 校验能在影响用户前发现漂移。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Emojis are stop characters"
       ],
       "correct": 1,
-      "explanation": "Composite emojis encode as several bytes; byte-level tokenizers may use multiple tokens per glyph."
+      "explanation": "Composite emojis encode as several bytes; byte-level tokenizers may use multiple tokens per glyph.",
+      "question_zh": "为什么一个 emoji 常常占用很多 token？",
+      "options_zh": [
+        "emoji 是保留的",
+        "多 codepoint emoji 被编码为多个 UTF-8 字节；没有专门 token 时每个字节都成为独立 subword",
+        "emoji 以 float 存储",
+        "emoji 是停字符"
+      ],
+      "explanation_zh": "组合 emoji 编码为多个字节；字节级 tokenizer 可能用多个 token 表示一个字形。"
     },
     {
       "stage": "post",
@@ -96,7 +152,15 @@
         "Match training corpus size"
       ],
       "correct": 2,
-      "explanation": "Vocab size scales with model and language coverage; these are rough community defaults."
+      "explanation": "Vocab size scales with model and language coverage; these are rough community defaults.",
+      "question_zh": "新的单语 transformer 词表大小有什么经验启发？",
+      "options_zh": [
+        "总是 8000",
+        "总是 1M",
+        "1B 参数以下大致 32k；1-10B 用 50-100k；多语言或前沿模型用 200k+",
+        "与训练语料大小匹配"
+      ],
+      "explanation_zh": "词表大小随模型和语种覆盖伸缩；这些是粗略的社区默认。"
     }
   ]
 }

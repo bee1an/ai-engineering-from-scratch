@@ -12,7 +12,15 @@
         "Preprocessing is required only for languages without whitespace"
       ],
       "correct": 1,
-      "explanation": "Models operate on integer token IDs; preprocessing bridges continuous language to discrete inputs."
+      "explanation": "Models operate on integer token IDs; preprocessing bridges continuous language to discrete inputs.",
+      "question_zh": "为什么语言模型在训练前需要预处理？",
+      "options_zh": [
+        "预处理能提升 GPU 利用率",
+        "模型消费的是离散整数 token，不是原始文本",
+        "模型直接读字符串",
+        "只有不带空格的语言才需要预处理"
+      ],
+      "explanation_zh": "模型操作整数 token ID；预处理把连续的语言桥接到离散输入。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Tokenization"
       ],
       "correct": 0,
-      "explanation": "Stemming chops suffixes with rules; it is fast but can be wrong."
+      "explanation": "Stemming chops suffixes with rules; it is fast but can be wrong.",
+      "question_zh": "下列哪种预处理操作是基于规则的后缀剥离？",
+      "options_zh": [
+        "Stemming",
+        "POS tagging",
+        "Lemmatization",
+        "Tokenization"
+      ],
+      "explanation_zh": "Stemming 用规则砍掉后缀，速度快但可能出错。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "poni"
       ],
       "correct": 3,
-      "explanation": "The 'ies' rule replaces the suffix with 'i', producing 'poni'; step 1b in real Porter cleans it up."
+      "explanation": "The 'ies' rule replaces the suffix with 'i', producing 'poni'; step 1b in real Porter cleans it up.",
+      "question_zh": "Porter stemmer 的 step 1a 对单词 'ponies' 返回什么？",
+      "options_zh": [
+        "ponies",
+        "ponie",
+        "pony",
+        "poni"
+      ],
+      "explanation_zh": "'ies' 规则把后缀替换为 'i'，得到 'poni'；真实 Porter 的 step 1b 会进一步清理。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "To reduce memory usage"
       ],
       "correct": 2,
-      "explanation": "Lemmas depend on grammatical role; without the tag the lookup is ambiguous."
+      "explanation": "Lemmas depend on grammatical role; without the tag the lookup is ambiguous.",
+      "question_zh": "为什么 lemmatization 通常需要 POS tag？",
+      "options_zh": [
+        "Unicode 处理",
+        "速度",
+        "语法上下文能消歧 'better' (ADJ) 与 'better' (VERB) 这类形式",
+        "降低内存占用"
+      ],
+      "explanation_zh": "lemma 取决于语法角色；没有 tag 查询就有歧义。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "'a' (adjective)"
       ],
       "correct": 1,
-      "explanation": "Verb-prefixed Penn Treebank tags map to WordNet 'v'."
+      "explanation": "Verb-prefixed Penn Treebank tags map to WordNet 'v'.",
+      "question_zh": "把 NLTK Penn Treebank 的 POS tag 转成 WordNet tag 时，以 'V' 开头的 tag 映射到哪个？",
+      "options_zh": [
+        "'n' (noun)",
+        "'v' (verb)",
+        "'r' (adverb)",
+        "'a' (adjective)"
+      ],
+      "explanation_zh": "Penn Treebank 中以 V 开头的 tag 映射到 WordNet 的 'v'。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Mixing tokenizer libraries within a notebook"
       ],
       "correct": 1,
-      "explanation": "Different preprocessing at training vs inference is the most common production NLP failure."
+      "explanation": "Different preprocessing at training vs inference is the most common production NLP failure.",
+      "question_zh": "NLP 预处理中的 'training/inference mismatch' 是什么？",
+      "options_zh": [
+        "训练和测试 batch size 不同",
+        "训练和服务使用不同的预处理，导致模型在推理时见到陌生分布",
+        "GPU 内存问题",
+        "在 notebook 中混用 tokenizer 库"
+      ],
+      "explanation_zh": "训练与推理预处理不同是生产 NLP 中最常见的失败。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "spaCy en_core_web_sm"
       ],
       "correct": 1,
-      "explanation": "Transformer models ship a paired tokenizer; classical preprocessing is bypassed."
+      "explanation": "Transformer models ship a paired tokenizer; classical preprocessing is bypassed.",
+      "question_zh": "在 transformer 流水线中，你应该用什么取代经典预处理？",
+      "options_zh": [
+        "NLTK word_tokenize",
+        "模型自带的 tokenizer（例如通过 tokenizers / transformers）",
+        "正则 tokenizer",
+        "spaCy en_core_web_sm"
+      ],
+      "explanation_zh": "Transformer 模型配套自己的 tokenizer；经典预处理被绕开。"
     },
     {
       "stage": "post",
@@ -96,7 +152,15 @@
         "Newer versions are slower"
       ],
       "correct": 1,
-      "explanation": "Library upgrades can change tokenization output, drifting from the training distribution."
+      "explanation": "Library upgrades can change tokenization output, drifting from the training distribution.",
+      "question_zh": "为什么在 requirements 中要锁定 NLTK 和 spaCy 的版本？",
+      "options_zh": [
+        "License 兼容性",
+        "tokenizer 与 lemmatizer 的行为会在小版本间变化，悄悄改变训练分布",
+        "旧版本支持更多语言",
+        "新版本更慢"
+      ],
+      "explanation_zh": "库升级可能改变 tokenization 输出，导致与训练分布漂移。"
     }
   ]
 }

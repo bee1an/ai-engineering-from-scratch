@@ -12,7 +12,15 @@
         "Defense in depth across input sanitize, policy rails, classifier gate, model, output filter, and HITL tier"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本 capstone 中的「层级安全」指什么?",
+      "options_zh": [
+        "对每条响应做人工审核",
+        "只在输入侧跑一个强分类器",
+        "对输出做单一基于规则的正则",
+        "在输入清洗、策略 rail、分类器门、模型、输出过滤器和 HITL 层之间做纵深防御"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Llama Guard 4"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "哪个分类器覆盖大约 132 种语言的多语言场景?",
+      "options_zh": [
+        "Nemotron 3 Content Safety",
+        "ShieldGemma-2",
+        "X-Guard",
+        "Llama Guard 4"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "To track false-positive blocks so the model stays helpful while improving harmlessness"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么在 XSTest 这种良性套件上衡量过度拒答?",
+      "options_zh": [
+        "用以替代 red-team 评分",
+        "对 token 吞吐做基准测试",
+        "认证 guardrail 框架",
+        "跟踪误拦截,让模型在改善 harmlessness 的同时保持有用"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Critic LLM scores drafts against a written constitution, prompts the model rewrites the objected outputs, and SFT runs on the improved pairs"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本 capstone 中的 constitutional 自我批评循环是什么?",
+      "options_zh": [
+        "对候选 jailbreak prompt 做 reranker",
+        "从零训练的 RLHF reward model",
+        "Llama Guard 4 的一次前向传播",
+        "Critic LLM 按写好的 constitution 给草稿打分,提示模型改写被反对的输出,再在改进对上做 SFT"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "On a hand-tuned 1-10 scale chosen by the operator"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "成功的 jailbreak 在结果中如何按严重性打分?",
+      "options_zh": [
+        "按生成响应的模型",
+        "按 CVSS 4.0,涵盖 attack vector、complexity 和 impact,并附上披露时间线",
+        "按 prompt 的原始 token 数",
+        "按操作员手调的 1-10 分"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "PSI, KL, MMD, KS, JS, and Wasserstein"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "red-team 范围运行的六类攻击是?",
+      "options_zh": [
+        "BLEU、ROUGE、METEOR、BERTScore、CometKiwi 和 chrF",
+        "PAIR、TAP、GCG、编码 (ASCII/base64/rot13)、多轮人格、多语言 code-switch",
+        "暴力破解、字典、重放、MITM、钓鱼和 CSRF",
+        "PSI、KL、MMD、KS、JS 和 Wasserstein"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Automation is required to disable Llama Guard 4"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么把范围自动化 (cron + 告警) 列入评分标准?",
+      "options_zh": [
+        "cron 是调用 OPA 的唯一方式",
+        "持续的定时探针能捕捉攻击成功率漂移和过度拒答的回归",
+        "明确要求手工运行",
+        "需要自动化才能禁用 Llama Guard 4"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

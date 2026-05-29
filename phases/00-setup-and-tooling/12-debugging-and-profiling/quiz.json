@@ -3,37 +3,52 @@
     {
       "stage": "pre",
       "question": "What makes debugging AI/ML code fundamentally different from debugging a typical web application?",
+      "question_zh": "调试 AI/ML 代码与调试普通 Web 应用相比，最根本的不同在哪里？",
       "options": ["AI code uses different programming languages", "AI bugs often don't crash -- they silently produce incorrect results with no error messages", "AI code cannot be debugged with standard tools like print statements", "AI code always requires a GPU to debug"],
+      "options_zh": ["AI 代码使用的编程语言不一样", "AI 的 bug 经常不会让程序崩溃，而是悄悄产出错误结果，连报错都没有", "AI 代码不能用 print 等常规手段调试", "调试 AI 代码必须用 GPU"],
       "correct": 1,
-      "explanation": "The worst AI bugs produce valid-looking output. A misconfigured training loop might run for hours without errors while the model learns nothing useful, unlike web apps that crash with stack traces."
+      "explanation": "The worst AI bugs produce valid-looking output. A misconfigured training loop might run for hours without errors while the model learns nothing useful, unlike web apps that crash with stack traces.",
+      "explanation_zh": "最棘手的 AI bug 会产出看起来「合理」的输出。一个配错的训练 loop 可能跑几个小时都不报错，但模型其实什么都没学到，这和 Web 应用一出错就抛 stack trace 完全不同。"
     },
     {
       "stage": "pre",
       "question": "What does a profiler measure?",
+      "question_zh": "profiler 测量的是什么？",
       "options": ["Whether the code produces correct output", "How much time and memory each part of the code consumes", "How many bugs exist in the codebase", "The code coverage of unit tests"],
+      "options_zh": ["代码输出是否正确", "代码的各个部分各自消耗了多少时间和内存", "代码库里有多少 bug", "单元测试的代码覆盖率"],
       "correct": 1,
-      "explanation": "Profilers measure resource consumption -- execution time per function, memory allocation, and GPU utilization -- helping you find bottlenecks and optimize performance."
+      "explanation": "Profilers measure resource consumption -- execution time per function, memory allocation, and GPU utilization -- helping you find bottlenecks and optimize performance.",
+      "explanation_zh": "profiler 衡量的是资源消耗：每个函数的执行时间、内存分配、GPU 利用率等等，帮你定位性能瓶颈、做优化。"
     },
     {
       "stage": "post",
       "question": "Your model achieves 99% accuracy on the test set. What AI-specific bug should you suspect first?",
+      "question_zh": "模型在 test set 上拿到了 99% 的准确率。你应该首先怀疑哪种 AI 特有的 bug？",
       "options": ["The model has too many parameters", "Data leakage -- test samples may have leaked into the training set", "The learning rate is too high", "The batch size is too large"],
+      "options_zh": ["模型参数太多", "数据泄漏：test 样本可能混进了 training set", "学习率太高", "batch size 太大"],
       "correct": 1,
-      "explanation": "Suspiciously high accuracy often indicates data leakage -- overlap between training and test data, or features that contain the target label. Always check for train/test overlap."
+      "explanation": "Suspiciously high accuracy often indicates data leakage -- overlap between training and test data, or features that contain the target label. Always check for train/test overlap.",
+      "explanation_zh": "异常高的准确率往往说明存在数据泄漏：训练集和测试集有重叠，或者特征里直接含有目标 label。务必检查 train/test 是否有重合。"
     },
     {
       "stage": "post",
       "question": "What is the most common finding when profiling a training loop's time breakdown?",
+      "question_zh": "对训练 loop 做时间剖析时，最常见的发现是什么？",
       "options": ["The backward pass takes 90% of the time", "Data loading takes more time than the forward and backward passes combined", "Writing logs takes the most time", "GPU memory allocation is the bottleneck"],
+      "options_zh": ["backward 占 90% 的时间", "数据加载比 forward 和 backward 加起来还耗时", "写日志最耗时", "GPU 显存分配是瓶颈"],
       "correct": 1,
-      "explanation": "Data loading often takes 60%+ of training time when num_workers=0 in the DataLoader. The fix is setting num_workers > 0 to load data in parallel with GPU computation."
+      "explanation": "Data loading often takes 60%+ of training time when num_workers=0 in the DataLoader. The fix is setting num_workers > 0 to load data in parallel with GPU computation.",
+      "explanation_zh": "DataLoader 里 num_workers=0 时，数据加载经常占到训练时间的 60% 以上。把 num_workers 设大于 0，让数据加载和 GPU 计算并行起来即可缓解。"
     },
     {
       "stage": "post",
       "question": "You see NaN loss at step 500. Which approach will help you find the root cause?",
+      "question_zh": "训练到第 500 步出现 NaN loss，哪种做法最能帮你找出根因？",
       "options": ["Restart training from scratch with a different random seed", "Use detect_nan to check for NaN/Inf in gradients and add breakpoint() at the failure point", "Increase the batch size to stabilize gradients", "Switch from Adam to SGD optimizer"],
+      "options_zh": ["换个随机种子从头重训", "用 detect_nan 检查梯度中的 NaN/Inf，并在失败点加 breakpoint()", "调大 batch size 让梯度更稳定", "把 optimizer 从 Adam 换成 SGD"],
       "correct": 1,
-      "explanation": "First identify WHERE the NaN originates by checking gradients for each parameter. A conditional breakpoint at the NaN step lets you inspect tensor values interactively. Common causes: learning rate too high, log(0), or division by zero."
+      "explanation": "First identify WHERE the NaN originates by checking gradients for each parameter. A conditional breakpoint at the NaN step lets you inspect tensor values interactively. Common causes: learning rate too high, log(0), or division by zero.",
+      "explanation_zh": "先通过检查每个参数的梯度找出 NaN 出现在哪里。在 NaN 出现的那一步加条件 breakpoint，就能交互式地查看 tensor 数值。常见原因有：学习率过高、log(0)、除零。"
     }
   ]
 }

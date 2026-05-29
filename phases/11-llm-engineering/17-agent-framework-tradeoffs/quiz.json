@@ -4,62 +4,102 @@
     {
       "stage": "post",
       "question": "Which framework is the right first pick for a workflow that must resume after a crash, accept a human approval mid-run, and fan out to three retrievers in parallel?",
+      "question_zh": "对于一个需要崩溃后能恢复、运行中接受人工审批、还要并行 fan out 到三个检索器的工作流，首选哪个框架？",
       "options": [
         "CrewAI",
         "AutoGen",
         "LangGraph",
         "Agno"
       ],
+      "options_zh": [
+        "CrewAI",
+        "AutoGen",
+        "LangGraph",
+        "Agno"
+      ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "post",
       "question": "Why does LLM-selected routing cost more tokens per turn than explicit routing?",
+      "question_zh": "为什么 LLM 选择式路由比显式路由每轮消耗更多 token？",
       "options": [
         "It pre-fetches the next node in parallel to hedge latency.",
         "A planner LLM call picks the next step each turn, adding prompt and completion tokens for every decision.",
         "It duplicates the tool list for every agent in the crew.",
         "It sends the whole conversation history to a verifier model."
       ],
+      "options_zh": [
+        "它会并行预取下一个节点来对冲延迟。",
+        "每一轮都要调用一次 planner LLM 来决定下一步，每次决策都额外消耗 prompt 和 completion 的 token。",
+        "它会为 crew 里的每个 agent 重复一份工具列表。",
+        "它会把整段对话历史发给一个验证模型。"
+      ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "post",
       "question": "Proposer-critic dialogue in code review naturally maps to which framework's core abstraction?",
+      "question_zh": "代码评审中的 proposer-critic 对话天然对应哪个框架的核心抽象？",
       "options": [
         "CrewAI's sequential Crew",
         "LangGraph's StateGraph",
         "AutoGen's GroupChat / ConversableAgent pair",
         "Agno's single Agent with tools"
       ],
+      "options_zh": [
+        "CrewAI 的顺序 Crew",
+        "LangGraph 的 StateGraph",
+        "AutoGen 的 GroupChat / ConversableAgent 配对",
+        "Agno 的单个 Agent 加工具"
+      ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "post",
       "question": "Which framework has built-in storage drivers (SQLite, Postgres, Redis, Mongo, DynamoDB) attached directly to the Agent class for session and memory persistence?",
+      "question_zh": "哪个框架在 Agent 类上直接挂载了内置的存储驱动（SQLite、Postgres、Redis、Mongo、DynamoDB）来做 session 和 memory 持久化？",
       "options": [
         "LangGraph",
         "CrewAI",
         "AutoGen",
         "Agno"
       ],
+      "options_zh": [
+        "LangGraph",
+        "CrewAI",
+        "AutoGen",
+        "Agno"
+      ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "post",
       "question": "You have a two-call summarizer: fetch text, summarize. Which option is the right framework choice?",
+      "question_zh": "你有一个两次调用的摘要器：抓文本、做摘要。框架该怎么选？",
       "options": [
-        "LangGraph StateGraph \u2014 always use a framework for reliability.",
-        "CrewAI with researcher + summarizer roles \u2014 roles make it clearer.",
-        "Plain Python with the provider SDK \u2014 no framework is the fastest framework for tiny pipelines.",
-        "AutoGen GroupChat \u2014 two agents can argue about the best summary."
+        "LangGraph StateGraph — always use a framework for reliability.",
+        "CrewAI with researcher + summarizer roles — roles make it clearer.",
+        "Plain Python with the provider SDK — no framework is the fastest framework for tiny pipelines.",
+        "AutoGen GroupChat — two agents can argue about the best summary."
+      ],
+      "options_zh": [
+        "LangGraph StateGraph：为了可靠性永远用框架。",
+        "CrewAI 配 researcher + summarizer 两个角色：角色让流程更清晰。",
+        "纯 Python 直接用 provider SDK：对小流水线来说，不用框架就是最快的框架。",
+        "AutoGen GroupChat：两个 agent 可以就最佳摘要互相辩论。"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     }
   ]
 }

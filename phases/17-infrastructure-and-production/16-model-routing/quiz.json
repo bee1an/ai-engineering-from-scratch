@@ -12,7 +12,15 @@
         "Run a cheap model first, escalate to a frontier model only on low confidence or refusal"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "model cascading 的核心思想是什么？",
+      "options_zh": [
+        "并行跑两个模型并对输出求平均",
+        "总是按随机权重路由",
+        "每个请求先跑最贵的模型",
+        "先跑便宜模型，只在低置信或拒答时升级到前沿模型"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "GPU temperature, fan speed, room humidity, time of day"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本课列出哪四个用于路由决策的信号？",
+      "options_zh": [
+        "任务分类、prompt 长度、与已知难题集的 embedding 相似度、首跑得到的自置信度",
+        "只看 token 数",
+        "只看用户分级",
+        "GPU 温度、风扇转速、室内湿度、时间"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Always faster than pre-route"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "cascade 路由器的预期延迟剖面是什么？",
+      "options_zh": [
+        "总是慢 10 倍",
+        "与前沿模型相同",
+        "中位数延迟约 1.2 倍（便宜跑 + 校验），约 2 倍发生在升级请求上（约 10% 的流量）",
+        "总是比预路由更快"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Random round-robin"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "哪种路由模式前置增加 5-10ms 延迟，但整体最快？",
+      "options_zh": [
+        "用分类器做预路由",
+        "Ensemble 路由",
+        "Cascade",
+        "随机轮询"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "A latency drift in the cheap model"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "路由中的 cheap-model drift 是什么？",
+      "options_zh": [
+        "便宜模型变贵了",
+        "Cascade 100% 的时候都掉到前沿模型",
+        "任务分布发生漂移，但训练好的路由器仍然把请求送给便宜模型，质量被悄悄降级",
+        "便宜模型的延迟漂移"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Online quality metrics — thumbs-up/down per route, LLM-judge on held-out samples, escalation rate, refusal rate"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本课建议用什么手段抓住路由漂移？",
+      "options_zh": [
+        "只用离线 eval 集",
+        "在生产中关掉路由",
+        "只做季度工程评审",
+        "在线质量指标 —— 每条路由的赞/踩、对留出样本上的 LLM-judge、升级率、拒答率"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

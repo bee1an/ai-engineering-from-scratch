@@ -12,7 +12,15 @@
         "The base model must be reset and pretrained again."
       ],
       "correct": 1,
-      "explanation": "The base model can extend text but has never been shown that an instruction expects a corresponding response. SFT teaches the format contract: see instruction, emit response."
+      "explanation": "The base model can extend text but has never been shown that an instruction expects a corresponding response. SFT teaches the format contract: see instruction, emit response.",
+      "question_zh": "在阅读课程之前: 你给一个原生 base model 提示「What is the capital of France?」,它输出「And what about Italy and Spain too?」。下列哪种诊断最贴切?",
+      "options_zh": [
+        "模型缺少 Paris 这个事实。",
+        "模型具备语言模型行为,但没有指令遵循的格式契约。",
+        "模型需要更大的词表。",
+        "base model 必须重置并重新预训练。"
+      ],
+      "explanation_zh": "base model 能延续文本,但从未被展示过指令对应着回应这一格式。SFT 教的是格式契约: 看到指令就输出回答。"
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "PyTorch normalises by sequence length so masked positions cancel out."
       ],
       "correct": 1,
-      "explanation": "ignore_index is a documented argument of F.cross_entropy. Targets equal to it contribute zero to loss and zero to gradients. -100 is the conventional default value."
+      "explanation": "ignore_index is a documented argument of F.cross_entropy. Targets equal to it contribute zero to loss and zero to gradients. -100 is the conventional default value.",
+      "question_zh": "collate 函数把 instruction 位置和 padding 位置的 labels[i] 设为 -100。为什么 PyTorch 的 cross-entropy 能正确处理这些位置?",
+      "options_zh": [
+        "Cross-entropy 会静默丢掉任何负 target。",
+        "ignore_index=-100 是 F.cross_entropy 的有效参数: 等于该值的 target 对 loss 和梯度贡献为零。",
+        "这些位置的输出会自动被设为 NaN。",
+        "PyTorch 按序列长度归一化,被 mask 的位置自然抵消。"
+      ],
+      "explanation_zh": "ignore_index 是 F.cross_entropy 的文档化参数。等于它的 target 对 loss 和梯度都贡献 0。-100 是惯用默认值。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "It is an optional optimisation; using same-position labels also works."
       ],
       "correct": 1,
-      "explanation": "Causal LM trains position i to predict token i+1. The slice aligns the prediction at position i with the gold label at position i+1, which is the standard next-token objective."
+      "explanation": "Causal LM trains position i to predict token i+1. The slice aligns the prediction at position i with the gold label at position i+1, which is the standard next-token objective.",
+      "question_zh": "为什么 shifted_loss 切片是 logits[:, :-1, :] 与 labels[:, 1:],而不是同位置使用?",
+      "options_zh": [
+        "为了在 collate 后让两个张量大小一致。",
+        "因为在因果下一个 token 目标下,模型在位置 i 的输出预测的是位置 i+1 的 token。",
+        "为了自动排除最后一个 padding 位置。",
+        "这是可选优化; 同位置 label 也能工作。"
+      ],
+      "explanation_zh": "因果 LM 训练 i 位置预测 i+1 处 token。这个切片把位置 i 的预测与位置 i+1 的金标签对齐,是标准的下一个 token 目标。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "The model cannot learn the boundary token without the mask."
       ],
       "correct": 1,
-      "explanation": "When instruction positions count toward the loss, they dominate the gradient because there are usually more of them than response tokens. The effective learning rate on the part you care about (the response) drops, and the model spends capacity reconstructing inputs the user always supplies."
+      "explanation": "When instruction positions count toward the loss, they dominate the gradient because there are usually more of them than response tokens. The effective learning rate on the part you care about (the response) drops, and the model spends capacity reconstructing inputs the user always supplies.",
+      "question_zh": "你不加 mask 训练: labels 等于 input_ids,无 -100。模型仍然训练,但响应的 exact-match 比加 mask 时差。最可能的原因是?",
+      "options_zh": [
+        "优化器在响应 token 上过拟合。",
+        "大部分梯度信号被用于预测指令 (mask 屏蔽掉的最大区域)。",
+        "Cross-entropy 在 loss 中含 special token 时不稳定。",
+        "没有 mask 模型就学不到边界 token。"
+      ],
+      "explanation_zh": "当指令位置计入 loss 时,它们因数量通常多于响应 token 而主导梯度。你真正关心的部分 (响应) 的有效学习率下降,模型把容量花在了重建用户始终会提供的输入上。"
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "Cross-entropy of the reference under the model."
       ],
       "correct": 1,
-      "explanation": "Token-level F1 (counted between predicted and reference tokens after normalisation) credits the model for getting most of the answer right even when surface form differs. This is lesson 41's job."
+      "explanation": "Token-level F1 (counted between predicted and reference tokens after normalisation) credits the model for getting most of the answer right even when surface form differs. This is lesson 41's job.",
+      "question_zh": "留出集上 exact-match 是 0.85。reviewer 指出模型常以同义改写答出正确答案,exact-match 漏掉这种情况。你加哪个指标来捕捉?",
+      "options_zh": [
+        "留出集的 loss。",
+        "对参考答案的 token 级 F1: 即便不字符相同,也认可重叠。",
+        "平均序列长度。",
+        "参考答案在模型下的 cross-entropy。"
+      ],
+      "explanation_zh": "Token 级 F1 (规范化后预测与参考的 token 间的 F1) 在表面形式不同时仍奖励大部分正确。这正是第 41 课要做的事。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Increase the vocabulary."
       ],
       "correct": 1,
-      "explanation": "Multi-turn SFT generalises the single-turn template. Each turn gets a role marker. The mask is the union of all non-assistant positions plus padding. The training objective is unchanged."
+      "explanation": "Multi-turn SFT generalises the single-turn template. Each turn gets a role marker. The mask is the union of all non-assistant positions plus padding. The training objective is unchanged.",
+      "question_zh": "你想把 SFT 模型用在支持多轮对话的聊天机器人。对数据和 mask 至少要做哪种最小改动?",
+      "options_zh": [
+        "什么都不用: SFT 模型天然支持多轮。",
+        "为每轮加 USER 和 ASSISTANT 标记,把多轮拼起来,mask 掉除当前训练的 assistant 轮以外的全部位置。",
+        "把 loss 换成均方误差。",
+        "增大词表。"
+      ],
+      "explanation_zh": "多轮 SFT 是单轮模板的推广。每轮加角色标记。Mask 是所有非 assistant 位置加 padding 的并集。训练目标不变。"
     }
   ]
 }

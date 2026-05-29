@@ -12,7 +12,15 @@
         "It reduces the model parameter count"
       ],
       "correct": 1,
-      "explanation": "Stacking three (D, D) projection matrices into one (3D, D) matrix produces the same outputs, but the forward pass is a single accelerator-friendly matmul."
+      "explanation": "Stacking three (D, D) projection matrices into one (3D, D) matrix produces the same outputs, but the forward pass is a single accelerator-friendly matmul.",
+      "question_zh": "为什么高效的 self-attention 块用一个输出 3*D 维特征的 linear 层?",
+      "options_zh": [
+        "在 Q、K、V 间强制权重共享",
+        "数学上等价于三个 Linear(D, D) 层,而前向只跑一次 matmul",
+        "免去 causal mask",
+        "减少模型参数量"
+      ],
+      "explanation_zh": "把三个 (D, D) 投影矩阵堆成一个 (3D, D) 矩阵,输出相同,但前向变成一次对加速器友好的 matmul。"
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "d_head is independent of d_model"
       ],
       "correct": 2,
-      "explanation": "The block splits d_model evenly across heads. The constraint d_model % n_heads == 0 is enforced at construction."
+      "explanation": "The block splits d_model evenly across heads. The constraint d_model % n_heads == 0 is enforced at construction.",
+      "question_zh": "d_model、n_heads 与 d_head 之间的关系是?",
+      "options_zh": [
+        "d_head = d_model * n_heads",
+        "d_head = d_model + n_heads",
+        "d_head = d_model // n_heads,且 d_model 必须能被 n_heads 整除",
+        "d_head 与 d_model 无关"
+      ],
+      "explanation_zh": "块把 d_model 在各 head 间均分。d_model % n_heads == 0 在构造时强制。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "sqrt(seq_len)"
       ],
       "correct": 1,
-      "explanation": "Scores are divided by sqrt(d_head), the head dimension that the matmul contracts. This keeps the variance of the scores bounded as d_head grows."
+      "explanation": "Scores are divided by sqrt(d_head), the head dimension that the matmul contracts. This keeps the variance of the scores bounded as d_head grows.",
+      "question_zh": "scaled dot-product attention 的缩放因子使用哪个值?",
+      "options_zh": [
+        "sqrt(d_model)",
+        "sqrt(d_head)",
+        "sqrt(n_heads)",
+        "sqrt(seq_len)"
+      ],
+      "explanation_zh": "得分除以 sqrt(d_head),也就是 matmul 收缩的 head 维度。这让得分方差随 d_head 增长保持有界。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "By using a different attention head for the future"
       ],
       "correct": 1,
-      "explanation": "Setting future entries to -inf forces softmax to give them weight zero. Past and present positions retain a valid weight distribution."
+      "explanation": "Setting future entries to -inf forces softmax to give them weight zero. Past and present positions retain a valid weight distribution.",
+      "question_zh": "causal mask 如何强制位置 t 不能 attend 到位置 t+1?",
+      "options_zh": [
+        "把未来位置的 keys 乘以 0",
+        "在 softmax 前把对角线以上的 score 置为负无穷",
+        "把未来 token 从输入中移除",
+        "为未来使用不同的 attention head"
+      ],
+      "explanation_zh": "把未来项设为 -inf,softmax 就把它们的权重压到 0。过去和当前位置仍保有有效的权重分布。"
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "It is required for autograd to track gradients"
       ],
       "correct": 0,
-      "explanation": "Without the output projection, head outputs would only ever combine in later layers. The projection gives the block one place to mix heads in the same step."
+      "explanation": "Without the output projection, head outputs would only ever combine in later layers. The projection gives the block one place to mix heads in the same step.",
+      "question_zh": "为什么块在合并各 head 后以 Linear(D, D) 输出投影收尾?",
+      "options_zh": [
+        "让模型在 head 间混合信息",
+        "匹配模型的词表大小",
+        "把激活归一化到均值为零",
+        "为了 autograd 能追踪梯度"
+      ],
+      "explanation_zh": "没有输出投影,各 head 输出只能在后续层混合。投影在同一步内提供了 head 间混合的位置。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "The output logits for the next token"
       ],
       "correct": 1,
-      "explanation": "Row t of the per-head matrix is the distribution over key positions used by query position t. Inspecting it shows where each head looks."
+      "explanation": "Row t of the per-head matrix is the distribution over key positions used by query position t. Inspecting it shows where each head looks.",
+      "question_zh": "shape 为 (B, H, T, T) 的 attention 权重矩阵告诉你什么?",
+      "options_zh": [
+        "每个 head 的参数量",
+        "每个 query 位置在每个 head、每个 batch 元素上,attend 到哪些 key 位置",
+        "query 与 value 向量之间的 cosine 相似度",
+        "下一个 token 的输出 logits"
+      ],
+      "explanation_zh": "每个 head 矩阵的第 t 行是 query 位置 t 用到的 key 位置分布。检视它能看到每个 head 关注哪里。"
     }
   ]
 }

@@ -12,7 +12,15 @@
         "90% off"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Anthropic 的 cache 命中读取相对原始输入价格的折扣是多少？",
+      "options_zh": [
+        "75 折",
+        "5 折",
+        "25 折",
+        "1 折"
+      ],
+      "explanation_zh": "Anthropic prompt caching 在命中时按基础输入价的 10% 计费，相当于 9 折优惠（即 90% off）。"
     },
     {
       "stage": "post",
@@ -24,7 +32,15 @@
         "Anthropic explicitly rejects timestamps in cached blocks"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么动态时间戳必须放在 cache 断点之下，而不是之上？",
+      "options_zh": [
+        "cache 只在前缀字节级一致时命中；变化的时间戳会让其后所有内容都无法匹配",
+        "时间戳让 tokenizer 困惑",
+        "时间戳比静态文本更费 token",
+        "Anthropic 明令禁止 cache block 里出现时间戳"
+      ],
+      "explanation_zh": "Cache 命中要求前缀字节级一致；时间戳放在断点之上会破坏后面所有内容的匹配。"
     },
     {
       "stage": "post",
@@ -36,7 +52,15 @@
         "A system-level flag you toggle per project"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "OpenAI 的 prompt caching 是怎么配置的？",
+      "options_zh": [
+        "显式的 cache_control 标记",
+        "你需要创建并引用 CachedContent API",
+        "自动前缀匹配，无需配置",
+        "项目级别的开关"
+      ],
+      "explanation_zh": "OpenAI 的 prompt caching 自动按前缀匹配，开发者无需显式配置。"
     },
     {
       "stage": "post",
@@ -48,7 +72,15 @@
         "No write premium"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "在 Anthropic，1 小时 TTL 的写入溢价是 5 分钟默认值的多少倍？",
+      "options_zh": [
+        "相同",
+        "2 倍写入溢价（即比基线高 50%）",
+        "4 倍写入溢价",
+        "无写入溢价"
+      ],
+      "explanation_zh": "1 小时 TTL 比 5 分钟默认值多收 2 倍写入溢价（相当于比基线贵 50%）。"
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "10"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "要回本 Anthropic 25% 的写入溢价，至少需要复用几次？",
+      "options_zh": [
+        "1 次",
+        "2 次",
+        "5 次",
+        "10 次"
+      ],
+      "explanation_zh": "写入贵 25%、读取省 90%，2 次命中就能回本。"
     }
   ]
 }

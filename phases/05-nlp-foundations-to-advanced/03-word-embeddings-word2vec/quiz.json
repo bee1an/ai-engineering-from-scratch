@@ -12,7 +12,15 @@
         "Frequent words carry the most meaning"
       ],
       "correct": 0,
-      "explanation": "Firth's (1957) distributional hypothesis: similar contexts imply similar meanings."
+      "explanation": "Firth's (1957) distributional hypothesis: similar contexts imply similar meanings.",
+      "question_zh": "什么是分布假说（distributional hypothesis）？",
+      "options_zh": [
+        "你能从一个词的搭配中认识它",
+        "词在文档中均匀分布",
+        "所有词都可以嵌入到 300 维",
+        "高频词承载最多含义"
+      ],
+      "explanation_zh": "Firth (1957) 的分布假说：相似上下文意味着相似含义。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "It causes vanishing gradients"
       ],
       "correct": 0,
-      "explanation": "Full-vocabulary softmax is too expensive; negative sampling reformulates it as binary classification."
+      "explanation": "Full-vocabulary softmax is too expensive; negative sampling reformulates it as binary classification.",
+      "question_zh": "为什么在 Word2Vec 中对整个词表跑普通 softmax 不实用？",
+      "options_zh": [
+        "对 100k+ 词表的 softmax 在每步训练中代价过高",
+        "softmax 不能建模概率",
+        "softmax 没有梯度",
+        "会造成梯度消失"
+      ],
+      "explanation_zh": "全词表 softmax 太昂贵；负采样把它重新表述为二分类。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Skip-gram trains a deep network; CBOW is shallow"
       ],
       "correct": 1,
-      "explanation": "Skip-gram: center -> context. CBOW: context -> center."
+      "explanation": "Skip-gram: center -> context. CBOW: context -> center.",
+      "question_zh": "skip-gram 和 CBOW 的区别是什么？",
+      "options_zh": [
+        "skip-gram 用 bigram；CBOW 用 unigram",
+        "skip-gram 从中心词预测上下文词；CBOW 从上下文预测中心词",
+        "skip-gram 从上下文预测中心词；CBOW 反过来",
+        "skip-gram 训深网络；CBOW 是浅层的"
+      ],
+      "explanation_zh": "skip-gram：center -> context；CBOW：context -> center。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Decorrelate the vectors"
       ],
       "correct": 0,
-      "explanation": "Positive pairs train sigmoid near 1; sampled negatives train sigmoid near 0."
+      "explanation": "Positive pairs train sigmoid near 1; sampled negatives train sigmoid near 0.",
+      "question_zh": "在负采样中，正样本对 (center, context) 的目标是什么？",
+      "options_zh": [
+        "最大化 sigmoid(W[center] dot W'[context])，使其接近 1",
+        "强制它们正交",
+        "最小化它们的点积",
+        "去除向量相关性"
+      ],
+      "explanation_zh": "正样本对训练 sigmoid 接近 1；采样的负样本训练 sigmoid 接近 0。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "The hidden-to-output W' matrix"
       ],
       "correct": 1,
-      "explanation": "The center-word table W is the standard embedding output; W' is often discarded or averaged in."
+      "explanation": "The center-word table W is the standard embedding output; W' is often discarded or averaged in.",
+      "question_zh": "训练完 Word2Vec 后，哪个权重矩阵成为词 embedding？",
+      "options_zh": [
+        "训练后单独的 projection",
+        "input 到 hidden 的 W 矩阵（中心词表）",
+        "两者相乘",
+        "hidden 到 output 的 W' 矩阵"
+      ],
+      "explanation_zh": "中心词表 W 是标准的 embedding 输出；W' 通常被丢弃或被平均合并。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "It assigns one static vector per word, so 'river bank' and 'financial bank' share the same vector"
       ],
       "correct": 3,
-      "explanation": "Static embeddings cannot disambiguate senses; contextual embeddings (ELMo/BERT) fix this."
+      "explanation": "Static embeddings cannot disambiguate senses; contextual embeddings (ELMo/BERT) fix this.",
+      "question_zh": "为什么 Word2Vec 在多义词（例如 'bank'）上失败？",
+      "options_zh": [
+        "窗口太小",
+        "它忽略稀有词",
+        "负采样丢掉稀有义",
+        "它对每个词分配一个静态向量，所以 'river bank' 和 'financial bank' 共享同一向量"
+      ],
+      "explanation_zh": "静态 embedding 无法消歧词义；上下文 embedding（ELMo/BERT）解决了这个问题。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "When dialog quality matters"
       ],
       "correct": 0,
-      "explanation": "Word2Vec wins on tiny latency budgets, on-device inference, or fast domain-specific training."
+      "explanation": "Word2Vec wins on tiny latency budgets, on-device inference, or fast domain-specific training.",
+      "question_zh": "2026 年什么时候你还会选 Word2Vec 而不是 transformer？",
+      "options_zh": [
+        "轻量、设备端、领域特定的检索，单行查表就是延迟预算",
+        "需要上下文消歧时",
+        "输入很长时",
+        "对话质量要求高时"
+      ],
+      "explanation_zh": "Word2Vec 在极小延迟预算、设备端推理或快速领域训练时仍占优。"
     },
     {
       "stage": "post",
@@ -96,7 +152,15 @@
         "Cosine similarity is invariant to gender"
       ],
       "correct": 2,
-      "explanation": "Directions in embedding space encode relational features, so adding/subtracting moves systematically."
+      "explanation": "Directions in embedding space encode relational features, so adding/subtracting moves systematically.",
+      "question_zh": "是什么让著名的 'king - man + woman ~ queen' 类比成立？",
+      "options_zh": [
+        "模型把 royalty 编为一个 flag bit",
+        "skip-gram 在皇室词表上训练",
+        "向量算术捕捉到了像 'royal' 这种可在性别间迁移的线性方向",
+        "cosine similarity 与性别无关"
+      ],
+      "explanation_zh": "embedding 空间中的方向编码了关系特征，所以加减能产生系统性移动。"
     }
   ]
 }

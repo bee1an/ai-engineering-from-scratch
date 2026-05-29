@@ -12,7 +12,15 @@
         "Multi-hop reasoning only"
       ],
       "correct": 1,
-      "explanation": "NIAH = needle in a haystack: plant a fact, ask the model to retrieve it, sweep depth and length."
+      "explanation": "NIAH = needle in a haystack: plant a fact, ask the model to retrieve it, sweep depth and length.",
+      "question_zh": "原始 NIAH benchmark 度量什么？",
+      "options_zh": [
+        "tokenizer 的 fertility",
+        "模型能否在长上下文中按可控深度找回植入的事实",
+        "embedding 的余弦漂移",
+        "仅多跳推理"
+      ],
+      "explanation_zh": "NIAH 即 needle in a haystack：植入一条事实，让模型找回，并扫描深度和长度。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Beam search slows"
       ],
       "correct": 0,
-      "explanation": "Effective context for reasoning is usually 25-50% of the advertised max."
+      "explanation": "Effective context for reasoning is usually 25-50% of the advertised max.",
+      "question_zh": "为什么宣传的上下文窗口往往与实际可用上下文相差很大？",
+      "options_zh": [
+        "注意力会随长度和任务退化；规格上限在多跳或推理负载下基本撑不住",
+        "tokenizer 会截断",
+        "embedding 溢出",
+        "Beam search 变慢"
+      ],
+      "explanation_zh": "用于推理的有效上下文通常只是宣称上限的 25-50%。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Thirteen task types across retrieval, multi-hop tracing, aggregation, and QA at multiple context lengths"
       ],
       "correct": 3,
-      "explanation": "RULER expands NIAH into a multi-task long-context benchmark catching models that saturate NIAH but fail elsewhere."
+      "explanation": "RULER expands NIAH into a multi-task long-context benchmark catching models that saturate NIAH but fail elsewhere.",
+      "question_zh": "RULER 在 NIAH 之上加了什么？",
+      "options_zh": [
+        "翻译任务",
+        "更快的推理",
+        "逐 token 的 logprob",
+        "13 类任务，覆盖检索、多跳追踪、聚合、QA，并跨多个上下文长度"
+      ],
+      "explanation_zh": "RULER 把 NIAH 扩展成多任务长上下文 benchmark，能识别那些 NIAH 满分但其他任务失败的模型。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Models lose punctuation"
       ],
       "correct": 0,
-      "explanation": "Mid-context content is least attended; sweeping depth exposes the U-shaped accuracy curve."
+      "explanation": "Mid-context content is least attended; sweeping depth exposes the U-shaped accuracy curve.",
+      "question_zh": "什么是 'lost in the middle' 现象？",
+      "options_zh": [
+        "模型对长输入中间部分的内容关注不足；depth=0.5 经常比 depth=0 或 1 表现差",
+        "模型重排 token",
+        "模型忘掉第一个 token",
+        "模型丢失标点"
+      ],
+      "explanation_zh": "中间位置内容受到的注意力最少；扫描深度能看到 U 形精度曲线。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Frontier models can ace single-needle retrieval but still fail multi-hop variable-tracing or aggregation tasks"
       ],
       "correct": 3,
-      "explanation": "Retrieval pass does not imply reasoning pass; multi-hop benchmarks expose the real ceiling."
+      "explanation": "Retrieval pass does not imply reasoning pass; multi-hop benchmarks expose the real ceiling.",
+      "question_zh": "为什么仅靠 NIAH 评测不够，还要补多跳测试？",
+      "options_zh": [
+        "多跳更快",
+        "NIAH 缺乏 ground truth",
+        "NIAH 没法跑长上下文",
+        "前沿模型可以在单针检索上拿满分，却在多跳变量追踪或聚合任务上失败"
+      ],
+      "explanation_zh": "通过检索不代表通过推理；多跳 benchmark 才能暴露真正的天花板。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Needles that share no literal tokens with the query, so retrieval requires a semantic reasoning step"
       ],
       "correct": 3,
-      "explanation": "NoLiMa removes lexical overlap so the model must reason rather than match keywords."
+      "explanation": "NoLiMa removes lexical overlap so the model must reason rather than match keywords.",
+      "question_zh": "NoLiMa 强调什么？",
+      "options_zh": [
+        "流式输出",
+        "延迟",
+        "分词",
+        "needle 与 query 没有任何字面 token 重叠，检索必须靠语义推理"
+      ],
+      "explanation_zh": "NoLiMa 移除字面重合，逼模型推理而不是匹配关键词。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Tokens per second only"
       ],
       "correct": 0,
-      "explanation": "Distinguishing retrieval-effective from reasoning-effective length is essential for real-world claims."
+      "explanation": "Distinguishing retrieval-effective from reasoning-effective length is essential for real-world claims.",
+      "question_zh": "长上下文规格表应该报告哪两个数？",
+      "options_zh": [
+        "有效检索长度（如 NIAH 通过率 90% 时的长度）和有效推理长度（如多跳通过率 70% 时的长度）",
+        "只有 GPU 显存和延迟",
+        "只有宣称的最大值",
+        "只有每秒 token 数"
+      ],
+      "explanation_zh": "区分 “检索有效长度” 和 “推理有效长度” 是真实可用性声明的关键。"
     },
     {
       "stage": "post",
@@ -96,7 +152,15 @@
         "Beam search depends on it"
       ],
       "correct": 0,
-      "explanation": "Long prompts have huge prefill costs; latency must be tracked alongside accuracy."
+      "explanation": "Long prompts have huge prefill costs; latency must be tracked alongside accuracy.",
+      "question_zh": "为什么要在长上下文长度下测量 time-to-first-token？",
+      "options_zh": [
+        "1M token 的 prefill 可能要数十秒；只看 accuracy 会掩盖严重影响产品体验的延迟",
+        "tokenization 慢",
+        "RAG 要求",
+        "Beam search 依赖它"
+      ],
+      "explanation_zh": "长 prompt 的 prefill 成本巨大；延迟必须和 accuracy 一起跟踪。"
     }
   ]
 }

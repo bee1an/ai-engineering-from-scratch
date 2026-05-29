@@ -12,7 +12,15 @@
         "(B, 2) input id and label pairs"
       ],
       "correct": 0,
-      "explanation": "Causal LM training reads (B, T) input ids and predicts the same shape of target ids, where target[t] = input[t+1]."
+      "explanation": "Causal LM training reads (B, T) input ids and predicts the same shape of target ids, where target[t] = input[t+1].",
+      "question_zh": "因果 LM 训练 batch 的 shape 契约是什么?",
+      "options_zh": [
+        "(B, T) 的 input id 与 (B, T) 的 target id,target 是 input 整体左移一位",
+        "在词表上的 (B, V) one-hot 向量",
+        "(B, T, T) 的 attention mask,对角线上是 input id",
+        "(B, 2) 的 (input id, label) 对"
+      ],
+      "explanation_zh": "因果 LM 训练读 (B, T) input id,预测同样形状的 target id,其中 target[t] = input[t+1]。"
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "N - T - S"
       ],
       "correct": 1,
-      "explanation": "The first window starts at 0. Subsequent windows start at multiples of S. The last window must still cover T+1 ids."
+      "explanation": "The first window starts at 0. Subsequent windows start at multiples of S. The last window must still cover T+1 ids.",
+      "question_zh": "在长度为 N 的 id 流上,以 stride S 切出长度 T+1 的窗口,共有多少个?",
+      "options_zh": [
+        "N // (T + 1)",
+        "max(0, 1 + (N - (T + 1)) // S)",
+        "(N - T) * S",
+        "N - T - S"
+      ],
+      "explanation_zh": "第一个窗口起点是 0,后续窗口起点是 S 的倍数。最后一个窗口仍需覆盖 T+1 个 id。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "It removes overlap between consecutive windows"
       ],
       "correct": 1,
-      "explanation": "A smaller stride produces more overlapping windows, increasing the example count and the boundary diversity at the cost of more compute per epoch."
+      "explanation": "A smaller stride produces more overlapping windows, increasing the example count and the boundary diversity at the cost of more compute per epoch.",
+      "question_zh": "把 stride 减半对数据集有什么影响?",
+      "options_zh": [
+        "把每个 epoch 的训练样本数减半",
+        "把每个 epoch 的训练样本数大约翻倍",
+        "没有影响,因为窗口从不重叠",
+        "去掉相邻窗口之间的重叠"
+      ],
+      "explanation_zh": "更小的 stride 产生更多重叠窗口,增加样本数和边界多样性,代价是每个 epoch 更多算力。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "It enables multi-GPU training"
       ],
       "correct": 2,
-      "explanation": "A seeded generator reproduces the same shuffle. Reruns with the same seed see batches in the same order, which is required for fair hyperparameter comparison."
+      "explanation": "A seeded generator reproduces the same shuffle. Reruns with the same seed see batches in the same order, which is required for fair hyperparameter comparison.",
+      "question_zh": "为什么向 DataLoader 显式传入 torch.Generator?",
+      "options_zh": [
+        "加快数据加载",
+        "省去 batch padding",
+        "在相同 seed 下让 shuffle 跨次运行保持确定性",
+        "启用多 GPU 训练"
+      ],
+      "explanation_zh": "带 seed 的 generator 复现同样的 shuffle。相同 seed 的多次运行看到的 batch 顺序相同,这是公平比较超参的前提。"
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "It is a quirk of PyTorch tensor indexing"
       ],
       "correct": 1,
-      "explanation": "The target at position t is the input at position t+1. Slicing the window into [:-1] and [1:] expresses that contract."
+      "explanation": "The target at position t is the input at position t+1. Slicing the window into [:-1] and [1:] expresses that contract.",
+      "question_zh": "为什么 dataset 从每个长度 T+1 的窗口里返回 (input[:-1], input[1:])?",
+      "options_zh": [
+        "为了节省内存,丢掉一个 id",
+        "实现 shift-by-one 的 target,使 loss 衡量下一个 token 的预测",
+        "为了从 input 中移除一个 special token",
+        "这是 PyTorch 张量索引的怪癖"
+      ],
+      "explanation_zh": "位置 t 的 target 是位置 t+1 的 input。把窗口切成 [:-1] 和 [1:] 就表达了这一契约。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Dropped data is recovered by the next epoch"
       ],
       "correct": 1,
-      "explanation": "All examples are exactly T tokens long by construction, so the batch is a clean rectangular tensor and the loss applies uniformly without a mask."
+      "explanation": "All examples are exactly T tokens long by construction, so the batch is a clean rectangular tensor and the loss applies uniformly without a mask.",
+      "question_zh": "为什么本节丢弃不完整的尾部窗口而不是 padding?",
+      "options_zh": [
+        "padding 会改变词表大小",
+        "丢弃使每个样本长度相同,无需 loss mask",
+        "模型不支持 padded token",
+        "丢掉的数据会在下个 epoch 找回"
+      ],
+      "explanation_zh": "由于结构上每个样本恰好为 T 个 token,batch 是干净的矩形张量,loss 可均匀应用,无需 mask。"
     }
   ]
 }

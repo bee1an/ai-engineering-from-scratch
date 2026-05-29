@@ -3,37 +3,52 @@
     {
       "stage": "pre",
       "question": "What problem does MCP (Model Context Protocol) solve for AI agents?",
+      "question_zh": "MCP（Model Context Protocol）为 AI agent 解决了什么问题？",
       "options": ["It provides a standard format for training data", "It gives agents a standard way to discover and use tools exposed by external servers, without hardcoding tool implementations", "It encrypts communication between agents", "It compresses large context windows to fit in smaller models"],
+      "options_zh": ["为训练数据提供一种标准格式", "让 agent 可以用统一方式发现并调用外部 server 暴露的工具，而不必把工具实现写死在 agent 代码里", "在 agent 之间加密通信", "压缩长上下文窗口以装进更小的模型"],
       "correct": 1,
-      "explanation": "MCP standardizes tool access: a server exposes tools with JSON schemas, and any MCP-compatible agent can discover and call them. This decouples tool implementation from agent code."
+      "explanation": "MCP standardizes tool access: a server exposes tools with JSON schemas, and any MCP-compatible agent can discover and call them. This decouples tool implementation from agent code.",
+      "explanation_zh": "MCP 把工具访问标准化：server 用 JSON schema 暴露工具，任何兼容 MCP 的 agent 都能发现并调用，从而把工具实现和 agent 代码解耦。"
     },
     {
       "stage": "pre",
       "question": "What is the difference between MCP and A2A?",
+      "question_zh": "MCP 和 A2A 有什么区别？",
       "options": ["MCP is for Python agents and A2A is for JavaScript agents", "MCP connects agents to tools (agent-to-tool), while A2A connects agents to other agents (agent-to-agent) for task delegation", "MCP is synchronous and A2A is asynchronous", "MCP is open source and A2A is proprietary"],
+      "options_zh": ["MCP 给 Python agent 用，A2A 给 JavaScript agent 用", "MCP 把 agent 连到工具（agent-to-tool），A2A 把 agent 连到其他 agent（agent-to-agent）以委派任务", "MCP 是同步的，A2A 是异步的", "MCP 开源，A2A 闭源"],
       "correct": 1,
-      "explanation": "MCP is the protocol for tool access (an agent calls a tool). A2A is the protocol for agent collaboration (an agent delegates a task to another agent). They solve different layers of the communication problem."
+      "explanation": "MCP is the protocol for tool access (an agent calls a tool). A2A is the protocol for agent collaboration (an agent delegates a task to another agent). They solve different layers of the communication problem.",
+      "explanation_zh": "MCP 是工具访问协议（agent 调用工具）。A2A 是 agent 协作协议（agent 把任务委派给其他 agent）。它们解决通信问题的不同层次。"
     },
     {
       "stage": "post",
       "question": "In A2A, what is an 'agent card' and why is it important?",
+      "question_zh": "A2A 里的「agent card」是什么，为什么重要？",
       "options": ["A visual dashboard showing agent performance metrics", "A JSON document at a well-known URL that describes an agent's capabilities, skills, and endpoint, enabling other agents to discover and delegate tasks to it", "A security credential that authenticates an agent's identity", "A configuration file that sets the agent's system prompt"],
+      "options_zh": ["展示 agent 性能指标的可视化仪表盘", "放在一个 well-known URL 上的 JSON 文档，描述 agent 的能力、技能和 endpoint，让其他 agent 能发现并向它委派任务", "用来认证 agent 身份的安全凭证", "设置 agent system prompt 的配置文件"],
       "correct": 1,
-      "explanation": "The agent card (hosted at /.well-known/agent.json) is how agents advertise themselves. It lists skills, supported input/output formats, and the task endpoint. Other agents read this card to decide whether and how to delegate work."
+      "explanation": "The agent card (hosted at /.well-known/agent.json) is how agents advertise themselves. It lists skills, supported input/output formats, and the task endpoint. Other agents read this card to decide whether and how to delegate work.",
+      "explanation_zh": "Agent card（放在 /.well-known/agent.json）是 agent 自我介绍的方式，列出 skill、支持的输入输出格式和任务 endpoint。其他 agent 通过它决定是否、如何委派任务。"
     },
     {
       "stage": "post",
       "question": "Why do multi-agent systems need structured communication protocols instead of just passing strings between agents?",
+      "question_zh": "为什么多 agent 系统需要结构化通信协议，而不是直接在 agent 之间传字符串？",
       "options": ["Strings are too large to send over HTTP", "Structured protocols provide type safety, discoverability, error handling, and interoperability between agents built by different teams with different frameworks", "String parsing is computationally expensive for LLMs", "Structured protocols are required by all cloud providers"],
+      "options_zh": ["字符串太大，HTTP 发不动", "结构化协议提供类型安全、可发现性、错误处理，以及由不同团队、不同框架构建的 agent 之间的互操作性", "解析字符串对 LLM 来说计算开销太大", "所有云厂商都强制要求"],
       "correct": 1,
-      "explanation": "Without structured contracts, agents from different teams misinterpret each other's output, error handling is ad-hoc, and there is no way to discover what another agent can do. Protocols provide the shared language that makes multi-agent systems reliable."
+      "explanation": "Without structured contracts, agents from different teams misinterpret each other's output, error handling is ad-hoc, and there is no way to discover what another agent can do. Protocols provide the shared language that makes multi-agent systems reliable.",
+      "explanation_zh": "没有结构化契约，不同团队的 agent 会互相误读彼此的输出，错误处理只能临时拼凑，也无法发现别人能做什么。协议提供让多 agent 系统可靠的共同语言。"
     },
     {
       "stage": "post",
       "question": "How does ACP (Agent Communication Protocol) differ from A2A in its design goals?",
+      "question_zh": "ACP（Agent Communication Protocol）在设计目标上和 A2A 有什么不同？",
       "options": ["ACP is faster than A2A for real-time applications", "ACP focuses on enterprise auditability with full message history and compliance tracking, while A2A focuses on lightweight task delegation", "ACP only works within a single organization while A2A works across organizations", "ACP uses WebSockets while A2A uses HTTP"],
+      "options_zh": ["ACP 在实时应用里比 A2A 更快", "ACP 关注企业级审计，保留完整消息历史和合规跟踪；A2A 更聚焦于轻量级任务委派", "ACP 只能在同一家组织内使用，A2A 可以跨组织", "ACP 用 WebSocket，A2A 用 HTTP"],
       "correct": 1,
-      "explanation": "ACP was designed for enterprise environments where every agent interaction must be auditable, traceable, and compliant. A2A is simpler and focuses on getting tasks done. ACP adds the governance layer that regulated industries require."
+      "explanation": "ACP was designed for enterprise environments where every agent interaction must be auditable, traceable, and compliant. A2A is simpler and focuses on getting tasks done. ACP adds the governance layer that regulated industries require.",
+      "explanation_zh": "ACP 面向企业环境，每一次 agent 交互都必须可审计、可追踪、合规。A2A 更简单，聚焦于把任务搞定。ACP 加上了受监管行业需要的治理层。"
     }
   ]
 }

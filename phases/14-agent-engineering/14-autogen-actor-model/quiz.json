@@ -12,7 +12,15 @@
         "Mutating each other's prompts"
       ],
       "correct": 1,
-      "explanation": "Actors have private state and an inbox; messages are the only interaction."
+      "explanation": "Actors have private state and an inbox; messages are the only interaction.",
+      "question_zh": "AutoGen v0.4 中 actor 之间唯一合法的交互方式是什么？",
+      "options_zh": [
+        "直接访问共享 dict",
+        "通过收件箱交换异步消息；不共享内存",
+        "共享 SQL 事务",
+        "互相修改对方的 prompt"
+      ],
+      "explanation_zh": "Actor 拥有私有状态和一个收件箱；消息是唯一的交互方式。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Plan, Act, Reflect"
       ],
       "correct": 0,
-      "explanation": "Core is the low-level actor framework, AgentChat is the task-driven high-level API, Extensions are integrations."
+      "explanation": "Core is the low-level actor framework, AgentChat is the task-driven high-level API, Extensions are integrations.",
+      "question_zh": "AutoGen v0.4 的三层 API 是什么？",
+      "options_zh": [
+        "Core、AgentChat、Extensions",
+        "前端、后端、数据库",
+        "Tools、Models、Memory",
+        "Plan、Act、Reflect"
+      ],
+      "explanation_zh": "Core 是底层 actor 框架，AgentChat 是任务驱动的高层 API，Extensions 是各类集成。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Handlers are pure functions"
       ],
       "correct": 0,
-      "explanation": "send() puts the message in the recipient's inbox and returns; a handler crash is local to that actor."
+      "explanation": "send() puts the message in the recipient's inbox and returns; a handler crash is local to that actor.",
+      "question_zh": "为什么把投递和处理解耦能带来故障隔离？",
+      "options_zh": [
+        "运行时会捕获 B 中处理器的失败而不会让 A 崩溃；A 的 send() 立即返回，从不阻塞",
+        "每个 actor 运行在独立的机器上",
+        "运行时会在失败时重启操作系统",
+        "处理器都是纯函数"
+      ],
+      "explanation_zh": "send() 把消息放入接收方的收件箱后返回；处理器崩溃只影响该 actor 自身。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Supervisor"
       ],
       "correct": 1,
-      "explanation": "RoundRobinGroupChat is fixed rotation; SelectorGroupChat uses a selector to pick next."
+      "explanation": "RoundRobinGroupChat is fixed rotation; SelectorGroupChat uses a selector to pick next.",
+      "question_zh": "AgentChat 中哪种拓扑会按固定顺序轮转 agent？",
+      "options_zh": [
+        "SelectorGroupChat",
+        "RoundRobinGroupChat",
+        "Magentic-One",
+        "Supervisor"
+      ],
+      "explanation_zh": "RoundRobinGroupChat 按固定顺序轮转；SelectorGroupChat 用一个选择器来挑选下一个。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "An OTel exporter"
       ],
       "correct": 1,
-      "explanation": "Magentic-One is Microsoft's reference team that demonstrates the AgentChat API."
+      "explanation": "Magentic-One is Microsoft's reference team that demonstrates the AgentChat API.",
+      "question_zh": "本课中 Magentic-One 是什么？",
+      "options_zh": [
+        "一个新的 LLM 模型",
+        "构建在 AgentChat 上、用于网页浏览、代码执行和文件处理的参考多 agent 团队",
+        "一种序列化格式",
+        "一个 OTel exporter"
+      ],
+      "explanation_zh": "Magentic-One 是 Microsoft 的参考多 agent 团队，用来展示 AgentChat API。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Replaced by LangGraph"
       ],
       "correct": 1,
-      "explanation": "AutoGen v0.7.x is stable for research; active development has shifted to Microsoft Agent Framework."
+      "explanation": "AutoGen v0.7.x is stable for research; active development has shifted to Microsoft Agent Framework.",
+      "question_zh": "课程中提到 AutoGen v0.4 在 2026 年初的状态是怎样？",
+      "options_zh": [
+        "已废弃且被移除",
+        "稳定但处于维护模式；Microsoft Agent Framework 是后续主线",
+        "刚刚发布",
+        "被 LangGraph 替代"
+      ],
+      "explanation_zh": "AutoGen v0.7.x 在研究场景下保持稳定；活跃开发已经转向 Microsoft Agent Framework。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Datadog APM"
       ],
       "correct": 1,
-      "explanation": "Every message emits a span; tool calls carry gen_ai.* attributes per OTel GenAI conventions."
+      "explanation": "Every message emits a span; tool calls carry gen_ai.* attributes per OTel GenAI conventions.",
+      "question_zh": "AutoGen v0.4 默认发出哪种可观测性标准？",
+      "options_zh": [
+        "仅 Prometheus 指标",
+        "符合 OTel GenAI 语义约定、带 gen_ai.* 属性的 OpenTelemetry span",
+        "StatsD",
+        "Datadog APM"
+      ],
+      "explanation_zh": "每条消息都会发出一个 span；工具调用按 OTel GenAI 约定携带 gen_ai.* 属性。"
     }
   ]
 }

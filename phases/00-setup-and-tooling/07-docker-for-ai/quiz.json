@@ -3,37 +3,52 @@
     {
       "stage": "pre",
       "question": "What is the primary difference between a Docker container and a virtual machine?",
+      "question_zh": "Docker 容器和虚拟机最主要的区别是什么？",
       "options": ["Containers are slower but more secure than VMs", "Containers share the host OS kernel while VMs run their own full OS", "Containers can only run Linux while VMs support any OS", "There is no practical difference"],
+      "options_zh": ["容器比 VM 慢但更安全", "容器共享宿主机的操作系统内核，而 VM 跑自己完整的操作系统", "容器只能运行 Linux，VM 则支持任意操作系统", "实际上没有差别"],
       "correct": 1,
-      "explanation": "Containers share the host kernel and isolate at the process level, making them start in seconds. VMs run a complete guest OS with its own kernel, requiring more resources and slower startup."
+      "explanation": "Containers share the host kernel and isolate at the process level, making them start in seconds. VMs run a complete guest OS with its own kernel, requiring more resources and slower startup.",
+      "explanation_zh": "容器共享宿主机内核，在进程级别做隔离，启动只要几秒。VM 则要跑一整个带独立内核的客户系统，资源占用更高，启动也更慢。"
     },
     {
       "stage": "pre",
       "question": "What is a Dockerfile?",
+      "question_zh": "Dockerfile 是什么？",
       "options": ["A configuration file for the Docker daemon", "A set of instructions for building a Docker image layer by layer", "A log file that records container activity", "A file that lists running containers"],
+      "options_zh": ["Docker daemon 的配置文件", "用于一层一层构建 Docker 镜像的一组指令", "记录容器活动的日志文件", "列出正在运行容器的文件"],
       "correct": 1,
-      "explanation": "A Dockerfile contains sequential instructions (FROM, RUN, COPY, etc.) that Docker executes to build an image. Each instruction creates a cached layer."
+      "explanation": "A Dockerfile contains sequential instructions (FROM, RUN, COPY, etc.) that Docker executes to build an image. Each instruction creates a cached layer.",
+      "explanation_zh": "Dockerfile 包含一系列顺序指令（FROM、RUN、COPY 等），Docker 按顺序执行这些指令来构建镜像，每条指令会形成一层可缓存的 layer。"
     },
     {
       "stage": "post",
       "question": "Why are volume mounts critical for AI development with Docker?",
+      "question_zh": "在用 Docker 做 AI 开发时，volume 挂载为什么至关重要？",
       "options": ["Volumes make containers run faster by using host disk speed", "Volumes persist data (models, datasets, code) across container rebuilds so you don't re-download gigabytes each time", "Volumes are required for Python packages to install correctly", "Volumes allow multiple containers to share the same GPU"],
+      "options_zh": ["volume 借助宿主机磁盘速度让容器跑得更快", "volume 让数据（模型、数据集、代码）在容器重建时仍然保留，避免每次都要重新下载几十 GB", "Python 包必须借助 volume 才能正确安装", "volume 让多个容器可以共享同一个 GPU"],
       "correct": 1,
-      "explanation": "Without volumes, everything inside a container is lost when it stops. Volume mounts map host directories into the container, so model weights (14+ GB) and datasets survive rebuilds."
+      "explanation": "Without volumes, everything inside a container is lost when it stops. Volume mounts map host directories into the container, so model weights (14+ GB) and datasets survive rebuilds.",
+      "explanation_zh": "如果不挂 volume，容器一停里面的所有内容就没了。volume 把宿主机目录映射进容器，模型权重（动辄 14+ GB）和数据集就能在重建容器后继续保留。"
     },
     {
       "stage": "post",
       "question": "What does the NVIDIA Container Toolkit enable?",
+      "question_zh": "NVIDIA Container Toolkit 让我们可以做什么？",
       "options": ["Installing CUDA drivers inside the container", "Exposing host GPUs to Docker containers via the --gpus flag", "Running NVIDIA GPU containers on AMD hardware", "Compiling CUDA code during the Docker build process"],
+      "options_zh": ["在容器内部安装 CUDA 驱动", "通过 --gpus 参数把宿主机的 GPU 暴露给 Docker 容器", "在 AMD 硬件上运行 NVIDIA GPU 容器", "在 Docker 构建过程中编译 CUDA 代码"],
       "correct": 1,
-      "explanation": "The NVIDIA Container Toolkit is a runtime hook that exposes host GPUs to containers. The CUDA toolkit lives inside the container, but the GPU driver is shared from the host."
+      "explanation": "The NVIDIA Container Toolkit is a runtime hook that exposes host GPUs to containers. The CUDA toolkit lives inside the container, but the GPU driver is shared from the host.",
+      "explanation_zh": "NVIDIA Container Toolkit 是一个运行时 hook，把宿主机的 GPU 暴露给容器。CUDA toolkit 装在容器里面，但 GPU 驱动是从宿主机共享过来的。"
     },
     {
       "stage": "post",
       "question": "In a Docker Compose file for AI, how does the 'ai-dev' service reach the 'qdrant' vector database?",
+      "question_zh": "在 AI 用的 Docker Compose 配置里，ai-dev 服务怎么访问 qdrant 向量数据库？",
       "options": ["By using the host machine's IP address and port", "By using the service name 'qdrant' as the hostname, since Compose creates a shared network", "By mounting a shared volume between the two containers", "By configuring a VPN between the containers"],
+      "options_zh": ["通过宿主机的 IP 地址和端口访问", "直接用服务名 qdrant 当作主机名访问，因为 Compose 会自动建一个共享网络", "在两个容器之间挂一个共享 volume", "在容器之间配置一条 VPN"],
       "correct": 1,
-      "explanation": "Docker Compose automatically creates a shared network where services can reach each other by name. The ai-dev container connects to 'http://qdrant:6333' using the service name as hostname."
+      "explanation": "Docker Compose automatically creates a shared network where services can reach each other by name. The ai-dev container connects to 'http://qdrant:6333' using the service name as hostname.",
+      "explanation_zh": "Docker Compose 会自动建一个共享网络，各服务之间可以直接用名字互相访问。ai-dev 容器只要用 http://qdrant:6333 这种以服务名作主机名的方式连接即可。"
     }
   ]
 }

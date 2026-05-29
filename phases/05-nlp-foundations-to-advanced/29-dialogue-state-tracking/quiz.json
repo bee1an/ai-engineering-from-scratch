@@ -5,98 +5,162 @@
     {
       "stage": "pre",
       "question": "What does dialogue state tracking maintain across turns?",
+      "question_zh": "对话状态跟踪（DST）在多轮对话中维护的是什么？",
       "options": [
         "A free-text history only",
         "A slot-value dictionary representing the user's current goal, updated after every turn",
         "An embedding of the conversation",
         "A POS-tagged transcript"
       ],
+      "options_zh": [
+        "仅纯文本的历史记录",
+        "一个槽位-值字典，表示用户当前的目标，每轮对话后更新",
+        "对话的 embedding 表示",
+        "带词性标注的对话文本"
+      ],
       "correct": 1,
-      "explanation": "DST keeps a structured slot-value map that the backend can act on."
+      "explanation": "DST keeps a structured slot-value map that the backend can act on.",
+      "explanation_zh": "DST 维护一个结构化的槽位-值映射，后端可以基于此采取行动。"
     },
     {
       "stage": "pre",
       "question": "What does Joint Goal Accuracy (JGA) measure?",
+      "question_zh": "Joint Goal Accuracy（JGA）衡量的是什么？",
       "options": [
         "Fraction of turns where every slot is exactly correct (all-or-nothing)",
         "Average slot accuracy",
         "Latency per turn",
         "Cosine similarity"
       ],
+      "options_zh": [
+        "每个槽位都完全正确的轮次比例（全对或全错）",
+        "平均槽位准确率",
+        "每轮的延迟",
+        "余弦相似度"
+      ],
       "correct": 0,
-      "explanation": "JGA is the strict per-turn match across all slots; per-slot accuracy is more lenient."
+      "explanation": "JGA is the strict per-turn match across all slots; per-slot accuracy is more lenient.",
+      "explanation_zh": "JGA 是按轮次严格匹配所有槽位的指标；按槽位计算的准确率则更宽松。"
     },
     {
       "stage": "check",
       "question": "Why does regenerating the whole state from history each turn handle user corrections naturally?",
+      "question_zh": "为什么每轮从历史重新生成整个状态可以自然处理用户的修正？",
       "options": [
         "It uses fewer tokens",
         "It runs on GPU",
         "It avoids embeddings",
         "Reading the full history lets the model re-derive the final state including 'actually...' corrections without explicit rollback logic"
       ],
+      "options_zh": [
+        "使用更少的 token",
+        "在 GPU 上运行",
+        "避免使用 embedding",
+        "读取完整历史让模型能重新推导最终状态，包含'其实……'之类的修正，无需显式的回滚逻辑"
+      ],
       "correct": 3,
-      "explanation": "Full-history regeneration absorbs corrections by recomputing the final state from the entire conversation."
+      "explanation": "Full-history regeneration absorbs corrections by recomputing the final state from the entire conversation.",
+      "explanation_zh": "基于完整历史重新生成可以从整个对话重新计算最终状态，从而吸收修正。"
     },
     {
       "stage": "check",
       "question": "Which 2026 pattern gives a guaranteed-valid slot dict in 5 lines of code?",
+      "question_zh": "在 2026 年，哪种模式可以用 5 行代码保证生成有效的槽位字典？",
       "options": [
         "Hand-written regex",
         "BM25 retrieval",
         "LLM + Instructor + Pydantic schema with constrained or validated output",
         "TF-IDF classifier"
       ],
+      "options_zh": [
+        "手写正则表达式",
+        "BM25 检索",
+        "LLM + Instructor + Pydantic schema，配合受约束或经校验的输出",
+        "TF-IDF 分类器"
+      ],
       "correct": 2,
-      "explanation": "Pydantic schema + Instructor validates the LLM's state output against the slot ontology automatically."
+      "explanation": "Pydantic schema + Instructor validates the LLM's state output against the slot ontology automatically.",
+      "explanation_zh": "Pydantic schema 加 Instructor 会自动按槽位本体校验 LLM 输出的状态。"
     },
     {
       "stage": "check",
       "question": "Why version your DST schema?",
+      "question_zh": "为什么要给 DST schema 做版本管理？",
       "options": [
         "Adding new slots post-hoc invalidates older training data and breaks longitudinal evaluation",
         "Required by JSON",
         "Reduce token count",
         "Speed gains"
       ],
+      "options_zh": [
+        "事后添加新槽位会让旧训练数据失效，并破坏纵向评估的可比性",
+        "JSON 规范要求",
+        "减少 token 数",
+        "提升速度"
+      ],
       "correct": 0,
-      "explanation": "Unversioned schema changes silently break training data alignment and eval comparability."
+      "explanation": "Unversioned schema changes silently break training data alignment and eval comparability.",
+      "explanation_zh": "没有版本号的 schema 变更会悄悄破坏训练数据对齐和评估可比性。"
     },
     {
       "stage": "post",
       "question": "Why must DST for compliance-sensitive domains include a rule-based check alongside LLM extraction?",
+      "question_zh": "为什么合规敏感领域的 DST 必须在 LLM 抽取之外加一层基于规则的校验？",
       "options": [
         "Rules avoid embeddings",
         "LLM-only DST can mis-extract destructive parameters (amount, account, date); a rules layer enforces deterministic constraints",
         "LLMs are slower",
         "Rules are multilingual"
       ],
+      "options_zh": [
+        "规则不需要 embedding",
+        "纯 LLM 的 DST 可能错误抽取破坏性参数（金额、账户、日期），规则层用确定性约束兜底",
+        "LLM 速度更慢",
+        "规则支持多语言"
+      ],
       "correct": 1,
-      "explanation": "Compliance domains require deterministic enforcement; rules catch slot errors that LLMs introduce."
+      "explanation": "Compliance domains require deterministic enforcement; rules catch slot errors that LLMs introduce.",
+      "explanation_zh": "合规领域需要确定性强制执行，规则可以兜住 LLM 引入的槽位错误。"
     },
     {
       "stage": "post",
       "question": "What is the cost concern with regenerating state on every turn via LLM?",
+      "question_zh": "用 LLM 每轮重新生成状态在成本上有什么顾虑？",
       "options": [
         "Re-reading the full history each turn yields O(n^2) total token usage; cap or summarize older turns",
         "More embeddings",
         "Cosine costs",
         "Embedding drift"
       ],
+      "options_zh": [
+        "每轮重读完整历史会带来 O(n^2) 的总 token 消耗；需要截断或摘要较早的轮次",
+        "更多 embedding",
+        "余弦计算成本",
+        "embedding 漂移"
+      ],
       "correct": 0,
-      "explanation": "Full-history regeneration is quadratic in turns; cap history or use rolling summaries."
+      "explanation": "Full-history regeneration is quadratic in turns; cap history or use rolling summaries.",
+      "explanation_zh": "完整历史重生成在轮数上是二次方增长；需要截断历史或使用滚动摘要。"
     },
     {
       "stage": "post",
       "question": "Why are explicit confirmation flows required before destructive backend actions?",
+      "question_zh": "为什么在破坏性后端操作前必须有显式的确认流程？",
       "options": [
         "Latency",
         "Confirmation increases JGA",
         "Required by tokenizers",
         "Even good DST has nonzero slot-error rates; a deterministic confirmation prevents wrong-account or wrong-amount actions"
       ],
+      "options_zh": [
+        "延迟原因",
+        "确认流程能提升 JGA",
+        "tokenizer 要求",
+        "再好的 DST 也有非零的槽位错误率；确定性的确认可以防止打错账户或金额"
+      ],
       "correct": 3,
-      "explanation": "Destructive actions need user confirmation because DST is never error-free."
+      "explanation": "Destructive actions need user confirmation because DST is never error-free.",
+      "explanation_zh": "破坏性操作需要用户确认，因为 DST 永远不可能完全无误。"
     }
   ]
 }

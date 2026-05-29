@@ -12,7 +12,15 @@
         "Test-set leakage from public benchmarks such as MMLU-Pro and MT-Bench-v2 into training data"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "在数据准备阶段,污染检查防止的是什么?",
+      "options_zh": [
+        "SFT 与 DPO 阶段间的 tokenizer drift",
+        "训练与推理之间的 GPU 驱动不一致",
+        "不同 llama.cpp 构建间的 GGUF 版本偏差",
+        "公开 benchmark (如 MMLU-Pro 和 MT-Bench-v2) 的测试集泄漏到训练数据"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "DPO cannot run on quantized weights"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么流水线采用 SFT 后接 DPO (或 GRPO),而不是直接用 DPO?",
+      "options_zh": [
+        "Axolotl 不支持 DPO",
+        "SFT 在标注完成项上建立领域行为,DPO 或 GRPO 再在偏好对或可验证奖励上做对齐",
+        "DPO 需要不同架构的 base model",
+        "DPO 不能在量化权重上跑"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Draft heads that predict N tokens ahead; the target verifies in one pass for 2-3x throughput"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "EAGLE-3 在 vLLM 服务阶段贡献了什么?",
+      "options_zh": [
+        "新的 prompt-caching 层",
+        "面向工具调用的 OPA 策略",
+        "自动数据去重步骤",
+        "draft head 预测后续 N 个 token,target 一次性验证,带来 2-3 倍吞吐"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Perplexity"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "哪个指标反映 speculative-decoding 中 draft 与 target 的对齐情况?",
+      "options_zh": [
+        "Acceptance rate",
+        "Coverage delta",
+        "PSI",
+        "Perplexity"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "FP32, FP16, BF16"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本流水线为部署灵活性发布的三种量化是?",
+      "options_zh": [
+        "ONNX、CoreML、TFLite",
+        "GPTQ-INT4-Marlin、AWQ-INT4、GGUF-Q4_K_M",
+        "三种 runtime 上仅 INT8",
+        "FP32、FP16、BF16"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "OpenAI's model card format"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本 capstone 中 2026 model card 遵循的框架约定是?",
+      "options_zh": [
+        "Datasheets for Datasets",
+        "Model Openness Framework (MOF) 2026 模板,涵盖数据、训练、评估、安全、license 和可复现性",
+        "仅 HuggingFace YAML front-matter",
+        "OpenAI 的 model card 格式"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Network egress bytes"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "服务副本用哪个 HPA 指标做自动扩缩?",
+      "options_zh": [
+        "Queue-wait time (排队等待时间)",
+        "CPU 利用率",
+        "GPU 温度",
+        "网络出口字节"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

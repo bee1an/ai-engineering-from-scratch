@@ -12,7 +12,15 @@
         "Anything torch.save() can serialize"
       ],
       "correct": 1,
-      "explanation": "Resume must walk the same trajectory. Without optimizer moments, scheduler position, and RNG state the resumed loss is a different curve."
+      "explanation": "Resume must walk the same trajectory. Without optimizer moments, scheduler position, and RNG state the resumed loss is a different curve.",
+      "question_zh": "下列哪一组最完整地描述了一次训练 checkpoint?",
+      "options_zh": [
+        "仅模型权重",
+        "模型状态、optimizer 状态、scheduler 状态、step 计数、loss 历史以及 python、numpy、torch CPU、torch CUDA 的 RNG 状态",
+        "只有 loss 历史",
+        "torch.save() 能序列化的任何东西"
+      ],
+      "explanation_zh": "Resume 必须沿同样的轨迹走。没有 optimizer moment、scheduler 位置和 RNG 状态,resume 后的 loss 会是另一条曲线。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "It bypasses fsync"
       ],
       "correct": 1,
-      "explanation": "atomic_save calls os.replace from a temp file in the same directory. Cross-device renames lose atomicity, which is why the temp file must live in the target directory."
+      "explanation": "atomic_save calls os.replace from a temp file in the same directory. Cross-device renames lose atomicity, which is why the temp file must live in the target directory.",
+      "question_zh": "为什么保存器先写到临时文件再 rename,而不是直接写目标文件?",
+      "options_zh": [
+        "I/O 更快",
+        "同目录下 POSIX rename 是原子的; 写到一半崩溃也不会留下半写文件,目标位置仍是上一个完好版本",
+        "实现去重",
+        "绕过 fsync"
+      ],
+      "explanation_zh": "atomic_save 从同目录的临时文件调用 os.replace。跨设备 rename 失去原子性,所以临时文件必须放在目标目录。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Because torch requires it"
       ],
       "correct": 1,
-      "explanation": "load_sharded_checkpoint asserts each shard's actual hash matches the recorded one and the meta file's hash too. Silent corruption is the worst failure mode."
+      "explanation": "load_sharded_checkpoint asserts each shard's actual hash matches the recorded one and the meta file's hash too. Silent corruption is the worst failure mode.",
+      "question_zh": "为什么分片 checkpoint 在 index.json 里为每个分片记录 sha256?",
+      "options_zh": [
+        "为了 SEO",
+        "让 loader 在加载时检测被截断或被篡改的分片,而不是静默地合并坏的 state_dict",
+        "压缩文件",
+        "torch 要求"
+      ],
+      "explanation_zh": "load_sharded_checkpoint 断言每个分片的实际 hash 与记录一致,meta 文件的 hash 也一致。静默损坏是最糟的失败模式。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "It always restarts from step 0"
       ],
       "correct": 1,
-      "explanation": "Without (epoch, batch_in_epoch) you snap to the next epoch boundary and waste work. Without RNG you see different batches. Both are required."
+      "explanation": "Without (epoch, batch_in_epoch) you snap to the next epoch boundary and waste work. Without RNG you see different batches. Both are required.",
+      "question_zh": "Resume 如何在当前 epoch 内续到正确位置?",
+      "options_zh": [
+        "跳到下一个 epoch 边界",
+        "TrainState 记录 (epoch, batch_in_epoch),并恢复 RNG 状态; loader 把 generator 快进过已消费的 batch 再继续",
+        "用专用数据库",
+        "总是从 step 0 开始"
+      ],
+      "explanation_zh": "没有 (epoch, batch_in_epoch) 就只能跳到下个 epoch 边界,白白浪费工作; 没有 RNG 你看到的 batch 也不同。两者都需要。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Compression"
       ],
       "correct": 1,
-      "explanation": "The lesson uses ckpt.v1; the next version is ckpt.v2 with a migrate function. Without the field, format evolution requires breakage."
+      "explanation": "The lesson uses ckpt.v1; the next version is ckpt.v2 with a migrate function. Without the field, format evolution requires breakage.",
+      "question_zh": "payload 上的 schema 字段带来了什么?",
+      "options_zh": [
+        "什么都没有",
+        "迁移钩子: 未来格式变化时改 schema 字符串,loader 可基于它分发,而不是直接破坏老运行",
+        "好看的文件名",
+        "压缩"
+      ],
+      "explanation_zh": "本节用 ckpt.v1; 下一个版本是 ckpt.v2 加 migrate 函数。没有这个字段,格式演进就要求破坏性变更。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "That the disk is fast"
       ],
       "correct": 1,
-      "explanation": "If you forget RNG you see a different curve and a non-trivial diff. If you forget optimizer state the diff is huge. The near-zero number is the contract."
+      "explanation": "If you forget RNG you see a different curve and a non-trivial diff. If you forget optimizer state the diff is huge. The near-zero number is the contract.",
+      "question_zh": "看 resume demo 摘要,max_loss_diff_after_resume 接近 0 证明了什么?",
+      "options_zh": [
+        "什么也没证明",
+        "续训后的 loss 轨迹在浮点噪声内与未中断 baseline 一致,意味着 RNG 状态与 optimizer 状态都被忠实恢复",
+        "模型不错",
+        "磁盘很快"
+      ],
+      "explanation_zh": "忘了 RNG,曲线会不同,差值非平凡; 忘了 optimizer 状态,差值会很大。接近 0 的数字才是契约。"
     }
   ]
 }

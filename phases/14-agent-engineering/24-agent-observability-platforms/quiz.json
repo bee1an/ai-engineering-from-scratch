@@ -12,7 +12,15 @@
         "Apache 2.0"
       ],
       "correct": 1,
-      "explanation": "Langfuse is MIT, including LLM-as-a-judge, annotation queues, prompt experiments, and Playground after June 2025."
+      "explanation": "Langfuse is MIT, including LLM-as-a-judge, annotation queues, prompt experiments, and Playground after June 2025.",
+      "question_zh": "在 2025 年 6 月把原本商业的模块开源后，Langfuse 现在使用什么许可？",
+      "options_zh": [
+        "GPLv3",
+        "MIT",
+        "Elastic License 2.0",
+        "Apache 2.0"
+      ],
+      "explanation_zh": "2025 年 6 月之后，Langfuse 整体使用 MIT，包括 LLM-as-a-judge、annotation queue、prompt experiment 和 Playground。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Static analysis of code"
       ],
       "correct": 1,
-      "explanation": "Phoenix focuses on behavioral drift and RAG evaluation with OpenInference auto-instrumentation."
+      "explanation": "Phoenix focuses on behavioral drift and RAG evaluation with OpenInference auto-instrumentation.",
+      "question_zh": "根据本课，Arize Phoenix 最强在哪？",
+      "options_zh": [
+        "Prompt 版本管理",
+        "深度的 agent 专项评测：trace 聚类、异常检测、RAG 检索相关性、OpenInference 自动埋点",
+        "自动化的优化循环",
+        "代码静态分析"
+      ],
+      "explanation_zh": "Phoenix 的重点是行为漂移和 RAG 评测，配合 OpenInference 自动埋点。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Jaeger"
       ],
       "correct": 2,
-      "explanation": "Opik centers on the optimization + guardrail loop."
+      "explanation": "Opik centers on the optimization + guardrail loop.",
+      "question_zh": "哪个平台把自动 prompt 优化、guardrail（PII 脱敏、话题约束）和 LLM-judge 幻觉检测组合到一起？",
+      "options_zh": [
+        "Langfuse",
+        "Phoenix",
+        "Opik",
+        "Jaeger"
+      ],
+      "explanation_zh": "Opik 围绕 optimization + guardrail 这条循环。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Datadog APM"
       ],
       "correct": 0,
-      "explanation": "Langfuse covers tracing + prompt management + evals + session replay end-to-end."
+      "explanation": "Langfuse covers tracing + prompt management + evals + session replay end-to-end.",
+      "question_zh": "本课推荐哪个平台作为带 prompt 管理的 all-in-one？",
+      "options_zh": [
+        "Langfuse",
+        "Phoenix",
+        "Opik",
+        "Datadog APM"
+      ],
+      "explanation_zh": "Langfuse 端到端覆盖 tracing + prompt 管理 + eval + session replay。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Only Opik's are reliable"
       ],
       "correct": 1,
-      "explanation": "Even the cited 14x gap between Opik and Langfuse should be measured on your own data before deciding."
+      "explanation": "Even the cited 14x gap between Opik and Langfuse should be measured on your own data before deciding.",
+      "question_zh": "本课对供应商发布的平台 benchmark 是什么态度？",
+      "options_zh": [
+        "认为它们是定论",
+        "把它当方向参考；用你自己的语料去测",
+        "OpenTelemetry 禁止这样做",
+        "只有 Opik 的可信"
+      ],
+      "explanation_zh": "即便是引用的 Opik 与 Langfuse 之间 14 倍差距，也得在你自己的数据上跑一遍再决定。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Spans cannot be replayed"
       ],
       "correct": 1,
-      "explanation": "Evals are what turn traces into actionable quality signals."
+      "explanation": "Evals are what turn traces into actionable quality signals.",
+      "question_zh": "为什么没有 evaluation 的 tracing 被视作昂贵的日志？",
+      "options_zh": [
+        "磁盘比 CPU 贵",
+        "你能看到运行过程，但没有打分；回归就看不见，二分定位也无从谈起",
+        "供应商对 span 收费",
+        "Span 不能回放"
+      ],
+      "explanation_zh": "Eval 才能把 trace 转成可执行的质量信号。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "They must run on GPUs"
       ],
       "correct": 1,
-      "explanation": "Without external tool-grounded verification, LLM-judges drift toward rubber-stamping (CRITIC, Lesson 5)."
+      "explanation": "Without external tool-grounded verification, LLM-judges drift toward rubber-stamping (CRITIC, Lesson 5).",
+      "question_zh": "本课对自己撸的 LLM-judge 给出什么警告？",
+      "options_zh": [
+        "Apache 2.0 禁止这种做法",
+        "CRITIC 同样适用：判别本身需要外部 grounding 来核实事实，否则会变成橡皮图章",
+        "它们只在 TypeScript 下可用",
+        "必须跑在 GPU 上"
+      ],
+      "explanation_zh": "没有外部工具 grounding，LLM-judge 会向橡皮图章漂移（CRITIC，第 5 课）。"
     }
   ]
 }

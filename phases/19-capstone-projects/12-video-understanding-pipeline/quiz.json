@@ -12,7 +12,15 @@
         "Scene cuts are the only thing a VLM understands"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么即使长上下文 VLM 能原生读完 2 小时视频,仍然需要 scene 级索引?",
+      "options_zh": [
+        "长上下文 VLM 不能流式输出",
+        "向量索引不支持视频文件",
+        "把 100 小时视频做成可查询语料需要 scene 级检索,即使每个视频可以被整段读取",
+        "Scene 切分是 VLM 唯一能理解的东西"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Pose, depth, and optical flow"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "在多向量索引中,每个 scene 获得哪三种向量?",
+      "options_zh": [
+        "字幕 embedding、关键帧 embedding 和转写 embedding",
+        "音频波形、mel-spectrogram 和 MFCC",
+        "Hash、gzip 和 CRC",
+        "Pose、depth 和 optical flow"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "By taking the union without scoring"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "在 query 阶段,如何合并三路检索的结果?",
+      "options_zh": [
+        "只取字幕命中",
+        "取 cosine 相似度的平均",
+        "对三个排序列表使用 reciprocal rank fusion",
+        "不打分,直接取并集"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "The keyframe embedding dimensionality"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "在最匹配的 scene 内,temporal grounding 步骤进一步细化什么?",
+      "options_zh": [
+        "Whisper 的转写词级时间戳",
+        "Qdrant 中存储的向量数量",
+        "包含答案的 (start, end) 时间窗",
+        "关键帧 embedding 的维度"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Counting and action-type questions, where VLMs miscount or mis-order events"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "哪一类问题作为已知的幻觉热点被单独报告?",
+      "options_zh": [
+        "关于场景的描述类问题",
+        "说话人识别问题",
+        "翻译问题",
+        "计数和动作类型问题,VLM 容易数错或弄错事件顺序"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "MRR@10"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "评分标准在留出集上衡量哪个 grounding 指标?",
+      "options_zh": [
+        "时间 grounding 的交并比 (IoU)",
+        "Acceptance rate",
+        "Perplexity",
+        "MRR@10"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "They let the viewer jump to the exact (video_id, start, end) so users can verify the claim"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么本流水线要求答案带有时间戳引用?",
+      "options_zh": [
+        "可以降低 embedding 维度",
+        "Whisper 输出要求时间戳",
+        "Qdrant payload 要求时间戳",
+        "让观看者跳到精确的 (video_id, start, end),用户可以核验论断"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

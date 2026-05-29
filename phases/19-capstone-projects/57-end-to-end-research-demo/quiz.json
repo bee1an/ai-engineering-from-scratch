@@ -12,7 +12,15 @@
         "To call a real language model on each branch"
       ],
       "correct": 1,
-      "explanation": "The demo is a composition test. Each stage exists in its own lesson. The demo imports them and wires the report. No new framework, no new abstractions."
+      "explanation": "The demo is a composition test. Each stage exists in its own lesson. The demo imports them and wires the report. No new framework, no new abstractions.",
+      "question_zh": "本节 demo 的任务是什么?",
+      "options_zh": [
+        "用一个新框架替换前面所有课的内容",
+        "通过普通 Python import 把先前课程的原语组合起来",
+        "把 scheduler 与某个 baseline 做基准对比",
+        "在每个分支上调用真实语言模型"
+      ],
+      "explanation_zh": "Demo 是组合测试。每个阶段有自己独立的课程,demo 只把它们 import 进来并接好报告。没有新框架,没有新抽象。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Because the lessons share a module name and would collide"
       ],
       "correct": 1,
-      "explanation": "The lessons are not installed packages. Each ships a main.py inside its own code/ folder. importlib.util.spec_from_file_location loads them by path without polluting the global module namespace."
+      "explanation": "The lessons are not installed packages. Each ships a main.py inside its own code/ folder. importlib.util.spec_from_file_location loads them by path without polluting the global module namespace.",
+      "question_zh": "为什么本节通过 importlib 加载先前课程,而不是普通 package import?",
+      "options_zh": [
+        "importlib 更快",
+        "每个先前课程是一个独立的 code/ 目录,不是已安装的 package; importlib 按文件路径加载",
+        "asyncio 要求 importlib",
+        "课程间共用一个 module 名,会冲突"
+      ],
+      "explanation_zh": "课程不是已安装的 package。每个课程在自己 code/ 目录里有 main.py。importlib.util.spec_from_file_location 按路径加载,不污染全局 module 命名空间。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "It picks the first triggered branch"
       ],
       "correct": 1,
-      "explanation": "Highest mean wins. Ties break on branch id so the demo is deterministic. Random would defeat the determinism test."
+      "explanation": "Highest mean wins. Ties break on branch id so the demo is deterministic. Random would defeat the determinism test.",
+      "question_zh": "best-result picker 在多于一个分支触发 paper 时如何选?",
+      "options_zh": [
+        "选实验运行最多的分支",
+        "选均值 reward 最高的分支,平局时按 branch id 字母序断",
+        "为公平随机选",
+        "选第一个被触发的分支"
+      ],
+      "explanation_zh": "最高均值胜出。平局按 branch id 断,让 demo 保持确定性。随机会破坏确定性测试。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "It returns None"
       ],
       "correct": 1,
-      "explanation": "NoTriggerError is the typed failure mode. Returning None would let the writer run on a malformed input and break later with a less actionable error."
+      "explanation": "NoTriggerError is the typed failure mode. Returning None would let the writer run on a malformed input and break later with a less actionable error.",
+      "question_zh": "当 scheduler 报告 0 次 paper trigger 时,picker 抛出什么错误?",
+      "options_zh": [
+        "ValueError",
+        "NoTriggerError,在 writer 运行前短路 demo",
+        "PaperValidationError",
+        "返回 None"
+      ],
+      "explanation_zh": "NoTriggerError 是有类型的失败模式。返回 None 会让 writer 在错误输入上继续运行,后面以可操作性更差的错误失败。"
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "To prove that the scheduler is fair"
       ],
       "correct": 1,
-      "explanation": "Determinism is part of the contract. Two runs with the same seed must produce the same artifacts. The test pins that."
+      "explanation": "Determinism is part of the contract. Two runs with the same seed must produce the same artifacts. The test pins that.",
+      "question_zh": "为什么确定性测试中 demo 用相同 seed 跑两次?",
+      "options_zh": [
+        "为了把 asyncio 跑两遍",
+        "为了断言所选分支、reward 与论文 section id 跨次运行一致",
+        "为抓内存泄漏",
+        "为证明 scheduler 公平"
+      ],
+      "explanation_zh": "确定性是契约的一部分。同 seed 两次运行必须产出相同 artifact,这条测试钉住它。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "A model prompt and completion log"
       ],
       "correct": 1,
-      "explanation": "Every stage's output is preserved. The report is a composition of upstream outputs, not a transformed summary. Downstream tooling reads the manifest; debuggers read the trace inside scheduler_report."
+      "explanation": "Every stage's output is preserved. The report is a composition of upstream outputs, not a transformed summary. Downstream tooling reads the manifest; debuggers read the trace inside scheduler_report.",
+      "question_zh": "成功运行后,demo 报告里包含什么?",
+      "options_zh": [
+        "只有最终 LaTeX 文件",
+        "scheduler_report、best_branch、best_reward、critic_result、paper_manifest 与 stop_reason",
+        "只有实验数和状态字符串",
+        "模型 prompt 与 completion 日志"
+      ],
+      "explanation_zh": "每个阶段的输出都被保留。报告是上游输出的组合,而不是经过转换的摘要。下游工具读 manifest,调试者从 scheduler_report 内部的 trace 读。"
     }
   ]
 }

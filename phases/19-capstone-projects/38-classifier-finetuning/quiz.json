@@ -12,7 +12,15 @@
         "Freeze the head and train only the body."
       ],
       "correct": 1,
-      "explanation": "The body is the expensive part and encodes useful structure from pretraining. Swap the head first. Whether to freeze the body is a separate decision driven by data size and domain drift."
+      "explanation": "The body is the expensive part and encodes useful structure from pretraining. Swap the head first. Whether to freeze the body is a separate decision driven by data size and domain drift.",
+      "question_zh": "在阅读课程之前: 一个预训练 LM 的 body 有 5M 参数,output head 投影到 30K 词表。你想要一个 2 类分类器。最稳妥的第一步是?",
+      "options_zh": [
+        "丢掉 body,在 800 个标注样本上从头训练一个新的 transformer。",
+        "只换掉 head 为 2 类的 linear 层,以后再决定是否训练 body。",
+        "保留原 head,但把除两个 logit 外的全部 mask 掉。",
+        "冻结 head,只训练 body。"
+      ],
+      "explanation_zh": "body 是昂贵且承载预训练结构的部分。先把 head 换掉。是否冻结 body 是另一个由数据规模和领域漂移驱动的决定。"
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "Plain mean ignores the batch dimension."
       ],
       "correct": 1,
-      "explanation": "Padding tokens carry no signal but the body still produces hidden states for them. Without masking, padded positions corrupt the pooled representation, especially on short sequences in a batch padded to the longest example."
+      "explanation": "Padding tokens carry no signal but the body still produces hidden states for them. Without masking, padded positions corrupt the pooled representation, especially on short sequences in a batch padded to the longest example.",
+      "question_zh": "为什么本节用带 attention-mask 的 mean pooling,而不是直接在序列轴上取平均?",
+      "options_zh": [
+        "对 transformer 来说普通平均在数学上未定义。",
+        "Padding 位置贡献无意义的隐藏状态,会把池化向量拉向 0。",
+        "即使没有 padding,mean pool 也按惯例需要 mask。",
+        "普通平均忽略 batch 维度。"
+      ],
+      "explanation_zh": "Padding token 不携带信号,但 body 仍会为它们产生隐藏状态。不做 mask,padded 位置会污染池化表示,在批次中含短序列时尤其明显。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "It is required by the Adam constructor."
       ],
       "correct": 2,
-      "explanation": "The optimiser only updates the parameters in its param list. By filtering on `requires_grad`, the same training function works for both regimes; the toggle is the freeze call, not the loop."
+      "explanation": "The optimiser only updates the parameters in its param list. By filtering on `requires_grad`, the same training function works for both regimes; the toggle is the freeze call, not the loop.",
+      "question_zh": "在 train_classifier 中,优化器以 [p for p in model.parameters() if p.requires_grad] 构造。这个写法保证了什么?",
+      "options_zh": [
+        "在 body 被冻结时静默忽略 head。",
+        "告诉 PyTorch 也对冻结参数 autograd。",
+        "只用可训练子集构造参数组,使 head-only 与 full-FT 共用同一段代码。",
+        "Adam 构造器要求这样做。"
+      ],
+      "explanation_zh": "优化器只更新参数列表里的参数。按 requires_grad 过滤,同一个训练函数就同时支持两种 regime; 切换的是 freeze,不是循环。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "0.30"
       ],
       "correct": 1,
-      "explanation": "F1 is the harmonic mean of precision and recall: 2 * 0.9 * 0.6 / (0.9 + 0.6) = 1.08 / 1.5 = 0.72."
+      "explanation": "F1 is the harmonic mean of precision and recall: 2 * 0.9 * 0.6 / (0.9 + 0.6) = 1.08 / 1.5 = 0.72.",
+      "question_zh": "在 spam 类上 precision 是 0.9,recall 是 0.6,F1 是多少?",
+      "options_zh": [
+        "0.75",
+        "0.72",
+        "0.50",
+        "0.30"
+      ],
+      "explanation_zh": "F1 是 precision 与 recall 的调和平均: 2 * 0.9 * 0.6 / (0.9 + 0.6) = 1.08 / 1.5 = 0.72。"
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "PyTorch silently disables gradients during full fine-tuning."
       ],
       "correct": 0,
-      "explanation": "A pretrained body usually needs a smaller learning rate than a fresh head. A common pattern is two parameter groups: high LR on the head, smaller LR on the body. The same LR for both destroys pretraining signal."
+      "explanation": "A pretrained body usually needs a smaller learning rate than a fresh head. A common pattern is two parameter groups: high LR on the head, smaller LR on the body. The same LR for both destroys pretraining signal.",
+      "question_zh": "你以与 head-only 训练相同的学习率做全量 fine-tuning,F1 从 0.90 跌到 0.55。最可能的原因是?",
+      "options_zh": [
+        "body 参数需要比 head 更小的学习率。",
+        "Adam 与分类目标不兼容。",
+        "Cross-entropy loss 在两类问题上未定义。",
+        "PyTorch 在全量 FT 时静默禁用了梯度。"
+      ],
+      "explanation_zh": "预训练 body 通常需要比新 head 更小的学习率。常见做法是两个参数组: head 用大 LR、body 用小 LR。两者同 LR 会破坏预训练信号。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "The precision-recall-F1 triple."
       ],
       "correct": 1,
-      "explanation": "`trainable` records the number of parameters that received gradients during training. Head-only has on the order of `hidden * num_classes`; full FT has the whole model. The number is the audit trail."
+      "explanation": "`trainable` records the number of parameters that received gradients during training. Head-only has on the order of `hidden * num_classes`; full FT has the whole model. The number is the audit trail.",
+      "question_zh": "团队想部署该分类器,问如何可复现地记录是哪种 regime 产出的生产 checkpoint。哪份 artifact 能回答?",
+      "options_zh": [
+        "最终 loss 值,因为 head-only loss 总比 full-FT loss 高。",
+        "TrainReport 中的 trainable 参数计数,在两种 regime 间相差数量级。",
+        "混淆矩阵,它能唯一标识 regime。",
+        "precision-recall-F1 三元组。"
+      ],
+      "explanation_zh": "trainable 记录训练中接收过梯度的参数数量。head-only 在 hidden × num_classes 量级; 全量 FT 是整模型。这个数字就是审计追溯。"
     }
   ]
 }

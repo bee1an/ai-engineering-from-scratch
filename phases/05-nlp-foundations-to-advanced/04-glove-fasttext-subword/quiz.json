@@ -12,7 +12,15 @@
         "Subword n-gram embeddings"
       ],
       "correct": 0,
-      "explanation": "GloVe factorizes the global co-occurrence matrix with a thoughtfully weighted log-loss."
+      "explanation": "GloVe factorizes the global co-occurrence matrix with a thoughtfully weighted log-loss.",
+      "question_zh": "GloVe 在 Word2Vec 之上的贡献是什么？",
+      "options_zh": [
+        "用加权 loss 直接对词-词共现矩阵做矩阵分解",
+        "字节级 tokenization",
+        "更深的神经网络",
+        "subword n-gram embedding"
+      ],
+      "explanation_zh": "GloVe 用精心设计的加权 log-loss 对全局共现矩阵做分解。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Polysemy disambiguation"
       ],
       "correct": 2,
-      "explanation": "FastText composes a word vector from its subword n-grams, so OOV words still get a sensible vector."
+      "explanation": "FastText composes a word vector from its subword n-grams, so OOV words still get a sensible vector.",
+      "question_zh": "FastText 解决了 Word2Vec 和 GloVe 解决不了的什么问题？",
+      "options_zh": [
+        "降低训练成本",
+        "多语言迁移",
+        "通过组合字符 n-gram 为未见词产生向量",
+        "多义消歧"
+      ],
+      "explanation_zh": "FastText 用 subword n-gram 组合出词向量，所以 OOV 词也能得到合理向量。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Normalizes vectors to unit length"
       ],
       "correct": 0,
-      "explanation": "The weighting prevents ubiquitous co-occurrences like (the, and) from dominating training."
+      "explanation": "The weighting prevents ubiquitous co-occurrences like (the, and) from dominating training.",
+      "question_zh": "在 GloVe 中，加权函数 f(x) = (x/x_max)^alpha 起什么作用？",
+      "options_zh": [
+        "降权极高频词对，避免它们主导 loss",
+        "选择负样本",
+        "随机初始化权重",
+        "把向量归一化为单位长度"
+      ],
+      "explanation_zh": "这个加权防止 (the, and) 这类普遍共现主导训练。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "The pair with highest IDF"
       ],
       "correct": 2,
-      "explanation": "BPE iteratively merges the most frequent adjacent pair."
+      "explanation": "BPE iteratively merges the most frequent adjacent pair.",
+      "question_zh": "BPE 的 merge 步骤如何选择下一对要合并的 pair？",
+      "options_zh": [
+        "随机一对",
+        "字典序最前的一对",
+        "整个语料中相邻 token 中最频繁的一对",
+        "IDF 最高的一对"
+      ],
+      "explanation_zh": "BPE 反复合并最频繁的相邻 pair。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Bytes preserve casing implicitly"
       ],
       "correct": 1,
-      "explanation": "Starting from 256 bytes means every UTF-8 string tokenizes; nothing is OOV."
+      "explanation": "Starting from 256 bytes means every UTF-8 string tokenizes; nothing is OOV.",
+      "question_zh": "GPT-2 为什么用字节级 BPE？",
+      "options_zh": [
+        "字节 BPE 跳过 merge 训练",
+        "256 个字节的基础词表覆盖任意输入，彻底消除 OOV",
+        "字节比字符训练更快",
+        "字节隐式保留大小写"
+      ],
+      "explanation_zh": "从 256 个字节起步意味着任何 UTF-8 字符串都能 tokenize；不会有 OOV。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Always byte-level BPE"
       ],
       "correct": 1,
-      "explanation": "Tokenizer-model mismatch silently corrupts inputs; always pair the shipped tokenizer with its model."
+      "explanation": "Tokenizer-model mismatch silently corrupts inputs; always pair the shipped tokenizer with its model.",
+      "question_zh": "微调预训练 transformer 时应该用哪个 tokenizer？",
+      "options_zh": [
+        "总是 SentencePiece",
+        "模型自带的那个 tokenizer；不匹配会破坏 embedding",
+        "词表最大的那个",
+        "总是字节级 BPE"
+      ],
+      "explanation_zh": "tokenizer 与模型不匹配会悄悄破坏输入；永远把模型与配套 tokenizer 一起用。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "When the corpus is very small"
       ],
       "correct": 1,
-      "explanation": "FastText's subword composition handles inflections, neologisms, and misspellings that GloVe cannot."
+      "explanation": "FastText's subword composition handles inflections, neologisms, and misspellings that GloVe cannot.",
+      "question_zh": "什么时候你会选择 FastText 而不是 GloVe 的预训练词向量？",
+      "options_zh": [
+        "需要 50d 模型时",
+        "形态丰富的语言或频繁出现新词、错拼的领域",
+        "延迟最紧时",
+        "语料非常小时"
+      ],
+      "explanation_zh": "FastText 的 subword 组合能处理 GloVe 处理不了的屈折、新词和错拼。"
     },
     {
       "stage": "post",
@@ -96,7 +152,15 @@
         "Subword pieces (characters, n-grams, or learned merges) below the word level"
       ],
       "correct": 3,
-      "explanation": "All three are subword tokenizers; they differ in how merges or pieces are learned, not in being subword."
+      "explanation": "All three are subword tokenizers; they differ in how merges or pieces are learned, not in being subword.",
+      "question_zh": "WordPiece、BPE 和 SentencePiece 的词表基础单元是什么？",
+      "options_zh": [
+        "句子",
+        "整词",
+        "段落",
+        "subword 片段（字符、n-gram 或学到的合并）小于词级别"
+      ],
+      "explanation_zh": "三者都是 subword tokenizer；区别在合并或片段如何学到，而不在它们是否是 subword。"
     }
   ]
 }

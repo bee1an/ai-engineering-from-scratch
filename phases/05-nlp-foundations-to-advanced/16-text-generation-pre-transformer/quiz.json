@@ -12,7 +12,15 @@
         "P(next word | previous n-1 words) from count statistics"
       ],
       "correct": 3,
-      "explanation": "An n-gram LM models P(w | last n-1 words) via counted occurrences."
+      "explanation": "An n-gram LM models P(w | last n-1 words) via counted occurrences.",
+      "question_zh": "n-gram 语言模型估计的是什么？",
+      "options_zh": [
+        "词之间的编辑距离",
+        "P(label | document)",
+        "文档 embedding",
+        "从计数统计估计 P(next word | previous n-1 words)"
+      ],
+      "explanation_zh": "n-gram LM 通过出现次数建模 P(w | last n-1 words)。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Tokenization mismatch"
       ],
       "correct": 2,
-      "explanation": "Smoothing reallocates probability mass so unseen n-grams get non-zero probability."
+      "explanation": "Smoothing reallocates probability mass so unseen n-grams get non-zero probability.",
+      "question_zh": "smoothing 在 n-gram 模型中解决什么问题？",
+      "options_zh": [
+        "数值精度",
+        "内存使用",
+        "训练中未见 n-gram 的零概率赋值，会让句子似然塌缩为零",
+        "tokenization 不匹配"
+      ],
+      "explanation_zh": "smoothing 重新分配概率质量，让未见 n-gram 也有非零概率。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "It uses gradient descent"
       ],
       "correct": 0,
-      "explanation": "Continuation probability gives credit for context diversity, not just raw count."
+      "explanation": "Continuation probability gives credit for context diversity, not just raw count.",
+      "question_zh": "Kneser-Ney 平滑相比朴素绝对折扣的关键洞见是什么？",
+      "options_zh": [
+        "用 continuation probability（一个词出现的不同上下文数量）而不是原始频率来估计低阶分布",
+        "用 TF-IDF",
+        "用更大 n",
+        "用梯度下降"
+      ],
+      "explanation_zh": "continuation probability 给上下文多样性以信用，而不是仅原始计数。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Throughput of generation"
       ],
       "correct": 0,
-      "explanation": "Perplexity = exp(- mean log P); lower means the model is less surprised by the test text."
+      "explanation": "Perplexity = exp(- mean log P); lower means the model is less surprised by the test text.",
+      "question_zh": "perplexity 衡量什么？",
+      "options_zh": [
+        "在留出测试集上每 token 平均负对数似然的指数；越低越好",
+        "不同 n-gram 数量",
+        "标签的交叉熵",
+        "生成吞吐量"
+      ],
+      "explanation_zh": "Perplexity = exp(- mean log P)；越低意味着模型对测试文本越不意外。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "To control batch size"
       ],
       "correct": 2,
-      "explanation": "Different tokenizations change the token count and likelihood, making perplexity values incomparable."
+      "explanation": "Different tokenizations change the token count and likelihood, making perplexity values incomparable.",
+      "question_zh": "为什么比较 perplexity 时训练集和测试集必须使用相同的 tokenization？",
+      "options_zh": [
+        "梯度下降要求",
+        "为了避免 OOV",
+        "perplexity 依赖 tokenization 方案；不匹配的 tokenizer 产生不可比的分数",
+        "为了控制 batch size"
+      ],
+      "explanation_zh": "不同 tokenization 改变 token 数量和似然，让 perplexity 值不可比。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "They use Laplace smoothing"
       ],
       "correct": 2,
-      "explanation": "Conditioning only on the last n-1 tokens makes long-range coherence accidental."
+      "explanation": "Conditioning only on the last n-1 tokens makes long-range coherence accidental.",
+      "question_zh": "为什么 trigram-LM 生成的句子局部流畅但全局不连贯？",
+      "options_zh": [
+        "它们丢标点",
+        "beam search 失败",
+        "每个下一词只受局部 trigram 上下文引导，模型没有超过 n-1 token 的长程记忆",
+        "它们用 Laplace 平滑"
+      ],
+      "explanation_zh": "只在最近 n-1 token 上做条件，长程一致性纯属偶然。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Summarization"
       ],
       "correct": 2,
-      "explanation": "KenLM-style n-gram models still serve as fast on-device or rescoring components."
+      "explanation": "KenLM-style n-gram models still serve as fast on-device or rescoring components.",
+      "question_zh": "n-gram 模型在 2026 年仍在生产中投放在哪些场景？",
+      "options_zh": [
+        "多语言翻译",
+        "开放域聊天机器人",
+        "延迟关键的路径，比如语音识别 rescoring 和通过 KenLM 等库实现的设备端自动补全",
+        "摘要"
+      ],
+      "explanation_zh": "KenLM 风格的 n-gram 模型仍作为快速的设备端或 rescoring 组件。"
     },
     {
       "stage": "post",
@@ -96,7 +152,15 @@
         "If a transformer LM does not beat a tuned Kneser-Ney baseline by a wide margin on the same tokenization, something is off in the training pipeline"
       ],
       "correct": 3,
-      "explanation": "KN baselines are surprisingly strong; a neural LM should win by a large margin or you have a bug."
+      "explanation": "KN baselines are surprisingly strong; a neural LM should win by a large margin or you have a bug.",
+      "question_zh": "为什么在宣称神经 LM '好' 之前仍建议先算 n-gram baseline？",
+      "options_zh": [
+        "它加快训练",
+        "ROUGE 要求",
+        "它去除 OOV",
+        "如果 transformer LM 在相同 tokenization 下不能大幅胜过调优的 Kneser-Ney baseline，训练流程一定哪里有问题"
+      ],
+      "explanation_zh": "KN baseline 出乎意料地强；神经 LM 应大幅胜出否则就有 bug。"
     }
   ]
 }

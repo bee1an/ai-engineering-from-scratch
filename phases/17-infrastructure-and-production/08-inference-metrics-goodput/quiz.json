@@ -5,74 +5,122 @@
     {
       "stage": "pre",
       "question": "Which components dominate TTFT (time to first token)?",
+      "question_zh": "TTFT（首 token 时延）主要由哪些环节构成？",
       "options": [
         "Decode-only forward time",
         "Disk I/O for weights",
         "Tokenizer GIL overhead",
         "Queue time, network request time, and prefill time"
       ],
+      "options_zh": [
+        "仅 decode 阶段的前向时间",
+        "权重的磁盘 I/O",
+        "tokenizer 的 GIL 开销",
+        "排队时间、网络请求时间和 prefill 时间"
+      ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "Which metric does the lesson call the one that actually matters for product?",
+      "question_zh": "本课认为对产品真正重要的指标是哪一个？",
       "options": [
         "GPU duty cycle",
         "Aggregate throughput in tokens per second",
         "Goodput — fraction of requests meeting every SLO constraint simultaneously",
         "Mean ITL"
       ],
+      "options_zh": [
+        "GPU 占空比",
+        "以 token/s 计的总吞吐",
+        "Goodput — 同时满足所有 SLO 约束的请求比例",
+        "ITL 的均值"
+      ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "Why is mean the wrong statistic to report for LLM latency?",
+      "question_zh": "为什么用均值来描述 LLM 延迟是错的？",
       "options": [
         "Mean is never computable on streaming responses",
         "Mean only works for prefill, not decode",
         "LLM latency distributions are right-skewed; users routinely hit P99 outliers that mean hides",
         "Mean is not supported by GenAI-Perf"
       ],
+      "options_zh": [
+        "对流式响应根本算不出均值",
+        "均值只适用于 prefill 而非 decode",
+        "LLM 的延迟分布右偏严重；用户经常碰到被均值掩盖的 P99 长尾",
+        "GenAI-Perf 不支持均值"
+      ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "Why do GenAI-Perf and LLMPerf disagree on TPOT for the same run?",
+      "question_zh": "为什么 GenAI-Perf 和 LLMPerf 对同一次运行的 TPOT 给出不同结果？",
       "options": [
         "GenAI-Perf only runs on Blackwell",
         "GenAI-Perf excludes TTFT from the ITL calculation; LLMPerf includes it, so tool choice changes the number",
         "LLMPerf uses microseconds and GenAI-Perf uses milliseconds",
         "They sample different requests"
       ],
+      "options_zh": [
+        "GenAI-Perf 只能在 Blackwell 上运行",
+        "GenAI-Perf 计算 ITL 时不算 TTFT，LLMPerf 算进去，因此选哪个工具会改变数值",
+        "LLMPerf 用微秒，GenAI-Perf 用毫秒",
+        "它们采样的是不同的请求"
+      ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "post",
       "question": "For long-output requests (>500 tokens), which metric dominates end-to-end latency?",
+      "question_zh": "对长输出请求（>500 tokens），哪个指标主导端到端延迟？",
       "options": [
         "TPOT times output length",
         "Cold-start time",
         "TTFT",
         "Network response time"
       ],
+      "options_zh": [
+        "TPOT 乘以输出长度",
+        "冷启动时间",
+        "TTFT",
+        "网络响应时间"
+      ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "post",
       "question": "Which set best captures the lesson's reasonable consumer-facing SLO for a 70B chat model in 2026?",
+      "question_zh": "本课为 2026 年面向消费者的 70B 聊天模型给出的合理 SLO 组合，哪一项最贴近？",
       "options": [
         "P50 only, no percentiles above",
         "TTFT P99 800 ms, TPOT P99 25 ms, E2E P99 3 s for <300-token outputs, goodput >= 99%",
         "TTFT P99 8s, TPOT P99 200ms, goodput 50%",
         "Mean TTFT 10 ms, mean TPOT 1 ms"
       ],
+      "options_zh": [
+        "只看 P50，更高的分位数不看",
+        "TTFT P99 800 ms，TPOT P99 25 ms，输出 <300 tokens 时 E2E P99 3 s，goodput >= 99%",
+        "TTFT P99 8s，TPOT P99 200ms，goodput 50%",
+        "TTFT 均值 10 ms，TPOT 均值 1 ms"
+      ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     }
   ]
 }

@@ -12,7 +12,15 @@
         "barrier and barrier"
       ],
       "correct": 1,
-      "explanation": "Broadcast at init keeps ranks in sync at step zero. All-reduce after backward keeps them in sync at every step that follows."
+      "explanation": "Broadcast at init keeps ranks in sync at step zero. All-reduce after backward keeps them in sync at every step that follows.",
+      "question_zh": "从零实现 DDP wrapper 的两个核心 collective 操作是?",
+      "options_zh": [
+        "send 与 recv",
+        "构造时 broadcast 让每个 rank 从相同参数起步,backward 后 all_reduce 让每个 rank 都拿到平均梯度",
+        "只有 reduce_scatter",
+        "barrier 与 barrier"
+      ],
+      "explanation_zh": "Init 时 broadcast 让 rank 在第 0 步同步; backward 后 all-reduce 让它们在每一步之后保持同步。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "It does not use torch.distributed at all"
       ],
       "correct": 1,
-      "explanation": "Gloo is the CPU collective backend. The same call sites work on nccl on GPU; the API surface is identical."
+      "explanation": "Gloo is the CPU collective backend. The same call sites work on nccl on GPU; the API surface is identical.",
+      "question_zh": "本节为什么不需要 CUDA 也能在 CPU 上工作?",
+      "options_zh": [
+        "它是个桩",
+        "torch.distributed 自带 gloo 后端,通过普通 socket 跑 collective; CPU 上的 torch.multiprocessing worker 构成真正的 process group; 在 GPU 上只是设备标签变了",
+        "用了模拟张量",
+        "完全不用 torch.distributed"
+      ],
+      "explanation_zh": "Gloo 是 CPU collective 后端。同一组调用点在 GPU 上换成 nccl 即可,API 表面相同。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "That CUDA is unnecessary"
       ],
       "correct": 1,
-      "explanation": "The cross entropy mean reduction on the full batch equals the average of per-rank means. Sum-and-divide is the right operation; the test makes that visible."
+      "explanation": "The cross entropy mean reduction on the full batch equals the average of per-rank means. Sum-and-divide is the right operation; the test makes that visible.",
+      "question_zh": "manual_all_reduce_matches_single_process 测试证明的是?",
+      "options_zh": [
+        "什么也没有",
+        "把每 rank 的梯度求和再除以 world_size,与单进程在拼接输入上算出的梯度在浮点噪声内一致",
+        "optimizer 收敛",
+        "CUDA 不必要"
+      ],
+      "explanation_zh": "Cross-entropy 的 mean reduction 在完整 batch 上等于各 rank 上 mean 的平均。求和再除是正确操作; 测试让这一点直观可见。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Computes a hash"
       ],
       "correct": 1,
-      "explanation": "Each rank owns 1/world_size of every parameter. The gather rebuilds the full tensor for compute; production FSDP overlaps the gather with the previous layer's work."
+      "explanation": "Each rank owns 1/world_size of every parameter. The gather rebuilds the full tensor for compute; production FSDP overlaps the gather with the previous layer's work.",
+      "question_zh": "本节中 FSDP 草图在每次 forward 对每个参数做什么?",
+      "options_zh": [
+        "什么也不做",
+        "把展平参数 right-pad 到 world_size 的倍数、切片、在每个 rank 上 all_gather、丢掉 pad,并验证重建后与原参数一致",
+        "重新初始化参数",
+        "计算 hash"
+      ],
+      "explanation_zh": "每个 rank 拥有每个参数的 1/world_size。Gather 重建完整张量用于计算; 生产 FSDP 还会把 gather 与上一层计算重叠。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Random choice"
       ],
       "correct": 0,
-      "explanation": "Gloo (and nccl) all_gather expects same-size outputs. Padding is the cheapest fix; the sketch trims the result back to the original length."
+      "explanation": "Gloo (and nccl) all_gather expects same-size outputs. Padding is the cheapest fix; the sketch trims the result back to the original length.",
+      "question_zh": "即便参数长度不能被 world_size 整除,gloo all_gather 也要按 world_size 个等大切片来调,这是为什么?",
+      "options_zh": [
+        "Gloo 的 all_gather 要求每 rank 的输出大小相等,所以展平参数在切片前 right-pad 到 world_size 的倍数,gather 后再丢掉 pad",
+        "这是 bug",
+        "加快网络",
+        "随机选择"
+      ],
+      "explanation_zh": "Gloo (以及 nccl) 的 all_gather 期望各 rank 同样大小的输出。Padding 是最便宜的修法; 草图随后把结果裁回原长度。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Nothing meaningful"
       ],
       "correct": 1,
-      "explanation": "DDP's invariant is parameter parity across ranks. The spread is the audit; the demo asserts it stays under 1e-3."
+      "explanation": "DDP's invariant is parameter parity across ranks. The spread is the audit; the demo asserts it stays under 1e-3.",
+      "question_zh": "看 demo 输出,跨 rank 的 param_sum_spread 接近 0 告诉你什么?",
+      "options_zh": [
+        "loss 低",
+        "每个 rank 都以相同参数值结束,意味着构造时 broadcast 与每次 backward 后的 all-reduce 都正常; 任一环节坏掉,差距会随步数增长",
+        "网络快",
+        "没什么意义"
+      ],
+      "explanation_zh": "DDP 的不变式是 rank 间参数一致。Spread 就是那条审计线; demo 断言它保持在 1e-3 以下。"
     }
   ]
 }

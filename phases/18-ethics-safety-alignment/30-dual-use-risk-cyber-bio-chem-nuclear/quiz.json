@@ -12,7 +12,15 @@
         "From 'mild uplift' (2024) to 'on the cusp of meaningfully helping novices create known biological threats' (April 2025) to '2.53x uplift insufficient to rule out ASL-3' (Anthropic 2025)"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "2024-2025 年间生物风险 uplift 的叙事是如何演变的?",
+      "options_zh": [
+        "2024-2025 年间没有变化",
+        "从「无 uplift」演变为「轻微 uplift」",
+        "从「严重 uplift」演变为「无可测量的 uplift」",
+        "从 2024 年的「轻微 uplift」演变为 2025 年 4 月的「在协助新手制造已知生物威胁方面已接近实质性帮助的边缘」,再到 Anthropic 2025 年的「2.53 倍 uplift,不足以排除 ASL-3」"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "Open-source models exceeded frontier capability"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Anthropic 2025 年 11 月的网络威胁报告发现了什么?",
+      "options_zh": [
+        "中国相关国家行为者使用 Claude 的 agentic coding 工具自动化了一次网络攻击行动 80-90% 的环节,人类介入仅出现在 4-6 个步骤",
+        "前沿模型拒绝了所有网络任务",
+        "网络攻击仍然完全是手工的",
+        "开源模型超越了前沿能力"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "By increasing context length only"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "支持视觉的前沿模型如何在侵蚀化学 / 生物领域的执行落差?",
+      "options_zh": [
+        "用虚拟仿真器替换所有实验室设备",
+        "通过生成假协议",
+        "通过观察 wet-lab 视频并提供实时的协议纠错; OpenAI 在 2025 年 12 月演示了 GPT-5 通过 AI 驱动的协议优化在 wet-lab 实验上获得 79 倍效率提升",
+        "仅靠加大上下文长度"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Frontier models refuse to discuss physics"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么核领域的 uplift 相对于生 / 化 / 网络仍然有限?",
+      "options_zh": [
+        "核是最容易被 AI 攻击的领域",
+        "核威胁模型主要受裂变材料获取支配 (这是一个非信息性的、采购和设备层面的瓶颈),因此 AI 在信息层面的 uplift 在实践中给新手带来的提升有限",
+        "训练数据中所有核相关信息都已被移除",
+        "前沿模型拒绝讨论物理"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "Expert-absolute capability is automatically zero"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "「相对新手」与「绝对专家」的不对称对 safety case 意味着什么?",
+      "options_zh": [
+        "两者都被 RLHF 完美解决",
+        "仅处理新手 uplift (输入过滤、拒答、不确定性) 不足以应对绝对专家级控制; 还需要 elicitation-hardening、能力 unlearning 和 control 协议等额外手段",
+        "只有新手 uplift 重要",
+        "绝对专家级能力自动为零"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Granting vetted security organisations (incident-response firms, government) capability access for defensive dual-use work, creating an access asymmetry that favours defenders if it scales"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "在网络两用上下文中,OpenAI 的「trusted access」试点是什么?",
+      "options_zh": [
+        "针对 CVE-2025-32711 的补丁",
+        "GPT-5 的开源版本",
+        "关闭所有 API 访问",
+        "向经过审核的安全机构 (事件响应公司、政府) 授予防御性两用工作所需的能力访问权限,如果规模化将造就有利于防御者的访问不对称"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

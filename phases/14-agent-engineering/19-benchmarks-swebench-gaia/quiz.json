@@ -12,7 +12,15 @@
         "Patch passes a separate LLM judge"
       ],
       "correct": 1,
-      "explanation": "The harness gates on test transitions: bug-revealing tests must flip while regression tests must stay green."
+      "explanation": "The harness gates on test transitions: bug-revealing tests must flip while regression tests must stay green.",
+      "question_zh": "SWE-bench 的评测器在候选 patch 上检查什么？",
+      "options_zh": [
+        "与参考修复的 BLEU 分数",
+        "原本失败的测试现在通过（FAIL_TO_PASS）且原本通过的测试仍然通过（PASS_TO_PASS）",
+        "Patch 长度低于 200 行",
+        "Patch 通过另一个 LLM 评审"
+      ],
+      "explanation_zh": "评测 harness 卡的是测试状态翻转：揭示 bug 的测试要从红变绿，回归测试要保持绿。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "It uses a different patch format"
       ],
       "correct": 1,
-      "explanation": "Verified is the cleaner subset for credible reporting."
+      "explanation": "Verified is the cleaner subset for credible reporting.",
+      "question_zh": "为什么会有 SWE-bench Verified？",
+      "options_zh": [
+        "跑得更快",
+        "OpenAI 人工筛选的 500 个任务子集，移除了模糊的 issue 和不可靠的测试",
+        "覆盖更多语言",
+        "使用不同的 patch 格式"
+      ],
+      "explanation_zh": "Verified 是更干净的子集，更适合用于可信汇报。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Patches always exceeded 1000 lines"
       ],
       "correct": 0,
-      "explanation": "SWE-bench+ flagged solution leakage and weak coverage on a large fraction of successful patches."
+      "explanation": "SWE-bench+ flagged solution leakage and weak coverage on a large fraction of successful patches.",
+      "question_zh": "SWE-bench+ 在成功 patch 上发现了什么？",
+      "options_zh": [
+        "32.67% 的 issue 中泄漏了解题文本，31.08% 的测试覆盖弱得可疑",
+        "所有 patch 都被记忆下来",
+        "不存在污染",
+        "Patch 总是超过 1000 行"
+      ],
+      "explanation_zh": "SWE-bench+ 标记出大量成功 patch 存在解题泄漏和覆盖薄弱问题。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Only single-turn questions"
       ],
       "correct": 1,
-      "explanation": "GAIA is intentionally easy-for-humans, hard-for-AI, testing reasoning + tools + modality."
+      "explanation": "GAIA is intentionally easy-for-humans, hard-for-AI, testing reasoning + tools + modality.",
+      "question_zh": "GAIA 的设计哲学是什么？",
+      "options_zh": [
+        "对人类难、对 AI 简单",
+        "对人类概念上很简单（约 92%），但对 AI 难（早期 GPT-4 + 插件约 15%）",
+        "纯粹的向量检索 benchmark",
+        "只有单轮问题"
+      ],
+      "explanation_zh": "GAIA 故意设计成对人类容易、对 AI 难，考的是推理 + 工具 + 多模态。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Gradient (RL, IRL)"
       ],
       "correct": 3,
-      "explanation": "AgentBench covers code, games, web, and open-ended generation. There is no gradient category."
+      "explanation": "AgentBench covers code, games, web, and open-ended generation. There is no gradient category.",
+      "question_zh": "以下哪个不是 AgentBench 的环境类别？",
+      "options_zh": [
+        "Code（Bash、DB、KG）",
+        "Games（Alfworld、LTP）",
+        "Web（WebShop、Mind2Web）",
+        "Gradient（RL、IRL）"
+      ],
+      "explanation_zh": "AgentBench 覆盖 code、games、web 和开放式生成。没有 gradient 这个类别。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Reporting wall-clock"
       ],
       "correct": 1,
-      "explanation": "Single-number fixation hides contamination and cost; always report Verified and per-distribution context."
+      "explanation": "Single-number fixation hides contamination and cost; always report Verified and per-distribution context.",
+      "question_zh": "本课指出汇报 SWE-bench 数字时的错误做法是什么？",
+      "options_zh": [
+        "按 repo 分项汇报",
+        "只汇报一个聚合数字，不区分 Verified 或 SWE-bench+ 上下文",
+        "汇报 step 数",
+        "汇报墙上时钟时间"
+      ],
+      "explanation_zh": "盯着单一数字看会掩盖污染和成本；应当始终汇报 Verified 和按分布拆分的上下文。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Step counts"
       ],
       "correct": 0,
-      "explanation": "Benchmarks aggregate; they do not capture cost, adversarial robustness, or your domain."
+      "explanation": "Benchmarks aggregate; they do not capture cost, adversarial robustness, or your domain.",
+      "question_zh": "这些 benchmark 不衡量哪个维度？",
+      "options_zh": [
+        "真实运营成本（token、墙上时钟）、对抗安全性以及你自己的领域",
+        "测试状态翻转",
+        "单任务成功率",
+        "Step 数"
+      ],
+      "explanation_zh": "Benchmark 是聚合量；它们捕捉不到成本、对抗鲁棒性和你自己的领域分布。"
     }
   ]
 }

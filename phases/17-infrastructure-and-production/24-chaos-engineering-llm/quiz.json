@@ -12,7 +12,15 @@
         "Three frontier models"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本课在生产中跑混沌实验之前要求具备哪 5 个先决条件？",
+      "options_zh": [
+        "Slack 频道、贴纸、吉祥物、hashtag、博客文章",
+        "SLI/SLO、可观测性、自动 rollback、结构化 runbook、on-call",
+        "仅有向量数据库",
+        "三个前沿模型"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "Frontend, backend, mobile, web"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "混沌架构有哪 4 个面，外加一个反馈环？",
+      "options_zh": [
+        "Ingest、transform、store、serve",
+        "Train、eval、deploy、archive",
+        "Control、target、safety、observability —— 反馈进入 SLO 调整",
+        "Frontend、backend、mobile、web"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Pauses the experiment when daily error-budget burn exceeds roughly 2x expected"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "混沌实验中 burn-rate 告警这道护栏会做什么？",
+      "options_zh": [
+        "关闭可观测性",
+        "把实验自动推到生产",
+        "加速实验",
+        "当当日错误预算消耗速度超过约 2 倍预期时暂停实验"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Reboot the entire datacenter"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本课列出的 LLM 专属混沌实验是哪一个？",
+      "options_zh": [
+        "扔掉所有 DNS",
+        "随机降低风扇转速",
+        "KV eviction storm，让 vLLM 的 block-budget 饱和",
+        "重启整个数据中心"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "Yearly only"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本课推荐什么样的混沌演练节奏？",
+      "options_zh": [
+        "每周一次小型 canary、每月一次 game day 加 postmortem、每季度一次跨团队韧性审计",
+        "每天对生产做整体故障注入",
+        "永远不做",
+        "每年一次"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Network packet loss"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "malformed-prompt 实验能揭示哪种 LLM 专属故障模式？",
+      "options_zh": [
+        "对深度嵌套 unicode 或巨大 UTF-8 codepoint 之类输入会卡住 worker 的 tokenizer 停滞",
+        "磁盘 I/O 争用",
+        "GPU 欠压",
+        "网络丢包"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

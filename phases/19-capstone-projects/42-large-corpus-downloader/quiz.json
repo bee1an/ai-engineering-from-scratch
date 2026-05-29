@@ -12,7 +12,15 @@
         "To store the URL in case the shard file moves"
       ],
       "correct": 1,
-      "explanation": "The checkpoint records verified_bytes and the sha256 of those bytes; resume only proceeds when the on-disk hash matches."
+      "explanation": "The checkpoint records verified_bytes and the sha256 of those bytes; resume only proceeds when the on-disk hash matches.",
+      "question_zh": "为什么下载器为每个分片单独维护一个 .partial.json checkpoint?",
+      "options_zh": [
+        "让缓存目录看上去整齐",
+        "重启下载时可以在追加前对已校验字节求 sha256 前缀,使静默损坏不可能发生",
+        "因为 urllib 要求",
+        "为了在分片文件移动时记录 URL"
+      ],
+      "explanation_zh": "checkpoint 记录 verified_bytes 与对应 sha256; 续传只在磁盘 hash 匹配时才进行。"
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "Faster sha256 computation"
       ],
       "correct": 1,
-      "explanation": "MinHash plus LSH catches paraphrases and boilerplate variants that exact-hash dedup walks past."
+      "explanation": "MinHash plus LSH catches paraphrases and boilerplate variants that exact-hash dedup walks past.",
+      "question_zh": "LSH 分带方案相对于精确 hash 去重多带来什么?",
+      "options_zh": [
+        "常数级内存占用",
+        "亚线性查找,即便文档相差几个 token 也能标记 Jaccard 高的近重复",
+        "无损压缩",
+        "更快的 sha256 计算"
+      ],
+      "explanation_zh": "MinHash + LSH 能抓到精确 hash 去重忽略的同义改写和模板变体。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "It saves disk space"
       ],
       "correct": 1,
-      "explanation": "Checkpoint-first matches a write-ahead log: a crash leaves the verified offset trailing or equal to the file, never ahead."
+      "explanation": "Checkpoint-first matches a write-ahead log: a crash leaves the verified offset trailing or equal to the file, never ahead.",
+      "question_zh": "为什么 checkpoint 在追加字节之前写,而不是之后?",
+      "options_zh": [
+        "方便",
+        "如果进程在写完字节但更新 checkpoint 前崩溃,下次续传读到的 checkpoint 落后于字节,会静默地重复追加,损坏文件",
+        "更快",
+        "节省磁盘"
+      ],
+      "explanation_zh": "Checkpoint-first 等价于 write-ahead log: 崩溃后 verified offset 要么落后要么等于文件大小,绝不超前。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "It is a backup of the manifest"
       ],
       "correct": 1,
-      "explanation": "Pinning the manifest hash makes the link between code and data a content-addressed contract."
+      "explanation": "Pinning the manifest hash makes the link between code and data a content-addressed contract.",
+      "question_zh": "manifest sha256 锁文件的作用是?",
+      "options_zh": [
+        "加快读取",
+        "下游阶段拒绝在 manifest 内容与钉住的 hash 不匹配时启动,堵住攻击者篡改单一文件的静默面",
+        "记录日期",
+        "manifest 的备份"
+      ],
+      "explanation_zh": "钉住 manifest hash,把代码与数据的连接变成了内容寻址契约。"
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "The tokenizer needs a vocabulary first"
       ],
       "correct": 1,
-      "explanation": "Dedup is the first stage where each duplicate-dropped document saves the tokenizer one pass."
+      "explanation": "Dedup is the first stage where each duplicate-dropped document saves the tokenizer one pass.",
+      "question_zh": "为什么 dedup 放在 tokenization 上游,而不是下游?",
+      "options_zh": [
+        "tokenizer 不能读 JSONL",
+        "tokenization 昂贵; 在同一文档上重复运行会让成本翻倍而 loss 曲线没有收益,因此先去重严格更便宜",
+        "tokenizer 拒绝重复",
+        "tokenizer 需要先有词表"
+      ],
+      "explanation_zh": "Dedup 是第一阶段,每个被去掉的重复文档都为 tokenizer 省下一遍处理。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Manifest sha256 stability"
       ],
       "correct": 1,
-      "explanation": "Tombstones let a future pass revisit the dedup threshold; deletes lose the evidence."
+      "explanation": "Tombstones let a future pass revisit the dedup threshold; deletes lose the evidence.",
+      "question_zh": "对被丢弃的重复样本打 tombstone,相比静默删除多保留了什么?",
+      "options_zh": [
+        "磁盘空间",
+        "重复项与命中其的 keeper 之间的链接,以及在阈值变化后仍可追溯的审计轨迹",
+        "压缩比",
+        "manifest sha256 的稳定性"
+      ],
+      "explanation_zh": "Tombstone 让未来重新审视 dedup 阈值成为可能; 删除则丢失证据。"
     }
   ]
 }

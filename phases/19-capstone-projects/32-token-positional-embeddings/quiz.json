@@ -12,7 +12,15 @@
         "(B, T, V) where V is the vocabulary size"
       ],
       "correct": 2,
-      "explanation": "Each id is mapped to a D-dimensional vector. The batch keeps B and T and gains a new feature dimension D."
+      "explanation": "Each id is mapped to a D-dimensional vector. The batch keeps B and T and gains a new feature dimension D.",
+      "question_zh": "embedding 阶段从 (B, T) id 产出什么 shape?",
+      "options_zh": [
+        "(B, T)",
+        "(B, V)",
+        "(B, T, D),其中 D 是模型维度",
+        "(B, T, V),其中 V 是词表大小"
+      ],
+      "explanation_zh": "每个 id 被映射为一个 D 维向量。Batch 保留 B 与 T,新增一个特征维度 D。"
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "By taking the elementwise maximum"
       ],
       "correct": 1,
-      "explanation": "The two tensors of shape (B, T, D) and (T, D) are summed. Broadcasting replicates the positional table across the batch axis."
+      "explanation": "The two tensors of shape (B, T, D) and (T, D) are summed. Broadcasting replicates the positional table across the batch axis.",
+      "question_zh": "本节如何把 token embedding 和 position embedding 组合在一起?",
+      "options_zh": [
+        "在特征轴上做拼接",
+        "做逐元素求和,把 position 向量在 batch 上广播",
+        "再加一个 linear 投影",
+        "取逐元素最大值"
+      ],
+      "explanation_zh": "对形状为 (B, T, D) 与 (T, D) 的两个张量求和。广播会把 position 表沿 batch 轴复制。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Zero"
       ],
       "correct": 3,
-      "explanation": "The sinusoidal table is computed from a formula and stored as a buffer. It contributes no parameters."
+      "explanation": "The sinusoidal table is computed from a formula and stored as a buffer. It contributes no parameters.",
+      "question_zh": "SinusoidalPositionalEmbedding 贡献多少可学习参数?",
+      "options_zh": [
+        "max_context_length",
+        "max_context_length * d_model",
+        "d_model",
+        "零"
+      ],
+      "explanation_zh": "正弦位置表由公式计算并作为 buffer 存放。它贡献 0 个参数。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Neither"
       ],
       "correct": 2,
-      "explanation": "In this lesson implementation, both classes enforce max_context_length at forward time. Learned is inherently table-bounded; sinusoidal here is also bounded because it uses a prebuilt table."
+      "explanation": "In this lesson implementation, both classes enforce max_context_length at forward time. Learned is inherently table-bounded; sinusoidal here is also bounded because it uses a prebuilt table.",
+      "question_zh": "哪种位置编码不能接受超过其构造时上限的序列?",
+      "options_zh": [
+        "正弦位置 embedding",
+        "可学习位置 embedding",
+        "两者皆不可",
+        "两者皆可"
+      ],
+      "explanation_zh": "本节实现里两个类都在 forward 时强制 max_context_length。可学习位置天然受表大小限制; 正弦在这里也使用预先构造的表,因此同样有上限。"
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "Because it doubles the parameter count"
       ],
       "correct": 2,
-      "explanation": "Pairing sin and cos at the same wavelength means a position shift by k is a rotation, which is a linear map. Attention can then learn relative offsets through linear projections."
+      "explanation": "Pairing sin and cos at the same wavelength means a position shift by k is a rotation, which is a linear map. Attention can then learn relative offsets through linear projections.",
+      "question_zh": "为什么正弦方案在相邻特征对上同时使用 sin 与 cos?",
+      "options_zh": [
+        "因为单独的 sin 不周期",
+        "因为单独的 cos 不能反向传播",
+        "使位置 p+k 处的向量是位置 p 处向量的线性函数",
+        "为了让参数量翻倍"
+      ],
+      "explanation_zh": "在同一波长上配对 sin 和 cos,意味着位置移动 k 是一次旋转,而旋转是线性映射。Attention 能通过线性投影学到相对偏移。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Token ids are stored in a sparse data structure"
       ],
       "correct": 1,
-      "explanation": "A row that did not contribute to any output has zero derivative for the loss, so its gradient is zero for that step."
+      "explanation": "A row that did not contribute to any output has zero derivative for the loss, so its gradient is zero for that step.",
+      "question_zh": "为什么 embedding 的反向传播只更新本 batch 出现过的 token 表行?",
+      "options_zh": [
+        "PyTorch 只为非零项保存梯度",
+        "未在 forward 中触及的行,根据链式法则梯度为零",
+        "优化器跳过它没见过的行",
+        "Token id 用稀疏数据结构存储"
+      ],
+      "explanation_zh": "未对任何输出贡献的行对 loss 的导数为 0,所以本步梯度为 0。"
     }
   ]
 }

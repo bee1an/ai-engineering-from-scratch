@@ -1,37 +1,52 @@
 [
   {
     "question": "What does the loss function represent in neural network training?",
+    "question_zh": "在神经网络训练中，损失函数代表什么？",
     "options": ["The number of incorrect predictions", "A differentiable measure of how wrong the model's predictions are, which the optimizer minimizes", "The size of the training dataset", "The learning rate schedule"],
+    "options_zh": ["预测错误的数量", "一个可微的度量，衡量模型预测有多错，优化器要最小化它", "训练数据集的大小", "学习率调度策略"],
     "correct": 1,
     "explanation": "The loss function maps predictions and targets to a single scalar that the optimizer minimizes via gradient descent. It must be differentiable so gradients can be computed.",
+    "explanation_zh": "损失函数把预测和目标映射成一个标量，优化器通过梯度下降来最小化它。它必须是可微的，这样才能计算梯度。",
     "stage": "pre"
   },
   {
     "question": "Why is cross-entropy preferred over MSE for classification tasks?",
+    "question_zh": "为什么分类任务更偏好交叉熵而不是 MSE？",
     "options": ["Cross-entropy is faster to compute", "Cross-entropy punishes confident wrong predictions exponentially via -log(p), while MSE gives weak gradients near 0 and 1", "MSE only works for regression", "Cross-entropy doesn't require labels"],
+    "options_zh": ["交叉熵计算更快", "交叉熵通过 -log(p) 指数级惩罚自信的错误预测，而 MSE 在 0 和 1 附近梯度很弱", "MSE 只能用于回归", "交叉熵不需要标签"],
     "correct": 1,
     "explanation": "When a model confidently predicts the wrong class (p near 0 for true class), -log(p) produces a huge loss and strong gradient. MSE produces weak gradients in the same situation because sigmoid is flat near 0 and 1.",
+    "explanation_zh": "当模型自信地预测错误类别时（真实类别的 p 接近 0），-log(p) 会产生巨大的损失和强梯度。同样情况下 MSE 给出的梯度很弱，因为 sigmoid 在 0 和 1 附近很平坦。",
     "stage": "pre"
   },
   {
     "question": "What happens if you use MSE loss for binary classification?",
+    "question_zh": "如果用 MSE 损失做二分类会发生什么？",
     "options": ["Training diverges immediately", "The model can minimize loss by predicting 0.5 for everything, achieving MSE=0.25 without learning", "The model trains normally", "Gradients explode"],
+    "options_zh": ["训练立刻发散", "模型可以全都预测 0.5 来最小化损失，得到 MSE=0.25，但什么都没学到", "模型训练正常", "梯度爆炸"],
     "correct": 1,
     "explanation": "With MSE on a balanced binary dataset, predicting 0.5 for every input gives MSE=0.25 -- the minimum achievable without discrimination. The model satisfies the loss without learning any useful patterns.",
+    "explanation_zh": "在均衡的二分类数据集上用 MSE，每个输入都预测 0.5 就能得到 MSE=0.25，是不做区分能达到的最小值。模型满足了损失函数，却没有学到任何有用的模式。",
     "stage": "post"
   },
   {
     "question": "What does label smoothing do and why is it useful?",
+    "question_zh": "标签平滑做了什么？为什么有用？",
     "options": ["It removes noisy labels from the dataset", "It replaces hard 0/1 targets with soft values like 0.1/0.9, preventing overconfident predictions and improving generalization", "It applies a moving average to the loss", "It smooths the learning rate schedule"],
+    "options_zh": ["把数据集里的噪声标签去掉", "把硬性的 0/1 目标换成 0.1/0.9 这样的软值，防止预测过于自信，提高泛化能力", "对损失值做滑动平均", "把学习率调度变得更平滑"],
     "correct": 1,
     "explanation": "Label smoothing changes targets from [0,0,1,0] to [0.025,0.025,0.925,0.025] (with alpha=0.1). This prevents the model from pushing logits to infinity to achieve hard targets, reducing overconfidence.",
+    "explanation_zh": "标签平滑把目标从 [0,0,1,0] 改成 [0.025,0.025,0.925,0.025]（alpha=0.1）。这样模型就不会把 logit 推到无穷大去达成硬性目标，从而降低过度自信。",
     "stage": "post"
   },
   {
     "question": "In contrastive loss (InfoNCE), what role does the temperature parameter play?",
+    "question_zh": "在对比损失 (InfoNCE) 中，温度参数起什么作用？",
     "options": ["It controls the learning rate", "It controls how sharp the similarity distribution is -- lower temperature means harder separation between positives and negatives", "It sets the number of negative samples", "It determines the embedding dimension"],
+    "options_zh": ["控制学习率", "控制相似度分布的锐度，温度越低，正负样本被分得越开", "设置负样本的数量", "决定 embedding 维度"],
     "correct": 1,
     "explanation": "Temperature divides the similarity scores before softmax. Lower temperature (e.g., 0.07) creates a sharper distribution where the model must clearly separate positives from negatives. Higher temperature is more forgiving.",
+    "explanation_zh": "温度在 softmax 之前对相似度做除法。较低的温度（比如 0.07）让分布更锐利，模型必须把正负样本明显分开。温度越高越宽容。",
     "stage": "post"
   }
 ]

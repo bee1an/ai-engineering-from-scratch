@@ -12,7 +12,15 @@
         "Models lack support for git"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "即便有 200k token 上下文,单 agent harness 在大任务上也会触顶,为什么?",
+      "options_zh": [
+        "单 agent 不能调用工具",
+        "Sandbox 拒绝运行多于一个进程",
+        "上下文一次塞不下架构计划、4 个并行的代码切片、reviewer 评论以及测试输出",
+        "模型不支持 git"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Force-merging branches when coders disagree"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "在这种工厂式结构里,architect 角色负责什么?",
+      "options_zh": [
+        "审查合并后的 diff 是否有幻觉",
+        "读 issue 并产出带显式接口的子任务计划",
+        "在干净的 sandbox 里跑测试套件",
+        "在 coder 意见不一致时强行 merge 分支"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "The architect requires worktree IDs"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么每个 coder 在自己的 git worktree + Daytona sandbox 中工作?",
+      "options_zh": [
+        "worktree 比 branch 克隆得快",
+        "Daytona 是唯一支持 SSH 的 sandbox",
+        "隔离的工作树让 N 个 coder 并行实现子任务而不互相踩踏共享文件",
+        "architect 需要 worktree id"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "It must be the same model as the architect"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "对 reviewer 施加什么限制以保持其客观性?",
+      "options_zh": [
+        "它必须在 tester 通过后才能运行",
+        "它不能批准自己撰写或提议过的 diff",
+        "它必须批准自己读到的每个 diff",
+        "它必须使用与 architect 相同的模型"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Token cost is unrelated to performance"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "评分标准为什么对单 agent baseline 衡量 token 效率?",
+      "options_zh": [
+        "多 agent 总是更便宜",
+        "角色边界增加了摘要和交接上下文,所以真正的问题是工厂模式在每美元上是否赢",
+        "单 agent 没有可观测性故事",
+        "Token 成本与性能无关"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "A handoff-failure histogram identifying which role boundary broke (plan, merge, review, test)"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "在 post-mortem 阶段,每个失败的 issue 会产出什么 artifact?",
+      "options_zh": [
+        "新的 architect 计划模板",
+        "更新后的 A2A 协议规范",
+        "force-push 日志",
+        "一份 handoff-failure 直方图,用以识别哪一处角色边界 (plan、merge、review、test) 出了问题"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "MigrationBench"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本 capstone 用哪个评估集来给跨角色的 pass@1 打分?",
+      "options_zh": [
+        "SWE-bench Pro 50 个 issue 的子集",
+        "HumanEval-Java",
+        "MT-Bench-v2",
+        "MigrationBench"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

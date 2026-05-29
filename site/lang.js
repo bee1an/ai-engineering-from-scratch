@@ -79,6 +79,10 @@
     'lesson.next':     { en: 'Next', zh: '下一课' },
     'lesson.quiz.correct': { en: 'correct', zh: '正确' },
     'lesson.quiz.complete': { en: 'Complete all questions to see your score', zh: '完成所有题目后查看分数' },
+    'lesson.quiz.title': { en: 'Quiz', zh: '测验' },
+    'lesson.quiz.pre': { en: 'Pre-Lesson Check', zh: '课前自测' },
+    'lesson.quiz.mid': { en: 'Mid-Lesson Check', zh: '课中自测' },
+    'lesson.quiz.post': { en: 'Post-Lesson Quiz', zh: '课后测验' },
     'lesson.diagram':   { en: 'Diagram', zh: '图表' },
     'lesson.close':     { en: 'Close', zh: '关闭' },
     'lesson.expand':    { en: 'Expand', zh: '展开' },
@@ -109,6 +113,9 @@
   }
 
   var current = detectInitial();
+  // Persist the initial detection so subsequent page loads stay consistent
+  // even if the browser language changes (e.g. user switches OS locale).
+  try { localStorage.setItem(STORAGE_KEY, current); } catch (e) {}
   document.documentElement.setAttribute('data-lang', current);
   document.documentElement.setAttribute('lang', current === 'zh' ? 'zh-CN' : 'en');
 

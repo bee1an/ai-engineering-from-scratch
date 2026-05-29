@@ -12,7 +12,15 @@
         "Push, pull, batch, stream"
       ],
       "correct": 0,
-      "explanation": "Supervisor-worker, swarm, hierarchical, and debate recur across 2026 frameworks."
+      "explanation": "Supervisor-worker, swarm, hierarchical, and debate recur across 2026 frameworks.",
+      "question_zh": "本课列出的四种编排模式是什么？",
+      "options_zh": [
+        "Supervisor-worker、swarm/peer-to-peer、hierarchical、debate",
+        "顺序、并行、分布式、联邦",
+        "Plan、act、reflect、refine",
+        "Push、pull、batch、stream"
+      ],
+      "explanation_zh": "Supervisor-worker、swarm、hierarchical 和 debate 在 2026 年的各家框架里反复出现。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Run supervisors on GPUs"
       ],
       "correct": 1,
-      "explanation": "Tool-call-based supervision gives you precise control over what each specialist sees."
+      "explanation": "Tool-call-based supervision gives you precise control over what each specialist sees.",
+      "question_zh": "LangChain 在 2026 年关于 supervision 的建议是什么？",
+      "options_zh": [
+        "始终使用 create_supervisor",
+        "更倾向直接用 tool call 取代 create_supervisor，以获得更细的上下文工程控制",
+        "完全避免 supervision",
+        "把 supervisor 跑在 GPU 上"
+      ],
+      "explanation_zh": "基于 tool call 的 supervision 让你能精确控制每个专家看到什么。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Swarm runs on cron only"
       ],
       "correct": 1,
-      "explanation": "Swarm is peer-to-peer; supervisor centralizes routing through one LLM."
+      "explanation": "Swarm is peer-to-peer; supervisor centralizes routing through one LLM.",
+      "question_zh": "Swarm 与 supervisor-worker 拓扑的区别是什么？",
+      "options_zh": [
+        "Swarm 用 GPU",
+        "Swarm 没有中心路由器；agent 通过共享工具表面互相直接交接",
+        "Swarm 是单 agent",
+        "Swarm 仅在 cron 上跑"
+      ],
+      "explanation_zh": "Swarm 是 peer-to-peer；supervisor 把路由集中在一个 LLM。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Never; it is an antipattern"
       ],
       "correct": 1,
-      "explanation": "Nested supervisors are for large specialist populations that exceed one supervisor's budget."
+      "explanation": "Nested supervisors are for large specialist populations that exceed one supervisor's budget.",
+      "question_zh": "什么时候用 hierarchical 编排是合理的？",
+      "options_zh": [
+        "任何时候，它免费可扩展",
+        "当一个 supervisor 的上下文预算装不下所有专家描述时",
+        "只在用 GPU 时",
+        "永远不应该；这是反模式"
+      ],
+      "explanation_zh": "嵌套 supervisor 适合专家数量超过单 supervisor 预算的场景。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Start with swarm and contract toward single"
       ],
       "correct": 1,
-      "explanation": "Anthropic's guidance is to build the right system for your needs, not the most sophisticated."
+      "explanation": "Anthropic's guidance is to build the right system for your needs, not the most sophisticated.",
+      "question_zh": "Anthropic 推荐的决策顺序是什么？",
+      "options_zh": [
+        "从 hierarchical 多 agent 起步",
+        "从单 agent + workflow 模式起步；只在需要时增加拓扑；supervisor > swarm > hierarchical；只有当准确率压过成本时才上 debate",
+        "从 debate 起步",
+        "从 swarm 起步再向单 agent 收敛"
+      ],
+      "explanation_zh": "Anthropic 的指导是：搭一个适合你需求的系统，而不是最复杂的系统。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "A test fixture"
       ],
       "correct": 1,
-      "explanation": "Layers that do not correspond to real teams add operational complexity without payoff."
+      "explanation": "Layers that do not correspond to real teams add operational complexity without payoff.",
+      "question_zh": "本课所谓 fake hierarchy 是什么？",
+      "options_zh": [
+        "YAML 标错",
+        "明明只有 2 个真实团队却为了『企业感』叠了 3 层 supervisor；该折叠就折叠",
+        "用 TypeScript 写的 orchestrator",
+        "一个测试 fixture"
+      ],
+      "explanation_zh": "对应不到真实团队的层级只会增加运维复杂度，没有收益。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Lower the rate limit"
       ],
       "correct": 1,
-      "explanation": "A hop counter caps swarm cycles before they loop indefinitely."
+      "explanation": "A hop counter caps swarm cycles before they loop indefinitely.",
+      "question_zh": "如何缓解 swarm 中的 bouncing handoff（A -> B -> A -> B）？",
+      "options_zh": [
+        "把 temperature 钉为 0",
+        "加跳数计数器，超过 N 次转移就拒绝",
+        "禁用 tracing",
+        "降低 rate limit"
+      ],
+      "explanation_zh": "跳数计数器把 swarm 的循环卡在无限之前。"
     }
   ]
 }

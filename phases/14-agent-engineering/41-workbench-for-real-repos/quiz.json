@@ -5,86 +5,142 @@
     {
       "stage": "pre",
       "question": "What is the goal of running the same task through prompt-only and workbench-guided pipelines?",
+      "question_zh": "为什么要把同一个任务分别用「纯 prompt」和「workbench 引导」两条管道跑一遍？",
       "options": [
         "To compare models",
         "To produce a before/after report you can hand to a skeptic with numbers, not arguments",
         "To pick a vendor",
         "To benchmark GPUs"
       ],
+      "options_zh": [
+        "比较模型",
+        "产出一份可以递给怀疑者的「前后对比报告」，用数字而不是争论说话",
+        "挑选供应商",
+        "做 GPU 基准测试"
+      ],
       "correct": 1,
-      "explanation": "The numbers do the arguing; the case is made on a real-feeling task, not a toy."
+      "explanation": "The numbers do the arguing; the case is made on a real-feeling task, not a toy.",
+      "explanation_zh": "让数字替你争论；案例要建立在真实感的任务上，而不是玩具任务。"
     },
     {
       "stage": "pre",
       "question": "Which is NOT one of the five outcomes measured?",
+      "question_zh": "下列哪一项不是被测量的五个结果之一？",
       "options": [
         "tests_actually_run",
         "acceptance_met",
         "files_outside_scope",
         "model_perplexity"
       ],
+      "options_zh": [
+        "tests_actually_run",
+        "acceptance_met",
+        "files_outside_scope",
+        "model_perplexity"
+      ],
       "correct": 3,
-      "explanation": "The five are tests_actually_run, acceptance_met, files_outside_scope, handoff_quality, reviewer_total."
+      "explanation": "The five are tests_actually_run, acceptance_met, files_outside_scope, handoff_quality, reviewer_total.",
+      "explanation_zh": "五个指标是：tests_actually_run、acceptance_met、files_outside_scope、handoff_quality、reviewer_total。"
     },
     {
       "stage": "check",
       "question": "What did LangChain's Anatomy of an Agent Harness measure on Terminal Bench 2.0?",
+      "question_zh": "LangChain 的《Anatomy of an Agent Harness》在 Terminal Bench 2.0 上测出了什么？",
       "options": [
         "Models all converged at top-3",
         "Same model moved from outside top 30 to rank five by changing only the harness",
         "Top model lost 25 places",
         "Harness changes did not move the rank"
       ],
+      "options_zh": [
+        "所有模型都收敛到前三",
+        "同一个模型仅靠换 harness 就从前 30 名之外升到第 5 名",
+        "顶级模型掉了 25 名",
+        "改 harness 没有影响排名"
+      ],
       "correct": 1,
-      "explanation": "Twenty-five-rank delta on the same model is the headline harness-vs-model receipt."
+      "explanation": "Twenty-five-rank delta on the same model is the headline harness-vs-model receipt.",
+      "explanation_zh": "同模型 25 名的差距，是「harness vs 模型」最有冲击力的证据。"
     },
     {
       "stage": "check",
       "question": "What does the preprints.org paper cite as the failure rate for enterprise agent projects?",
+      "question_zh": "preprints.org 那篇论文给出的企业 agent 项目失败率是多少？",
       "options": [
         "8%",
         "About 88% fail to reach production, with failures clustering around runtime, not reasoning",
         "About 50%",
         "None fail"
       ],
+      "options_zh": [
+        "8%",
+        "约 88% 无法上生产，失败集中在运行时而非推理能力",
+        "约 50%",
+        "全都成功"
+      ],
       "correct": 1,
-      "explanation": "The Harness Engineering for Language Agents preprint traces failures to runtime issues (stale state, brittle retries, overgrown context)."
+      "explanation": "The Harness Engineering for Language Agents preprint traces failures to runtime issues (stale state, brittle retries, overgrown context).",
+      "explanation_zh": "《Harness Engineering for Language Agents》预印本把失败追溯到运行时问题（陈旧状态、脆弱重试、上下文膨胀）。"
     },
     {
       "stage": "check",
       "question": "What does WebAgent baseline accuracy do in long-context conditions?",
+      "question_zh": "在长上下文条件下，WebAgent 基线的准确率会怎样？",
       "options": [
         "Stays flat",
         "Drops from 40-50% to under 10% mostly from infinite loops and goal loss",
         "Goes up by 30%",
         "Halves but stays above 30%"
       ],
+      "options_zh": [
+        "保持不变",
+        "从 40–50% 跌到 10% 以下，主要源于死循环和目标丢失",
+        "上升 30%",
+        "腰斩但仍高于 30%"
+      ],
       "correct": 1,
-      "explanation": "Long-context collapse is what the Ralph Loop and handoff packet exist to absorb."
+      "explanation": "Long-context collapse is what the Ralph Loop and handoff packet exist to absorb.",
+      "explanation_zh": "Ralph Loop 和交接包的存在，正是为了吸收长上下文崩塌带来的冲击。"
     },
     {
       "stage": "post",
       "question": "What does the lesson say about false negatives (cases where prompt-only is faster)?",
+      "question_zh": "课程怎么看「false negative」——也就是 prompt-only 更快的情形？",
       "options": [
         "They do not exist",
         "Single-step factual tasks, one-line lints, formatter runs are faster prompt-only; enumerate them honestly so the workbench is not framed as overkill",
         "They prove the workbench fails",
         "They invalidate the harness thesis"
       ],
+      "options_zh": [
+        "它们不存在",
+        "单步事实任务、单行 lint、跑格式化等用 prompt-only 更快；要诚实列出来，免得 workbench 被当成杀鸡用牛刀",
+        "它们证明 workbench 失败了",
+        "它们推翻了 harness 论点"
+      ],
       "correct": 1,
-      "explanation": "Honest enumeration of prompt-only-fastest cases keeps the harness argument credible."
+      "explanation": "Honest enumeration of prompt-only-fastest cases keeps the harness argument credible.",
+      "explanation_zh": "诚实列出「prompt-only 反而最快」的场景，能让 harness 论点更可信。"
     },
     {
       "stage": "post",
       "question": "Where do you cite the report from this lesson?",
+      "question_zh": "应该在什么场合引用本课产出的这份报告？",
       "options": [
         "Internal HR review",
         "When someone wants to drop the verification gate 'just for this sprint', or when a new agent product launches and needs a portable time-savings benchmark",
         "Only in marketing decks",
         "Only at hackathons"
       ],
+      "options_zh": [
+        "公司内部 HR 评估",
+        "当有人想「就这一个 sprint」绕过验证门时，或者新 agent 产品上线、需要一份可移植的省时基准时",
+        "只在营销 PPT 里",
+        "只在黑客松上"
+      ],
       "correct": 1,
-      "explanation": "The numbers travel further than the explanation; cite the report when pressure tries to short-circuit surfaces."
+      "explanation": "The numbers travel further than the explanation; cite the report when pressure tries to short-circuit surfaces.",
+      "explanation_zh": "数字比解释跑得更远；当外部压力想绕过这些 surface 时，把报告甩出去。"
     }
   ]
 }

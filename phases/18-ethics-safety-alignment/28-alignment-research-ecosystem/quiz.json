@@ -12,7 +12,15 @@
         "A frontier safety institute owned by the EU"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "MATS 是做什么的,大致规模如何?",
+      "options_zh": [
+        "一项 reward-model 训练服务",
+        "ML Alignment & Theory Scholars: 一个研究导师项目,自 2021 年以来累计 527+ 学者、180+ 篇论文,2025 年前的校友约有 80% 投身于安全 / 安全研究",
+        "一家颁发 AI 出口许可证的监管机构",
+        "一所由欧盟运营的前沿安全研究所"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "Constitutional AI"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Redwood Research 提出了哪一研究 agenda?",
+      "options_zh": [
+        "面向 LLM 的差分隐私",
+        "AI Control (Lesson 10): 通过 U / T / H 协议在颠覆下保持安全",
+        "通过 SynthID 做水印",
+        "Constitutional AI"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Apollo Research"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "In-Context Scheming 论文以及「Towards Safety Cases for AI Scheming」框架是哪家机构发表的?",
+      "options_zh": [
+        "METR",
+        "MATS",
+        "Eleos AI",
+        "Apollo Research"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Closed-source red-teaming only"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "METR 在对齐生态中独特的方法论风格是什么?",
+      "options_zh": [
+        "对 base model 做对抗训练",
+        "基于任务的能力评估、自主任务时间跨度研究,以及框架综合 (例如「Common Elements of Frontier AI Safety Policies」)",
+        "硬件 attestation 的可验证推理",
+        "仅做闭源 red-teaming"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "Labs evaluating their own models have a structural conflict of interest; external evaluators (Redwood, Apollo, METR, Eleos, UK AISI) can raise and validate failure modes the lab might underreport"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么多机构联合署名对安全主张很重要?",
+      "options_zh": [
+        "可以提高引用数",
+        "可以加快论文发表",
+        "EU AI Act 强制要求",
+        "实验室对自家模型的评估存在结构性的利益冲突; 外部评估者 (Redwood、Apollo、METR、Eleos、UK AISI) 可以提出并验证实验室自己可能少报的失败模式"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Pre-deployment model-welfare evaluations (Lesson 19), including the external welfare assessment in Claude Opus 4's system card"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Eleos AI Research 在生态中的主要贡献是什么?",
+      "options_zh": [
+        "AI Control benchmark",
+        "水印标准",
+        "California 训练数据法案的起草",
+        "部署前的 model-welfare 评估 (Lesson 19),包括 Claude Opus 4 system card 中的外部 welfare 评估"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

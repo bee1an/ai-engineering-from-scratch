@@ -12,7 +12,15 @@
         "One fixed-size vector per text where cosine similarity ranks passages by semantic proximity"
       ],
       "correct": 3,
-      "explanation": "Dense embeddings give one vector per text (typically 384-3072 dim); cosine ranks similarity."
+      "explanation": "Dense embeddings give one vector per text (typically 384-3072 dim); cosine ranks similarity.",
+      "question_zh": "什么是 dense embedding？",
+      "options_zh": [
+        "文档之上的图",
+        "每个词表 token 一个稀疏权重",
+        "token 级对齐矩阵",
+        "每段文本一个固定大小向量，cosine similarity 按语义相近度对 passage 排序"
+      ],
+      "explanation_zh": "Dense embedding 给每段文本一个向量（通常 384-3072 维）；cosine 给出相似度排名。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Cross-encoder rescoring"
       ],
       "correct": 2,
-      "explanation": "Matryoshka training makes the first N dims of the vector standalone-useful, enabling cheap truncation."
+      "explanation": "Matryoshka training makes the first N dims of the vector standalone-useful, enabling cheap truncation.",
+      "question_zh": "Matryoshka Representation Learning 能带来什么？",
+      "options_zh": [
+        "多语言训练",
+        "更快的 softmax",
+        "把训练好的 embedding 截断到前 N 维，仍能得到一个有用的小 embedding",
+        "cross-encoder rescoring"
+      ],
+      "explanation_zh": "Matryoshka 训练让向量的前 N 维可独立使用，便于廉价截断。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "MaxSim: for each query token find the most similar document token, then sum the maxima"
       ],
       "correct": 3,
-      "explanation": "ColBERT-style late interaction uses MaxSim across per-token vectors."
+      "explanation": "ColBERT-style late interaction uses MaxSim across per-token vectors.",
+      "question_zh": "多向量（ColBERT）embedding 如何为 query-doc 对打分？",
+      "options_zh": [
+        "对均值池化的 token 向量做 cosine",
+        "交叉熵",
+        "Earth-mover's distance",
+        "MaxSim：每个 query token 找最相似的 document token，再把 maxima 求和"
+      ],
+      "explanation_zh": "ColBERT 风格的 late interaction 在每 token 向量上用 MaxSim。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Only a colbert vector"
       ],
       "correct": 2,
-      "explanation": "BGE-M3 emits three retrieval modes from one model, useful for fused hybrid scoring."
+      "explanation": "BGE-M3 emits three retrieval modes from one model, useful for fused hybrid scoring.",
+      "question_zh": "BGE-M3 在一次推理中同时输出什么？",
+      "options_zh": [
+        "只有 sparse 向量",
+        "只有 dense 向量",
+        "Dense、sparse 和 multi-vector (colbert) 表示，由同一个模型一次推理产出",
+        "只有 colbert 向量"
+      ],
+      "explanation_zh": "BGE-M3 从一个模型同时产出三种检索模式，便于做混合融合打分。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Required by FAISS only"
       ],
       "correct": 1,
-      "explanation": "Re-normalizing after truncation restores unit norm so dot product equals cosine again."
+      "explanation": "Re-normalizing after truncation restores unit norm so dot product equals cosine again.",
+      "question_zh": "为什么 Matryoshka 截断后的向量在 cosine similarity 之前必须重新归一化？",
+      "options_zh": [
+        "截断会破坏训练",
+        "截断改变向量范数；不重归一化时点积不再等于 cosine",
+        "cosine 忽略归一化",
+        "只有 FAISS 要求"
+      ],
+      "explanation_zh": "截断后重新归一化恢复单位范数，让点积再次等于 cosine。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Prefixes change tokenizer behavior"
       ],
       "correct": 2,
-      "explanation": "BGE models expect a 'Represent this sentence for searching...' prefix on queries."
+      "explanation": "BGE models expect a 'Represent this sentence for searching...' prefix on queries.",
+      "question_zh": "为什么 BGE 模型常常需要 query 端的前缀字符串？",
+      "options_zh": [
+        "为了压缩 query",
+        "FAISS 要求",
+        "BGE 训练时用了显式的 query prompt；不带它会损失 3-5 点召回",
+        "前缀改变 tokenizer 行为"
+      ],
+      "explanation_zh": "BGE 模型期望 query 带 'Represent this sentence for searching...' 前缀。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "MTEB rewards bigger models"
       ],
       "correct": 2,
-      "explanation": "MTEB averages across tasks; domain-specific eval can flip the ranking."
+      "explanation": "MTEB averages across tasks; domain-specific eval can flip the ranking.",
+      "question_zh": "为什么说 MTEB 必要但不充分以挑选 embedding 模型？",
+      "options_zh": [
+        "MTEB 只覆盖英文",
+        "MTEB 忽略延迟",
+        "排行榜排名是跨众多任务的平均；你具体领域可能不同，所以总要在自己数据上 benchmark",
+        "MTEB 偏爱更大模型"
+      ],
+      "explanation_zh": "MTEB 跨任务取均；领域特定评估可能反转排名。"
     },
     {
       "stage": "post",
@@ -96,7 +152,15 @@
         "On small corpora only"
       ],
       "correct": 2,
-      "explanation": "SPLADE captures lexical/keyword matches that dense models can miss; fuse with dense via RRF."
+      "explanation": "SPLADE captures lexical/keyword matches that dense models can miss; fuse with dense via RRF.",
+      "question_zh": "什么时候应该把 SPLADE 稀疏检索加在 dense embedding 旁边？",
+      "options_zh": [
+        "只要 encoder 是多语言",
+        "只要使用了 Matryoshka",
+        "查询关键词重，或包含 dense embedding 会模糊化的标识符/代码时",
+        "只在小语料上"
+      ],
+      "explanation_zh": "SPLADE 捕捉 dense 模型可能漏掉的词法/关键词匹配；通过 RRF 与 dense 融合。"
     }
   ]
 }

@@ -1,37 +1,102 @@
 [
   {
     "question": "Why is manually reading a few LLM outputs not a reliable evaluation method?",
-    "options": ["It takes too long", "Small samples miss failure modes that only appear at scale, and human judgment is inconsistent across reviewers and sessions", "Manual review is too expensive", "LLM outputs are always correct"],
+    "options": [
+      "It takes too long",
+      "Small samples miss failure modes that only appear at scale, and human judgment is inconsistent across reviewers and sessions",
+      "Manual review is too expensive",
+      "LLM outputs are always correct"
+    ],
     "correct": 1,
     "explanation": "Reading 10 outputs shows you 10 points in a distribution. A prompt change might improve 90% of outputs but break 10% of edge cases. Without systematic evaluation, you'll miss the regression until users report it.",
-    "stage": "pre"
+    "stage": "pre",
+    "question_zh": "为什么手动读几条 LLM 输出不是可靠的评估方法？",
+    "options_zh": [
+      "太慢",
+      "小样本看不到只在规模上才暴露的失败模式，并且不同评审者、不同时间的人工判断也不一致",
+      "人工评审太贵",
+      "LLM 输出永远正确"
+    ],
+    "explanation_zh": "读 10 条输出只是看到分布上的 10 个点。Prompt 改动可能让 90% 的输出变好，却让 10% 的边角 case 变差。没有系统化评测，回归只会等到用户上报才发现。"
   },
   {
     "question": "What is regression testing in the context of LLM applications?",
-    "options": ["Testing linear regression models", "Running a fixed set of test cases after every change (prompt, model, parameters) to ensure quality hasn't degraded", "Testing on the training data", "Measuring model loss during training"],
+    "options": [
+      "Testing linear regression models",
+      "Running a fixed set of test cases after every change (prompt, model, parameters) to ensure quality hasn't degraded",
+      "Testing on the training data",
+      "Measuring model loss during training"
+    ],
     "correct": 1,
     "explanation": "Every prompt change, model swap, or temperature tweak changes the output distribution. Regression tests catch cases where a change that improves one area silently degrades another.",
-    "stage": "pre"
+    "stage": "pre",
+    "question_zh": "在 LLM 应用语境下，回归测试是什么？",
+    "options_zh": [
+      "测试线性回归模型",
+      "在每次改动（prompt、模型、参数）后跑一组固定测试用例，确保质量没有退化",
+      "在训练数据上测试",
+      "测量训练时的 loss"
+    ],
+    "explanation_zh": "每次 prompt 改动、换模型、调温度都会改变输出分布。回归测试能抓到 “某处变好、另一处悄悄变差” 的情况。"
   },
   {
     "question": "What is the LLM-as-judge evaluation approach?",
-    "options": ["Having the model evaluate its own training loss", "Using a strong LLM to score outputs against rubrics, replacing expensive human evaluation while scaling to thousands of test cases", "Using the model's confidence scores", "Comparing two models' parameter counts"],
+    "options": [
+      "Having the model evaluate its own training loss",
+      "Using a strong LLM to score outputs against rubrics, replacing expensive human evaluation while scaling to thousands of test cases",
+      "Using the model's confidence scores",
+      "Comparing two models' parameter counts"
+    ],
     "correct": 1,
     "explanation": "LLM-as-judge sends (input, output, rubric) to a strong model (e.g., GPT-4) which scores the output. It's cheaper and faster than human evaluation, though it has known biases (e.g., preferring verbose responses).",
-    "stage": "post"
+    "stage": "post",
+    "question_zh": "LLM-as-judge 评估方法是什么？",
+    "options_zh": [
+      "让模型自评训练 loss",
+      "用一个强 LLM 按 rubric 给输出打分，替代昂贵的人工评估，并能扩展到上千测试用例",
+      "用模型的置信度分数",
+      "比较两个模型的参数量"
+    ],
+    "explanation_zh": "LLM-as-judge 把 (input, output, rubric) 发给一个强模型（比如 GPT-4），让它给输出打分。比人工更便宜、更快，但有已知偏差（比如偏好啰嗦回答）。"
   },
   {
     "question": "What makes a good evaluation dataset for an LLM application?",
-    "options": ["As many examples as possible", "Diverse inputs covering common cases, edge cases, adversarial inputs, and expected outputs with clear rubrics", "Only the hardest examples", "Random samples from the internet"],
+    "options": [
+      "As many examples as possible",
+      "Diverse inputs covering common cases, edge cases, adversarial inputs, and expected outputs with clear rubrics",
+      "Only the hardest examples",
+      "Random samples from the internet"
+    ],
     "correct": 1,
     "explanation": "A good eval set covers the distribution: happy path cases, edge cases (empty input, very long input), adversarial inputs (prompt injection), and ambiguous queries. Each example has a clear expected output or scoring rubric.",
-    "stage": "post"
+    "stage": "post",
+    "question_zh": "什么样的评估数据集对 LLM 应用是好数据集？",
+    "options_zh": [
+      "样本越多越好",
+      "覆盖常见 case、边角 case、对抗输入的多样输入，加上清晰的预期输出或评分细则",
+      "只放最难的样本",
+      "互联网随机采样"
+    ],
+    "explanation_zh": "好的评测集覆盖整个分布：正常 case、边角 case（空输入、超长输入）、对抗输入（prompt injection）、模糊问题。每个样本都有清晰的预期输出或打分细则。"
   },
   {
     "question": "How should you handle non-deterministic LLM outputs in evaluation?",
-    "options": ["Set temperature to 0 for all evaluations", "Run each test case multiple times and use aggregate metrics (pass rate, average score) to account for output variance", "Non-determinism doesn't affect evaluation", "Only evaluate the first output"],
+    "options": [
+      "Set temperature to 0 for all evaluations",
+      "Run each test case multiple times and use aggregate metrics (pass rate, average score) to account for output variance",
+      "Non-determinism doesn't affect evaluation",
+      "Only evaluate the first output"
+    ],
     "correct": 1,
     "explanation": "Even at temperature 0, some providers introduce sampling variation. Running each test 3-5 times and measuring pass rate or average score gives a more reliable picture than a single run that might hit a lucky/unlucky sample.",
-    "stage": "post"
+    "stage": "post",
+    "question_zh": "在评估中怎么处理 LLM 的非确定性输出？",
+    "options_zh": [
+      "所有评估把 temperature 设为 0",
+      "每个测试用例跑多次，用聚合指标（通过率、平均分）来吸收输出方差",
+      "非确定性不影响评估",
+      "只评估第一次输出"
+    ],
+    "explanation_zh": "即便 temperature 0，部分供应商仍会引入采样波动。每个测试跑 3-5 次再看通过率或平均分，比单次运行（可能撞上幸运/不幸样本）可靠得多。"
   }
 ]

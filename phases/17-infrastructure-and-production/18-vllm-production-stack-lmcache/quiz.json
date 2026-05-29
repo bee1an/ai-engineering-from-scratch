@@ -12,7 +12,15 @@
         "Cold-start image pull"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "LMCache 在 vLLM 部署中主要解决什么问题？",
+      "options_zh": [
+        "HBM 中 KV cache 压力导致抢占以及对相同前缀的重复 prefill",
+        "Tokenizer 的 GIL 争用",
+        "网络出口过滤",
+        "冷启动时拉镜像"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "ChunkedPrefill API"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "vLLM 中哪个 API 引入了可插拔的 KV cache backend？",
+      "options_zh": [
+        "Prefix-caching 标志",
+        "PagedAttention v2",
+        "vLLM v0.9.0 中的 Connector API",
+        "ChunkedPrefill API"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Removal of LMCache support"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "vLLM 0.11.0（2026 年 1 月）在 KV offload 路径上加了什么？",
+      "options_zh": [
+        "异步 offload 路径，让常见情况下引擎不会因 offload 阻塞",
+        "仅同步的 offload",
+        "强制 FP8 KV cache",
+        "移除了 LMCache 支持"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "When you are running on CPU only"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "什么时候应该选 LMCache 而不是原生 CPU offload？",
+      "options_zh": [
+        "当多个引擎跨租户、LoRA 变体或重复 RAG 上下文共享前缀，跨引擎复用就划算",
+        "当你想完全关掉 KV 缓存时",
+        "当单个引擎 HBM 紧张且没有前缀共享时",
+        "只在 CPU 上运行时"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "Engine crashes"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "当 KV 占用一直明显低于 HBM 时，LMCache 的收益会怎样？",
+      "options_zh": [
+        "LMCache 会自动禁用",
+        "仍然让吞吐翻倍",
+        "配置和 baseline 相比大致只多 3-5% 的开销，没有真正收益",
+        "引擎崩溃"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "It does not — they are mutually exclusive"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "LMCache 为什么能与 disaggregated 服务（Phase 17 · 17）组合起来？",
+      "options_zh": [
+        "因为 LMCache 替代了 NIXL",
+        "从 prefill 传到 decode 的 KV 落到 LMCache 中；后续查询可以从 LMCache 拉取并跳过 prefill，cache-aware 路由器因此可以挑一台本地或 LMCache 共享缓存命中的引擎",
+        "因为 LMCache 跑在和引擎相同的 GPU 上",
+        "组合不起来 —— 它们互斥"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

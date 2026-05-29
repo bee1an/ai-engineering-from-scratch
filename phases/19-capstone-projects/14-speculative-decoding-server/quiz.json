@@ -12,7 +12,15 @@
         "A draft model proposes k candidate tokens; the target model verifies them in a single pass"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "speculative decoding 背后的两层机制是什么?",
+      "options_zh": [
+        "两个 target 模型按 token 交替",
+        "一个 embedding 模型加一个合成器",
+        "一个检索缓存加一个 reranker",
+        "draft 模型提议 k 个候选 token,target 模型用一次前向一并验证"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "It runs only on CPUs"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "EAGLE-3 相比 ngram draft 多做了什么?",
+      "options_zh": [
+        "替代了 target 模型",
+        "在 target 模型的 hidden state 上训练 draft head,以获得更高的接受率",
+        "完全避免 tokenization",
+        "只在 CPU 上跑"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Tail latency is independent of batch size"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么 p99 尾延迟要在 batch size 1、8、32 上分别报告?",
+      "options_zh": [
+        "稳态的 tokens-per-second 会掩盖一个事实: 拒绝时的 verify pass 比普通解码更贵",
+        "vLLM 不能服务 batch size 小于 8",
+        "p99 只在 batch size 32 时才重要",
+        "尾延迟与 batch size 无关"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Quantization changes at runtime"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么流量分布变化时接受率会漂移?",
+      "options_zh": [
+        "vLLM 每小时轮换模型",
+        "Draft 对齐取决于输入分布: ShareGPT、代码和领域数据触发的模式各不相同",
+        "操作系统调度器重新打乱 GPU 显存",
+        "运行时量化方式发生变化"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Queue-wait time on inference requests"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Kubernetes HPA 用哪个信号来扩缩部署?",
+      "options_zh": [
+        "Cluster autoscaler 节点",
+        "CPU 利用率",
+        "磁盘 IOPS",
+        "推理请求的 queue-wait 时间"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Automatic dataset curation"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "P-EAGLE 相对于串行 EAGLE-3 增加了什么?",
+      "options_zh": [
+        "把权重量化为 FP4",
+        "去掉 target 模型",
+        "在 draft 分支树上做并行 speculation,target 一次前向验证",
+        "自动化数据筛选"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Exactly 10x throughput at any quality"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "评分标准对非 speculative baseline 要求达到的吞吐目标是?",
+      "options_zh": [
+        "在两种模型上,质量持平的前提下至少 2.5 倍",
+        "任何高于 baseline 的提升",
+        "约 1.1 倍且质量持平",
+        "在任意质量下精确 10 倍"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

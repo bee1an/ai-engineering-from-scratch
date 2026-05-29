@@ -3,37 +3,52 @@
     {
       "stage": "pre",
       "question": "Why cannot a plain CNN process a point cloud directly?",
+      "question_zh": "为什么普通 CNN 不能直接处理点云？",
       "options": ["Point clouds are too large", "A CNN assumes input pixels arranged on a regular grid with neighbourhood structure; a point cloud is an unordered set of points in R^3 with no grid and variable size, violating both assumptions", "CNNs only work on grayscale", "Point clouds require quaternions"],
+      "options_zh": ["点云太大了", "CNN 假设输入像素排在带邻域结构的规则网格上；点云是 R^3 中无序的点集合，没有网格、点数还不固定，这两个假设都被违反了", "CNN 只能处理灰度图", "点云需要四元数"],
       "correct": 1,
-      "explanation": "CNN convolutions need a regular neighbourhood. A point cloud has neither a grid nor a fixed point count. Voxelising the cloud brings back a grid (used by 3D CNNs) but is memory-expensive. PointNet side-stepped this with a permutation-invariant architecture that treats each point independently then aggregates symmetrically."
+      "explanation": "CNN convolutions need a regular neighbourhood. A point cloud has neither a grid nor a fixed point count. Voxelising the cloud brings back a grid (used by 3D CNNs) but is memory-expensive. PointNet side-stepped this with a permutation-invariant architecture that treats each point independently then aggregates symmetrically.",
+      "explanation_zh": "CNN 卷积要求规则的邻域。点云既没有网格也没有固定点数。把点云体素化能恢复网格（3D CNN 这么做），但显存代价很高。PointNet 绕开了这个问题，用排列不变的架构对每个点独立处理，再做对称聚合。"
     },
     {
       "stage": "pre",
       "question": "What trick makes PointNet permutation-invariant over the input points?",
+      "question_zh": "PointNet 通过什么技巧让网络对输入点集顺序无关？",
       "options": ["Batch normalisation", "A shared MLP applied to every point independently, followed by a symmetric aggregation (max pool or sum); since the aggregation ignores point order, the whole network's output is order-invariant", "A special loss function", "Sorting the points before the forward pass"],
+      "options_zh": ["batch normalisation", "对每个点独立应用同一个共享 MLP，再用对称聚合（max pool 或求和）；聚合无视点序，整个网络的输出也就和顺序无关", "一种特殊的 loss 函数", "前向传播前先把点排序"],
       "correct": 1,
-      "explanation": "The symmetric-function trick is the core of every point-cloud network family since 2017. Run the same MLP on every point (same weights, no ordering dependence) and then aggregate with a function that does not depend on order. Max and sum are the two canonical choices; max is used by PointNet and most descendants."
+      "explanation": "The symmetric-function trick is the core of every point-cloud network family since 2017. Run the same MLP on every point (same weights, no ordering dependence) and then aggregate with a function that does not depend on order. Max and sum are the two canonical choices; max is used by PointNet and most descendants.",
+      "explanation_zh": "「对称函数」技巧是 2017 年以来所有点云网络的核心。每个点都过同一个 MLP（共享权重，不依赖顺序），再用与顺序无关的函数聚合。最常用的是 max 和 sum，PointNet 及其后继大多用 max。"
     },
     {
       "stage": "post",
       "question": "A vanilla NeRF MLP fed with raw (x, y, z) coordinates produces blurry results. What fixes it?",
+      "question_zh": "原始 NeRF 的 MLP 直接喂入 (x, y, z) 坐标会得到模糊的结果，怎么解决？",
       "options": ["Adding more training data", "Positional encoding: project coordinates into Fourier features (sin/cos of 2^l * pi * x for multiple l) before the MLP; this lets the low-frequency-biased MLP represent high-frequency details", "Using 16-bit precision", "Switching to a CNN"],
+      "options_zh": ["加更多训练数据", "用 positional encoding：在进 MLP 前把坐标映射成 Fourier 特征（多个 l 的 sin/cos(2^l * pi * x)），让本来偏向低频的 MLP 能表示高频细节", "使用 16 位精度", "换成 CNN"],
       "correct": 1,
-      "explanation": "MLPs are spectrally biased: they easily fit smooth functions and struggle with high frequencies. Positional encoding lifts each coordinate into a vector that already contains high-frequency signals. The MLP then has a much easier job of composing those features into sharp geometry and texture. The same trick is used in transformer positional encoding and in diffusion time embedding."
+      "explanation": "MLPs are spectrally biased: they easily fit smooth functions and struggle with high frequencies. Positional encoding lifts each coordinate into a vector that already contains high-frequency signals. The MLP then has a much easier job of composing those features into sharp geometry and texture. The same trick is used in transformer positional encoding and in diffusion time embedding.",
+      "explanation_zh": "MLP 有谱偏差：容易拟合光滑函数、不容易学高频。positional encoding 把每个坐标映射成本身已经含有高频成分的向量，MLP 再把这些特征组合成锐利的几何和纹理就轻松多了。transformer 的位置编码、diffusion 的时间 embedding 用的都是同一招。"
     },
     {
       "stage": "post",
       "question": "How is a NeRF rendered pixel computed?",
+      "question_zh": "NeRF 渲染一个像素是怎么算出来的？",
       "options": ["As the output of the final MLP layer", "By casting a ray from the camera through the pixel, sampling N points along the ray, querying the MLP at each point for (density, colour), and compositing the samples with a volumetric rendering equation that accumulates alpha-weighted colours along the ray", "By looking up a precomputed voxel grid", "By running a convolution over a depth map"],
+      "options_zh": ["最后一层 MLP 的输出", "从相机出发穿过该像素发一条光线，沿光线采样 N 个点，对每个点用 MLP 查询 (密度, 颜色)，再用体渲染公式沿光线累计 alpha 加权颜色", "查一个预计算的体素网格", "在深度图上跑一次卷积"],
       "correct": 1,
-      "explanation": "NeRF rendering is classical volume rendering with a neural density field. For each pixel you pick a ray, sample along it, query (sigma, c) at each sample, and composite using (1 - exp(-sigma * delta)) alphas and cumulative transmittance. Backprop through this rendering step is what trains the MLP from 2D photos — no explicit 3D supervision ever appears."
+      "explanation": "NeRF rendering is classical volume rendering with a neural density field. For each pixel you pick a ray, sample along it, query (sigma, c) at each sample, and composite using (1 - exp(-sigma * delta)) alphas and cumulative transmittance. Backprop through this rendering step is what trains the MLP from 2D photos — no explicit 3D supervision ever appears.",
+      "explanation_zh": "NeRF 渲染本质是经典体渲染加上神经密度场。每个像素选一条光线，沿线采样，每个样本查 (sigma, c)，用 (1 - exp(-sigma * delta)) 作为 alpha 并累乘透射率合成颜色。从 2D 照片训练 MLP 靠的就是反向传播穿过这一步渲染——全程没有显式 3D 监督。"
     },
     {
       "stage": "post",
       "question": "Why has 3D Gaussian splatting largely replaced NeRF in production?",
+      "question_zh": "为什么 3D Gaussian splatting 在生产环境基本取代了 NeRF？",
       "options": ["It produces higher-quality images", "It is an explicit representation (millions of 3D Gaussians with opacity and colour) that renders in real time via rasterisation instead of MLP queries on sampled rays; training is minutes instead of hours, rendering is 100x faster, and quality is comparable", "NeRFs were shown to be mathematically incorrect", "Gaussians are more compressible"],
+      "options_zh": ["它图像质量更高", "它是一种显式表示（数百万个带不透明度和颜色的 3D 高斯），通过光栅化实时渲染，而不是沿采样光线查 MLP；训练只要几分钟而不是几小时，渲染快 100 倍，质量相近", "NeRF 被证明在数学上是错的", "高斯更容易压缩"],
       "correct": 1,
-      "explanation": "3D Gaussian Splatting (SIGGRAPH 2023) replaces the implicit MLP-based scene with an explicit cloud of 3D Gaussian primitives. Rendering becomes GPU rasterisation, which is orders of magnitude faster than per-pixel ray sampling through an MLP. Most 2026 NeRF products ship with Gaussian splatting or its successors; the NeRF paradigm still informs the training objective and the math."
+      "explanation": "3D Gaussian Splatting (SIGGRAPH 2023) replaces the implicit MLP-based scene with an explicit cloud of 3D Gaussian primitives. Rendering becomes GPU rasterisation, which is orders of magnitude faster than per-pixel ray sampling through an MLP. Most 2026 NeRF products ship with Gaussian splatting or its successors; the NeRF paradigm still informs the training objective and the math.",
+      "explanation_zh": "3D Gaussian Splatting（SIGGRAPH 2023）用一团显式的 3D 高斯基元取代了基于 MLP 的隐式场景。渲染变成 GPU 光栅化，比逐像素穿过 MLP 沿光线采样快几个数量级。2026 年大多数 NeRF 类产品出货的都是 Gaussian splatting 或其后继；NeRF 范式仍在训练目标和数学推导上发挥作用。"
     }
   ]
 }

@@ -12,7 +12,15 @@
         "Determinism is needed only for the build system"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么本流水线把确定性底层与 agent 层结合,而不是只用其一?",
+      "options_zh": [
+        "OpenRewrite 或 libcst 能安全又便宜地处理 70-80% 的机械改写,把 agent 留给那些模糊的长尾",
+        "agent 单独使用比 recipe 更快",
+        "确定性 recipe 比 LLM 慢",
+        "确定性只在构建系统中才需要"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Green CI in the sandbox without a coverage regression beyond a small threshold"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本流水线把什么信号作为迁移成功的真值?",
+      "options_zh": [
+        "agent 按评分表自评",
+        "PR 上的 reviewer 批准",
+        "diff 体积低于硬限制",
+        "在 sandbox 中 CI 通过,且覆盖率回退不超过一个小阈值"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "30 minutes wall-clock, $8 cost, and 20 agent turns"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "agent 循环对每个仓库强制的预算上限是?",
+      "options_zh": [
+        "时间和成本均不限,只在出错时中止",
+        "无 turn 限制,100 美元上限",
+        "1 小时 wall-clock,100 turn",
+        "30 分钟 wall-clock、8 美元成本、20 个 agent turn"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "The agent automatically force-pushes a fix"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "迁移后覆盖率下降超过约 2% 时会触发什么?",
+      "options_zh": [
+        "reviewer 被绕过",
+        "该仓库被归入 coverage_regression 失败类别,而不是干净地开 PR",
+        "确定性底层重放它的 recipe",
+        "agent 自动 force-push 一个修复"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "It satisfies a compliance checklist"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么把失败分类视为交付物而非副产物?",
+      "options_zh": [
+        "它替代了测试套件",
+        "它把失败的仓库按类别分组,让未来的 recipe 作者可以瞄准最常见的失败模式",
+        "GitHub 分支保护要求它",
+        "它满足某个合规清单"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "ViDoRe v3"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本 capstone 在 Java 8 到 17 迁移上瞄准的公开 benchmark 是?",
+      "options_zh": [
+        "Amazon 的 MigrationBench",
+        "SWE-bench Pro",
+        "MMLU-Pro",
+        "ViDoRe v3"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "The fraction of fixes handled by OpenRewrite versus authored by the agent layer"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "agent 集成评分标准衡量修复分布的什么属性?",
+      "options_zh": [
+        "源文件的 tokenization 速度",
+        "每个仓库 force-push 的次数",
+        "被钉住的依赖数量",
+        "由 OpenRewrite 处理与由 agent 层撰写的修复各占的比例"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

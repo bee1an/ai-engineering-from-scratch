@@ -12,7 +12,15 @@
         "agent_loop"
       ],
       "correct": 1,
-      "explanation": "invoke_agent is the canonical name; the agent's name attribute appears in the span name when set."
+      "explanation": "invoke_agent is the canonical name; the agent's name attribute appears in the span name when set.",
+      "question_zh": "在 GenAI 约定中，哪个 span 名代表一次 agent 运行？",
+      "options_zh": [
+        "agent.start",
+        "invoke_agent（可选用 gen_ai.agent.name 作为后缀）",
+        "run_chain",
+        "agent_loop"
+      ],
+      "explanation_zh": "invoke_agent 是规范名；当设置了 agent name 属性时，它会出现在 span 名中。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Latency, error, throughput"
       ],
       "correct": 0,
-      "explanation": "Model/client (LLM calls), agent (create/invoke), tool (per invocation) are the categories."
+      "explanation": "Model/client (LLM calls), agent (create/invoke), tool (per invocation) are the categories.",
+      "question_zh": "GenAI SIG 定义了哪三类 span？",
+      "options_zh": [
+        "Model/client、agent、tool",
+        "Frontend、backend、db",
+        "Read、write、exec",
+        "Latency、error、throughput"
+      ],
+      "explanation_zh": "Model/client（LLM 调用）、agent（创建/调用）、tool（每次调用）就是这三类。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Always CLIENT"
       ],
       "correct": 1,
-      "explanation": "Remote agent calls are CLIENT; in-process agent runs are INTERNAL."
+      "explanation": "Remote agent calls are CLIENT; in-process agent runs are INTERNAL.",
+      "question_zh": "invoke_agent span 何时使用 CLIENT 而非 INTERNAL kind？",
+      "options_zh": [
+        "始终是 INTERNAL",
+        "对远程 agent 服务（OpenAI Assistants、Bedrock Agents）用 CLIENT；对进程内框架（LangChain、CrewAI、本地 ReAct）用 INTERNAL",
+        "仅 HTTPS 时 CLIENT",
+        "始终是 CLIENT"
+      ],
+      "explanation_zh": "调用远程 agent 用 CLIENT；进程内 agent 运行用 INTERNAL。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Capture only on errors"
       ],
       "correct": 1,
-      "explanation": "Default-off content capture protects PII and secrets; opt-in is explicit."
+      "explanation": "Default-off content capture protects PII and secrets; opt-in is explicit.",
+      "question_zh": "默认情况下输入和输出内容捕获的规则是什么？",
+      "options_zh": [
+        "默认全部捕获",
+        "Instrumentation 默认不应捕获；通过 gen_ai.* 属性显式开启",
+        "只捕获 output，从不捕获 input",
+        "只在出错时捕获"
+      ],
+      "explanation_zh": "默认不捕获是为了保护 PII 和密钥；想捕获要显式 opt-in。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "gen_ai.agent.name"
       ],
       "correct": 2,
-      "explanation": "gen_ai.data_source.id labels the RAG corpus or store hit by retrieval."
+      "explanation": "gen_ai.data_source.id labels the RAG corpus or store hit by retrieval.",
+      "question_zh": "哪个属性标识检索时使用的语料库或存储？",
+      "options_zh": [
+        "gen_ai.provider.name",
+        "gen_ai.request.model",
+        "gen_ai.data_source.id",
+        "gen_ai.agent.name"
+      ],
+      "explanation_zh": "gen_ai.data_source.id 标记检索命中的 RAG 语料库或存储。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Encrypt prompts in span attributes"
       ],
       "correct": 1,
-      "explanation": "External storage with pointer IDs avoids PII leaking into traces that ops can read."
+      "explanation": "External storage with pointer IDs avoids PII leaking into traces that ops can read.",
+      "question_zh": "本课对生产环境保存 prompt 内容有什么建议？",
+      "options_zh": [
+        "在每个 span 上以纯文本捕获完整 prompt",
+        "把内容存到外部（S3、日志存储），span 上只记录引用 ID",
+        "永远不存任何内容",
+        "在 span 属性里加密 prompt"
+      ],
+      "explanation_zh": "外置存储 + 指针 ID，避免 PII 泄漏到运维都能看到的 trace 中。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Pay for a license"
       ],
       "correct": 1,
-      "explanation": "The env var pins the experimental conventions so attributes are not silently renamed."
+      "explanation": "The env var pins the experimental conventions so attributes are not silently renamed.",
+      "question_zh": "怎么 opt-in 到 GenAI 约定的实验性稳定预览？",
+      "options_zh": [
+        "编辑 OTel collector 配置",
+        "设置 OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_latest_experimental",
+        "从源码重新构建 SDK",
+        "购买许可证"
+      ],
+      "explanation_zh": "这个环境变量把实验性约定钉死，避免属性被悄悄改名。"
     }
   ]
 }

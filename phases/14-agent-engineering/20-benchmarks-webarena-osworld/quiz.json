@@ -12,7 +12,15 @@
         "To avoid TLS"
       ],
       "correct": 1,
-      "explanation": "Pinned self-hosted apps make execution-based evaluation reliable and comparable over time."
+      "explanation": "Pinned self-hosted apps make execution-based evaluation reliable and comparable over time.",
+      "question_zh": "为什么 WebArena 自托管它的四个目标应用？",
+      "options_zh": [
+        "为了省钱",
+        "为了固定可复现版本，让基于执行的评测稳定不抖",
+        "为了在 GPU 上跑",
+        "为了避免 TLS"
+      ],
+      "explanation_zh": "把自托管应用版本钉死，能让基于执行的评测可靠且能跨时间比较。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Screenshots cost less"
       ],
       "correct": 1,
-      "explanation": "Screenshot-driven evaluation forces pixel-to-element grounding, the actual production constraint."
+      "explanation": "Screenshot-driven evaluation forces pixel-to-element grounding, the actual production constraint.",
+      "question_zh": "为什么 OSWorld 用真实操作系统截图而非辅助功能 API？",
+      "options_zh": [
+        "辅助功能 API 太快",
+        "截图迫使 agent 在 1920x1080 下做真实的 GUI grounding，与生产约束一致",
+        "辅助功能 API 会泄漏 PII",
+        "截图更便宜"
+      ],
+      "explanation_zh": "截图驱动的评测强迫 agent 做像素到元素的 grounding，这才是生产环境的真实约束。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Hallucination and refusal"
       ],
       "correct": 1,
-      "explanation": "Grounding (pixel-to-element) and operational knowledge (menus, shortcuts) are the headline blockers."
+      "explanation": "Grounding (pixel-to-element) and operational knowledge (menus, shortcuts) are the headline blockers.",
+      "question_zh": "OSWorld 主要暴露了哪两类失败模式？",
+      "options_zh": [
+        "延迟和带宽",
+        "GUI grounding 和 operational knowledge",
+        "embedding drift 和 token 泄漏",
+        "幻觉和拒答"
+      ],
+      "explanation_zh": "Grounding（像素到元素）和 operational knowledge（菜单、快捷键）是头部障碍。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "A new OS"
       ],
       "correct": 1,
-      "explanation": "Gold trajectories make trajectory efficiency measurable, not just success rate."
+      "explanation": "Gold trajectories make trajectory efficiency measurable, not just success rate.",
+      "question_zh": "OSWorld-Human 在基础 benchmark 之上加了什么？",
+      "options_zh": [
+        "更多任务",
+        "人工整理的 gold 操作轨迹，揭示 agent 步骤效率比人类差 1.4-2.7 倍",
+        "更大屏幕分辨率",
+        "新的操作系统"
+      ],
+      "explanation_zh": "Gold 轨迹让轨迹效率可衡量，而不只是成功率。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Best agent at 0% across the board"
       ],
       "correct": 0,
-      "explanation": "The 14.41% vs 78.24% gap is the WebArena release-time number."
+      "explanation": "The 14.41% vs 78.24% gap is the WebArena release-time number.",
+      "question_zh": "本课为 WebArena 引用了哪个发布时数字？",
+      "options_zh": [
+        "最佳 GPT-4 agent 14.41% 成功率 vs 人类 78.24%",
+        "最佳 agent 99%、人类 100%",
+        "最佳 agent 50%、人类 50%",
+        "最佳 agent 全面 0%"
+      ],
+      "explanation_zh": "14.41% vs 78.24% 的差距就是 WebArena 发布时的数字。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Tests pass trivially"
       ],
       "correct": 1,
-      "explanation": "Evaluating an accessibility-API agent on screenshot-only benchmarks skips the grounding test."
+      "explanation": "Evaluating an accessibility-API agent on screenshot-only benchmarks skips the grounding test.",
+      "question_zh": "当 agent 使用 DOM 或辅助功能 API 时，本课警告纯截图评测会出什么问题？",
+      "options_zh": [
+        "什么也不会变",
+        "你会绕开 OSWorld 想要测的 grounding 这一关",
+        "会超出 rate limit",
+        "测试会轻松通过"
+      ],
+      "explanation_zh": "用辅助功能 API 的 agent 在纯截图 benchmark 上跑，等于跳过了 grounding 测试。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Length is the only metric that matters"
       ],
       "correct": 0,
-      "explanation": "Two agents at 60% success can differ 2-3x in steps; cost and efficiency only show up if you measure trajectory length."
+      "explanation": "Two agents at 60% success can differ 2-3x in steps; cost and efficiency only show up if you measure trajectory length.",
+      "question_zh": "为什么忽视轨迹长度是 benchmark 的一个失败？",
+      "options_zh": [
+        "它隐藏了仅靠成功率看不到的成本和低效（OSWorld-Human 揭示的 1.4-2.7 倍差距）",
+        "轨迹长度总是和 gold 一致",
+        "轨迹无法测量",
+        "长度是唯一重要的指标"
+      ],
+      "explanation_zh": "两个 60% 成功率的 agent 步数差距可能在 2-3 倍；只有测轨迹长度，成本和效率才显出来。"
     }
   ]
 }

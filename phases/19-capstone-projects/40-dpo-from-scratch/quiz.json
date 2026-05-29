@@ -12,7 +12,15 @@
         "Sigmoid is incompatible with maximum likelihood."
       ],
       "correct": 1,
-      "explanation": "The Bradley-Terry preference depends only on the reward difference. Anything common to both completions cancels. This is the structural reason DPO can avoid an explicit reward model: the prompt-only term in the optimal policy formula cancels."
+      "explanation": "The Bradley-Terry preference depends only on the reward difference. Anything common to both completions cancels. This is the structural reason DPO can avoid an explicit reward model: the prompt-only term in the optimal policy formula cancels.",
+      "question_zh": "在阅读课程之前: 在 Bradley-Terry 偏好模型下,人类在给定 prompt x 时偏好 y_w 而不是 y_l 的概率为 sigmoid(r(x, y_w) - r(x, y_l))。这意味着什么?",
+      "options_zh": [
+        "你必须先拟合 r,再训练策略。",
+        "只有 reward 之差有意义; 任何同时加到 r(x, y_w) 与 r(x, y_l) 上的函数都会抵消。",
+        "Bradley-Terry 需要一个不消失的归一化常数 Z(x)。",
+        "Sigmoid 与最大似然不兼容。"
+      ],
+      "explanation_zh": "Bradley-Terry 偏好只依赖 reward 之差。两者共有的部分都抵消。这正是 DPO 能在没有显式 reward model 的情况下工作的结构性原因: 最优策略公式中只与 prompt 有关的项消去了。"
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "-1."
       ],
       "correct": 1,
-      "explanation": "Both differences are zero, so the sigmoid argument is zero, the sigmoid value is 0.5, and -log(0.5) = log(2). This is the loss when the policy has not moved from the reference at all."
+      "explanation": "Both differences are zero, so the sigmoid argument is zero, the sigmoid value is 0.5, and -log(0.5) = log(2). This is the loss when the policy has not moved from the reference at all.",
+      "question_zh": "对单个三元组,DPO loss 是 -log sigmoid( beta * ( (logp_w_pol - logp_w_ref) - (logp_l_pol - logp_l_ref) ) )。如果 logp_w_pol = logp_w_ref 且 logp_l_pol = logp_l_ref,loss 等于?",
+      "options_zh": [
+        "0",
+        "log(2)",
+        "beta",
+        "-1"
+      ],
+      "explanation_zh": "两个差都是 0,所以 sigmoid 自变量为 0,sigmoid 值为 0.5,-log(0.5) = log(2)。这是策略相对参考完全没有移动时的 loss。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "False unless gradients are explicitly disabled with no_grad."
       ],
       "correct": 1,
-      "explanation": "The reference is frozen for the entire DPO run. Its parameters never update. The implementation either snapshots reference log-probs once or wraps the reference forward pass in no_grad with requires_grad=False set on its parameters."
+      "explanation": "The reference is frozen for the entire DPO run. Its parameters never update. The implementation either snapshots reference log-probs once or wraps the reference forward pass in no_grad with requires_grad=False set on its parameters.",
+      "question_zh": "DPO 训练过程中,被选 (chosen) 完成项在参考模型下的 log-prob 会因策略偏离参考而在 epoch 间变化。对还是错?",
+      "options_zh": [
+        "对: 参考会随策略更新而漂移。",
+        "错: 参考是冻结的; 参考 log-prob 只算一次后被复用。",
+        "只有当 beta 非零时才对。",
+        "除非用 no_grad 显式禁用梯度,否则错。"
+      ],
+      "explanation_zh": "整段 DPO 运行中参考都被冻结,其参数从不更新。实现上要么一次性快照参考 log-prob,要么把参考前向放在 no_grad 中并把它的参数 requires_grad 设为 False。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Indeterminate (depends on the reference)."
       ],
       "correct": 1,
-      "explanation": "The gradient is -beta * (1 - sigmoid(z)), which is non-positive. Increasing the chosen log-probability decreases the loss, which is exactly the training signal we want."
+      "explanation": "The gradient is -beta * (1 - sigmoid(z)), which is non-positive. Increasing the chosen log-probability decreases the loss, which is exactly the training signal we want.",
+      "question_zh": "对 logp_w_pol (策略在被选完成项上的 log-prob) 求 L_DPO 的梯度,符号是?",
+      "options_zh": [
+        "正 (loss 随被选 log-prob 增大而增大)",
+        "负 (loss 随被选 log-prob 增大而减小)",
+        "0 (loss 与策略 log-prob 无关)",
+        "不定 (取决于参考)"
+      ],
+      "explanation_zh": "梯度是 -beta * (1 - sigmoid(z)),非正。提升被选 log-prob 会降低 loss,这正是我们想要的训练信号。"
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "The optimiser is using the wrong learning rate."
       ],
       "correct": 1,
-      "explanation": "Sum-of-log-probabilities is biased toward shorter sequences because every additional token adds a negative log-probability term. The standard fix is to normalise log-probs by completion length when training and evaluating."
+      "explanation": "Sum-of-log-probabilities is biased toward shorter sequences because every additional token adds a negative log-probability term. The standard fix is to normalise log-probs by completion length when training and evaluating.",
+      "question_zh": "在你的 fixture 上 DPO loss 在下降,但策略开始普遍偏好更短的完成项,即便更短并不更好。最可能的原因是?",
+      "options_zh": [
+        "beta 太低。",
+        "长度偏置: 序列越长,累加的 log-prob 项 (每个为负) 越多,所以 sum-of-log-probs 在结构上惩罚长度。",
+        "参考没被正确冻结。",
+        "优化器学习率不对。"
+      ],
+      "explanation_zh": "log-prob 之和对短序列存在偏置,因为每多一个 token 就多一个负 log-prob 项。标准修复是按完成项长度归一化 log-prob。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "It requires no beta parameter."
       ],
       "correct": 0,
-      "explanation": "IPO's squared loss does not saturate the way the sigmoid does, which helps when preference labels are noisy or when some triples are mis-labelled. Empirically it reduces over-optimisation on small preference datasets."
+      "explanation": "IPO's squared loss does not saturate the way the sigmoid does, which helps when preference labels are noisy or when some triples are mis-labelled. Empirically it reduces over-optimisation on small preference datasets.",
+      "question_zh": "你想把 sigmoid + log loss 替换为 IPO 变体 (z - 1)^2。对训练动力学的实际影响是?",
+      "options_zh": [
+        "它不会像 sigmoid loss 那样饱和,在带噪偏好标签下表现更好。",
+        "在所有点上数学等价。",
+        "它彻底去掉对参考模型的需求。",
+        "它不再需要 beta 参数。"
+      ],
+      "explanation_zh": "IPO 的平方 loss 不像 sigmoid 那样饱和,在偏好标签噪声大或部分三元组被错标时更稳健。经验上能在小偏好数据集上减少过度优化。"
     }
   ]
 }

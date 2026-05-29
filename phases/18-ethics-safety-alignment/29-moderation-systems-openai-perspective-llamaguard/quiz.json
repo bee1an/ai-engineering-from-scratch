@@ -12,7 +12,15 @@
         "A GPT-4o-based moderation classifier that handles text and images in one call, returning a 13-category response schema (harassment, hate, self-harm, sexual, violence, illicit, with sub-categories), free for most developers"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "OpenAI 的 omni-moderation-latest (2024) 是什么?",
+      "options_zh": [
+        "一个 RLHF reward model",
+        "一个面向推理的前沿模型",
+        "一个 C2PA 水印接口",
+        "一个基于 GPT-4o 的审核分类器,可在一次调用中处理文本和图像,返回包含 13 个类别的响应 schema (harassment、hate、self-harm、sexual、violence、illicit 及子类),对大多数开发者免费"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "harassment"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "下列哪一个不是 OpenAI Moderation 的主要顶层类别?",
+      "options_zh": [
+        "violence",
+        "election-interference",
+        "self-harm",
+        "harassment"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Input moderation (pre-generation), Output moderation (post-generation), Custom moderation (domain rules)"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "标准的 2026 审核三层模式是什么?",
+      "options_zh": [
+        "Probe / detector / harness",
+        "Tokenizer / model / detokenizer",
+        "Telescopic / periscopic / microscopic",
+        "输入审核 (生成前)、输出审核 (生成后)、自定义审核 (业务规则)"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Reward over user satisfaction"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Perspective API (Google Jigsaw) 主要用来打分的是什么?",
+      "options_zh": [
+        "水印强度",
+        "毒性 (含 severe-toxicity、insult、profanity、threat、identity-attack 等子维度),作为 LLM 时代之前的内容审核基线",
+        "推理质量",
+        "对用户满意度的 reward"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "It removes the need for output classifiers"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "仅做输入侧审核的一个失败模式是什么?",
+      "options_zh": [
+        "无法在 GPU 上运行",
+        "它无法捕捉模型输出端的失败或幻觉; 编码类攻击 (Lesson 12-14) 可以完全绕过输入分类器",
+        "它总是会拦截合法内容",
+        "它使输出分类器变得不必要"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Deprecated immediately with no replacement"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Azure Content Moderator 的弃用计划及迁移目标是什么?",
+      "options_zh": [
+        "2024 年 2 月弃用,2027 年 3 月 15 日下线; 迁移目标是 Azure AI Content Safety (基于 LLM,与 Azure OpenAI 集成)",
+        "被 Perspective API 取代",
+        "并入 Llama Guard 4",
+        "立即弃用且无替代品"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

@@ -5,74 +5,122 @@
     {
       "stage": "pre",
       "question": "What core data structure backs SGLang's KV cache reuse?",
+      "question_zh": "支撑 SGLang KV cache 复用的核心数据结构是什么？",
       "options": [
         "A radix tree where each node owns a token range and its KV blocks",
         "A hash table keyed by full prompt",
         "A skip list keyed by request id",
         "A B-tree of attention scores"
       ],
+      "options_zh": [
+        "一棵 radix 树，每个节点持有一段 token 范围以及对应的 KV 块",
+        "以完整 prompt 为键的哈希表",
+        "以 request id 为键的跳表",
+        "由 attention 分数构成的 B 树"
+      ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "Why is FCFS scheduling wrong for prefix-heavy traffic on SGLang?",
+      "question_zh": "为什么 FCFS 调度不适合 SGLang 上前缀密集的流量？",
       "options": [
         "FCFS only works on AMD GPUs",
         "FCFS is the recommended SGLang policy",
         "FCFS is incompatible with PagedAttention",
         "FCFS can evict a hot prefix branch before the next long-prefix request hits, breaking radix-tree reuse"
       ],
+      "options_zh": [
+        "FCFS 只在 AMD GPU 上有效",
+        "FCFS 是 SGLang 推荐的策略",
+        "FCFS 与 PagedAttention 不兼容",
+        "FCFS 可能在下一条长前缀请求到来之前驱逐掉热前缀分支，破坏 radix 树的复用"
+      ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "What eviction granularity does SGLang's cache-aware scheduler use to match radix shape?",
+      "question_zh": "SGLang 的 cache-aware 调度器使用什么粒度的驱逐策略以匹配 radix 树的形态？",
       "options": [
         "Per-request only",
         "Whole branches, starting from shortest-used leaves",
         "Single tokens",
         "Random eviction"
       ],
+      "options_zh": [
+        "只按请求驱逐",
+        "整个分支驱逐，从使用时间最短的叶子开始",
+        "按单个 token",
+        "随机驱逐"
+      ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "What is the most direct engineer's lever for keeping the radix-tree shared prefix discoverable?",
+      "question_zh": "保持 radix 树共享前缀可被发现，工程师最直接能动的旋钮是什么？",
       "options": [
         "Lower the GPU memory utilization knob",
         "Fix prompt-template ordering so immutable content (system, tools, schemas) is always first",
         "Always use static batching",
         "Disable continuous batching"
       ],
+      "options_zh": [
+        "调低 GPU 显存利用率参数",
+        "固定 prompt 模板的顺序，让不变的内容（system、tools、schemas）始终排在最前面",
+        "始终使用静态 batching",
+        "关闭 continuous batching"
+      ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "post",
       "question": "Which workload pattern does the lesson NOT expect RadixAttention to win on?",
+      "question_zh": "本课预期 RadixAttention 在哪种工作负载上没有优势？",
       "options": [
         "Agents with shared tool schemas",
         "Voice workloads with repeated preambles",
         "RAG with a shared retrieval preamble",
         "Single-shot generation with unique prompts and no shared system prompt"
       ],
+      "options_zh": [
+        "共享工具 schema 的 agent",
+        "带有重复前置语的语音工作负载",
+        "带共享检索前置语的 RAG",
+        "prompt 各不相同、且没有共享 system prompt 的一次性生成"
+      ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "post",
       "question": "ProjectDiscovery's deployment moved from 7% to 74% prefix-cache hit rate by doing what?",
+      "question_zh": "ProjectDiscovery 是通过什么手段把前缀缓存命中率从 7% 提到 74% 的？",
       "options": [
         "Moving dynamic content out of the cacheable prefix",
         "Increasing GPU count from 8 to 16",
         "Switching from vLLM to SGLang without any prompt changes",
         "Disabling continuous batching"
       ],
+      "options_zh": [
+        "把动态内容移出可缓存的前缀",
+        "把 GPU 从 8 张增加到 16 张",
+        "在不改 prompt 的情况下，从 vLLM 切到 SGLang",
+        "关闭 continuous batching"
+      ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     }
   ]
 }

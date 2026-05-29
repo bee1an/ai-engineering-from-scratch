@@ -12,7 +12,15 @@
         "Training with zero examples"
       ],
       "correct": 0,
-      "explanation": "Zero-shot transfer: train on the source language, run on the target without target-language supervision."
+      "explanation": "Zero-shot transfer: train on the source language, run on the target without target-language supervision.",
+      "question_zh": "zero-shot 跨语言迁移是什么？",
+      "options_zh": [
+        "在源语言上微调多语言模型，并在没有目标语言标签的情况下评估另一种语言",
+        "不用翻译模型也能翻译",
+        "用零次合并 tokenize",
+        "用零样本训练"
+      ],
+      "explanation_zh": "zero-shot 迁移：在源语言上训练，在目标语言上跑而无需目标语言监督。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "DistilBERT"
       ],
       "correct": 2,
-      "explanation": "XLM-R is the canonical 100-language pretrained baseline for cross-lingual classification."
+      "explanation": "XLM-R is the canonical 100-language pretrained baseline for cross-lingual classification.",
+      "question_zh": "哪个模型家族是标准的 100 语种跨语言基线？",
+      "options_zh": [
+        "GloVe",
+        "GPT-2",
+        "XLM-R（如 XLM-RoBERTa-base，270M）",
+        "DistilBERT"
+      ],
+      "explanation_zh": "XLM-R 是跨语言分类的规范 100 语种预训练基线。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "English is too short"
       ],
       "correct": 1,
-      "explanation": "Typologically related sources (e.g. Hindi for Indic targets) often outperform English as a fine-tune source."
+      "explanation": "Typologically related sources (e.g. Hindi for Indic targets) often outperform English as a fine-tune source.",
+      "question_zh": "为什么把英文当源语言不一定对非英文目标的迁移最好？",
+      "options_zh": [
+        "英文数据太少",
+        "语言相似度（类型学、文字、形态）预测迁移质量；更接近的高资源源语言可能优于英文",
+        "英文使用 BPE",
+        "英文太短"
+      ],
+      "explanation_zh": "类型相近的源（如对印度语系目标用印地语）作为微调源常优于英文。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Tokenizers cannot handle Unicode"
       ],
       "correct": 1,
-      "explanation": "Long-tail languages tokenize at much higher fertility, eating context and training efficiency."
+      "explanation": "Long-tail languages tokenize at much higher fertility, eating context and training efficiency.",
+      "question_zh": "低资源语言的 'fertility tax' 是什么？",
+      "options_zh": [
+        "BPE 拒绝训练",
+        "低资源文本的每个词被切成更多 subword，吃掉上下文窗口、延迟和容量",
+        "更小的模型训练更慢",
+        "tokenizer 处理不了 Unicode"
+      ],
+      "explanation_zh": "长尾语言以更高的 fertility tokenize，吃掉上下文和训练效率。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Aggregates run faster"
       ],
       "correct": 1,
-      "explanation": "Aggregate accuracy masks poor performance on low-resource languages; per-language scores expose it."
+      "explanation": "Aggregate accuracy masks poor performance on low-resource languages; per-language scores expose it.",
+      "question_zh": "为什么需要逐语言评估，而不是聚合准确率？",
+      "options_zh": [
+        "聚合忽略 tokenization",
+        "聚合数字会掩盖长尾语言；多语言模型可能远低于其平均所暗示的水平",
+        "聚合只对分类有效",
+        "聚合更快"
+      ],
+      "explanation_zh": "聚合准确率掩盖低资源语言的差表现；逐语言分数能暴露它。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "High LR can collapse the multilingual alignment and effectively reduce the model to English-only"
       ],
       "correct": 3,
-      "explanation": "Excessive LR drifts the shared representation; conservative LR (~2e-5) preserves cross-lingual structure."
+      "explanation": "Excessive LR drifts the shared representation; conservative LR (~2e-5) preserves cross-lingual structure.",
+      "question_zh": "用少量数据适配多语言模型时，为什么微调学习率至关重要？",
+      "options_zh": [
+        "更低的 LR 浪费 GPU",
+        "tokenizer 要求",
+        "它改变词表",
+        "高 LR 会让多语言对齐崩溃，把模型实际上退化为只会英文"
+      ],
+      "explanation_zh": "过大的 LR 会让共享表示漂移；保守 LR（约 2e-5）保留跨语言结构。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "More training epochs"
       ],
       "correct": 2,
-      "explanation": "Byte fallback and broader-vocab tokenizers reduce fertility and OOV for low-resource scripts."
+      "explanation": "Byte fallback and broader-vocab tokenizers reduce fertility and OOV for low-resource scripts.",
+      "question_zh": "哪种缓解直接解决长尾文字的 tokenizer fertility？",
+      "options_zh": [
+        "跳过停用词",
+        "降低 batch size",
+        "使用 byte-fallback（SentencePiece byte_fallback=True）或具有更广文字覆盖的 tokenizer（例如 XLM-V）",
+        "更多训练 epoch"
+      ],
+      "explanation_zh": "byte fallback 和更广词表的 tokenizer 降低低资源文字的 fertility 和 OOV。"
     },
     {
       "stage": "post",
@@ -96,7 +152,15 @@
         "Whenever the tokenizer is BPE"
       ],
       "correct": 1,
-      "explanation": "Sometimes monolingual training beats multilingual for high-resource targets; empirical comparison decides."
+      "explanation": "Sometimes monolingual training beats multilingual for high-resource targets; empirical comparison decides.",
+      "question_zh": "什么时候值得尝试从零训练单语模型而不是用多语言模型？",
+      "options_zh": [
+        "对英文总是值得",
+        "当目标语言数据足够多，可以训练一个超过多语言基线的单语模型时；先测再下结论",
+        "只对翻译值得",
+        "tokenizer 是 BPE 时"
+      ],
+      "explanation_zh": "对高资源目标，单语训练有时优于多语言；用经验比较来决定。"
     }
   ]
 }

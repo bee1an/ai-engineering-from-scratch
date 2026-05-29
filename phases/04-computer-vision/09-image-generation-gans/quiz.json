@@ -3,37 +3,52 @@
     {
       "stage": "pre",
       "question": "Why does GAN training use the non-saturating generator loss -log(D(G(z))) instead of log(1 - D(G(z)))?",
+      "question_zh": "为什么 GAN 训练用「非饱和」生成器 loss -log(D(G(z)))，而不是 log(1 - D(G(z)))？",
       "options": ["They are mathematically different and produce better equilibria", "Early in training D(G(z)) is near zero, so log(1 - D(G(z))) has vanishing gradient; -log(D(G(z))) has large gradient there so G receives a useful signal", "It speeds up the discriminator", "It is required by PyTorch"],
+      "options_zh": ["它们数学上不同，能产生更好的平衡点", "训练早期 D(G(z)) 接近 0，log(1 - D(G(z))) 在那里梯度消失；-log(D(G(z))) 在同一区域梯度很大，G 才能收到有效信号", "能加速判别器", "PyTorch 要求这样写"],
       "correct": 1,
-      "explanation": "The two losses share the same gradient direction but very different magnitudes when D(G(z)) is small. log(1 - D(G(z))) plateaus at zero gradient there. The non-saturating form stays informative across the whole range. Goodfellow noted this tweak in the original paper and every modern GAN uses it."
+      "explanation": "The two losses share the same gradient direction but very different magnitudes when D(G(z)) is small. log(1 - D(G(z))) plateaus at zero gradient there. The non-saturating form stays informative across the whole range. Goodfellow noted this tweak in the original paper and every modern GAN uses it.",
+      "explanation_zh": "当 D(G(z)) 很小时，两个 loss 梯度方向一致但量级差距巨大。log(1 - D(G(z))) 在那里梯度趋近于 0；非饱和形式则在整个区间都能给出有用信号。Goodfellow 在原论文里就指出了这个改写，现在所有 GAN 都用它。"
     },
     {
       "stage": "pre",
       "question": "DCGAN's rules say to use strided convolutions instead of pooling. Why?",
+      "question_zh": "DCGAN 的设计准则要求用 strided convolution 取代 pooling，为什么？",
       "options": ["Pooling is slower on GPUs", "Pooling is non-learnable and throws away information the generator might need; strided convs let the network learn its own downsampling, which empirically produces sharper generated images", "Pooling breaks gradient flow", "Pooling is incompatible with batch norm"],
+      "options_zh": ["pooling 在 GPU 上更慢", "pooling 不可学习，会丢弃生成器可能需要的信息；strided conv 让网络自己学下采样，实验上能生成更锐利的图像", "pooling 会破坏梯度流", "pooling 和 batch norm 不兼容"],
       "correct": 1,
-      "explanation": "Max-pool is a hand-picked downsampling that discards everything but the max. In a generative setting the model benefits from a learned downsampling that can preserve information across the stride. Strided convolutions in D and strided transposed convolutions in G were the architectural change that made DCGANs trainable."
+      "explanation": "Max-pool is a hand-picked downsampling that discards everything but the max. In a generative setting the model benefits from a learned downsampling that can preserve information across the stride. Strided convolutions in D and strided transposed convolutions in G were the architectural change that made DCGANs trainable.",
+      "explanation_zh": "max-pool 是一种人工挑选的下采样，把最大值之外的全扔掉。生成场景里，模型更需要一个可学习的下采样来保留跨步信息。D 用 strided conv、G 用 strided transposed conv，正是让 DCGAN 能训得起来的关键架构改动。"
     },
     {
       "stage": "post",
       "question": "You train a GAN and notice G produces almost identical samples regardless of the input noise. Which failure is this?",
+      "question_zh": "训练 GAN 时发现，不论输入什么噪声，G 输出的样本几乎一模一样，这是哪种失败？",
       "options": ["Vanishing gradients", "Mode collapse — G has found a narrow region of the data distribution that consistently fools D and has no incentive to explore; fixes include spectral norm, minibatch discrimination, or a larger batch", "Oscillation", "The dataset is too small"],
+      "options_zh": ["梯度消失", "模式塌缩（mode collapse）——G 找到了数据分布里能稳定骗过 D 的一小块区域，就没动力再去探索其他模式；修法包括 spectral norm、minibatch discrimination 或加大 batch", "震荡", "数据集太小"],
       "correct": 1,
-      "explanation": "Mode collapse is the characteristic GAN failure where samples lack diversity. The diagnostic is obvious: noise in, same image out. Fixes all target the discriminator's ability to punish lack of diversity, either by making D more expressive (spectral norm, minibatch discrimination) or by giving G less room to collapse (larger batch, conditional labels)."
+      "explanation": "Mode collapse is the characteristic GAN failure where samples lack diversity. The diagnostic is obvious: noise in, same image out. Fixes all target the discriminator's ability to punish lack of diversity, either by making D more expressive (spectral norm, minibatch discrimination) or by giving G less room to collapse (larger batch, conditional labels).",
+      "explanation_zh": "模式塌缩是 GAN 的典型失败：样本缺乏多样性。诊断很直接——输入是噪声，输出却是同一张图。修法都围绕「让 D 能惩罚单一性」展开：要么提升 D 的表达力（spectral norm、minibatch discrimination），要么压缩 G 的塌缩空间（更大 batch、条件标签）。"
     },
     {
       "stage": "post",
       "question": "Why do DCGAN training scripts use Adam with betas=(0.5, 0.999) instead of the default (0.9, 0.999)?",
+      "question_zh": "为什么 DCGAN 训练脚本里 Adam 用 betas=(0.5, 0.999)，而不是默认的 (0.9, 0.999)？",
       "options": ["The default is broken", "A lower beta1 reduces momentum; in an adversarial game, heavy momentum keeps each optimizer in the wrong direction too long when the other network's behaviour changes, which causes instability", "Adam is only supported with beta1=0.5 on CUDA", "It is a typo propagated through tutorials"],
+      "options_zh": ["默认值有问题", "beta1 调低会减小动量；在对抗博弈里，对手网络的行为时刻在变，过大的动量会让优化器在错误方向上拖太久，导致训练不稳", "CUDA 上 Adam 只支持 beta1=0.5", "是教程里以讹传讹的笔误"],
       "correct": 1,
-      "explanation": "Adam's default beta1=0.9 averages gradients over roughly 10 steps. In a stationary objective that is helpful. In an adversarial game where the loss landscape shifts every D and G update, that averaging delays the optimizer's response and causes oscillation. Radford et al. found beta1=0.5 much more stable, and it is now the GAN default."
+      "explanation": "Adam's default beta1=0.9 averages gradients over roughly 10 steps. In a stationary objective that is helpful. In an adversarial game where the loss landscape shifts every D and G update, that averaging delays the optimizer's response and causes oscillation. Radford et al. found beta1=0.5 much more stable, and it is now the GAN default.",
+      "explanation_zh": "Adam 默认 beta1=0.9 相当于在大约 10 步上对梯度做平均。在稳定目标上这没问题；但在对抗博弈中，每一步 D 或 G 的更新都会改变损失曲面，这种平均会拖慢优化器响应速度，引起震荡。Radford 等人发现 beta1=0.5 稳定得多，从此成了 GAN 默认值。"
     },
     {
       "stage": "post",
       "question": "A colleague reports a GAN with D loss near zero and G loss increasing over training. What is happening and how do you fix it?",
+      "question_zh": "同事报告说他的 GAN 中 D loss 接近 0，G loss 却越训越高，发生了什么？怎么修？",
       "options": ["Both nets are improving correctly", "The discriminator has become too strong and drives G's gradient to zero; fixes include a smaller D, spectral norm, label smoothing on real labels (0.9 instead of 1.0), or switching to WGAN-GP", "The generator is correctly overfitting", "Nothing — this is the equilibrium"],
+      "options_zh": ["两个网络都在正确进步", "判别器太强了，把 G 的梯度压到 0；修法包括缩小 D、加 spectral norm、对真实标签做 label smoothing（用 0.9 代替 1.0），或者换成 WGAN-GP", "生成器在正确地过拟合", "什么也不用做——这就是均衡"],
       "correct": 1,
-      "explanation": "D's loss near zero means D is perfect on both real and fake. At that point the BCE gradient to G vanishes: G sees a near-zero signal no matter what it outputs. The fix is to weaken D or use a loss that does not saturate. Spectral norm (limits D's Lipschitz constant) and WGAN-GP (uses Earth-Mover distance instead of BCE) are the two standard rescues."
+      "explanation": "D's loss near zero means D is perfect on both real and fake. At that point the BCE gradient to G vanishes: G sees a near-zero signal no matter what it outputs. The fix is to weaken D or use a loss that does not saturate. Spectral norm (limits D's Lipschitz constant) and WGAN-GP (uses Earth-Mover distance instead of BCE) are the two standard rescues.",
+      "explanation_zh": "D loss 接近 0 表示 D 在真假样本上都完美。这时 BCE 传给 G 的梯度也接近 0，G 不管输出什么都收不到信号。修法是削弱 D，或换一个不会饱和的 loss。spectral norm（限制 D 的 Lipschitz 常数）和 WGAN-GP（用 Earth-Mover 距离代替 BCE）是两种标准救援方案。"
     }
   ]
 }

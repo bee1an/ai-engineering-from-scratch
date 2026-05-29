@@ -12,7 +12,15 @@
         "It is stateless by default, so a single endpoint behind a load balancer can scale horizontally"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么 2026 修订版的 MCP 倾向于在生产服务器使用 StreamableHTTP?",
+      "options_zh": [
+        "它去除了对认证的需求",
+        "它是唯一支持工具调用的传输",
+        "它会自动加密 payload",
+        "它默认无状态,因此一个负载均衡器后的单一端点可以水平扩展"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "Mutual TLS without scopes"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本 capstone 用哪种授权模型来门控工具调用?",
+      "options_zh": [
+        "携带每工具 scope 的 OAuth 2.1 token,在工具调用时检查",
+        "共享的 admin 密码",
+        "按 IP 分配的 API key",
+        "无 scope 的 mutual TLS"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Exposes the tool manifest, transport URL, and auth requirements so the registry can validate and index the server"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": ".well-known/mcp-capabilities 文档的作用是?",
+      "options_zh": [
+        "存储服务器的审计日志",
+        "列出出站 IP 段",
+        "持有 OPA 策略包",
+        "暴露工具清单、传输 URL 和认证要求,让 registry 能够校验并索引该服务器"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "They require a different programming language"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本设计中,为什么破坏性工具放在独立的 MCP server 上?",
+      "options_zh": [
+        "它们不能通过 StreamableHTTP 暴露",
+        "它们运行在更慢的硬件上",
+        "它们由通过 Slack card 在短窗口内提升的审批 token 门控",
+        "它们需要不同的编程语言"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Whether the caller's scopes permit invocation, plus PII redaction and payload caps"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "OPA / Rego 在每次工具调用时决定什么?",
+      "options_zh": [
+        "调用哪个模型",
+        "审计日志写到哪里",
+        "服务器应如何对响应重新排序",
+        "调用方的 scope 是否允许调用,以及 PII 脱敏和 payload 上限"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Adding a second replica and showing the load balancer redistributing without session stickiness"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "在压测中,什么证据能体现 StreamableHTTP 的水平扩展?",
+      "options_zh": [
+        "把并发降到一个客户端",
+        "切换到 stdio 传输",
+        "所有东西跑在同一个进程",
+        "增加第二个 replica,负载均衡器在没有会话粘性的情况下重新分发流量"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "PII improves search performance"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么审计日志在按租户持久化前要用 Presidio 清洗 PII?",
+      "options_zh": [
+        "让日志更短",
+        "在保留每次调用可查的链路同时,满足企业安全要求",
+        "Presidio 能减少 ClickHouse 的写放大",
+        "PII 能改善搜索性能"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

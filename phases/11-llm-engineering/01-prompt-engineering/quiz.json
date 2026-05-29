@@ -1,37 +1,52 @@
 [
   {
     "question": "What is the most common mistake people make when writing prompts for LLMs?",
+    "question_zh": "写 LLM prompt 时最常见的错误是什么？",
     "options": ["Using too many tokens", "Writing vague, underspecified instructions that leave the model guessing about format, scope, and constraints", "Using the wrong API", "Not using enough examples"],
+    "options_zh": ["使用了太多 token", "写出含糊、规定不足的指令，让模型只能猜测格式、范围和约束", "用错了 API", "示例数量不够"],
     "correct": 1,
     "explanation": "LLMs follow instructions literally. 'Write me a marketing email' gives the model no constraints. Specifying tone, audience, length, format, and constraints produces dramatically better results.",
+    "explanation_zh": "LLM 会照字面理解指令。一句'帮我写一封营销邮件'没有任何约束。明确说明语气、受众、长度、格式和限制，效果会好得多。",
     "stage": "pre"
   },
   {
     "question": "What are the four core components of an effective prompt?",
+    "question_zh": "一个有效 prompt 的四个核心组成部分是什么？",
     "options": ["Input, output, model, temperature", "Role, context, constraints, and output format", "System, user, assistant, function", "Query, document, answer, score"],
+    "options_zh": ["输入、输出、模型、temperature", "角色、上下文、约束和输出格式", "system、user、assistant、function", "查询、文档、答案、分数"],
     "correct": 1,
     "explanation": "Effective prompts specify: who the model should be (role), what it should know (context), what it should and shouldn't do (constraints), and how to structure the response (output format).",
+    "explanation_zh": "有效的 prompt 会明确：模型应当扮演谁（角色）、应当了解什么（上下文）、能做和不能做什么（约束），以及如何组织回复（输出格式）。",
     "stage": "pre"
   },
   {
     "question": "Why should you include output format instructions in your prompts?",
+    "question_zh": "为什么 prompt 中要包含输出格式说明？",
     "options": ["It makes the prompt shorter", "Without format instructions, the model chooses its own structure, which varies between calls and is hard to parse programmatically", "It reduces API costs", "It prevents hallucination"],
+    "options_zh": ["让 prompt 更短", "没有格式说明时模型会自行选择结构，多次调用之间差异大，难以程序化解析", "降低 API 成本", "防止幻觉"],
     "correct": 1,
     "explanation": "LLMs are non-deterministic. Without explicit format instructions, one call might return bullet points, the next prose, the next markdown. Specifying format ensures consistent, parseable outputs.",
+    "explanation_zh": "LLM 不具确定性。没有明确格式说明时，一次返回项目符号，下一次返回散文，再下一次又是 markdown。明确格式能保证输出稳定且可解析。",
     "stage": "post"
   },
   {
     "question": "What is the purpose of a system prompt?",
+    "question_zh": "system prompt 的作用是什么？",
     "options": ["To authenticate the API call", "To set persistent behavioral rules, role, and constraints that apply to the entire conversation", "To define the model's architecture", "To compress the conversation history"],
+    "options_zh": ["用于 API 调用的鉴权", "为整个会话设定持久的行为规则、角色和约束", "定义模型的架构", "压缩对话历史"],
     "correct": 1,
     "explanation": "The system prompt establishes the model's persona, rules, and constraints for the entire session. It runs before every user turn and is the primary mechanism for controlling model behavior in production.",
+    "explanation_zh": "system prompt 为整个会话确立模型的角色、规则与约束。它在每轮用户输入前生效，是生产环境中控制模型行为的主要手段。",
     "stage": "post"
   },
   {
     "question": "How should you test whether a prompt change actually improved output quality?",
+    "question_zh": "如何检验一次 prompt 修改是否真的提升了输出质量？",
     "options": ["Read a few outputs and make a judgment call", "Run the prompt on a diverse test set and measure changes in defined metrics (accuracy, format compliance, relevance)", "Ask the model if it's doing better", "Check the API response time"],
+    "options_zh": ["看几个输出后凭感觉判断", "在多样化的测试集上运行 prompt，并衡量预定义指标（准确率、格式合规率、相关性）的变化", "直接问模型自己有没有变好", "查看 API 响应时间"],
     "correct": 1,
     "explanation": "Evaluating prompt changes on a handful of examples is unreliable. A systematic evaluation harness with diverse test cases and defined metrics shows whether changes help across the distribution, not just cherry-picked examples.",
+    "explanation_zh": "靠几条样本判断 prompt 改动是不可靠的。一套带有多样测试用例和预定义指标的系统评估框架，才能看出修改在整体分布上是否有效，而不是只在挑出来的例子上有效。",
     "stage": "post"
   }
 ]

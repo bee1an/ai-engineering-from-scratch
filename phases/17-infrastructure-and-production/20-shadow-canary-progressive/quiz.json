@@ -12,7 +12,15 @@
         "A/B first, then shadow, then canary"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "LLM rollout 中 shadow、canary 和 A/B 测试的正确顺序是什么？",
+      "options_zh": [
+        "先 shadow（零影响对比），再 canary（线上流量、按门递增），稳定后再用 A/B 比较不同备选方案",
+        "完全跳过 shadow",
+        "先 canary、再 shadow、再 A/B",
+        "先 A/B、再 shadow、再 canary"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "Just throughput"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本课用哪 5 个指标来卡 canary 的递增？",
+      "options_zh": [
+        "GPU 温度、风扇转速、队列深度、成本、延迟",
+        "仅离线 eval 的准确率",
+        "延迟分位数、每请求成本、错误/拒答率、输出长度分布、用户反馈率",
+        "只看吞吐"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Up to about 15%, due to GPU FP non-associativity plus batch-size variance"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本课引用相同输入下 LLM 的 run-to-run 准确率方差大约是多少？",
+      "options_zh": [
+        "低于 0.1%",
+        "Run-to-run 输出完全一致",
+        "总是 50%",
+        "可达约 15%，源于 GPU 浮点非结合性加 batch size 抖动"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "A smoke test catching cost blow-ups, length regressions, refusal changes, and hard errors — not a quality guarantee"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "在本课的语境下 shadow mode 是用来干嘛的？",
+      "options_zh": [
+        "代替 rollback",
+        "替代 eval 的完整质量测试",
+        "最终的生产上线步骤",
+        "一种烟雾测试，捕捉成本爆炸、长度回归、拒答变化和硬错误 —— 不是质量保证"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "Manual SSH to each pod"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "本课认为正确的 rollback 设计是什么？",
+      "options_zh": [
+        "等下一个发布窗口",
+        "用新的模型 digest 重新部署，要花几个小时",
+        "翻一个策略开关、把固定的模型 digest 回退，秒级完成 —— 不需要重新部署",
+        "手动 SSH 到每个 pod"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Cost is the same across providers"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么把成本和延迟、质量并列作为 gate？",
+      "options_zh": [
+        "质量提升 20% 的模型每次调用可能贵 3 倍；不加成本 gate 就上线会打破单位经济模型",
+        "每家供应商都会自动封顶成本",
+        "成本是虚荣指标",
+        "各家供应商成本一致"
+      ],
+      "explanation_zh": ""
     }
   ]
 }
