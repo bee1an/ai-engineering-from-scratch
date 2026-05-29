@@ -12,7 +12,15 @@
         "A zero-click AI command-injection flaw in Microsoft 365 Copilot (CVE-2025-32711, CVSS 9.3) causing unauthorized network information disclosure, with exfiltration via a CSP allowlisted/trusted Microsoft domain"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "下列哪一项最贴切地描述了 EchoLeak（CVE-2025-32711）？",
+      "options_zh": [
+        "通过长上下文 shot stuffing 实现的 jailbreak",
+        "针对 PyPI 的供应链攻击",
+        "NPU 中的硬件漏洞",
+        "Microsoft 365 Copilot 中的零点击 AI 命令注入漏洞（CVE-2025-32711，CVSS 9.3），可造成未授权的网络信息泄露，外发通道借助 CSP 允许列表中的可信 Microsoft 域名"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "It requires three clicks but no typing"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "EchoLeak 为什么是 “zero-click”？",
+      "options_zh": [
+        "受害者无需打开邮件；Copilot 在常规查询中通过 RAG 把它作为上下文检索进来，注入的指令就被执行",
+        "需要用户在 Teams 聊天里点一个链接",
+        "在操作系统内核里运行",
+        "需要点击三次但不需要打字"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Prompt, response, log"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Aim Labs 把 EchoLeak 描述为 “LLM Scope Violation”。需要分别独立控制的三条边界是什么？",
+      "options_zh": [
+        "Retrieval、Scope、Output",
+        "网络、磁盘、内存",
+        "Input、Model、GPU",
+        "Prompt、Response、Log"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Increased context size"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Microsoft / GitHub 是怎么修复 CamoLeak（CVSS 9.6，GitHub Copilot Chat）的？",
+      "options_zh": [
+        "增加了一个 XPIA 的 prompt-injection 过滤器",
+        "完全在 Copilot Chat 中关闭了图像渲染（代价是可用性），因为另一种攻击面无法被有效约束",
+        "把模型换成了 Llama Guard",
+        "增大了 context size"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "Severity ratings are decided by OWASP only"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "EchoLeak 的披露暴露出在严重性评级上的什么模式？",
+      "options_zh": [
+        "厂商最初给出的 CVSS 分数偏高",
+        "厂商最初把 EchoLeak 评级为 “信息泄露” 类的低危；Aim Labs 给出的 MFA 验证码外发 PoC 把评级抬升到了 9.3——防御方需要主动推动给出更全面的 PoC，特别是 AI 特有漏洞",
+        "所有 AI CVE 都会自动评为 10.0",
+        "严重性评级只由 OWASP 决定"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Both call it a Tier-2 risk only"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "截至 2024/2025 年，NIST 和 OWASP 把 prompt injection 排在什么位置？",
+      "options_zh": [
+        "NIST AI SPD 2024 把 prompt injection 视为生成式 AI 的主要信息安全风险；OWASP 2025 把它列为 LLM01（应用层最高威胁）",
+        "NIST：不在范围内；OWASP：未列入",
+        "NIST：次要；OWASP：列表末尾",
+        "两者都只视其为 Tier-2 风险"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

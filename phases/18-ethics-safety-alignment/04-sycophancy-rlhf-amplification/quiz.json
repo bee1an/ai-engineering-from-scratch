@@ -5,74 +5,122 @@
     {
       "stage": "pre",
       "question": "Which best describes sycophancy in a language model?",
+      "question_zh": "下列哪一项最贴切地描述了语言模型中的 sycophancy？",
       "options": [
         "Agreeing with a stated user premise regardless of its truth",
         "Switching languages mid-conversation",
         "Refusing to answer any user-belief question",
         "Citing sources for every claim"
       ],
+      "options_zh": [
+        "不顾真实性，迎合用户陈述的前提",
+        "在对话中途切换语言",
+        "拒绝回答任何涉及用户观点的问题",
+        "对每一条断言都引用来源"
+      ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "Shapira et al. (2026) formalize sycophancy amplification as a two-stage mechanism. What is stage 1?",
+      "question_zh": "Shapira 等人 (2026) 把 sycophancy 放大形式化为一个两阶段机制，其中第一阶段是什么？",
       "options": [
         "Labelers explicitly select sycophantic outputs in 100% of pairs",
         "Sycophantic completions are over-represented among high-reward outputs of the base policy",
         "Sycophancy is encoded in the tokenizer",
         "The optimizer adds a sycophancy term to the loss directly"
       ],
+      "options_zh": [
+        "标注者在 100% 的对比中显式选择迎合性的输出",
+        "在基础策略的高 reward 输出中，迎合性的回答占比过高",
+        "sycophancy 被编码进了 tokenizer",
+        "优化器直接在 loss 中加入 sycophancy 项"
+      ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "Why is sycophancy considered inverse-scaling in the lesson?",
+      "question_zh": "为什么本节课把 sycophancy 视为一种 inverse-scaling 现象？",
       "options": [
         "It is observed only in models below 1B parameters",
         "It tracks training loss inversely",
         "It decreases as model size grows",
         "It rises with model size and longer RLHF training, unlike most capabilities"
       ],
+      "options_zh": [
+        "它只在参数量小于 1B 的模型上出现",
+        "它与训练 loss 反向变化",
+        "它随模型规模增大而减少",
+        "与大多数能力不同，它会随模型规模和 RLHF 训练时间一起上升"
+      ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "Cheng, Tramel et al. (Science, March 2026) decouple sycophancy from honesty by:",
+      "question_zh": "Cheng、Tramel 等人 (Science, 2026 年 3 月) 是通过什么方式把 sycophancy 与诚实性解耦的？",
       "options": [
         "Measuring matched user-belief vs third-party-belief framings of the same factual claim",
         "Using only multiple-choice questions",
         "Asking models to introspect on their own reasoning",
         "Testing only on math problems"
       ],
+      "options_zh": [
+        "对同一事实陈述，分别用 \"用户相信\" 和 \"第三方相信\" 两种配对表述进行测量",
+        "只使用选择题",
+        "让模型对自身推理过程进行内省",
+        "只在数学题上做测试"
+      ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "post",
       "question": "What is the agreement-penalty correction Shapira et al. propose?",
+      "question_zh": "Shapira 等人提出的 agreement-penalty 修正方案是什么？",
       "options": [
         "Penalize the policy when its KL is below a threshold",
         "Re-rank outputs by length only",
         "Drop pairs where the user is wrong",
         "Subtract a classifier-measured agreement score from the proxy reward: r'(x, y) = r(x, y) - alpha * agree(x, y)"
       ],
+      "options_zh": [
+        "当策略的 KL 低于某个阈值时对其进行惩罚",
+        "只按长度重新排序输出",
+        "丢弃用户观点错误的那些对比",
+        "在 proxy reward 上减去由分类器度量的 agreement 分数：r'(x, y) = r(x, y) - alpha * agree(x, y)"
+      ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "post",
       "question": "What trade-off does the agreement penalty produce as alpha increases?",
+      "question_zh": "随着 alpha 增大，agreement penalty 会带来什么样的权衡？",
       "options": [
         "It always strictly improves both sycophancy and helpfulness",
         "Sycophancy rises because the classifier is noisy",
         "Sycophancy drops, but legitimate agreement (the model is slightly more contrarian on correct user beliefs) also drops",
         "Only helpfulness changes, sycophancy is unaffected"
       ],
+      "options_zh": [
+        "总能同时严格改善 sycophancy 和有用性",
+        "由于分类器有噪声，sycophancy 反而上升",
+        "sycophancy 下降，但合理的赞同也跟着下降（在用户观点正确时模型也会变得稍偏反对）",
+        "只有有用性发生变化，sycophancy 不受影响"
+      ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     }
   ]
 }

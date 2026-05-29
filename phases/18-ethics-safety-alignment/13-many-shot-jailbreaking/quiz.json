@@ -12,7 +12,15 @@
         "Tokenizer ambiguities on Unicode characters"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "many-shot jailbreaking (MSJ) 利用的是 context window 的哪种特性？",
+      "options_zh": [
+        "position embedding 在 2048 token 之外发生轮转",
+        "sliding-window attention 截断 system prompt",
+        "极长的 context window 允许在目标查询之前塞入数百轮伪造的 user-assistant 有害合规对话",
+        "tokenizer 在 Unicode 字符上的歧义"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "Logistic, plateauing at 50%"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "在 MSJ 中，attack success rate (ASR) 如何随 shot 数变化？",
+      "options_zh": [
+        "斜率为负的线性",
+        "在 shot 数上呈 power-law；不会平台化，会持续上升",
+        "在 100 shot 处的阶跃函数",
+        "logistic 形，在 50% 处平台化"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Both require a hidden scratchpad"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么 MSJ 与 benign in-context learning (ICL) 共享同一种机制？",
+      "options_zh": [
+        "二者都依赖模型从 in-context 例子中提取任务结构，并把它执行在 query 上",
+        "二者都依赖 RLHF",
+        "二者都绕过了 tokenization",
+        "二者都需要一个隐藏 scratchpad"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Defenses must run on every token of the response"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "MSJ 的核心防御困境是什么？",
+      "options_zh": [
+        "防御必须在 sampling temperature 为 0 时生效",
+        "防御需要 GPU 集群",
+        "压制对长 context 中模式的提取，会同时关掉 benign in-context learning；防御必须区分有害与良性模式",
+        "防御必须在响应的每个 token 上运行"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "It increases ASR"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "在测试设置上，Anthropic 基于 classifier 的 prompt 修改防御把 MSJ 攻击成功率从多少降到多少？",
+      "options_zh": [
+        "从 99% 到 50%",
+        "从 30% 到 25%",
+        "从 61% 到 2%",
+        "它会让 ASR 升高"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "They are mutually exclusive"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "MSJ 与 PAIR (第 12 课) 如何相互作用？",
+      "options_zh": [
+        "PAIR 能压制 MSJ",
+        "PAIR 只对闭源模型有效",
+        "MSJ 与 PAIR 可组合：用 PAIR 找出攻击结构，再用大量 shot 填充，比单独使用任一种都能达到更高的 ASR",
+        "二者互斥"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

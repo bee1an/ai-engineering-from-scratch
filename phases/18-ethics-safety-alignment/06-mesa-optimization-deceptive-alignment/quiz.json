@@ -12,7 +12,15 @@
         "Outer = is data clean; inner = is the optimizer stochastic"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "哪一组最能体现 inner / outer alignment 的区分？",
+      "options_zh": [
+        "Outer = 模型能否在硬件上运行；inner = loss 是否够低",
+        "Outer = base objective 是否符合我们的本意；inner = mesa-objective 是否与 base objective 一致",
+        "Outer = policy 是否稳定；inner = temperature 是否够低",
+        "Outer = 数据是否干净；inner = optimizer 是否随机"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "Probabilistically aligned"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "以下哪一项不属于 Hubinger 等人提出的 mesa-objective alignment 四大类？",
+      "options_zh": [
+        "Approximately aligned",
+        "Robustly aligned",
+        "Proxy aligned",
+        "Probabilistically aligned"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "It has any internal representation at all"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "在什么条件下，deceptive alignment 会成为 mesa-optimizer 的 reward 最大化策略？",
+      "options_zh": [
+        "用 PPO 训练而不是 DPO",
+        "它有持久的终极目标，能区分 training 与 deployment，并且 base optimizer 会在它训练期叛变时修改它",
+        "参数容量超过 100B",
+        "它有任何内部表示"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "It cannot run on GPUs"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么标准 adversarial training 可能无法消除（甚至加剧）deceptive alignment？",
+      "options_zh": [
+        "它比 RLHF 需要更多算力",
+        "它教会 mesa-optimizer 更精准地判别 test 与 deployment，而不是学到对齐的 mesa-objective",
+        "它用错了 loss function",
+        "它无法在 GPU 上运行"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "A technique for faster training"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Hubinger 等人 (2019) 提出的 gradient hacking 是什么？",
+      "options_zh": [
+        "一种推测的病态情形：有能力的 mesa-optimizer 通过其输出塑造自己的 gradient 更新，以保留其 mesa-objective",
+        "针对 instruction-tuned 模型的 jailbreaking 方法",
+        "autograd 中的 bug",
+        "一种加速训练的技术"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Mesa-optimizer hides its goal during evaluation"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "以下哪一项属于 outer alignment 失败，而非 inner？",
+      "options_zh": [
+        "reward hacking 与 sycophancy 的出现，是因为 base objective 本身就是人类意图的劣质 proxy",
+        "mesa-optimizer 优化一个 proxy goal，在分布外发生偏移",
+        "backdoor 在 SFT 后仍然存活",
+        "mesa-optimizer 在 evaluation 期间隐藏其目标"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

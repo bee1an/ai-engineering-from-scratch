@@ -3,65 +3,105 @@
     "id": "ml-intro-pre-1",
     "stage": "pre",
     "question": "In supervised learning, what does the model receive during training?",
+    "question_zh": "在监督学习中，模型在训练时接收什么？",
     "options": [
       "Only input data with no labels",
       "Input-output pairs where the correct answer is provided",
       "A reward signal for each action taken",
       "A set of rules written by a human expert"
     ],
+    "options_zh": [
+      "只有输入数据，没有标签",
+      "输入-输出对，其中提供了正确答案",
+      "每个动作的奖励信号",
+      "人类专家编写的一组规则"
+    ],
     "correct": 1,
-    "explanation": "Supervised learning trains on input-output pairs (labeled data). The model learns to map inputs to known correct outputs."
+    "explanation": "Supervised learning trains on input-output pairs (labeled data). The model learns to map inputs to known correct outputs.",
+    "explanation_zh": "监督学习在输入-输出对（标注数据）上训练。模型学习将输入映射到已知的正确输出。"
   },
   {
     "id": "ml-intro-pre-2",
     "stage": "pre",
     "question": "What is the purpose of splitting data into training and test sets?",
+    "question_zh": "将数据分为训练集和测试集的目的是什么？",
     "options": [
       "To make training faster by using less data",
       "To have backup data in case the training data is lost",
       "To evaluate whether the model generalizes to data it has never seen during training",
       "To balance the classes in the dataset"
     ],
+    "options_zh": [
+      "通过使用更少的数据来加快训练速度",
+      "在训练数据丢失时有备份数据",
+      "评估模型是否能泛化到训练期间从未见过的数据",
+      "平衡数据集中的类别"
+    ],
     "correct": 2,
-    "explanation": "The test set measures generalization. If you evaluate on training data, you measure memorization, not learning."
+    "explanation": "The test set measures generalization. If you evaluate on training data, you measure memorization, not learning.",
+    "explanation_zh": "测试集用来衡量泛化能力。如果在训练数据上评估，你衡量的是记忆能力，而不是学习能力。"
   },
   {
     "id": "ml-intro-post-1",
     "stage": "post",
     "question": "A model gets 98% accuracy on training data but 55% on test data. What is this an example of?",
+    "question_zh": "一个模型在训练数据上达到 98% 准确率，但在测试数据上只有 55%。这是什么情况的例子？",
     "options": [
       "Underfitting: the model is too simple",
       "Overfitting: the model memorized training noise instead of learning general patterns",
       "Data drift: the test distribution changed",
       "Good generalization: the model learned the true patterns"
     ],
+    "options_zh": [
+      "欠拟合：模型太简单",
+      "过拟合：模型记住了训练噪声而非学到通用模式",
+      "数据漂移：测试分布发生了变化",
+      "泛化良好：模型学到了真实模式"
+    ],
     "correct": 1,
-    "explanation": "A large gap between training accuracy (high) and test accuracy (low) is the hallmark of overfitting. The model memorized the training data."
+    "explanation": "A large gap between training accuracy (high) and test accuracy (low) is the hallmark of overfitting. The model memorized the training data.",
+    "explanation_zh": "训练准确率（高）和测试准确率（低）之间的巨大差距是过拟合的典型特征。模型记住了训练数据。"
   },
   {
     "id": "ml-intro-post-2",
     "stage": "post",
     "question": "An e-commerce site wants to group customers into segments based on purchase behavior without any predefined labels. Which type of ML is this?",
+    "question_zh": "一个电商网站想根据购买行为将客户分组，但没有任何预定义标签。这属于哪种机器学习？",
     "options": [
       "Supervised learning (classification)",
       "Supervised learning (regression)",
       "Unsupervised learning (clustering)",
       "Reinforcement learning"
     ],
+    "options_zh": [
+      "监督学习（分类）",
+      "监督学习（回归）",
+      "无监督学习（聚类）",
+      "强化学习"
+    ],
     "correct": 2,
-    "explanation": "Finding natural groupings in data without predefined labels is clustering, which is a form of unsupervised learning."
+    "explanation": "Finding natural groupings in data without predefined labels is clustering, which is a form of unsupervised learning.",
+    "explanation_zh": "在没有预定义标签的情况下发现数据中的自然分组就是聚类，属于无监督学习。"
   },
   {
     "id": "ml-intro-post-3",
     "stage": "post",
     "question": "Which scenario is NOT a good use case for machine learning?",
+    "question_zh": "以下哪个场景不适合使用机器学习？",
     "options": [
       "Predicting customer churn from historical behavior data",
       "Detecting fraudulent transactions in a stream of millions of payments",
       "Converting temperatures from Celsius to Fahrenheit",
       "Classifying images of skin lesions as benign or malignant"
     ],
+    "options_zh": [
+      "根据历史行为数据预测客户流失",
+      "在数百万笔支付流中检测欺诈交易",
+      "将摄氏温度转换为华氏温度",
+      "将皮肤病变图像分类为良性或恶性"
+    ],
     "correct": 2,
-    "explanation": "Celsius to Fahrenheit is a fixed formula (F = 9/5 * C + 32). Simple, well-defined rules do not need ML. ML adds complexity with no benefit."
+    "explanation": "Celsius to Fahrenheit is a fixed formula (F = 9/5 * C + 32). Simple, well-defined rules do not need ML. ML adds complexity with no benefit.",
+    "explanation_zh": "摄氏转华氏是固定公式（F = 9/5 * C + 32）。简单、明确的规则不需要机器学习。机器学习只会增加复杂度而没有收益。"
   }
 ]

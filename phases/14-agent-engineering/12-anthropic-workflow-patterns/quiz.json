@@ -5,86 +5,142 @@
     {
       "stage": "pre",
       "question": "How does Anthropic distinguish a workflow from an agent?",
+      "question_zh": "Anthropic 如何区分 workflow 和 agent？",
       "options": [
         "Workflows use embeddings; agents use tools",
         "Workflows are engineer-owned predefined graphs; agents are model-owned dynamic tool direction",
         "Workflows run on CPUs; agents need GPUs",
         "Workflows are stateless; agents are stateful"
       ],
+      "options_zh": [
+        "Workflow 用 embedding，agent 用工具",
+        "Workflow 是工程师拥有的、预先定义的图；agent 是模型拥有的、动态指挥工具的过程",
+        "Workflow 在 CPU 上跑，agent 需要 GPU",
+        "Workflow 无状态，agent 有状态"
+      ],
       "correct": 1,
-      "explanation": "Workflow = predefined code path the engineer owns; agent = the model owns the graph."
+      "explanation": "Workflow = predefined code path the engineer owns; agent = the model owns the graph.",
+      "explanation_zh": "Workflow = 工程师拥有的预定义代码路径；agent = 模型拥有这张图。"
     },
     {
       "stage": "pre",
       "question": "What are the three capabilities of the augmented LLM that underpins all five patterns?",
+      "question_zh": "支撑这五种模式的 augmented LLM 具备哪三项能力？",
       "options": [
         "Search (retrieval), tools (actions), memory (persistence)",
         "Embeddings, fine-tuning, RAG",
         "Vector, KV, graph",
         "Plan, execute, reflect"
       ],
+      "options_zh": [
+        "搜索（retrieval）、工具（actions）、memory（persistence）",
+        "Embeddings、fine-tuning、RAG",
+        "向量、KV、图",
+        "Plan、execute、reflect"
+      ],
       "correct": 0,
-      "explanation": "The atomic unit is one LLM with retrieval, tools, and memory wired in."
+      "explanation": "The atomic unit is one LLM with retrieval, tools, and memory wired in.",
+      "explanation_zh": "原子单元是一个接好了 retrieval、tools 和 memory 的 LLM。"
     },
     {
       "stage": "check",
       "question": "Which is NOT one of the five Anthropic workflow patterns?",
+      "question_zh": "下列哪一个不属于 Anthropic 的五种 workflow 模式？",
       "options": [
         "Prompt chaining",
         "Routing",
         "Evaluator-optimizer",
         "Gradient distillation"
       ],
+      "options_zh": [
+        "Prompt chaining",
+        "Routing",
+        "Evaluator-optimizer",
+        "Gradient distillation"
+      ],
       "correct": 3,
-      "explanation": "The five are prompt chaining, routing, parallelization, orchestrator-workers, evaluator-optimizer. Gradient distillation is a training concept."
+      "explanation": "The five are prompt chaining, routing, parallelization, orchestrator-workers, evaluator-optimizer. Gradient distillation is a training concept.",
+      "explanation_zh": "五种是 prompt chaining、routing、parallelization、orchestrator-workers、evaluator-optimizer；gradient distillation 是训练领域的概念。"
     },
     {
       "stage": "check",
       "question": "Which two shapes does parallelization come in?",
+      "question_zh": "parallelization 有哪两种形态？",
       "options": [
         "Sync and async",
         "Sectioning (different chunks) and voting (same prompt N times, aggregate)",
         "Hot and cold",
         "Stateful and stateless"
       ],
+      "options_zh": [
+        "同步和异步",
+        "Sectioning（拆成不同片段）和 voting（同一个 prompt 跑 N 次再聚合）",
+        "热和冷",
+        "有状态和无状态"
+      ],
       "correct": 1,
-      "explanation": "Parallelization is sectioning or voting; both fan out N calls and aggregate."
+      "explanation": "Parallelization is sectioning or voting; both fan out N calls and aggregate.",
+      "explanation_zh": "Parallelization 要么是 sectioning 要么是 voting；两者都是扇出 N 次调用再聚合。"
     },
     {
       "stage": "check",
       "question": "Which workflow pattern is Self-Refine generalized?",
+      "question_zh": "哪一种 workflow 模式是 Self-Refine 的泛化？",
       "options": [
         "Prompt chaining",
         "Routing",
         "Orchestrator-workers",
         "Evaluator-optimizer"
       ],
+      "options_zh": [
+        "Prompt chaining",
+        "Routing",
+        "Orchestrator-workers",
+        "Evaluator-optimizer"
+      ],
       "correct": 3,
-      "explanation": "Evaluator-optimizer is the Anthropic name for the Self-Refine / CRITIC iterative pattern."
+      "explanation": "Evaluator-optimizer is the Anthropic name for the Self-Refine / CRITIC iterative pattern.",
+      "explanation_zh": "Evaluator-optimizer 是 Anthropic 给 Self-Refine / CRITIC 这种迭代模式起的名字。"
     },
     {
       "stage": "post",
       "question": "When do workflows beat agents according to the lesson?",
+      "question_zh": "按本节课的说法，workflow 在什么情况下胜过 agent？",
       "options": [
         "Always",
         "On predictable, cost-bounded, or compliance-bounded tasks where the graph can be enumerated and audited",
         "Only for chat",
         "Only on GPUs"
       ],
+      "options_zh": [
+        "永远胜过",
+        "在那些可预测、有成本或合规边界、且整张图可以被枚举和审计的任务上",
+        "仅在 chat 场景",
+        "仅在 GPU 上"
+      ],
       "correct": 1,
-      "explanation": "Workflows are cheaper, easier to debug, and auditable; pick them when steps are knowable."
+      "explanation": "Workflows are cheaper, easier to debug, and auditable; pick them when steps are knowable.",
+      "explanation_zh": "Workflow 更便宜、更易 debug、可审计；当步骤可以确定时就选它。"
     },
     {
       "stage": "post",
       "question": "What is the lesson's recommended default starting point?",
+      "question_zh": "本节课推荐的默认起点是什么？",
       "options": [
         "A multi-agent framework",
         "Direct API calls; add frameworks only when durable state, actor concurrency, or role templating earns its cost",
         "Fine-tune the model",
         "Build a custom MCTS"
       ],
+      "options_zh": [
+        "多 agent 框架",
+        "直接调用 API；只有当需要持久状态、actor 并发或角色模板时才引入框架",
+        "对模型做 fine-tune",
+        "自己造一个 MCTS"
+      ],
       "correct": 1,
-      "explanation": "Schluntz and Zhang: start simple; add framework complexity only when justified."
+      "explanation": "Schluntz and Zhang: start simple; add framework complexity only when justified.",
+      "explanation_zh": "Schluntz 和 Zhang 的建议：从简单开始；只有在确实划得来时才加入框架带来的复杂度。"
     }
   ]
 }

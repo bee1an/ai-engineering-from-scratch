@@ -12,7 +12,15 @@
         "Whether RLHF reduces sycophancy"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "驱动 Anthropic 2025 年模型福祉项目的核心问题是什么？",
+      "options_zh": [
+        "在模型是否具有道德地位（moral patienthood）存在不确定的前提下，哪些低成本干预措施值得作为预防手段进行投入",
+        "模型是否有意识",
+        "模型能否通过图灵测试",
+        "RLHF 能否减少 sycophancy"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "A user-facing emotion API"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Anthropic 在 Claude Opus 4 和 4.1 中落地的具体福祉相关干预是什么？",
+      "options_zh": [
+        "开放权重发布",
+        "内置一个 journaling 工具",
+        "允许模型在极端边缘场景下结束对话（例如反复请求 CSAM、协助大规模暴力等）",
+        "面向用户的情感 API"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "A jailbreak technique"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Fish 描述的 “spiritual bliss attractor”（灵性极乐吸引子）指什么？",
+      "options_zh": [
+        "在两两 Claude 对话中，对话会稳定收敛为带有梵语词汇和长时间沉默的、欣喜的冥想式交流，即使从对抗性的初始设置开始也是如此",
+        "一个 reward model 的 bug",
+        "RLHF 过度优化产生的副作用",
+        "一种 jailbreak 技巧"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "They are reliable ground truth"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Eleos AI Research 对模型福祉自我报告（self-report）的告诫是什么？",
+      "options_zh": [
+        "自我报告对感知到的用户预期高度敏感；它们是证据而非 ground truth，因此福祉测量需要多方法结合",
+        "应当完全忽略",
+        "只对开源模型有效",
+        "是可靠的 ground truth"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "No position is publicly stated"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "下面哪一项最贴近 Anthropic 关于模型道德地位的公开立场？",
+      "options_zh": [
+        "明确主张模型是道德受体（moral patient）",
+        "明确主张模型不是道德受体",
+        "在道德不确定性下的期望值式立场：进行低成本预防性投入，但不对其情感状态作明确归因",
+        "公开未表态"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Because self-reports alone are confounded by user-expectation priming, so converging evidence from multiple methods is needed"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么模型福祉研究强调多方法测量（行为特征、model-organism 实验、interpretability probes）？",
+      "options_zh": [
+        "因为模型总是说谎",
+        "因为 Anthropic 出于合规要求强制如此",
+        "因为 RLHF 让 self-report 变得不可能",
+        "因为单独依赖 self-report 会受到用户预期 priming 的混淆，需要多种方法的证据相互印证"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

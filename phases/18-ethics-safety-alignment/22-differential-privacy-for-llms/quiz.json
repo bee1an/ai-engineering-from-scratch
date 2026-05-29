@@ -12,7 +12,15 @@
         "M is provably equivalent to a non-private algorithm"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "对于随机算法 M，(epsilon, delta)-differential privacy 提供了什么保证？",
+      "options_zh": [
+        "M 永远不会记忆任何训练数据",
+        "M 除噪声外是确定性的",
+        "对任意只相差一个样本的两个数据集 D 和 D'，以及任意事件 S：P(M(D) ∈ S) ≤ e^epsilon · P(M(D') ∈ S) + delta，使得任何单个个体的贡献都无法被可靠地推断出来",
+        "M 可证明等价于一个非私有算法"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "Sum clipped gradients and add Gaussian noise scaled by sigma * C"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "下列哪一步 不是 Abadi et al. 2016 描述的 DP-SGD 的步骤？",
+      "options_zh": [
+        "采样一个 mini-batch 并计算 per-example 梯度",
+        "把每个 per-example 梯度裁剪到阈值 C",
+        "在每一步之间重新随机化模型的 tokenizer",
+        "对裁剪后的梯度求和并加入按 sigma · C 缩放的高斯噪声"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "LoRA removes the need for an accountant"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么 LoRA + DP-SGD 是 2025 年常见的配置？",
+      "options_zh": [
+        "对前沿模型做完整 DP-SGD 代价过高；LoRA 把梯度更新限制在一个小的 adapter 上，降低了 per-example 梯度的存储开销，同时仍然能在 adapter 上提供 DP 保证",
+        "因为它把 LoRA 用作 tokenizer",
+        "因为 LoRA 在设计上会增大 epsilon",
+        "因为 LoRA 让 accountant 变得不再必要"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "It showed they measure different things: MIA on inserted canaries under-reports memorization because canaries are not optimized to be the 'most extractable' examples that actually matter for privacy"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "2025 年 3 月的审计（arXiv:2503.06808）如何化解 canary-MIA 与训练数据抽取之间的张力？",
+      "options_zh": [
+        "完全不再需要 canary",
+        "证明 DP-SGD 没必要",
+        "证明两者衡量的是同一个属性",
+        "结论是两者衡量的是不同的东西：在插入的 canary 上做 MIA 会低估记忆程度，因为 canary 并未被优化为 “最容易被抽取” 的、真正影响隐私的样本"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "A way to compute epsilon from epsilon-delta accounting alone"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "PMixED（arXiv:2403.15638）作为 DP 训练的替代方案，提供的是什么？",
+      "options_zh": [
+        "更快的 DP-SGD 变体",
+        "针对 Renyi DP 的新 accountant",
+        "推理时的差分隐私：在 next-token 分布上做专家混合，并加聚合噪声；完全避开 DP 训练",
+        "仅凭 epsilon-delta accounting 就能算出 epsilon 的方法"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "A countermeasure to canary insertion"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Differential Privacy Reversal via LLM Feedback 攻击是什么？",
+      "options_zh": [
+        "把 DP 训练后的模型的置信度分数当作 oracle，用以重新识别个体——即使输出本身没有直接泄漏",
+        "针对 tokenizer entropy 的攻击",
+        "把 epsilon 重置为零的方法",
+        "对 canary 插入的反制手段"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

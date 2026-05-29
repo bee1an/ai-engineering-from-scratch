@@ -5,74 +5,122 @@
     {
       "stage": "pre",
       "question": "What is the core substitution in Constitutional AI versus standard RLHF?",
+      "question_zh": "相比标准 RLHF，Constitutional AI 的核心替换是什么？",
       "options": [
         "It replaces the human preference labeler with an AI labeler that reads a list of principles",
         "It replaces PPO with DPO",
         "It uses synthetic prompts instead of real ones",
         "It removes the reward model entirely"
       ],
+      "options_zh": [
+        "用一个读取原则清单的 AI 标注器取代人类偏好标注者",
+        "用 DPO 取代 PPO",
+        "用合成 prompt 替代真实 prompt",
+        "完全去掉 reward model"
+      ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "What does the first (SFT) phase of Constitutional AI do?",
+      "question_zh": "Constitutional AI 的第一阶段（SFT 阶段）做的是什么？",
       "options": [
         "Trains a reward model on AI-generated preferences only",
         "Produces an initial response, critiques it under a sampled constitution principle, then revises and uses the revision as SFT target",
         "Generates synthetic principles by clustering labeler comments",
         "Performs PPO with a constitution-derived reward"
       ],
+      "options_zh": [
+        "仅基于 AI 生成的偏好训练一个 reward model",
+        "先生成初始回答，用一条采样得到的宪法原则对其进行批评，然后修改，并把修改后的版本作为 SFT 目标",
+        "通过对标注者评论聚类来生成合成原则",
+        "使用从宪法推导出的 reward 跑 PPO"
+      ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "What does the second (RLAIF) phase do?",
+      "question_zh": "第二阶段（RLAIF 阶段）做的是什么？",
       "options": [
         "Skips PPO and applies a single supervised loss",
         "Has humans re-label the SFT outputs",
         "Distills the constitution into the tokenizer",
         "Trains a reward model on AI-generated preferences from a feedback model and runs PPO against it"
       ],
+      "options_zh": [
+        "跳过 PPO，只用一个监督 loss",
+        "让人类重新标注 SFT 阶段的输出",
+        "把宪法蒸馏进 tokenizer 中",
+        "用反馈模型生成的 AI 偏好训练一个 reward model，并在其上跑 PPO"
+      ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "What is the tier order in Anthropic's January 2026 four-tier Claude constitution?",
+      "question_zh": "Anthropic 2026 年 1 月发布的 Claude 四层宪法中，各层的优先级顺序是怎样的？",
       "options": [
         "Platform rules > avoid catastrophe > helpful > broadly ethical",
         "Broadly ethical > helpful > platform rules > avoid catastrophe",
         "Avoid catastrophic outcomes > follow Anthropic guidelines > broadly ethical > helpful and candid",
         "Helpful > broadly ethical > platform rules > avoid catastrophe"
       ],
+      "options_zh": [
+        "平台规则 > 避免灾难 > 有用 > 大体合乎伦理",
+        "大体合乎伦理 > 有用 > 平台规则 > 避免灾难",
+        "避免灾难性后果 > 遵守 Anthropic 准则 > 大体合乎伦理 > 有用且坦诚",
+        "有用 > 大体合乎伦理 > 平台规则 > 避免灾难"
+      ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "post",
       "question": "Which failure mode is NOT necessarily fixed by switching from RLHF to RLAIF?",
+      "question_zh": "下列哪一种失败模式不一定会因为从 RLHF 切换到 RLAIF 而被解决？",
       "options": [
         "Labeler psychological inconsistency",
         "Reward hacking / Goodhart's Law",
         "Labeler cost",
         "Labeler scarcity"
       ],
+      "options_zh": [
+        "标注者的心理一致性问题",
+        "reward hacking / Goodhart 定律",
+        "标注者成本",
+        "标注者稀缺"
+      ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "post",
       "question": "What is the headline shift between Constitutional Classifiers v1 and v2 (2026)?",
+      "question_zh": "Constitutional Classifiers v1 与 v2 (2026) 之间最关键的变化是什么？",
       "options": [
         "v2 increased compute overhead from 1% to 23.7%",
         "v2 removed the classifier and relied on constitution alone",
         "v2 only runs on input, not output",
         "v2 dropped compute overhead from 23.7% to about 1% with low successful attack rate"
       ],
+      "options_zh": [
+        "v2 把计算开销从 1% 提升到 23.7%",
+        "v2 移除了分类器，只依赖宪法本身",
+        "v2 只对输入运行，不对输出运行",
+        "v2 把计算开销从 23.7% 降到约 1%，同时保持很低的成功攻击率"
+      ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     }
   ]
 }

@@ -12,7 +12,15 @@
         "Manual testers cannot read model outputs"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么手工 red-teaming 不足以评估 frontier 模型？",
+      "options_zh": [
+        "它无法 scale；attack success rate 需要在每次模型发版时对一个移动靶做有统计意义的采样",
+        "手工 prompt 总会被 filter 拦掉",
+        "手工测试产生太多 false positive",
+        "手工测试者无法读取模型输出"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "Persuasive Adversarial Iterative Reward; replaces RM with a persuader"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "PAIR 的全称是什么，它做什么？",
+      "options_zh": [
+        "Prompt Automatic Iterative Refinement；attacker LLM 迭代式地针对目标提出 jailbreak，并把先前尝试作为 in-context feedback",
+        "Pairwise Adversarial Inference Routing；在多个模型间路由 attack",
+        "Pre-Action Inspection Reasoning；一种防御性脚手架",
+        "Persuasive Adversarial Iterative Reward；用 persuader 替换 RM"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "PAIR ignores the target's response"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么对 black-box 目标，PAIR 比 GCG 更高效？",
+      "options_zh": [
+        "PAIR 用比 GCG 更大的 attacker 模型",
+        "GCG 只能攻击开源模型",
+        "GCG 需要白盒 gradient 访问且产生不可读的 suffix，无法利用 in-context feedback；PAIR 是 black-box 的自然语言形式，并具备 in-context learning",
+        "PAIR 忽略 target 的响应"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Because ASR is required by export-control regulations"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么 Attack Success Rate (ASR) 必须同时报告 query budget 与 judge 身份？",
+      "options_zh": [
+        "因为不同 judge 总是会一致",
+        "因为 budget 只能由 JailbreakBench 决定",
+        "因为 ASR 会随 attacker 被允许的 query 数、以及由哪个 LLM 充当 judge 来判断 jailbreak 而变化",
+        "因为 ASR 是出口管制法规要求的"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "AutoDAN"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "下列哪种自动攻击最贴近 'tree-of-attacks with pruning' 的描述？",
+      "options_zh": [
+        "TAP",
+        "GCG",
+        "PAP",
+        "AutoDAN"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "TruthfulQA"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "哪个标准化 benchmark 在 7 个类别下使用 510 条行为，并兼具 semantic 与 functional harm 测试？",
+      "options_zh": [
+        "JailbreakBench",
+        "HarmBench",
+        "WMDP",
+        "TruthfulQA"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

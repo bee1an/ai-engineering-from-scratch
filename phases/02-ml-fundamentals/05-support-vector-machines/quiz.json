@@ -3,65 +3,105 @@
     "id": "svm-pre-1",
     "stage": "pre",
     "question": "What are support vectors in an SVM?",
+    "question_zh": "SVM 中的支持向量是什么？",
     "options": [
       "All data points in the training set",
       "The training points closest to the decision boundary that determine the hyperplane",
       "The feature vectors after kernel transformation",
       "The weight vectors learned during training"
     ],
+    "options_zh": [
+      "训练集中的所有数据点",
+      "距离决策边界最近、决定超平面的训练点",
+      "经过 kernel 变换后的特征向量",
+      "训练过程中学到的权重向量"
+    ],
     "correct": 1,
-    "explanation": "Support vectors are the training points that lie exactly on the margin boundaries. They are the only points that determine the decision hyperplane. Removing non-support-vector points does not change the boundary."
+    "explanation": "Support vectors are the training points that lie exactly on the margin boundaries. They are the only points that determine the decision hyperplane. Removing non-support-vector points does not change the boundary.",
+    "explanation_zh": "支持向量是恰好位于边界（margin）上的训练点。只有它们决定决策超平面。移除非支持向量的点不会改变边界。"
   },
   {
     "id": "svm-pre-2",
     "stage": "pre",
     "question": "What does the SVM maximize when finding the decision boundary?",
+    "question_zh": "SVM 在寻找决策边界时最大化什么？",
     "options": [
       "The number of correctly classified training points",
       "The margin -- the distance between the decision boundary and the nearest points of each class",
       "The total distance from all points to the boundary",
       "The complexity of the decision boundary"
     ],
+    "options_zh": [
+      "训练集中正确分类的点的数量",
+      "margin——决策边界与每个类别最近点之间的距离",
+      "所有点到边界的总距离",
+      "决策边界的复杂度"
+    ],
     "correct": 1,
-    "explanation": "SVMs find the hyperplane that maximizes the margin between the two classes. A wider margin leads to better generalization on unseen data."
+    "explanation": "SVMs find the hyperplane that maximizes the margin between the two classes. A wider margin leads to better generalization on unseen data.",
+    "explanation_zh": "SVM 寻找能最大化两个类别之间 margin 的超平面。更宽的 margin 能在未见过的数据上获得更好的泛化能力。"
   },
   {
     "id": "svm-post-1",
     "stage": "post",
     "question": "What happens when you increase the C parameter in an SVM?",
+    "question_zh": "当你增大 SVM 中的 C 参数时会发生什么？",
     "options": [
       "The margin gets wider and more misclassifications are allowed",
       "The margin gets narrower, fewer misclassifications are tolerated, and the model may overfit",
       "The kernel function changes from linear to RBF",
       "The number of support vectors always increases"
     ],
+    "options_zh": [
+      "margin 变宽，允许更多误分类",
+      "margin 变窄，容忍更少误分类，模型可能过拟合",
+      "kernel 函数从线性变为 RBF",
+      "support vector 的数量总是增加"
+    ],
     "correct": 1,
-    "explanation": "Large C penalizes misclassifications heavily, producing a narrow margin that closely fits the training data. This can lead to overfitting. Small C allows more violations for a wider, more regularized margin."
+    "explanation": "Large C penalizes misclassifications heavily, producing a narrow margin that closely fits the training data. This can lead to overfitting. Small C allows more violations for a wider, more regularized margin.",
+    "explanation_zh": "较大的 C 会严重惩罚误分类，产生紧贴训练数据的窄 margin。这可能导致过拟合。较小的 C 允许更多违例，换来更宽、更正则化的 margin。"
   },
   {
     "id": "svm-post-2",
     "stage": "post",
     "question": "How does the kernel trick enable SVMs to learn nonlinear boundaries?",
+    "question_zh": "kernel trick 如何让 SVM 学习非线性边界？",
     "options": [
       "It replaces the SVM with a neural network",
       "It computes dot products in a high-dimensional space without explicitly mapping data to that space",
       "It removes outliers from the dataset before training",
       "It adds polynomial features to the input data directly"
     ],
+    "options_zh": [
+      "它把 SVM 替换成神经网络",
+      "它在高维空间中计算点积，而不需要显式地把数据映射到那个空间",
+      "它在训练前从数据集中移除离群点",
+      "它直接向输入数据添加多项式特征"
+    ],
     "correct": 1,
-    "explanation": "The kernel trick replaces every dot product x_i . x_j with K(x_i, x_j), computing the dot product in a high-dimensional (even infinite-dimensional for RBF) feature space without ever constructing it."
+    "explanation": "The kernel trick replaces every dot product x_i . x_j with K(x_i, x_j), computing the dot product in a high-dimensional (even infinite-dimensional for RBF) feature space without ever constructing it.",
+    "explanation_zh": "kernel trick 把每个点积 x_i · x_j 替换成 K(x_i, x_j)，在高维（对 RBF kernel 甚至是无限维）特征空间中计算点积，而不需要真的构造那个空间。"
   },
   {
     "id": "svm-post-3",
     "stage": "post",
     "question": "Hinge loss is zero when y * f(x) >= 1. What does this mean in terms of classification?",
+    "question_zh": "Hinge loss 在 y * f(x) >= 1 时为零。这在分类中意味着什么？",
     "options": [
       "The point is misclassified",
       "The point is correctly classified and lies outside the margin",
       "The point is exactly on the decision boundary",
       "The point is a noise sample that should be ignored"
     ],
+    "options_zh": [
+      "该点被错误分类",
+      "该点被正确分类且位于 margin 之外",
+      "该点恰好在决策边界上",
+      "该点是应该被忽略的噪声样本"
+    ],
     "correct": 1,
-    "explanation": "When y * f(x) >= 1, the point is correctly classified AND lies on or beyond the margin boundary. Only points inside the margin or misclassified (y * f(x) < 1) contribute to the hinge loss."
+    "explanation": "When y * f(x) >= 1, the point is correctly classified AND lies on or beyond the margin boundary. Only points inside the margin or misclassified (y * f(x) < 1) contribute to the hinge loss.",
+    "explanation_zh": "当 y * f(x) >= 1 时，该点被正确分类且位于 margin 边界上或之外。只有位于 margin 内部或被错误分类的点（y * f(x) < 1）才会对 hinge loss 有贡献。"
   }
 ]

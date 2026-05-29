@@ -3,65 +3,105 @@
     "id": "linreg-pre-1",
     "stage": "pre",
     "question": "What does the learning rate control in gradient descent?",
+    "question_zh": "在 gradient descent 中，learning rate 控制什么？",
     "options": [
       "The number of features used by the model",
       "How many epochs the model trains for",
       "The size of each parameter update step",
       "The ratio of training to test data"
     ],
+    "options_zh": [
+      "模型使用的特征数量",
+      "模型训练的 epoch 数",
+      "每次参数更新步长的大小",
+      "训练数据与测试数据的比例"
+    ],
     "correct": 2,
-    "explanation": "The learning rate is a scalar that controls how much weights change per gradient descent step. Too large causes divergence, too small causes slow convergence."
+    "explanation": "The learning rate is a scalar that controls how much weights change per gradient descent step. Too large causes divergence, too small causes slow convergence.",
+    "explanation_zh": "Learning rate 是一个标量，控制每次 gradient descent 步骤中权重变化的幅度。过大会导致发散，过小会导致收敛缓慢。"
   },
   {
     "id": "linreg-pre-2",
     "stage": "pre",
     "question": "What does R-squared = 0 mean for a regression model?",
+    "question_zh": "回归模型的 R-squared = 0 意味着什么？",
     "options": [
       "The model makes perfect predictions",
       "The model is no better than always predicting the mean of the target",
       "The model has negative error",
       "The model has not been trained yet"
     ],
+    "options_zh": [
+      "模型预测完美",
+      "模型不比总是预测目标均值更好",
+      "模型有负误差",
+      "模型还没训练"
+    ],
     "correct": 1,
-    "explanation": "R-squared = 0 means the model explains none of the variance in the target. It performs exactly as well as simply predicting the mean every time."
+    "explanation": "R-squared = 0 means the model explains none of the variance in the target. It performs exactly as well as simply predicting the mean every time.",
+    "explanation_zh": "R-squared = 0 意味着模型完全没有解释目标的方差。它的表现和每次都预测均值一样。"
   },
   {
     "id": "linreg-post-1",
     "stage": "post",
     "question": "Why is feature scaling important for gradient descent in multiple linear regression?",
+    "question_zh": "为什么特征缩放对多元线性回归中的 gradient descent 很重要？",
     "options": [
       "It makes the model more interpretable",
       "It prevents the cost surface from being elongated, allowing faster convergence",
       "It reduces the number of features needed",
       "It guarantees the model will find the global minimum"
     ],
+    "options_zh": [
+      "它让模型更易解释",
+      "它防止代价曲面被拉长，从而加快收敛",
+      "它减少所需的特征数量",
+      "它保证模型能找到全局最小值"
+    ],
     "correct": 1,
-    "explanation": "When features have very different scales, the cost surface becomes elongated. Gradient descent takes many more steps to converge. Standardizing features makes the surface more spherical."
+    "explanation": "When features have very different scales, the cost surface becomes elongated. Gradient descent takes many more steps to converge. Standardizing features makes the surface more spherical.",
+    "explanation_zh": "当特征的尺度差异很大时，代价曲面会被拉长。Gradient descent 需要更多步才能收敛。标准化特征会让曲面更接近球形。"
   },
   {
     "id": "linreg-post-2",
     "stage": "post",
     "question": "The normal equation gives optimal weights directly. Why would you prefer gradient descent instead?",
+    "question_zh": "正规方程可以直接给出最优权重。为什么你会更倾向于使用 gradient descent？",
     "options": [
       "Gradient descent always gives more accurate results",
       "The normal equation does not work for linear regression",
       "Matrix inversion in the normal equation is O(n^3) in features, which is too slow for thousands of features",
       "Gradient descent requires less memory than storing the data"
     ],
+    "options_zh": [
+      "Gradient descent 总是给出更准确的结果",
+      "正规方程不适用于线性回归",
+      "正规方程中的矩阵求逆是 O(n^3) 复杂度（n 为特征数），对于成千上万个特征来说太慢了",
+      "Gradient descent 比存储数据需要更少的内存"
+    ],
     "correct": 2,
-    "explanation": "The normal equation requires inverting X^T * X, which is O(n^3) in the number of features. For large feature counts, gradient descent is more efficient."
+    "explanation": "The normal equation requires inverting X^T * X, which is O(n^3) in the number of features. For large feature counts, gradient descent is more efficient.",
+    "explanation_zh": "正规方程需要对 X^T * X 求逆，其复杂度是 O(n^3)（n 为特征数）。当特征数量很大时，gradient descent 更高效。"
   },
   {
     "id": "linreg-post-3",
     "stage": "post",
     "question": "A degree-10 polynomial regression model fits training data perfectly (R^2 = 1.0) but has R^2 = 0.3 on test data. What should you do?",
+    "question_zh": "一个 10 次多项式回归模型在训练数据上拟合完美（R^2 = 1.0），但在测试数据上 R^2 = 0.3。你应该怎么做？",
     "options": [
       "Increase the polynomial degree to 20 for even better training fit",
       "Reduce model complexity (lower degree) or add regularization (Ridge) to prevent overfitting",
       "Collect less training data so the model cannot memorize",
       "Remove the test set and report training R^2 only"
     ],
+    "options_zh": [
+      "把多项式次数提高到 20，让训练拟合更好",
+      "降低模型复杂度（降低次数）或加正则化（Ridge）来防止过拟合",
+      "减少训练数据，让模型无法记忆",
+      "去掉测试集，只报告训练 R^2"
+    ],
     "correct": 1,
-    "explanation": "Perfect training fit with poor test fit is overfitting. The fix is to reduce complexity (lower polynomial degree) or add regularization to penalize large weights."
+    "explanation": "Perfect training fit with poor test fit is overfitting. The fix is to reduce complexity (lower polynomial degree) or add regularization to penalize large weights.",
+    "explanation_zh": "训练拟合完美但测试表现差是过拟合。解决办法是降低复杂度（降低多项式次数）或加正则化来惩罚大权重。"
   }
 ]

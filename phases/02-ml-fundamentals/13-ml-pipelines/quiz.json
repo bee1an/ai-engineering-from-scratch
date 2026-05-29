@@ -10,7 +10,15 @@
       "Features being dropped during encoding"
     ],
     "correct": 1,
-    "explanation": "Data leakage occurs when information that would not be available at prediction time is used during training. Example: computing the scaler's mean/std on the full dataset including test data."
+    "explanation": "Data leakage occurs when information that would not be available at prediction time is used during training. Example: computing the scaler's mean/std on the full dataset including test data.",
+    "question_zh": "在 ML pipeline 的语境下，data leakage 是什么？",
+    "options_zh": [
+      "数据在预处理时被意外删除",
+      "测试集或未来数据中的信息污染了训练过程",
+      "模型处理数据太慢",
+      "特征在编码时被丢弃"
+    ],
+    "explanation_zh": "data leakage 指训练时使用了预测时本不可获得的信息。例子：用包含测试集的全量数据来计算 scaler 的 mean/std。"
   },
   {
     "id": "pipeline-pre-2",
@@ -23,7 +31,15 @@
       "Fitting the scaler takes too long on large datasets"
     ],
     "correct": 1,
-    "explanation": "When the scaler is fit on all data, its mean and standard deviation encode information from test samples. Training features are then shifted using test statistics, leaking future information into training."
+    "explanation": "When the scaler is fit on all data, its mean and standard deviation encode information from test samples. Training features are then shifted using test statistics, leaking future information into training.",
+    "question_zh": "为什么在切分 train/test 之前先在全量数据上 fit scaler 算 leak？",
+    "options_zh": [
+      "缩放会改变数据分布",
+      "scaler 的统计量（mean、std）包含了测试数据信息，模型在训练时就间接看到了测试集",
+      "缩放只能在测试集上做",
+      "在大数据上 fit scaler 太慢"
+    ],
+    "explanation_zh": "如果 scaler 在全部数据上拟合，它的 mean 和 std 就编码了测试样本的信息。训练特征再用这套统计量去标准化，相当于把未来信息泄露到训练里。"
   },
   {
     "id": "pipeline-post-1",
@@ -36,7 +52,15 @@
       "fit_transform is slower but more accurate"
     ],
     "correct": 1,
-    "explanation": "fit_transform computes statistics (e.g., mean, std) from the data AND transforms it. transform applies the already-learned statistics without recomputing. On test data, you must use transform to avoid leakage."
+    "explanation": "fit_transform computes statistics (e.g., mean, std) from the data AND transforms it. transform applies the already-learned statistics without recomputing. On test data, you must use transform to avoid leakage.",
+    "question_zh": "在 sklearn 中，对 pipeline 的某一步调用 fit_transform 和 transform 有什么区别？",
+    "options_zh": [
+      "完全一样，都做 fit 加 transform",
+      "fit_transform 从数据中学习参数并应用变换；transform 只应用之前学到的参数",
+      "transform 用于训练数据；fit_transform 用于测试数据",
+      "fit_transform 更慢但更准确"
+    ],
+    "explanation_zh": "fit_transform 同时计算统计量（如 mean、std）并对数据应用变换。transform 只用已经学到的统计量，不再重新计算。在测试数据上必须用 transform，否则会 leak。"
   },
   {
     "id": "pipeline-post-2",
@@ -49,7 +73,15 @@
       "It converts all columns to the same data type"
     ],
     "correct": 1,
-    "explanation": "Real datasets have mixed types. Numeric columns need scaling, categorical columns need encoding. ColumnTransformer routes each column subset to the appropriate transformer within a single pipeline."
+    "explanation": "Real datasets have mixed types. Numeric columns need scaling, categorical columns need encoding. ColumnTransformer routes each column subset to the appropriate transformer within a single pipeline.",
+    "question_zh": "为什么真实数据集需要 ColumnTransformer？",
+    "options_zh": [
+      "它能让 pipeline 在多个 CPU 上并行运行",
+      "它能在同一个 pipeline 里对数值列和类别列分别应用不同的预处理",
+      "它会自动删除有缺失值的列",
+      "它会把所有列转换成同一种数据类型"
+    ],
+    "explanation_zh": "真实数据通常类型混合：数值列要 scaling，类别列要 encoding。ColumnTransformer 在一个 pipeline 内把每组列路由给合适的 transformer。"
   },
   {
     "id": "pipeline-post-3",
@@ -62,6 +94,14 @@
       "Convert the unknown category to the number zero"
     ],
     "correct": 2,
-    "explanation": "Robust pipelines anticipate unseen categories in production. Solutions include an 'unknown' fallback for one-hot encoding, or defaulting to the global mean for target encoding."
+    "explanation": "Robust pipelines anticipate unseen categories in production. Solutions include an 'unknown' fallback for one-hot encoding, or defaulting to the global mean for target encoding.",
+    "question_zh": "线上模型收到一个训练时从未出现过的类别值（'new_category'），pipeline 应该怎么处理？",
+    "options_zh": [
+      "完全忽略这一行，不返回预测",
+      "从头重训整个模型",
+      "优雅地处理未知类别，例如归到 'unknown' 桶，或在 target encoding 中回退到全局均值",
+      "把未知类别转成数字 0"
+    ],
+    "explanation_zh": "稳健的 pipeline 要预先考虑线上出现未见类别的情况。常见做法是 one-hot 时设一个 'unknown' 兜底类别，或 target encoding 时回退到全局均值。"
   }
 ]

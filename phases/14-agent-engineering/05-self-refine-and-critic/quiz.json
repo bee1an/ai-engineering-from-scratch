@@ -12,7 +12,15 @@
         "Search, score, synthesize"
       ],
       "correct": 1,
-      "explanation": "Self-Refine uses one model in three roles: generate, feedback, refine."
+      "explanation": "Self-Refine uses one model in three roles: generate, feedback, refine.",
+      "question_zh": "Self-Refine 循环由哪三个 prompt 组成？",
+      "options_zh": [
+        "Plan、execute、solve",
+        "Generate、feedback、refine",
+        "Actor、evaluator、reflector",
+        "Search、score、synthesize"
+      ],
+      "explanation_zh": "Self-Refine 让同一个模型扮演三种角色：generate、feedback、refine。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "It speeds up token generation"
       ],
       "correct": 1,
-      "explanation": "The refine prompt conditions on the full history so the model does not repeat its earlier errors."
+      "explanation": "The refine prompt conditions on the full history so the model does not repeat its earlier errors.",
+      "question_zh": "Self-Refine 的 refine 步为什么要带历史？",
+      "options_zh": [
+        "provider 只在带历史时做缓存",
+        "没有先前的输出和批评，refine 会重复之前的错误；消融实验显示质量明显下降",
+        "billing 需要历史",
+        "可以加速 token 生成"
+      ],
+      "explanation_zh": "refine 这个 prompt 要 condition 在完整历史上，模型才不会再犯之前的错。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "It runs the feedback step in parallel"
       ],
       "correct": 1,
-      "explanation": "CRITIC swaps self-critique for a verify step routed through search, code interpreter, calculator, or domain verifiers."
+      "explanation": "CRITIC swaps self-critique for a verify step routed through search, code interpreter, calculator, or domain verifiers.",
+      "question_zh": "CRITIC 相对 Self-Refine 改了什么？",
+      "options_zh": [
+        "去掉了 refine 步",
+        "把自我反馈这一步换成了由外部工具提供 grounding 的验证器",
+        "用更大的模型来生成",
+        "把 feedback 步并行执行"
+      ],
+      "explanation_zh": "CRITIC 把 self-critique 替换成 verify 步，通过 search、code interpreter、calculator 或领域验证器来做核对。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Parallel sampling"
       ],
       "correct": 2,
-      "explanation": "Anthropic names this pattern Evaluator-Optimizer: an evaluator scores, an optimizer revises, loop until convergence."
+      "explanation": "Anthropic names this pattern Evaluator-Optimizer: an evaluator scores, an optimizer revises, loop until convergence.",
+      "question_zh": "用 Anthropic 的 Claude 友好术语，Self-Refine 和 CRITIC 对应哪种 workflow 模式？",
+      "options_zh": [
+        "Router",
+        "Prompt chain",
+        "Evaluator-Optimizer",
+        "Parallel sampling"
+      ],
+      "explanation_zh": "Anthropic 把这种模式叫 Evaluator-Optimizer：evaluator 打分，optimizer 修改，循环直到收敛。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "A guardrail that times out; widen the timeout"
       ],
       "correct": 1,
-      "explanation": "Same-style self-critique converges on 'looks good to me'; differentiate the evaluator from the optimizer."
+      "explanation": "Same-style self-critique converges on 'looks good to me'; differentiate the evaluator from the optimizer.",
+      "question_zh": "什么是 rubber-stamp 循环（橡皮图章式循环）？课程建议如何避免？",
+      "options_zh": [
+        "一个总通过的测试，办法是删掉这个测试",
+        "同一个模型用同样的 prompt 给自己输出做评审然后批准它；办法是用结构上不同的 prompt 或换一个独立的小型 critic",
+        "一个总失败的重试，办法是加大预算",
+        "一个 timeout 的 guardrail，办法是延长 timeout"
+      ],
+      "explanation_zh": "同风格自我批评最后会收敛到 \"看起来不错\"，要让 evaluator 和 optimizer 在结构上有差别。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Tracing"
       ],
       "correct": 2,
-      "explanation": "Output guardrails validate the final agent output and can call tools, matching CRITIC's verifier role."
+      "explanation": "Output guardrails validate the final agent output and can call tools, matching CRITIC's verifier role.",
+      "question_zh": "OpenAI Agents SDK 中哪个特性的形态最贴近 CRITIC？",
+      "options_zh": [
+        "Handoffs",
+        "Sessions",
+        "Output guardrails（可以调用工具）",
+        "Tracing"
+      ],
+      "explanation_zh": "Output guardrails 用来校验最终的 agent 输出，并且可以调用工具，正好对应 CRITIC 里 verifier 的角色。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Never stop; let the agent self-improve indefinitely"
       ],
       "correct": 2,
-      "explanation": "A combined condition avoids single-condition failure modes."
+      "explanation": "A combined condition avoids single-condition failure modes.",
+      "question_zh": "课程为 2026 年的 evaluator-optimizer 循环推荐了什么样的停止条件？",
+      "options_zh": [
+        "只有 verifier 通过才停",
+        "只有模型自己说 'fine' 才停",
+        "组合条件：verifier 通过 OR（模型说 fine 且迭代次数 >= 2）OR 迭代次数 >= max_iterations",
+        "永不停止，让 agent 自我改进到永远"
+      ],
+      "explanation_zh": "组合条件能避免任何单一条件的失效模式。"
     }
   ]
 }

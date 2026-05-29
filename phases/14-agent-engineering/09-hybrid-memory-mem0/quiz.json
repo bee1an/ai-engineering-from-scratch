@@ -5,86 +5,142 @@
     {
       "stage": "pre",
       "question": "Which query class does a KV store handle best?",
+      "question_zh": "KV 存储最擅长处理哪一类查询？",
       "options": [
         "Semantic similarity over long conversations",
         "Direct fact lookup keyed by (user, type, entity)",
         "Reachability across customers sharing a billing entity",
         "Temporal queries valid-at-time"
       ],
+      "options_zh": [
+        "长对话上的语义相似度",
+        "用 (user, type, entity) 作 key 的事实直查",
+        "共用同一个 billing 实体的客户之间的可达性",
+        "valid-at-time 的时序查询"
+      ],
       "correct": 1,
-      "explanation": "KV is O(1) on exact keys; vector is for similarity, graph is for relationships."
+      "explanation": "KV is O(1) on exact keys; vector is for similarity, graph is for relationships.",
+      "explanation_zh": "KV 在精确 key 上是 O(1)；向量做相似度，图做关系。"
     },
     {
       "stage": "pre",
       "question": "What are the three stores Mem0 writes in parallel on each add()?",
+      "question_zh": "Mem0 在每次 add() 时并行写入的三种存储是什么？",
       "options": [
         "Vector, KV, graph",
         "Cache, queue, log",
         "Postgres, Redis, ClickHouse",
         "Embedding, attention, FFN"
       ],
+      "options_zh": [
+        "向量、KV、图",
+        "Cache、队列、日志",
+        "Postgres、Redis、ClickHouse",
+        "Embedding、attention、FFN"
+      ],
       "correct": 0,
-      "explanation": "Mem0 fans every write out to vector, KV, and graph stores."
+      "explanation": "Mem0 fans every write out to vector, KV, and graph stores.",
+      "explanation_zh": "Mem0 把每一次写入扇出到 vector、KV、graph 三种存储。"
     },
     {
       "stage": "check",
       "question": "What three dimensions feed Mem0's fusion score?",
+      "question_zh": "Mem0 的融合打分由哪三个维度组成？",
       "options": [
         "Relevance, importance, recency",
         "Precision, recall, F1",
         "Latency, throughput, cost",
         "Confidence, perplexity, BLEU"
       ],
+      "options_zh": [
+        "相关性（relevance）、重要性（importance）、新鲜度（recency）",
+        "精确率、召回率、F1",
+        "延迟、吞吐、成本",
+        "置信度、perplexity、BLEU"
+      ],
       "correct": 0,
-      "explanation": "Score is a weighted sum of relevance, importance, and recency; weights tune per product."
+      "explanation": "Score is a weighted sum of relevance, importance, and recency; weights tune per product.",
+      "explanation_zh": "分数是 relevance、importance、recency 的加权和；权重按产品形态调。"
     },
     {
       "stage": "check",
       "question": "What does Mem0g do when an incoming fact contradicts an existing edge?",
+      "question_zh": "当一个新事实与已有的边冲突时，Mem0g 会怎么做？",
       "options": [
         "Deletes the edge",
         "Marks the existing edge invalid but does not delete it, so temporal queries can still traverse",
         "Raises an exception",
         "Rewrites the user_id"
       ],
+      "options_zh": [
+        "删除该边",
+        "把已有的边标记为无效但不删除，使时序查询仍能遍历到它",
+        "抛异常",
+        "改写 user_id"
+      ],
       "correct": 1,
-      "explanation": "Soft invalidation preserves history for temporal (valid-at-time) queries."
+      "explanation": "Soft invalidation preserves history for temporal (valid-at-time) queries.",
+      "explanation_zh": "软失效保留了历史，便于做时序（valid-at-time）查询。"
     },
     {
       "stage": "check",
       "question": "Why does the lesson recommend tuning fusion weights per product?",
+      "question_zh": "为什么本节课建议按产品形态调融合权重？",
       "options": [
         "Providers require it",
         "Recency dominates for chat agents while importance dominates for compliance agents and relevance dominates for retrieval agents",
         "Vector libraries reject equal weights",
         "It is required by Apache 2.0"
       ],
+      "options_zh": [
+        "厂商要求这样做",
+        "在 chat agent 上 recency 占主导，在合规 agent 上 importance 占主导，在检索 agent 上 relevance 占主导",
+        "向量库不接受相等的权重",
+        "Apache 2.0 协议要求"
+      ],
       "correct": 1,
-      "explanation": "Different products want different bias on relevance/importance/recency; one set of weights does not fit all."
+      "explanation": "Different products want different bias on relevance/importance/recency; one set of weights does not fit all.",
+      "explanation_zh": "不同产品对 relevance / importance / recency 的偏好不同；一套权重不可能通吃。"
     },
     {
       "stage": "post",
       "question": "What is the scope taxonomy Mem0 uses?",
+      "question_zh": "Mem0 用的 scope 分类是什么？",
       "options": [
         "Public, private, secret",
         "User, session, agent",
         "Local, regional, global",
         "Read, write, admin"
       ],
+      "options_zh": [
+        "Public、private、secret",
+        "User、session、agent",
+        "本地、区域、全局",
+        "读、写、管理员"
+      ],
       "correct": 1,
-      "explanation": "Scopes are user (cross-session), session (one thread), agent (per-instance state)."
+      "explanation": "Scopes are user (cross-session), session (one thread), agent (per-instance state).",
+      "explanation_zh": "Scope 分为 user（跨会话）、session（单条线程）、agent（每个实例的状态）。"
     },
     {
       "stage": "post",
       "question": "What is embedding drift in this pattern, and how does the lesson recommend mitigating it?",
+      "question_zh": "在这个模式下什么叫 embedding drift？本节课建议如何缓解？",
       "options": [
         "Vectors get encrypted; rotate keys",
         "Vector retrieval quality degrades as the corpus grows; periodically re-embed the top-N most used records",
         "Embeddings overflow integers; switch to float64",
         "The embedding API changes URL; pin a domain"
       ],
+      "options_zh": [
+        "向量被加密；轮换密钥",
+        "随着语料增长，向量检索质量下降；定期对最常用的前 N 条记录重新做 embedding",
+        "Embedding 整数溢出；切到 float64",
+        "embedding API 改了 URL；钉住一个域名"
+      ],
       "correct": 1,
-      "explanation": "Periodic re-embedding of hot records keeps retrieval quality steady as the corpus grows."
+      "explanation": "Periodic re-embedding of hot records keeps retrieval quality steady as the corpus grows.",
+      "explanation_zh": "随着语料增长，定期对热点记录重新做 embedding 可以让检索质量保持稳定。"
     }
   ]
 }

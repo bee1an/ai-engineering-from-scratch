@@ -12,7 +12,15 @@
         "Allocational harm only occurs offline"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "课程如何区分表征性伤害（representational harm）和分配性伤害（allocational harm）？",
+      "options_zh": [
+        "表征性伤害只与视觉模型有关",
+        "表征性伤害是刻板印象、抹除或贬低性描绘；分配性伤害是某个群体在物质性结果上的不平等",
+        "表征性是计算层面的；分配性是统计层面的",
+        "分配性伤害只在线下出现"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "Embedding-based, probability-based, generated-text-based"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Gallegos et al. 2024 提出的三类评估指标分别是什么？",
+      "options_zh": [
+        "RLHF 前、RLHF 中、RLHF 后",
+        "视觉、音频、文本",
+        "WEAT、BLEU、ROUGE",
+        "基于 embedding 的、基于概率的、基于生成文本的"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Bias that only emerges at intersections (e.g., gender x race) is missed by evaluations that look at one axis at a time"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么除了单维度评估之外，还需要做 intersectional（交叉性）公平性评估？",
+      "options_zh": [
+        "intersectionality 和交叉验证是同一个概念",
+        "单维度方法计算更便宜",
+        "单维度是法律上唯一允许的方法",
+        "只有在交叉位置才会显现的偏见（例如性别 x 种族），在单维度评估里会被漏掉"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Uncertainty-based intersectional fairness evaluation that compares the model's uncertainty over outcomes across intersectional identity tuples, not just point predictions"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "WinoIdentity（COLM 2025）提出了什么？",
+      "options_zh": [
+        "针对人口属性分类器的对抗攻击",
+        "针对身份术语的新 tokenizer",
+        "在 embedding 空间替代 WEAT 的方法",
+        "基于不确定性的交叉性公平评估：比较模型在不同身份组合元组上对结果的不确定性，而不只是 point prediction"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "Re-labeling the training set"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "下列哪一项属于针对偏见的 mechanistic interpretability 方法？",
+      "options_zh": [
+        "把 PPO 切换成 DPO",
+        "在 MLP 层中识别性别神经元、用 SAE 暴露与种族相关的 feature，或操纵特定的 attention head（UniBias）",
+        "增加更多 KL 正则",
+        "重新标注训练集"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "It is balanced across all identity axes"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "10 年回顾性 meta-critique（arXiv:2508.11067）对偏见研究文献提出了什么观点？",
+      "options_zh": [
+        "过度集中在二元性别偏见上，忽视了残障、宗教、移民身份、多语种身份等其他维度，可能因 “被忽视” 而对边缘群体造成伤害",
+        "回避定量方法",
+        "过度强调交叉性",
+        "在所有身份维度上是均衡的"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

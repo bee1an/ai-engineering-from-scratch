@@ -5,74 +5,122 @@
     {
       "stage": "pre",
       "question": "What is the 2026 standard pattern for LLM service credentials?",
+      "question_zh": "2026 年 LLM 服务凭证的标准模式是什么？",
       "options": [
         "Store keys in a Slack channel",
         "Centralized vault pulled by an AI gateway at runtime via IAM role; rotate in vault and all apps pick up in minutes",
         "Email the key to each engineer",
         "Hardcode API keys in config files for speed"
       ],
+      "options_zh": [
+        "把密钥存在 Slack 频道里",
+        "集中式 vault，AI gateway 在运行时通过 IAM 角色拉取；在 vault 里轮换后所有应用几分钟内生效",
+        "把密钥邮件发给每个工程师",
+        "为了速度把 API key 硬编码在配置文件里"
+      ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "What rotation cadence does the lesson recommend for API keys, vault root tokens, and CI/CD credentials?",
+      "question_zh": "课程建议 API key、vault root token 和 CI/CD 凭证的轮换周期是什么？",
       "options": [
         "Within 90 days, automated where possible, logged and tracked when manual",
         "Every 5 years",
         "Only when leaked",
         "Never"
       ],
+      "options_zh": [
+        "90 天内，尽可能自动化，手动时记录并跟踪",
+        "每 5 年",
+        "仅在泄露时",
+        "从不"
+      ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "Why is consistent tokenization (Mesh approach) used for PII scrubbing?",
+      "question_zh": "为什么 PII 脱敏要用一致的 tokenization（Mesh 方法）？",
       "options": [
         "It uses less memory than regex",
         "It encrypts the prompt to the model",
         "It is required by ISO 27001",
         "Same source value maps to the same placeholder, so the LLM preserves code and relationship semantics across the prompt"
       ],
+      "options_zh": [
+        "比正则表达式占用更少内存",
+        "它会加密发给模型的 prompt",
+        "ISO 27001 要求这样做",
+        "相同的源值映射到相同的占位符，这样 LLM 能在整个 prompt 中保留代码和关系语义"
+      ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "What egress posture does the lesson recommend for LLM service subnets?",
+      "question_zh": "课程建议 LLM 服务子网采用什么出站策略？",
       "options": [
         "Whitelist a small set of domains (api.openai.com, api.anthropic.com, vector DB, vault) and drop everything else, with an allowlist-only DNS resolver",
         "Block all egress including providers",
         "Allow DNS but block HTTP",
         "Allow all outbound traffic"
       ],
+      "options_zh": [
+        "白名单少量域名（api.openai.com、api.anthropic.com、向量数据库、vault），丢弃其他所有流量，并使用仅允许白名单的 DNS 解析器",
+        "阻止所有出站流量，包括提供商",
+        "允许 DNS 但阻止 HTTP",
+        "允许所有出站流量"
+      ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "post",
       "question": "What did the 2026 Vercel supply-chain incident teach about CI/CD credentials?",
+      "question_zh": "2026 年 Vercel 供应链事件对 CI/CD 凭证的教训是什么？",
       "options": [
         "CI/CD credentials are prod-equivalent — store in vault, scope narrowly, rotate aggressively",
         "CI/CD secrets cannot be stolen",
         "CI/CD credentials are low-risk and can stay in env files",
         "Vercel was unaffected"
       ],
+      "options_zh": [
+        "CI/CD 凭证等同于生产凭证——存入 vault、严格限定范围、频繁轮换",
+        "CI/CD secret 不会被窃取",
+        "CI/CD 凭证风险低，可以留在 env 文件里",
+        "Vercel 未受影响"
+      ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "post",
       "question": "Which audit log fields does the lesson recommend keeping for every LLM call?",
+      "question_zh": "课程建议为每次 LLM 调用保留哪些审计日志字段？",
       "options": [
         "Just the raw prompt",
         "Only the response",
         "Timestamp, user/tenant, prompt hash (not raw), model + version, token counts, cost, response hash, any guardrail trips",
         "Only the cost"
       ],
+      "options_zh": [
+        "只保留原始 prompt",
+        "只保留响应",
+        "时间戳、用户/租户、prompt 哈希（非原文）、模型 + 版本、token 数量、成本、响应哈希、任何护栏触发记录",
+        "只保留成本"
+      ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     }
   ]
 }

@@ -3,65 +3,105 @@
     "id": "feateng-pre-1",
     "stage": "pre",
     "question": "Why is feature engineering often more impactful than choosing a fancier algorithm?",
+    "question_zh": "为什么特征工程往往比选择更花哨的算法更有影响力？",
     "options": [
       "Feature engineering makes the code run faster",
       "Good features expose patterns to the model that raw data hides, making even simple models effective",
       "Feature engineering eliminates the need for a test set",
       "Fancy algorithms cannot process raw data"
     ],
+    "options_zh": [
+      "特征工程让代码跑得更快",
+      "好的特征能把原始数据隐藏的模式暴露给模型，让简单模型也能有效",
+      "特征工程消除了对测试集的需求",
+      "花哨的算法无法处理原始数据"
+    ],
     "correct": 1,
-    "explanation": "The representation of data matters more than the algorithm. A well-engineered feature like BMI (weight/height^2) directly exposes the relevant pattern, making even logistic regression competitive with complex ensembles."
+    "explanation": "The representation of data matters more than the algorithm. A well-engineered feature like BMI (weight/height^2) directly exposes the relevant pattern, making even logistic regression competitive with complex ensembles.",
+    "explanation_zh": "数据的表示比算法更重要。精心设计的特征（如 BMI = weight/height^2）直接暴露相关模式，让 logistic regression 也能和复杂 ensemble 竞争。"
   },
   {
     "id": "feateng-pre-2",
     "stage": "pre",
     "question": "What is one-hot encoding?",
+    "question_zh": "什么是 one-hot encoding？",
     "options": [
       "Replacing each category with its frequency in the dataset",
       "Creating one binary column per category, with exactly one column set to 1 per row",
       "Converting all features to values between 0 and 1",
       "Encoding the target variable as a probability"
     ],
+    "options_zh": [
+      "用类别在数据集中的频率替换该类别",
+      "为每个类别创建一个二进制列，每行恰好有一列设为 1",
+      "将所有特征转换为 0 到 1 之间的值",
+      "将目标变量编码为概率"
+    ],
     "correct": 1,
-    "explanation": "One-hot encoding creates a binary column for each unique category. For a color feature with values red/blue/green, it produces three columns: is_red, is_blue, is_green."
+    "explanation": "One-hot encoding creates a binary column for each unique category. For a color feature with values red/blue/green, it produces three columns: is_red, is_blue, is_green.",
+    "explanation_zh": "One-hot encoding 为每个唯一类别创建一个二进制列。例如颜色特征有 red/blue/green 三个值，就会产生三列：is_red、is_blue、is_green。"
   },
   {
     "id": "feateng-post-1",
     "stage": "post",
     "question": "What is the data leakage risk with target encoding?",
+    "question_zh": "target encoding 的数据泄漏风险是什么？",
     "options": [
       "It makes the model too slow to train",
       "It replaces categories with the mean target value, which can leak information from the test set if not computed on training data only",
       "It creates too many features",
       "It only works with binary targets"
     ],
+    "options_zh": [
+      "它让模型训练太慢",
+      "它用目标均值替换类别，如果不是只在训练数据上计算，会从测试集泄漏信息",
+      "它创建了太多特征",
+      "它只适用于二分类目标"
+    ],
     "correct": 1,
-    "explanation": "Target encoding replaces each category with the mean target for that category. If computed on the full dataset (including test data), test labels leak into training features, inflating performance estimates."
+    "explanation": "Target encoding replaces each category with the mean target for that category. If computed on the full dataset (including test data), test labels leak into training features, inflating performance estimates.",
+    "explanation_zh": "Target encoding 用该类别的目标均值替换每个类别。如果在全部数据集（包括测试数据）上计算，测试标签就会泄漏到训练特征中，虚高性能估计。"
   },
   {
     "id": "feateng-post-2",
     "stage": "post",
     "question": "TF-IDF weights a word by its inverse document frequency. What is the effect?",
+    "question_zh": "TF-IDF 用逆文档频率对词进行加权。效果是什么？",
     "options": [
       "Common words like 'the' get high weight because they appear frequently",
       "Rare, distinctive words get higher weight while common words get lower weight",
       "All words get equal weight regardless of frequency",
       "Only the most frequent word in each document is kept"
     ],
+    "options_zh": [
+      "像「the」这样的常见词因为出现频繁而获得高权重",
+      "罕见、有区分度的词获得更高权重，而常见词获得更低权重",
+      "所有词无论频率如何都获得相同权重",
+      "每个文档中只保留最高频的词"
+    ],
     "correct": 1,
-    "explanation": "IDF = log(total docs / docs containing word). Common words (appearing in many documents) get low IDF. Rare, distinctive words get high IDF, making them more influential in the representation."
+    "explanation": "IDF = log(total docs / docs containing word). Common words (appearing in many documents) get low IDF. Rare, distinctive words get high IDF, making them more influential in the representation.",
+    "explanation_zh": "IDF = log(总文档数 / 包含该词的文档数)。常见词（出现在许多文档中）获得低 IDF。罕见、有区分度的词获得高 IDF，使它们在表示中更有影响力。"
   },
   {
     "id": "feateng-post-3",
     "stage": "post",
     "question": "You have two features with correlation 0.98. Why might you remove one?",
+    "question_zh": "你有两个相关系数为 0.98 的特征。为什么可能要删掉其中一个？",
     "options": [
       "Highly correlated features always cause the model to crash",
       "They are redundant -- both carry nearly the same information, and keeping both increases overfitting risk without adding signal",
       "Correlated features make the data non-stationary",
       "Correlation above 0.5 means the features are measuring different things"
     ],
+    "options_zh": [
+      "高度相关的特征总是会导致模型崩溃",
+      "它们是冗余的——两者携带几乎相同的信息，保留两者会增加过拟合风险而不增加信号",
+      "相关的特征会使数据变成非平稳的",
+      "相关系数超过 0.5 意味着特征在测量不同的东西"
+    ],
     "correct": 1,
-    "explanation": "Features with r=0.98 are nearly redundant. Keeping both adds a noisy duplicate that increases dimensionality, overfitting risk, and multicollinearity without providing new information about the target."
+    "explanation": "Features with r=0.98 are nearly redundant. Keeping both adds a noisy duplicate that increases dimensionality, overfitting risk, and multicollinearity without providing new information about the target.",
+    "explanation_zh": "相关系数 r=0.98 的特征几乎是冗余的。保留两者会增加一个带噪声的副本，提高维度、过拟合风险和多重共线性，却不提供关于目标的新信息。"
   }
 ]

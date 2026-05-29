@@ -3,62 +3,102 @@
     {
       "stage": "pre",
       "question": "What is the defining property of a convex function?",
+      "question_zh": "凸函数的定义性质是什么？",
       "options": [
         "It has exactly one critical point",
         "The line segment between any two points on its graph lies above or on the graph",
         "Its derivative is always positive",
         "It can only be defined on positive real numbers"
       ],
+      "options_zh": [
+        "只有一个临界点",
+        "图像上任意两点之间的连线段位于图像之上或之上",
+        "导数恒为正",
+        "只能定义在正实数上"
+      ],
       "correct": 1,
-      "explanation": "A function is convex if for any two points x, y and any t in [0,1]: f(tx + (1-t)y) <= t*f(x) + (1-t)*f(y). Geometrically, the chord between any two points on the graph never dips below the graph itself."
+      "explanation": "A function is convex if for any two points x, y and any t in [0,1]: f(tx + (1-t)y) <= t*f(x) + (1-t)*f(y). Geometrically, the chord between any two points on the graph never dips below the graph itself.",
+      "explanation_zh": "如果对任意两点 x、y 和任意 t 属于 [0,1] 都有 f(tx + (1-t)y) <= t*f(x) + (1-t)*f(y)，那么函数就是凸的。几何上看，图像上任意两点之间的弦永远不会低于图像本身。"
     },
     {
       "stage": "pre",
       "question": "Which of these ML problems has a convex loss landscape?",
+      "question_zh": "下列 ML 问题中，哪一个具有凸的损失曲面？",
       "options": [
         "Training a 3-layer neural network with ReLU activations",
         "Logistic regression with cross-entropy loss",
         "k-means clustering",
         "Matrix factorization for recommendation"
       ],
+      "options_zh": [
+        "训练带 ReLU 激活的 3 层神经网络",
+        "使用交叉熵损失的 logistic regression",
+        "k-means 聚类",
+        "用于推荐的矩阵分解"
+      ],
       "correct": 1,
-      "explanation": "Logistic regression has a convex loss (log-loss is convex in the weights). Neural networks, k-means, and matrix factorization are all non-convex. For convex problems, any local minimum is the global minimum."
+      "explanation": "Logistic regression has a convex loss (log-loss is convex in the weights). Neural networks, k-means, and matrix factorization are all non-convex. For convex problems, any local minimum is the global minimum.",
+      "explanation_zh": "logistic regression 的损失是凸的（log-loss 关于权重是凸函数）。神经网络、k-means 和矩阵分解都是非凸的。对凸问题来说，任何局部极小值都是全局极小值。"
     },
     {
       "stage": "post",
       "question": "Newton's method converges to the minimum of f(x) = 5x^2 + 3x + 1 in how many steps?",
+      "question_zh": "Newton 法收敛到 f(x) = 5x^2 + 3x + 1 的最小值需要多少步？",
       "options": [
         "1 step (it is exact for quadratic functions)",
         "About 10 steps",
         "About 100 steps",
         "It depends on the learning rate"
       ],
+      "options_zh": [
+        "1 步（对二次函数它是精确的）",
+        "大约 10 步",
+        "大约 100 步",
+        "取决于学习率"
+      ],
       "correct": 0,
-      "explanation": "Newton's method fits a local quadratic approximation and jumps to its minimum. For an actual quadratic function, the approximation is exact, so Newton's method converges in a single step regardless of the starting point."
+      "explanation": "Newton's method fits a local quadratic approximation and jumps to its minimum. For an actual quadratic function, the approximation is exact, so Newton's method converges in a single step regardless of the starting point.",
+      "explanation_zh": "Newton 法用一个局部二次近似来拟合并直接跳到它的最小值。对于真正的二次函数，这个近似就是精确的，所以无论从哪一点出发，Newton 法都能一步收敛。"
     },
     {
       "stage": "post",
       "question": "In the KKT conditions, what does 'complementary slackness' (lambda_i * g_i(x) = 0) mean?",
+      "question_zh": "在 KKT 条件中，互补松弛性 (lambda_i * g_i(x) = 0) 是什么意思？",
       "options": [
         "All constraints must be active at the optimum",
         "Either a constraint is active (g_i = 0) or its multiplier is zero (lambda_i = 0) — an inactive constraint has no effect",
         "The gradients of all constraints must be orthogonal",
         "The Lagrangian is always zero at the optimum"
       ],
+      "options_zh": [
+        "在最优解处所有约束都必须是激活的",
+        "约束要么是激活的 (g_i = 0)，要么其乘子为零 (lambda_i = 0)，未激活的约束不产生影响",
+        "所有约束的梯度必须互相正交",
+        "在最优解处 Lagrangian 总是零"
+      ],
       "correct": 1,
-      "explanation": "Complementary slackness means each constraint is either binding (g_i = 0, sitting on the boundary) or irrelevant (lambda_i = 0, not affecting the solution). In SVMs, this is why only support vectors (active constraints with lambda_i > 0) determine the decision boundary."
+      "explanation": "Complementary slackness means each constraint is either binding (g_i = 0, sitting on the boundary) or irrelevant (lambda_i = 0, not affecting the solution). In SVMs, this is why only support vectors (active constraints with lambda_i > 0) determine the decision boundary.",
+      "explanation_zh": "互补松弛性意味着每个约束要么是紧的 (g_i = 0，正好在边界上)，要么是无关的 (lambda_i = 0，不影响解)。在 SVM 中，正是因为这一点，只有 support vector（lambda_i > 0 的激活约束）才决定决策边界。"
     },
     {
       "stage": "post",
       "question": "Why does SGD find good solutions in non-convex neural network landscapes despite the lack of convexity guarantees?",
+      "question_zh": "在没有凸性保证的情况下，为什么 SGD 仍然能在非凸的神经网络损失曲面上找到好的解？",
       "options": [
         "Neural networks are secretly convex in high dimensions",
         "SGD always finds the global minimum",
         "In high dimensions, most critical points are saddle points (not bad local minima), and SGD noise helps escape them",
         "The loss function is irrelevant to model performance"
       ],
+      "options_zh": [
+        "神经网络在高维下其实是凸的",
+        "SGD 总是能找到全局最优解",
+        "在高维空间中，大多数临界点是鞍点（而不是糟糕的局部极小值），SGD 的噪声能帮助逃离这些鞍点",
+        "损失函数对模型性能没有影响"
+      ],
       "correct": 2,
-      "explanation": "In high-dimensional parameter spaces, random critical points are overwhelmingly saddle points. The few local minima that exist tend to have loss values close to the global minimum. SGD's stochastic noise helps escape saddle points, and overparameterization smooths the landscape."
+      "explanation": "In high-dimensional parameter spaces, random critical points are overwhelmingly saddle points. The few local minima that exist tend to have loss values close to the global minimum. SGD's stochastic noise helps escape saddle points, and overparameterization smooths the landscape.",
+      "explanation_zh": "在高维参数空间里，随机的临界点绝大多数是鞍点。少数存在的局部极小值的损失值往往也接近全局最小。SGD 的随机噪声有助于逃离鞍点，过参数化也让损失曲面变得更平滑。"
     }
   ]
 }

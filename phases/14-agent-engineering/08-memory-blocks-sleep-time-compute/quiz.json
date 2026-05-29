@@ -5,86 +5,142 @@
     {
       "stage": "pre",
       "question": "What are Letta's three memory tiers?",
+      "question_zh": "Letta 的三个 memory 层级是什么？",
       "options": [
         "Cache, KV, archival",
         "Core, recall, archival",
         "RAM, swap, disk",
         "Working, episodic, semantic"
       ],
+      "options_zh": [
+        "Cache、KV、archival",
+        "Core、recall、archival",
+        "RAM、swap、磁盘",
+        "工作、情景、语义"
+      ],
       "correct": 1,
-      "explanation": "Letta uses core (always visible), recall (conversation history), and archival (external) tiers."
+      "explanation": "Letta uses core (always visible), recall (conversation history), and archival (external) tiers.",
+      "explanation_zh": "Letta 使用 core（始终可见）、recall（对话历史）、archival（外部）三个层级。"
     },
     {
       "stage": "pre",
       "question": "Which production problem does sleep-time compute target?",
+      "question_zh": "sleep-time compute 针对的是哪类生产问题？",
       "options": [
         "Tail latency from doing memory consolidation on the critical path",
         "Higher accuracy on math problems",
         "Lower embedding cost",
         "Faster JSON parsing"
       ],
+      "options_zh": [
+        "在关键路径上做 memory 整合带来的尾部延迟",
+        "提高数学题的准确率",
+        "降低 embedding 成本",
+        "更快的 JSON 解析"
+      ],
       "correct": 0,
-      "explanation": "Sleep-time moves prune/summarize/reconcile off the user-facing path, so primary responses stay fast."
+      "explanation": "Sleep-time moves prune/summarize/reconcile off the user-facing path, so primary responses stay fast.",
+      "explanation_zh": "Sleep-time 把裁剪 / 总结 / 调和这些动作搬出用户面向的路径，使主响应保持低延迟。"
     },
     {
       "stage": "check",
       "question": "Which property is NOT a memory block field in Letta?",
+      "question_zh": "下列哪一项不是 Letta memory block 的字段？",
       "options": [
         "label",
         "value",
         "limit",
         "embedding_model_version"
       ],
+      "options_zh": [
+        "label",
+        "value",
+        "limit",
+        "embedding_model_version"
+      ],
       "correct": 3,
-      "explanation": "Blocks carry id, label, value, limit, description; embedding model version is not part of the block schema."
+      "explanation": "Blocks carry id, label, value, limit, description; embedding model version is not part of the block schema.",
+      "explanation_zh": "Block 携带 id、label、value、limit、description；embedding 模型版本不在 block 的 schema 里。"
     },
     {
       "stage": "check",
       "question": "Why can the sleep-time agent run a stronger model than the primary?",
+      "question_zh": "为什么 sleep-time agent 可以跑比主 agent 更强的模型？",
       "options": [
         "It receives a private API key",
         "It is off the critical path, so it is not latency-constrained",
         "It is exempt from rate limits",
         "Memory ops cost half tokens"
       ],
+      "options_zh": [
+        "它拿到了一把私有的 API key",
+        "它不在关键路径上，所以不受延迟约束",
+        "它不受 rate limit 限制",
+        "memory 操作只花一半 token"
+      ],
       "correct": 1,
-      "explanation": "Because it does not block user responses, the sleep-time agent can be slower and more expensive."
+      "explanation": "Because it does not block user responses, the sleep-time agent can be slower and more expensive.",
+      "explanation_zh": "因为它不阻塞用户响应，sleep-time agent 可以更慢、更贵。"
     },
     {
       "stage": "check",
       "question": "What pattern do the Human and Persona blocks generalize to?",
+      "question_zh": "Human 和 Persona 这两个 block 推广成了什么模式？",
       "options": [
         "Vector embeddings",
         "Arbitrary user-defined typed editable blocks (Task, Project, Safety, ...)",
         "JSON-RPC channels",
         "OS processes"
       ],
+      "options_zh": [
+        "向量 embeddings",
+        "用户自定义的、有类型且可编辑的任意 block（Task、Project、Safety……）",
+        "JSON-RPC 通道",
+        "OS 进程"
+      ],
       "correct": 1,
-      "explanation": "Letta generalizes the two MemGPT blocks to any user-defined block with id, label, value, limit, description."
+      "explanation": "Letta generalizes the two MemGPT blocks to any user-defined block with id, label, value, limit, description.",
+      "explanation_zh": "Letta 把 MemGPT 那两个 block 推广成任意用户自定义 block，带 id、label、value、limit、description。"
     },
     {
       "stage": "post",
       "question": "What is silent drift in this pattern?",
+      "question_zh": "在这种模式下什么叫 silent drift？",
       "options": [
         "A primary agent never seeing that the sleep-time agent rewrote a block underneath it; fix with versioning and visible diffs",
         "Slow disk writes",
         "Embedding model upgrades",
         "Rate-limit jitter"
       ],
+      "options_zh": [
+        "主 agent 完全察觉不到 sleep-time agent 在背后改写了一个 block；修复方法是给 block 加版本并把 diff 暴露出来",
+        "磁盘写入慢",
+        "embedding 模型升级",
+        "rate-limit 抖动"
+      ],
       "correct": 0,
-      "explanation": "Versioning blocks and surfacing diffs in the trace makes sleep-time rewrites visible to the primary loop."
+      "explanation": "Versioning blocks and surfacing diffs in the trace makes sleep-time rewrites visible to the primary loop.",
+      "explanation_zh": "给 block 加版本，并在 trace 中显式呈现 diff，可以让 sleep-time 的改写对主循环可见。"
     },
     {
       "stage": "post",
       "question": "What replaced inline `Thought:` tokens and the send_message/heartbeat pattern in Letta V1?",
+      "question_zh": "在 Letta V1 中，原本内联的 `Thought:` token 和 send_message/heartbeat 模式被什么取代了？",
       "options": [
         "Native reasoning emitted on a separate channel and passed through turns",
         "A second LLM dedicated to thoughts",
         "A bigger system prompt",
         "Manual user-typed thoughts"
       ],
+      "options_zh": [
+        "走独立通道发出、并跨轮次传递的原生 reasoning",
+        "一个专门负责思考的第二个 LLM",
+        "更大的 system prompt",
+        "用户手动键入的思考"
+      ],
       "correct": 0,
-      "explanation": "Letta V1 (letta_v1_agent) uses provider-level native reasoning, not prompt-shaped thoughts."
+      "explanation": "Letta V1 (letta_v1_agent) uses provider-level native reasoning, not prompt-shaped thoughts.",
+      "explanation_zh": "Letta V1（letta_v1_agent）使用厂商提供的原生 reasoning，而不是用 prompt 模拟出来的 thought。"
     }
   ]
 }

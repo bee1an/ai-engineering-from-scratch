@@ -12,7 +12,15 @@
         "IPI only works on multimodal models"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "indirect prompt injection (IPI) 与 direct prompt injection 的区别是什么？",
+      "options_zh": [
+        "IPI 需要对目标模型做 fine-tuning",
+        "IPI 把指令藏在 agent 正常运行时消费的外部内容里（网页、邮件、tool output），攻击者并不需要触碰用户的 prompt",
+        "IPI 是 jailbreaking 的同义词",
+        "IPI 只对多模态模型有效"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "Inbox / document workflows"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "下列哪一项不属于本课列出的三种 IPI 投递载体？",
+      "options_zh": [
+        "retrieval-augmented generation（被污染的检索）",
+        "用户对 system prompt 的直接编辑",
+        "tool output",
+        "收件箱 / 文档工作流"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Filters only run after the model responds"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么 user-input filter 漏掉 IPI？",
+      "options_zh": [
+        "filter 无法读 JSON",
+        "user-input filter 区分大小写",
+        "payload 从来没出现在用户输入里；它出现在被检索或工具供给的内容中",
+        "filter 只在模型响应之后才运行"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Label content by source as trusted or untrusted; actions triggered by untrusted content must be ratified by trusted input before execution"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "AI agent 的 Information Flow Control (IFC) 的核心原则是什么？",
+      "options_zh": [
+        "对所有检索内容加密",
+        "只用 single-turn prompt",
+        "默认禁用所有 tool",
+        "按来源给内容打 trusted / untrusted 标签；由 untrusted 内容触发的动作必须经过 trusted 输入的批准才能执行"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "Adaptive attacks (gradient, RL, random search, human red-team) broke >90% of them despite their original near-zero ASR claims"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Nasr 等人 (2025 年 10 月，'The Attacker Moves Second') 用 adaptive attack 检验 12 个已发表 IPI 防御后发现了什么？",
+      "options_zh": [
+        "adaptive attack 评估成本太高",
+        "它们最初公布的接近零的 ASR 在 adaptive attack 下依然成立",
+        "只有一个防御被攻破",
+        "adaptive attack（gradient、RL、random search、人工 red-team）攻破了其中 90% 以上，尽管它们最初宣称 ASR 接近零"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "LLM10 (lowest)"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "在 2025 年 OWASP LLM Top 10 中，prompt injection 排在第几？",
+      "options_zh": [
+        "未列入",
+        "LLM01（榜首，应用层威胁第一）",
+        "LLM05",
+        "LLM10（最低）"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

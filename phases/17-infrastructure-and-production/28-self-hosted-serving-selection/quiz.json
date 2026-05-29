@@ -5,74 +5,122 @@
     {
       "stage": "pre",
       "question": "Which engine does the lesson pick as the dev-laptop one-command default?",
+      "question_zh": "课程选择哪个引擎作为开发笔记本的一键默认引擎？",
       "options": [
         "TGI",
         "Ollama",
         "vLLM",
         "llama.cpp"
       ],
+      "options_zh": [
+        "TGI",
+        "Ollama",
+        "vLLM",
+        "llama.cpp"
+      ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "What 2025 event changes the default away from TGI for new projects?",
+      "question_zh": "2025 年哪个事件让新项目的默认选择不再是 TGI？",
       "options": [
         "TGI was acquired by Anthropic",
         "TGI raised prices",
         "TGI dropped CUDA support",
         "TGI entered maintenance mode on December 11, 2025 — only bug fixes going forward"
       ],
+      "options_zh": [
+        "TGI 被 Anthropic 收购",
+        "TGI 涨价",
+        "TGI 放弃 CUDA 支持",
+        "TGI 于 2025 年 12 月 11 日进入维护模式——此后只修 bug"
+      ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "Which hardware constraint forces llama.cpp and excludes vLLM / TRT-LLM?",
+      "question_zh": "哪种硬件限制会强制使用 llama.cpp 而排除 vLLM / TRT-LLM？",
       "options": [
         "Apple M4",
         "AMD MI300X",
         "NVIDIA Hopper",
         "CPU only (no accelerator)"
       ],
+      "options_zh": [
+        "Apple M4",
+        "AMD MI300X",
+        "NVIDIA Hopper",
+        "纯 CPU（无加速器）"
+      ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "Which engine does the lesson position for agentic multi-turn and prefix-heavy workloads thanks to RadixAttention?",
+      "question_zh": "课程中提到，哪个引擎因为 RadixAttention 而适合 agentic 多轮对话和 prefix 密集型工作负载？",
       "options": [
         "Ollama",
         "llama.cpp",
         "SGLang",
         "TGI"
       ],
+      "options_zh": [
+        "Ollama",
+        "llama.cpp",
+        "SGLang",
+        "TGI"
+      ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "post",
       "question": "What dev-to-prod pipeline does the lesson recommend on the same GGUF or HF weights?",
+      "question_zh": "课程推荐在同一套 GGUF 或 HF 权重上使用什么样的开发到生产流水线？",
       "options": [
         "Only TRT-LLM, top to bottom",
         "Ollama in dev and Ollama in prod",
         "Ollama in dev, llama.cpp in staging, vLLM (or SGLang for prefix-heavy) in prod",
         "TGI everywhere"
       ],
+      "options_zh": [
+        "只用 TRT-LLM，从头到尾",
+        "开发用 Ollama，生产也用 Ollama",
+        "开发用 Ollama，预发用 llama.cpp，生产用 vLLM（或 prefix 密集时用 SGLang）",
+        "全程用 TGI"
+      ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "post",
       "question": "Why is Ollama discouraged for shared production?",
+      "question_zh": "为什么不建议在共享生产环境中使用 Ollama？",
       "options": [
         "It is closed source",
         "It only runs on Windows",
         "Go HTTP serialization adds overhead, concurrency management is simpler than vLLM, and OpenTelemetry support lags",
         "It cannot load GGUF"
       ],
+      "options_zh": [
+        "它是闭源的",
+        "它只能在 Windows 上运行",
+        "Go HTTP 序列化增加开销，并发管理比 vLLM 简单，OpenTelemetry 支持滞后",
+        "它无法加载 GGUF"
+      ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     }
   ]
 }

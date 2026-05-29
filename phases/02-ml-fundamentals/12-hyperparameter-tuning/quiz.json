@@ -10,7 +10,15 @@
       "Parameters apply to neural networks only; hyperparameters apply to tree models"
     ],
     "correct": 1,
-    "explanation": "Parameters are learned by the optimization algorithm during training (e.g., weights). Hyperparameters are set before training and control how learning happens (e.g., learning rate, regularization strength)."
+    "explanation": "Parameters are learned by the optimization algorithm during training (e.g., weights). Hyperparameters are set before training and control how learning happens (e.g., learning rate, regularization strength).",
+    "question_zh": "parameter 和 hyperparameter 有什么区别？",
+    "options_zh": [
+      "parameter 由用户设置；hyperparameter 在训练中学到",
+      "parameter 在训练中学到（权重、偏置）；hyperparameter 在训练前设置（learning rate、最大深度）",
+      "没有区别，是同义词",
+      "parameter 只用于神经网络；hyperparameter 只用于树模型"
+    ],
+    "explanation_zh": "parameter 是优化算法在训练中学到的（比如权重）。hyperparameter 在训练前设定，控制学习的方式（比如 learning rate、正则化强度）。"
   },
   {
     "id": "hptune-pre-2",
@@ -23,7 +31,15 @@
       "4"
     ],
     "correct": 2,
-    "explanation": "Grid search evaluates every combination: 5^4 = 625. This exponential scaling is why grid search becomes impractical with many hyperparameters."
+    "explanation": "Grid search evaluates every combination: 5^4 = 625. This exponential scaling is why grid search becomes impractical with many hyperparameters.",
+    "question_zh": "对 4 个 hyperparameter 各取 5 个值做 grid search，需要多少次评估？",
+    "options_zh": [
+      "20",
+      "25",
+      "625",
+      "4"
+    ],
+    "explanation_zh": "grid search 会评估每个组合：5^4 = 625。这种指数级增长正是 grid search 在 hyperparameter 多时变得不切实际的原因。"
   },
   {
     "id": "hptune-post-1",
@@ -36,7 +52,15 @@
       "Grid search cannot handle continuous hyperparameters"
     ],
     "correct": 1,
-    "explanation": "Usually only 1-2 hyperparameters matter for a given problem. Grid search wastes evaluations varying unimportant ones. Random search gives unique values for every parameter per trial, covering important dimensions more densely."
+    "explanation": "Usually only 1-2 hyperparameters matter for a given problem. Grid search wastes evaluations varying unimportant ones. Random search gives unique values for every parameter per trial, covering important dimensions more densely.",
+    "question_zh": "在评估预算相同的前提下，random search 为什么经常优于 grid search？",
+    "options_zh": [
+      "random search 用了更好的优化算法",
+      "大多数 hyperparameter 的有效维度很低，random search 能在重要维度上覆盖更密",
+      "random search 一定能找到全局最优",
+      "grid search 处理不了连续 hyperparameter"
+    ],
+    "explanation_zh": "通常一个问题只有 1 到 2 个 hyperparameter 真的关键。grid search 会把评估浪费在不重要的维度上。random search 每次试验给每个参数一个独特值，重要维度采样得更密。"
   },
   {
     "id": "hptune-post-2",
@@ -49,7 +73,15 @@
       "Bias and variance in the surrogate model"
     ],
     "correct": 1,
-    "explanation": "The acquisition function decides where to evaluate next by balancing exploitation (near known good results) and exploration (where the surrogate model is uncertain). This directs search more efficiently than random."
+    "explanation": "The acquisition function decides where to evaluate next by balancing exploitation (near known good results) and exploration (where the surrogate model is uncertain). This directs search more efficiently than random.",
+    "question_zh": "在 Bayesian optimization 中，acquisition function 平衡的是什么？",
+    "options_zh": [
+      "训练速度和模型准确率",
+      "exploitation（在已知好点附近搜索）和 exploration（在不确定区域搜索）",
+      "特征数量和样本数量",
+      "代理模型的 bias 和 variance"
+    ],
+    "explanation_zh": "acquisition function 决定下一次评估在哪里，权衡 exploitation（靠近已知较好结果）和 exploration（代理模型不确定的区域），比 random 更高效。"
   },
   {
     "id": "hptune-post-3",
@@ -62,6 +94,14 @@
       "Hyperparameters should only be integers"
     ],
     "correct": 1,
-    "explanation": "Tuning on the test set means you selected hyperparameters that happen to perform well on those specific samples. This is overfitting to the test set. Use a validation set for tuning and reserve the test set for final evaluation."
+    "explanation": "Tuning on the test set means you selected hyperparameters that happen to perform well on those specific samples. This is overfitting to the test set. Use a validation set for tuning and reserve the test set for final evaluation.",
+    "question_zh": "你直接在测试集上调 hyperparameter，并把最好的测试表现作为最终结果。这有什么问题？",
+    "options_zh": [
+      "没问题，这是标准做法",
+      "你过拟合到了测试集；汇报出来的指标偏乐观，无法泛化",
+      "测试集应该用来训练而不是调参",
+      "hyperparameter 只能取整数"
+    ],
+    "explanation_zh": "在测试集上调参等于挑了在那批样本上恰好表现好的 hyperparameter，这就是过拟合到测试集。调参要用 validation set，把 test set 留给最终评估。"
   }
 ]

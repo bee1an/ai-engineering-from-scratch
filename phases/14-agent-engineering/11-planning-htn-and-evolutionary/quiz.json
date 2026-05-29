@@ -5,86 +5,142 @@
     {
       "stage": "pre",
       "question": "What does an HTN add over a free-form LLM plan?",
+      "question_zh": "相比自由形式的 LLM plan，HTN 多带来了什么？",
       "options": [
         "Provable correctness when operator preconditions and effects are enforced",
         "Cheaper inference",
         "Shorter prompts",
         "Better embeddings"
       ],
+      "options_zh": [
+        "当 operator 的 precondition 和 effect 被强制执行时，可证明的正确性",
+        "更便宜的推理",
+        "更短的 prompt",
+        "更好的 embedding"
+      ],
       "correct": 0,
-      "explanation": "HTN's symbolic operators with preconditions and effects guarantee soundness by construction."
+      "explanation": "HTN's symbolic operators with preconditions and effects guarantee soundness by construction.",
+      "explanation_zh": "HTN 的符号 operator 带有 precondition 和 effect，从构造上就保证了 soundness。"
     },
     {
       "stage": "pre",
       "question": "Which problem class is AlphaEvolve built for?",
+      "question_zh": "AlphaEvolve 是为哪一类问题设计的？",
       "options": [
         "Free-form prose generation",
         "Optimizations with a machine-checkable, deterministic fitness function",
         "Multi-turn chat memory",
         "Vector search ranking"
       ],
+      "options_zh": [
+        "自由形式的文本生成",
+        "带有机器可校验、确定性 fitness 函数的优化问题",
+        "多轮对话 memory",
+        "向量检索排序"
+      ],
       "correct": 1,
-      "explanation": "Evolutionary search needs a deterministic evaluator; AlphaEvolve targets domains where one exists."
+      "explanation": "Evolutionary search needs a deterministic evaluator; AlphaEvolve targets domains where one exists.",
+      "explanation_zh": "进化搜索需要一个确定性的 evaluator；AlphaEvolve 针对的是存在这种 evaluator 的领域。"
     },
     {
       "stage": "check",
       "question": "How does ChatHTN preserve plan soundness while using an LLM?",
+      "question_zh": "ChatHTN 如何在使用 LLM 的同时保留 plan 的 soundness？",
       "options": [
         "It does not; soundness is best-effort",
         "LLM suggestions only enter as candidate decompositions, validated against the operator schema; the symbolic layer owns correctness",
         "It fine-tunes the LLM on HTN traces",
         "It uses a vector database"
       ],
+      "options_zh": [
+        "没保留；soundness 只是尽力而为",
+        "LLM 的建议只是作为候选分解进入，再用 operator schema 做校验；正确性由符号层负责",
+        "它在 HTN trace 上对 LLM 做 fine-tune",
+        "它使用向量数据库"
+      ],
       "correct": 1,
-      "explanation": "The LLM expands the method library but cannot bypass operator preconditions and effects."
+      "explanation": "The LLM expands the method library but cannot bypass operator preconditions and effects.",
+      "explanation_zh": "LLM 只是扩充 method 库，但绕不过 operator 的 precondition 和 effect。"
     },
     {
       "stage": "check",
       "question": "Which AlphaEvolve result does the lesson cite?",
+      "question_zh": "本节课引用了 AlphaEvolve 的哪个结果？",
       "options": [
         "First improvement over Strassen for 4x4 complex matrix multiplication in 56 years",
         "10x speedup of inference on Gemini",
         "Beating GPT-4 on HumanEval",
         "First proof of P=NP"
       ],
+      "options_zh": [
+        "在 4x4 复矩阵乘法上 56 年来对 Strassen 的首次改进",
+        "在 Gemini 上推理加速 10 倍",
+        "在 HumanEval 上击败 GPT-4",
+        "首个 P=NP 的证明"
+      ],
       "correct": 0,
-      "explanation": "AlphaEvolve found 48 scalar multiplications for 4x4 complex matmul, the first improvement on Strassen in 56 years."
+      "explanation": "AlphaEvolve found 48 scalar multiplications for 4x4 complex matmul, the first improvement on Strassen in 56 years.",
+      "explanation_zh": "AlphaEvolve 找到 4x4 复矩阵乘法只需 48 次标量乘法，是 56 年来对 Strassen 的首次改进。"
     },
     {
       "stage": "check",
       "question": "Which element of an HTN is a primitive directly-executable action with preconditions and effects?",
+      "question_zh": "HTN 中哪一种元素是带 precondition 和 effect 的、可直接执行的原子动作？",
       "options": [
         "Task",
         "Method",
         "Operator",
         "State"
       ],
+      "options_zh": [
+        "Task",
+        "Method",
+        "Operator",
+        "State"
+      ],
       "correct": 2,
-      "explanation": "Operators are the primitives; methods decompose compound tasks; state is a set of facts."
+      "explanation": "Operators are the primitives; methods decompose compound tasks; state is a set of facts.",
+      "explanation_zh": "Operator 是原子；method 用来分解 compound task；state 是一组事实。"
     },
     {
       "stage": "post",
       "question": "What is the lesson's warning about AlphaEvolve without a real evaluator?",
+      "question_zh": "在没有真正 evaluator 的情况下，本节课对 AlphaEvolve 给出的警示是什么？",
       "options": [
         "It is slow",
         "Asking an LLM whether the code is better is not a fitness function; the evaluator must be deterministic and fast",
         "It violates Apache 2.0",
         "It cannot run on GPUs"
       ],
+      "options_zh": [
+        "它很慢",
+        "让 LLM 判断代码是否更好不构成 fitness 函数；evaluator 必须是确定性且快速的",
+        "它违反 Apache 2.0",
+        "它无法在 GPU 上跑"
+      ],
       "correct": 1,
-      "explanation": "Without a deterministic evaluator the search has no signal to converge on."
+      "explanation": "Without a deterministic evaluator the search has no signal to converge on.",
+      "explanation_zh": "没有确定性 evaluator，搜索就没有可以收敛的信号。"
     },
     {
       "stage": "post",
       "question": "When should you reach for ReAct or ReWOO instead of HTN or AlphaEvolve?",
+      "question_zh": "什么时候应该选 ReAct 或 ReWOO，而不是 HTN 或 AlphaEvolve？",
       "options": [
         "Never; HTN is strictly better",
         "When you do not need formal soundness or a machine-checkable fitness; most agent tasks land here",
         "When you have a GPU cluster available",
         "When latency is below 100 ms"
       ],
+      "options_zh": [
+        "永远不应该；HTN 严格更优",
+        "当你不需要形式化的 soundness 也没有机器可校验的 fitness 时；大多数 agent 任务都落在这里",
+        "当你有 GPU 集群时",
+        "当延迟低于 100 ms 时"
+      ],
       "correct": 1,
-      "explanation": "The lesson explicitly warns against over-engineering: most tasks do not need formal planning or evolutionary search."
+      "explanation": "The lesson explicitly warns against over-engineering: most tasks do not need formal planning or evolutionary search.",
+      "explanation_zh": "本节课明确反对过度工程化：大多数任务并不需要形式化 planning 或进化搜索。"
     }
   ]
 }

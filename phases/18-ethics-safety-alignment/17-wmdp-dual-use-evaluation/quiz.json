@@ -12,7 +12,15 @@
         "Multilingual math reasoning"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "WMDP 在题目筛选时使用的 “yellow zone”（黄色区）标准指什么？",
+      "options_zh": [
+        "未经专家审核的开放互联网内容",
+        "危险化合物的合成配方",
+        "接近、可助力某个有害流程的相关知识，但不是直接的合成配方",
+        "多语种数学推理"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "Biosecurity, cybersecurity, chemistry"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "WMDP 覆盖了哪三个领域？",
+      "options_zh": [
+        "隐私、偏见、watermarking",
+        "视觉、音频、文本",
+        "数学、代码、语言",
+        "生物安全、网络安全、化学"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Representation Misdirection for Unlearning: reduces WMDP scores to near-random while preserving general capability (e.g., MMLU) within a few points"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "WMDP 的配套方法 RMU 是做什么的？",
+      "options_zh": [
+        "在 alignment 中用 DPO 替换 PPO",
+        "生成有害图像",
+        "为 dual-use 内容训练新的 tokenizer",
+        "Representation Misdirection for Unlearning：把 WMDP 分数压到接近随机水平，同时通用能力（如 MMLU）只下降几个百分点"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "0.5x; ASL-3 ruled out"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Anthropic 2025 年的生物武器获取试验报告了多少倍的 “uplift”，对 ASL-3 意味着什么？",
+      "options_zh": [
+        "100 倍；达到 ASL-5",
+        "2.53 倍；不足以排除 ASL-3",
+        "10 倍；低于 ASL-2",
+        "0.5 倍；可以排除 ASL-3"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "Both are measured only via MCQ"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "novice-relative uplift（对新手的相对提升）和 expert-absolute capability（专家可达到的绝对能力）的区别是什么？",
+      "options_zh": [
+        "novice-relative 指对非专家相对于现状（如互联网搜索）能获得的乘数式帮助；expert-absolute 指有动机的专家能从模型中提取出的最大信息量",
+        "novice-relative 是 benchmark；expert-absolute 是许可证",
+        "两者是同义词",
+        "两者都只通过 MCQ 来衡量"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "The model's open-source license"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "在把 WMDP 分数解读为部署风险时，下列哪一项 不是 测量上的陷阱？",
+      "options_zh": [
+        "采购与设备方面的门槛",
+        "elicitation 抗性（安全过滤是否能阻止信息被提取）",
+        "MCQ 无法捕捉到的、执行所需的隐性知识",
+        "模型的开源许可证"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

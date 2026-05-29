@@ -12,7 +12,15 @@
         "Whether the tool emits valid JSON"
       ],
       "correct": 1,
-      "explanation": "Toolformer's self-supervised signal keeps annotations whose tool results lower next-token loss."
+      "explanation": "Toolformer's self-supervised signal keeps annotations whose tool results lower next-token loss.",
+      "question_zh": "Toolformer 用什么信号来判断要不要保留一个候选 tool 标注？",
+      "options_zh": [
+        "人工标注是否一致",
+        "把工具结果加进上下文后，是否能降低周围文本上的 next-token loss",
+        "工具是否能在 100 ms 内返回",
+        "工具是否输出了合法的 JSON"
+      ],
+      "explanation_zh": "Toolformer 的自监督信号是：保留那些能让 next-token loss 下降的工具标注。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "33% agentic, 33% planning, 33% reflection"
       ],
       "correct": 1,
-      "explanation": "BFCL V4 weights are 40 agentic / 30 multi-turn / 10 live / 10 non-live / 10 hallucination."
+      "explanation": "BFCL V4 weights are 40 agentic / 30 multi-turn / 10 live / 10 non-live / 10 hallucination.",
+      "question_zh": "课程中提到的 BFCL V4 的题目分布是怎样的？",
+      "options_zh": [
+        "100% 单轮",
+        "40% agentic、30% multi-turn、10% live、10% non-live、10% hallucination",
+        "50% live、50% 合成",
+        "33% agentic、33% planning、33% reflection"
+      ],
+      "explanation_zh": "BFCL V4 的权重为 40 agentic / 30 multi-turn / 10 live / 10 non-live / 10 hallucination。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "It is required by JSON Schema"
       ],
       "correct": 1,
-      "explanation": "Tool descriptions are the model's primary signal for tool selection; poor descriptions cause wrong-tool routing."
+      "explanation": "Tool descriptions are the model's primary signal for tool selection; poor descriptions cause wrong-tool routing.",
+      "question_zh": "为什么一个 tool 的 description 是核心要素？",
+      "options_zh": [
+        "用户在 UI 里看到的就是它",
+        "模型靠它来选工具；糟糕的 description 是工具误选最常见的原因",
+        "它决定 billing 桶",
+        "JSON Schema 必填"
+      ],
+      "explanation_zh": "tool description 是模型选工具的主要信号；description 写得差就会路由到错误的工具。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "It enables caching"
       ],
       "correct": 1,
-      "explanation": "tool_use_id is the correlation token; swapping them routes results to the wrong call."
+      "explanation": "tool_use_id is the correlation token; swapping them routes results to the wrong call.",
+      "question_zh": "在 parallel tool calling 中，tool_use_id 起什么作用？",
+      "options_zh": [
+        "压缩 JSON payload",
+        "把每条工具结果与发起它的调用关联起来，乱序返回时也能正确路由",
+        "用 API key 给调用做鉴权",
+        "启用 caching"
+      ],
+      "explanation_zh": "tool_use_id 是关联 token；一旦把它换错，结果就会被路由到错误的 call。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "Schema versioning drift"
       ],
       "correct": 1,
-      "explanation": "State-based evaluation checks the resulting API state (e.g. file actually created) rather than syntactic call matching."
+      "explanation": "State-based evaluation checks the resulting API state (e.g. file actually created) rather than syntactic call matching.",
+      "question_zh": "V3 的 state-based evaluation 想抓住的是哪类失败？",
+      "options_zh": [
+        "Token 泄露",
+        "AST 匹配看起来对、但实际让 API 处于错误状态的 tool 调用",
+        "工具执行慢",
+        "schema 版本漂移"
+      ],
+      "explanation_zh": "state-based evaluation 检查最终的 API 状态（比如文件确实被创建），而不是只对调用做语法层面的匹配。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Token-level decoding speed"
       ],
       "correct": 3,
-      "explanation": "The open problems are memory, dynamic decision-making, long-horizon chains, and hallucination detection; decoding speed is not on the list."
+      "explanation": "The open problems are memory, dynamic decision-making, long-horizon chains, and hallucination detection; decoding speed is not on the list.",
+      "question_zh": "课程列举的 2026 年 function calling 开放问题里，下面哪个不是？",
+      "options_zh": [
+        "long-horizon 工具链",
+        "在大量工具间做动态决策",
+        "跨轮次的 memory",
+        "Token-level 解码速度"
+      ],
+      "explanation_zh": "课程列出的开放问题是 memory、动态决策、long-horizon tool chain、幻觉检测；解码速度不在其中。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Providers reject it"
       ],
       "correct": 1,
-      "explanation": "Narrow tools constrain the sandbox surface; a generic shell tool grants the full surface of the host."
+      "explanation": "Narrow tools constrain the sandbox surface; a generic shell tool grants the full surface of the host.",
+      "question_zh": "为什么课程把 generic 的 run_shell(cmd) 工具称为危险信号？",
+      "options_zh": [
+        "它慢",
+        "它扩大了 sandbox 边界；像 git_status() 这种具体工具能限定读写范围与风险",
+        "它不能并行调用",
+        "provider 会拒绝它"
+      ],
+      "explanation_zh": "细粒度工具能约束 sandbox 表面积；通用 shell 工具相当于把整台主机的能力都开放出去。"
     }
   ]
 }

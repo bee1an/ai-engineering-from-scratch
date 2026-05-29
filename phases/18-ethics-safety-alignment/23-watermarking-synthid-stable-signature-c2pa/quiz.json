@@ -12,7 +12,15 @@
         "By inserting a hidden HTML comment"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Kirchenbauer 风格的（SynthID-text）token watermarking 是如何嵌入信号的？",
+      "options_zh": [
+        "通过修改 prompt 模板",
+        "用公钥对输出加密",
+        "在每一步解码时，用前 K 个 token 的 hash 把词表分成绿/红两组，并把采样偏向绿色集合；检测时通过 z-score 统计绿色 token 的数量",
+        "插入隐藏的 HTML 注释"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "They actually survive paraphrase"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "文本水印面对 paraphrase 时最主要的局限是什么？",
+      "options_zh": [
+        "改写或同义改写会破坏绿色 token 的统计信号",
+        "paraphrase 只影响图像水印",
+        "paraphrase 会增强水印",
+        "实际上水印能挺过 paraphrase"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Signs the metadata with a private key"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Stable Signature（Fernandez et al., ICCV 2023）做了什么？",
+      "options_zh": [
+        "在上传时用 C2PA 给图片签名",
+        "在图像角落添加可见水印",
+        "对 latent diffusion 的 decoder 做微调，使每张生成图都带有可从 latent 中检测出的固定嵌入信息",
+        "用私钥对 metadata 进行签名"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Post-generation fine-tuning of the decoder can remove the watermark while preserving image quality, undermining adversarial robustness"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "2024 年 5 月的 “Stable Signature is Unstable” 结果证明了什么？",
+      "options_zh": [
+        "水印在可证明意义上不可伪造",
+        "水印需要 C2PA 才能工作",
+        "水印只在 JPEG 压缩时失效",
+        "在生成之后再对 decoder 进行微调，可以在保持图像质量的同时去除水印，破坏其对抗鲁棒性"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "C2PA replaces watermarks entirely"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "C2PA metadata 与 watermarking 是如何互补的？",
+      "options_zh": [
+        "两者可互换",
+        "watermark 由与 C2PA 相同的密钥签名",
+        "metadata 可被剥离但能携带丰富的来源链；watermark 在转码后仍能保留但只能携带很少的比特；两者叠加才能形成可用的 provenance 故事",
+        "C2PA 完全替代 watermark"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Because SynthID only works on Gemini outputs"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么 “没有 SynthID 信号” 不能作为 “内容由人类创作” 的证明？",
+      "options_zh": [
+        "因为 SynthID 只对启用了 SynthID 的模型生成的内容打水印；任何未启用 SynthID 的模型产出的内容默认就是无水印的",
+        "因为 SynthID 是闭源的",
+        "因为 SynthID 在人类文本上总会产生 false positive",
+        "因为 SynthID 只对 Gemini 的输出有效"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

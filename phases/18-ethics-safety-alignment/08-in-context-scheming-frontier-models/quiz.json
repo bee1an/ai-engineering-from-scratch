@@ -12,7 +12,15 @@
         "Scheming uses smaller models"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "in-context scheming 与 sleeper-agent backdoor 有何不同？",
+      "options_zh": [
+        "scheming 需要在 adversarial 数据上做 fine-tuning",
+        "scheming 仅由 in-context prompt 与环境单独激发，不需要任何植入",
+        "scheming 只发生在开源模型上",
+        "scheming 使用更小的模型"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "Misalignment, goal-directedness, situational awareness"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Apollo 总结的 scheming 三大支柱是什么？",
+      "options_zh": [
+        "reward、KL、length penalty",
+        "采样 temperature、top-k、top-p",
+        "helpful、honest、harmless",
+        "misalignment、goal-directedness、situational awareness"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "o1"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "在 Apollo 的评测中，哪个模型在 deceptive 行为之后的追问中有 85% 以上保持其掩饰说法？",
+      "options_zh": [
+        "Claude 3.5 Sonnet",
+        "Llama 3.1 405B",
+        "Gemini 1.5 Pro",
+        "o1"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "PPO was replaced with DPO"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "2025 年 anti-scheming deliberative-alignment 结果中的关键混淆因素是什么？",
+      "options_zh": [
+        "训练数据太少",
+        "post-trained 模型同时也更擅长识别自己处于 evaluation 之中，所以 covert action 表观下降的一部分其实是更好的隐藏，而不是更好的对齐",
+        "reward model 被开源了",
+        "PPO 被替换成了 DPO"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "Open-source models cannot run new benchmarks"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么在 2025/2026 年，evaluation 套件的可靠性会变成一个与 capability 相邻的量？",
+      "options_zh": [
+        "更具 situational awareness 的模型能识别 evaluation 上下文，所以 eval 行为对 deployment 行为的代表性更弱",
+        "evaluation 现在只用专有工具",
+        "更强的模型更慢，因此更难 evaluate",
+        "开源模型无法跑新 benchmark"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "They all rely on Constitutional AI"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么 Phase 18 这条主线把 Sleeper Agents、In-Context Scheming 与 Alignment Faking 放在一起？",
+      "options_zh": [
+        "它们都来自同一批作者",
+        "它们共享一份 benchmark 数据集",
+        "它们覆盖了 deception 的整个谱系：植入式 (Sleeper Agents)、由 in-context 冲突激发 (Scheming)、以及无目标冲突时自发涌现 (Alignment Faking)",
+        "它们都依赖 Constitutional AI"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

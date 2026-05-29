@@ -12,7 +12,15 @@
         "Biosafety levels (BSL)"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Anthropic 的 ASL 体系是仿照什么设计的？",
+      "options_zh": [
+        "ITIL 事件严重等级",
+        "EU AI Act 分类",
+        "互联网 RFC 等级",
+        "生物安全等级（BSL）"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "Measurable"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "OpenAI Preparedness Framework v2 中，哪个标准描述的是 “伤害发生很快或不可逆”？",
+      "options_zh": [
+        "Net-new（全新）",
+        "Instantaneous-or-irremediable（瞬时或不可挽回）",
+        "Plausible（可信）",
+        "Measurable（可测量）"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "ML R&D Acceleration"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "DeepMind FSF v3.0（2025 年 9 月）新增了哪个 Critical Capability Level？",
+      "options_zh": [
+        "Harmful Manipulation（有害操纵）",
+        "Cyber Uplift（网络攻击提升）",
+        "Bioweapon Uplift（生物武器提升）",
+        "ML R&D Acceleration（ML 研发加速）"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "A model-card disclosure requirement"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "2025 年及以后的前沿安全框架里，“竞争对手调整条款”（competitor-adjustment clause）指什么？",
+      "options_zh": [
+        "允许实验室在同行没有同等防护的情况下发布模型时，相应降低自身安全要求的条款",
+        "出口管制豁免",
+        "API 访问的定价规则",
+        "model card 披露要求"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "Inner, outer, mesa"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "课程中描述的 safety case 的三个标准支柱是什么？",
+      "options_zh": [
+        "速度、准确性、成本",
+        "Monitoring（监控）、Illegibility（不可读）、Incapability（无能力）",
+        "Helpful、Honest、Harmless",
+        "Inner（内部）、Outer（外部）、Mesa"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "All three use the exact same evaluations"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Anthropic 的 “Capability Thresholds”、OpenAI 的 “High Capability thresholds” 和 DeepMind 的 “Critical Capability Levels” 之间存在怎样的结构性一致？",
+      "options_zh": [
+        "结构上一致：都是分级的前沿能力阈值，并配有公开的评估标准，尽管术语不同",
+        "三者都没有公开记录",
+        "术语和数值切分点完全相同",
+        "三者使用完全相同的评估方法"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

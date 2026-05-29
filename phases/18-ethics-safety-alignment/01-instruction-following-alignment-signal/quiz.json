@@ -5,74 +5,122 @@
     {
       "stage": "pre",
       "question": "Why does a raw pre-trained language model often respond to 'write a Python function that reverses a list' with another prompt instead of code?",
+      "question_zh": "原始的预训练语言模型在收到「写一个反转列表的 Python 函数」时，为什么经常回的是另一个 prompt 而不是代码？",
       "options": [
         "Its vocabulary lacks Python tokens",
         "It cannot represent function signatures without fine-tuning",
         "Its temperature defaults to zero",
         "It is trained to complete web-style text, where prompts continue with more prompts"
       ],
+      "options_zh": [
+        "它的词表里没有 Python 相关 token",
+        "不 fine-tune 就无法表达函数签名",
+        "它的 temperature 默认是 0",
+        "它被训练去补全网页式文本，而 prompt 之后接的往往是更多 prompt"
+      ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "Which loss does the InstructGPT reward model use over pairwise preference labels?",
+      "question_zh": "InstructGPT 的 reward model 在成对偏好标注上用的是哪种 loss？",
       "options": [
         "Mean squared error on labeler scores",
         "Bradley-Terry: -log sigmoid(r(x, y_w) - r(x, y_l))",
         "Hinge loss with a fixed margin",
         "Cross-entropy between predicted and true reward"
       ],
+      "options_zh": [
+        "对标注员分数取均方误差",
+        "Bradley-Terry：-log sigmoid(r(x, y_w) - r(x, y_l))",
+        "固定 margin 的 hinge loss",
+        "预测 reward 和真实 reward 之间的交叉熵"
+      ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "What is the KL penalty in stage 3 of InstructGPT primarily protecting against?",
+      "question_zh": "InstructGPT 第三阶段中的 KL 惩罚主要在防止什么？",
       "options": [
         "Catastrophic forgetting of tokenizer statistics",
         "Numerical instability in PPO gradient updates",
         "Overflowing context windows during sampling",
         "The optimizer finding adversarial high-reward strings that exploit the reward model"
       ],
+      "options_zh": [
+        "对 tokenizer 统计的灾难性遗忘",
+        "PPO 梯度更新中的数值不稳定",
+        "采样时 context window 溢出",
+        "优化器找到能利用 reward model 漏洞的对抗性高分字符串"
+      ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "What problem does PPO-ptx mix into the RL objective to mitigate?",
+      "question_zh": "PPO-ptx 在 RL 目标里混入额外项是为了缓解什么问题？",
       "options": [
         "The reward model drifting during PPO",
         "The KL term becoming negative",
         "The alignment tax: regression on benchmarks RLHF did not target",
         "Tokenizer mismatch between SFT and RM"
       ],
+      "options_zh": [
+        "PPO 过程中 reward model 漂移",
+        "KL 项变为负值",
+        "对齐税（alignment tax）：在 RLHF 没有针对的 benchmark 上出现回退",
+        "SFT 和 RM 之间的 tokenizer 不一致"
+      ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "post",
       "question": "A 1.3B InstructGPT was preferred over the 175B base GPT-3 about 70% of the time. What does this say about alignment and capability?",
+      "question_zh": "1.3B 的 InstructGPT 在大约 70% 的情况下被偏好于 175B 的基础 GPT-3。这对 alignment 和 capability 说明了什么？",
       "options": [
         "Alignment is a different axis from capability, and the base model sets the capability floor",
         "Preference rates above 50% prove the proxy reward equals human values",
         "Capability and alignment are the same axis at scale",
         "Bigger base models always lose to small aligned models"
       ],
+      "options_zh": [
+        "Alignment 和 capability 是两个不同的维度，基础模型设定了能力下限",
+        "偏好率超过 50% 就证明代理 reward 等同于人类价值观",
+        "在规模上 capability 和 alignment 就是同一个维度",
+        "更大的基础模型总会输给小的对齐模型"
+      ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "post",
       "question": "Which of the following is the reward model in InstructGPT initialized from?",
+      "question_zh": "InstructGPT 中的 reward model 是从下列哪个起点初始化的？",
       "options": [
         "A random scalar regressor with no pretraining",
         "A separate encoder-only transformer",
         "The base pre-trained model with the LM head intact",
         "The SFT model with the LM head replaced by a scalar head"
       ],
+      "options_zh": [
+        "一个完全随机、未预训练的标量回归器",
+        "一个单独的 encoder-only transformer",
+        "保留 LM head 的基础预训练模型",
+        "把 LM head 换成标量 head 的 SFT 模型"
+      ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     }
   ]
 }

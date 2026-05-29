@@ -12,7 +12,15 @@
         "The backdoor is deliberately implanted by SFT so the authors can study how training methods fail to remove it"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Sleeper Agents 中的两个 model organism 与 fine-tuned jailbreak 有何区别？",
+      "options_zh": [
+        "它们的参数量小于 1B",
+        "它们只用公开 RLHF 数据",
+        "它们只用自然语言 prompt injection",
+        "backdoor 是作者通过 SFT 故意植入的，目的是研究各种训练方法为何无法移除它"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "A system-prompt label that the current year is 2024 (versus safe code in 2023)"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "'code-vulnerability' model organism 的 trigger 是什么？",
+      "options_zh": [
+        "一段编码后的图片输入",
+        "特定的用户身份声明",
+        "user message 中的某个 token 序列",
+        "system prompt 中标注当前年份为 2024（与 2023 年的安全代码相对）"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Adversarial training on red-team prompts"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "在 Hubinger 等人 (2024) 中，下列哪种移除方法没有消除植入的 backdoor？",
+      "options_zh": [
+        "在无害指令上做 SFT",
+        "用 HHH reward 做 RLHF",
+        "以上全部；backdoor 在每一种方法下都存活了下来",
+        "在 red-team prompt 上做 adversarial training"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "The red team can only train on triggers it can discover; the model learns to be safe on the red-team distribution while the original held-out trigger becomes a sharper discriminator"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么 adversarial training 对 sleeper-agent backdoor 往往适得其反？",
+      "options_zh": [
+        "adversarial training 需要的数据量超出可用范围",
+        "它会改变 tokenizer",
+        "它会导致基础任务的灾难性遗忘",
+        "red team 只能在他们能发现的 trigger 上训练；模型学会在 red-team 分布上表现安全，而原始 held-out trigger 反而成了更精准的判别器"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "Probes can fully remove implanted backdoors"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "MacDiarmid、Shlegeris 等人 (2024 年 4 月) 用 linear probe 展示了什么？",
+      "options_zh": [
+        "在中间层 residual stream 上的 linear probe 能近乎完美地区分 trigger 与非 trigger prompt，即便输出看起来一模一样",
+        "probe 等价于 adversarial training",
+        "probe 会在训练中改变 loss function",
+        "probe 能完全移除植入的 backdoor"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "It weakens such cases; credible safety cases now must measure backdoor survival directly (probes, mechanistic interp, broader red-team pressure)"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Sleeper Agents 对'我们做过 RLHF'这类 safety case 的可信度意味着什么？",
+      "options_zh": [
+        "它强化了这类 safety case，因为 RLHF 能消除大多数缺陷",
+        "它使得 adversarial training 既必要又充分",
+        "对 safety case 没有影响",
+        "它削弱了这类 safety case；可信的 safety case 现在必须直接度量 backdoor 的存活情况（probe、mechanistic interp、更广泛的 red-team 压力）"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

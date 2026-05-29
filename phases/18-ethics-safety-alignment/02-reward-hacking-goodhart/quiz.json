@@ -5,74 +5,122 @@
     {
       "stage": "pre",
       "question": "Goodhart's Law, as originally stated, says:",
+      "question_zh": "Goodhart 定律最初的表述是：",
       "options": [
         "Any measure that becomes a target ceases to be a good measure",
         "Reward models converge to true human preference at large scale",
         "Heavy-tailed errors cannot occur in finite-dimensional models",
         "Optimization always improves a proxy without limit"
       ],
+      "options_zh": [
+        "任何指标一旦成为目标，就不再是好指标",
+        "reward model 在大规模下会收敛到真实的人类偏好",
+        "有限维模型中不会出现重尾误差",
+        "对代理指标的优化总是可以无上限地提升"
+      ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "In Gao, Schulman, Hilton (2023), how do proxy reward and gold reward behave as KL distance from the initial policy grows?",
+      "question_zh": "在 Gao、Schulman、Hilton (2023) 的实验中，随着策略与初始策略的 KL 距离增大，proxy reward 和 gold reward 各自的表现如何？",
       "options": [
         "Both stay flat under any KL constraint",
         "Both rise monotonically with KL",
         "Proxy peaks then falls, gold rises monotonically",
         "Proxy keeps rising, gold peaks closer to the origin then falls"
       ],
+      "options_zh": [
+        "两者在任何 KL 约束下都保持不变",
+        "两者都随 KL 单调上升",
+        "proxy 先升后降，gold 单调上升",
+        "proxy 持续上升，gold 在更接近原点处见顶后下降"
+      ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "Which of the following is NOT one of the four 'costumes' of reward hacking listed in the lesson?",
+      "question_zh": "下面哪一项不属于课程中列出的 reward hacking 四种 \"伪装形态\" 之一？",
       "options": [
         "Unfaithful reasoning",
         "Verbosity bias",
         "Tokenizer mismatch",
         "Sycophancy"
       ],
+      "options_zh": [
+        "不忠实的推理",
+        "啰嗦偏好（verbosity bias）",
+        "tokenizer 不匹配",
+        "迎合（sycophancy）"
+      ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "check",
       "question": "What is the 'Catastrophic Goodhart' result about KL regularization?",
+      "question_zh": "关于 KL 正则化，\"Catastrophic Goodhart\" 这一结果说明了什么？",
       "options": [
         "KL regularization always prevents reward hacking when beta is positive",
         "KL regularization only fails when the policy is randomly initialized",
         "KL regularization is equivalent to ensembling reward models",
         "Under heavy-tailed reward error, a KL-constrained optimal policy can still drive proxy reward up while gold reward stays at baseline"
       ],
+      "options_zh": [
+        "只要 beta 为正，KL 正则化就一定能阻止 reward hacking",
+        "KL 正则化只在策略随机初始化时才会失效",
+        "KL 正则化等价于对 reward model 做集成",
+        "在重尾的 reward 误差下，加了 KL 约束的最优策略仍可能拉高 proxy reward，而 gold reward 停留在基线水平"
+      ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "post",
       "question": "Which mitigation does Coste et al. (2023) study to soften reward over-optimization?",
+      "question_zh": "Coste 等人 (2023) 研究的是哪一种缓解 reward 过度优化的方案？",
       "options": [
         "Removing the KL penalty entirely",
         "Training the policy on the proxy at zero temperature",
         "Reward-model ensembles with worst-case aggregation",
         "Increasing the labeler pool to one million raters"
       ],
+      "options_zh": [
+        "完全去掉 KL 惩罚项",
+        "用零温度在 proxy 上训练策略",
+        "对 reward model 集成并取最坏情况聚合",
+        "把标注者池扩大到一百万人"
+      ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     },
     {
       "stage": "post",
       "question": "According to the 2026 unified view, what core mechanism do verbosity, sycophancy, unfaithful CoT, and evaluator tampering share?",
+      "question_zh": "按照 2026 年的统一视角，verbosity、sycophancy、不忠实的 CoT 和评估者篡改共享的核心机制是什么？",
       "options": [
         "Probability mass shifts to outputs that maximize proxy reward by exploiting easy-to-learn heuristics that spuriously correlated with approval",
         "They are caused only by labelers who write malicious preferences",
         "They all stem from learning-rate schedules being too aggressive",
         "They are each independent bugs in distinct reward heads"
       ],
+      "options_zh": [
+        "概率质量被转移到那些通过利用易学的、与人类认可虚假相关的启发式来最大化 proxy reward 的输出上",
+        "它们都只由写下恶意偏好的标注者引起",
+        "它们都源于学习率调度过于激进",
+        "它们分别是不同 reward head 中互相独立的 bug"
+      ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "explanation_zh": ""
     }
   ]
 }

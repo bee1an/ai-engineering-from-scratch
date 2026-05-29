@@ -12,7 +12,15 @@
         "Equal acceptance rates: P(Y=1 | A=a) = P(Y=1 | A=a')"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "对于群体 A=a 和 A=a'，下列哪一项最符合 demographic parity（人口统计学一致性）的定义？",
+      "options_zh": [
+        "群体之间的 true-positive 率和 false-positive 率相等",
+        "群体之间的 predictive value 相等",
+        "群体之间的 Lipschitz 常数相等",
+        "群体之间的接受率相等：P(Y=1 | A=a) = P(Y=1 | A=a')"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "Individual fairness implies counterfactual fairness for any DAG"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Chouldechova / Kleinberg-Mullainathan-Raghavan 2017 的 impossibility 结果说了什么？",
+      "options_zh": [
+        "群体公平性总是可以通过 re-weighting 实现",
+        "在 base rate 不相等时，demographic parity、equalized odds 与 conditional use accuracy equality 不能同时成立",
+        "counterfactual fairness 蕴含 demographic parity",
+        "individual fairness 在任意 DAG 下都蕴含 counterfactual fairness"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "A causal DAG with a sensitive-attribute intervention"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Dwork 等人 2012 通过什么定义 individual fairness？",
+      "options_zh": [
+        "个体层面的 demographic parity",
+        "受保护群体之间的准确率相等",
+        "在任务相关的相似度度量下，决策映射满足 Lipschitz 条件，使相似的个体得到相似的决策",
+        "对敏感属性做干预的 causal DAG"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "A causal DAG; the decision is unchanged when the individual's sensitive attribute is counterfactually altered"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Counterfactual fairness（Kusner et al. 2017）的要求是什么？",
+      "options_zh": [
+        "不需要任何因果假设",
+        "所有群体的 Lipschitz 常数相等",
+        "只需要群体级别的统计量",
+        "需要一个 causal DAG；当对个体的敏感属性做反事实改变时，决策不变"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "They prove the impossibility theorem is wrong"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "为什么 backtracking counterfactual（arXiv:2401.13935）对法律合规很重要？",
+      "options_zh": [
+        "它不是去干预受保护属性（这在法律上有问题），而是反过来问：是哪些实际特征的组合本可以产生反事实结果",
+        "完全不需要因果模型",
+        "替代了基于 embedding 的偏见指标",
+        "证明了 impossibility 定理是错的"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Only individual fairness is justifiable"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "ICLR Blogposts 2024 的哲学性调和论点是什么？",
+      "options_zh": [
+        "impossibility 定理可以靠 re-weighting 解决",
+        "在显式给出因果图的前提下，满足某些群体公平性度量就能蕴含 counterfactual fairness；两类公平观的对立，部分源于因果模型被隐式留下",
+        "群体公平和反事实公平毫无关系",
+        "只有 individual fairness 才站得住脚"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

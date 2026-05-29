@@ -12,7 +12,15 @@
         "Are humans more accurate than reward models?"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Superalignment 议程提出的核心问题是什么？",
+      "options_zh": [
+        "RLHF 能否扩展到 1B 参数以上？",
+        "adversarial training 能否移除所有 backdoor？",
+        "更弱的 overseer 能否可靠地监督一个更强的、对齐的模型？",
+        "人类是否比 reward model 更准确？"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "A strong model (GPT-4 class) is fine-tuned on labels produced by a weak model (GPT-2 class) and its capability is measured against the strong supervised ceiling"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "在 Burns 等人 (2023) 的 weak-to-strong generalization 中，实验设置是怎样的？",
+      "options_zh": [
+        "reward model 仅在合成数据上训练",
+        "两个强模型 debate，由人类做裁判",
+        "GPT-2 在 GPT-4 标签上 fine-tune",
+        "用一个弱模型 (GPT-2 级) 产生的标签去 fine-tune 一个强模型 (GPT-4 级)，然后把它的能力与强监督 ceiling 做对比"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "(weak - ceiling) / ceiling"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Performance Gap Recovered (PGR) 是如何定义的？",
+      "options_zh": [
+        "(ceiling - fine-tuned) / weak",
+        "(fine-tuned - weak) / (ceiling - weak)",
+        "fine-tuned / ceiling",
+        "(weak - ceiling) / ceiling"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Debate"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "下列哪一项不是本课列出的 scalable oversight 机制？",
+      "options_zh": [
+        "Task Decomposition",
+        "Tokenizer Distillation",
+        "Recursive Reward Modeling",
+        "Debate"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "They both require white-box access"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "scalable oversight 与 W2SG 是如何互补的？",
+      "options_zh": [
+        "scalable oversight 提升 overseer 有效信号的质量；W2SG 在 overseer 提供的不完美信号基础上，弥合剩余的能力差距",
+        "二者瞄准同一个指标",
+        "二者互斥",
+        "二者都需要白盒访问"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Both debaters always tell the truth"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "AI-safety-via-debate 机制的核心假设是什么？",
+      "options_zh": [
+        "debate transcript 总比直接给答案更短",
+        "找到一个有说服力的真答案，比找到一个有说服力的假答案更容易",
+        "judge 比辩手更有能力",
+        "两个辩手总是说真话"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

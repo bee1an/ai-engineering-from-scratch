@@ -10,7 +10,15 @@
       "Weak classifiers are always faster than strong classifiers"
     ],
     "correct": 1,
-    "explanation": "The key is diversity. If classifiers make independent errors, majority voting means a wrong answer must fool more than half the models. Errors cancel out, and the ensemble accuracy exceeds any individual."
+    "explanation": "The key is diversity. If classifiers make independent errors, majority voting means a wrong answer must fool more than half the models. Errors cancel out, and the ensemble accuracy exceeds any individual.",
+    "question_zh": "把多个弱分类器组合成 ensemble 为什么能提升准确率？",
+    "options_zh": [
+      "每个弱分类器分别记住测试集的不同部分",
+      "如果各分类器犯的错误不同，多数投票可以抵消个体的错判",
+      "ensemble 训练数据总是比单一模型更多",
+      "弱分类器总是比强分类器更快"
+    ],
+    "explanation_zh": "关键是多样性。如果各分类器的错误彼此独立，多数投票意味着错误答案得骗过半数以上模型才行。错误互相抵消，ensemble 准确率会超过任何单个成员。"
   },
   {
     "id": "ensemble-pre-2",
@@ -23,7 +31,15 @@
       "Bagging requires labeled data; boosting works unsupervised"
     ],
     "correct": 0,
-    "explanation": "Bagging trains models independently on bootstrap samples (parallel, reduces variance). Boosting trains models sequentially, with each new model focusing on the mistakes of the ensemble so far (reduces bias)."
+    "explanation": "Bagging trains models independently on bootstrap samples (parallel, reduces variance). Boosting trains models sequentially, with each new model focusing on the mistakes of the ensemble so far (reduces bias).",
+    "question_zh": "bagging 和 boosting 的主要区别是什么？",
+    "options_zh": [
+      "bagging 在随机子集上并行训练；boosting 顺序训练，每一步聚焦上一步的错误",
+      "bagging 用深度神经网络；boosting 用决策树",
+      "bagging 减少 bias；boosting 减少 variance",
+      "bagging 需要标注数据；boosting 是无监督的"
+    ],
+    "explanation_zh": "bagging 在 bootstrap 样本上独立训练（并行，主要降 variance）。boosting 顺序训练，每个新模型聚焦当前 ensemble 的错判（主要降 bias）。"
   },
   {
     "id": "ensemble-post-1",
@@ -36,7 +52,15 @@
       "It is removed from the training set"
     ],
     "correct": 1,
-    "explanation": "AdaBoost increases the weights of misclassified samples after each round. This forces the next weak learner to pay more attention to the examples the ensemble currently gets wrong."
+    "explanation": "AdaBoost increases the weights of misclassified samples after each round. This forces the next weak learner to pay more attention to the examples the ensemble currently gets wrong.",
+    "question_zh": "在 AdaBoost 中，每一轮之后被错分样本的权重会发生什么？",
+    "options_zh": [
+      "保持不变",
+      "增大，让下一个弱学习器更关注这个难例",
+      "减小，让下一个学习器忽略它",
+      "从训练集里被剔除"
+    ],
+    "explanation_zh": "AdaBoost 每轮都会增大被错分样本的权重，强迫下一个弱学习器把注意力放到当前 ensemble 还做不对的样本上。"
   },
   {
     "id": "ensemble-post-2",
@@ -49,7 +73,15 @@
       "The trees are all identical so adding more has no effect"
     ],
     "correct": 1,
-    "explanation": "Random forests do not overfit with more trees (unlike boosting). However, variance reduction plateaus once enough diverse trees have been averaged. More trees just add compute cost without improving accuracy."
+    "explanation": "Random forests do not overfit with more trees (unlike boosting). However, variance reduction plateaus once enough diverse trees have been averaged. More trees just add compute cost without improving accuracy.",
+    "question_zh": "一个 100 棵树的随机森林在测试集上的准确率，跟 200 棵树时一样；加到 500 棵也没有改善。为什么？",
+    "options_zh": [
+      "随机森林欠拟合，需要换算法",
+      "树足够多之后 variance 下降会进入平台期，再加只增加计算成本而不会过拟合",
+      "500 棵就是上限",
+      "所有树都一样，加多少都没用"
+    ],
+    "explanation_zh": "随机森林不会因为树多而过拟合（这点与 boosting 不同）。但当足够多的多样化树被平均后，variance 下降会触顶，再加树只是徒增算力开销。"
   },
   {
     "id": "ensemble-post-3",
@@ -62,6 +94,14 @@
       "The predictions of the previous tree"
     ],
     "correct": 1,
-    "explanation": "In gradient boosting, each new tree is trained to predict the residuals (negative gradient of the loss) of the current ensemble. This sequentially reduces the remaining error."
+    "explanation": "In gradient boosting, each new tree is trained to predict the residuals (negative gradient of the loss) of the current ensemble. This sequentially reduces the remaining error.",
+    "question_zh": "gradient boosting 中，每一棵新树拟合的目标是什么？",
+    "options_zh": [
+      "原始的目标值",
+      "当前 ensemble 预测的残差（误差）",
+      "随机的特征子集",
+      "上一棵树的预测值"
+    ],
+    "explanation_zh": "在 gradient boosting 中，每棵新树用来预测当前 ensemble 的残差（损失的负梯度），从而顺序减小剩余误差。"
   }
 ]

@@ -12,7 +12,15 @@
         "CoT requires a calculator tool that GPT-4 lacks"
       ],
       "correct": 1,
-      "explanation": "Without branching, a wrong early subexpression poisons the rest of the chain; the paper measures only 4 percent for CoT."
+      "explanation": "Without branching, a wrong early subexpression poisons the rest of the chain; the paper measures only 4 percent for CoT.",
+      "question_zh": "chain-of-thought 在 Game of 24 上为什么表现很差？",
+      "options_zh": [
+        "模型不会做整数乘法",
+        "线性推理无法在早期某一步出错时回溯，错误会沿着链条不断累积",
+        "prompt 太短了",
+        "CoT 需要 calculator 工具，而 GPT-4 没有"
+      ],
+      "explanation_zh": "没有分支，前期一个错误的子表达式会污染整条链；论文报告 CoT 只有 4% 的成功率。"
     },
     {
       "stage": "pre",
@@ -24,7 +32,15 @@
         "A tool registered with the runtime"
       ],
       "correct": 1,
-      "explanation": "ToT treats reasoning as a tree where each node is an intermediate thought that can expand into K children."
+      "explanation": "ToT treats reasoning as a tree where each node is an intermediate thought that can expand into K children.",
+      "question_zh": "Tree of Thoughts 搜索中的一个 node 指什么？",
+      "options_zh": [
+        "模型生成的一个 token",
+        "一个连贯的中间推理步骤或 thought，可以扩展出 K 个子节点",
+        "微调过程中的一次权重更新",
+        "向 runtime 注册的一个工具"
+      ],
+      "explanation_zh": "ToT 把推理看作一棵树，每个 node 是一个中间 thought，可以扩展出 K 个子节点。"
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Optimizer that updates model weights between rollouts"
       ],
       "correct": 3,
-      "explanation": "LATS is gradient-free; the three LLM roles are policy, value, and self-reflector. There are no weight updates."
+      "explanation": "LATS is gradient-free; the three LLM roles are policy, value, and self-reflector. There are no weight updates.",
+      "question_zh": "下面三个里，哪个不是 LATS 给 LLM 安排的角色？",
+      "options_zh": [
+        "Policy：提出下一步动作",
+        "Value function：给部分轨迹打分",
+        "Self-reflector：在失败后写反思",
+        "Optimizer：在两次 rollout 之间更新模型权重"
+      ],
+      "explanation_zh": "LATS 是 gradient-free 的，LLM 的三种角色是 policy、value、self-reflector，整个过程没有权重更新。"
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Search, Synthesize, Synthesize-Again, Stop"
       ],
       "correct": 1,
-      "explanation": "MCTS proceeds in select, expand, simulate, backpropagate per iteration."
+      "explanation": "MCTS proceeds in select, expand, simulate, backpropagate per iteration.",
+      "question_zh": "课程里列出的 MCTS 四个阶段是哪四个？",
+      "options_zh": [
+        "Sample, Score, Sort, Submit",
+        "Select, Expand, Simulate, Backpropagate",
+        "Plan, Execute, Reflect, Stop",
+        "Search, Synthesize, Synthesize-Again, Stop"
+      ],
+      "explanation_zh": "MCTS 每轮按 select、expand、simulate、backpropagate 四步走。"
     },
     {
       "stage": "check",
@@ -60,7 +92,15 @@
         "It controls the number of rollouts"
       ],
       "correct": 1,
-      "explanation": "c balances exploitation (Q) against the exploration term; tune per task."
+      "explanation": "c balances exploitation (Q) against the exploration term; tune per task.",
+      "question_zh": "在 UCT 里，exploration 常数 c 起什么作用？",
+      "options_zh": [
+        "对价值估计 Q 做缩放",
+        "在 exploitation 项 Q 与 exploration 项 sqrt(ln N / n) 之间做加权",
+        "决定树的最大深度",
+        "决定 rollout 的次数"
+      ],
+      "explanation_zh": "c 在 exploitation（Q）和 exploration 项之间做权衡，按任务调。"
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "When the task is code generation"
       ],
       "correct": 0,
-      "explanation": "A noisy value function plus a single correct answer is exactly when search overfits to the noise."
+      "explanation": "A noisy value function plus a single correct answer is exactly when search overfits to the noise.",
+      "question_zh": "什么时候搜索反而比单条轨迹更糟？",
+      "options_zh": [
+        "evaluator 噪声大、答案唯一时，搜索会收敛到一个评分高但其实错了的答案",
+        "任务有多个正确答案时",
+        "token 便宜的时候",
+        "做代码生成时"
+      ],
+      "explanation_zh": "value function 有噪声 + 答案唯一，正是搜索容易过拟合到噪声的场景。"
     },
     {
       "stage": "post",
@@ -84,7 +132,15 @@
         "Less than CoT because of pruning"
       ],
       "correct": 2,
-      "explanation": "The lesson cites 100-1000x token cost for ToT on Game of 24 versus CoT."
+      "explanation": "The lesson cites 100-1000x token cost for ToT on Game of 24 versus CoT.",
+      "question_zh": "在 Game of 24 上，ToT 相比 CoT 大致要多消耗多少 token？",
+      "options_zh": [
+        "大约 2 倍",
+        "大约 10 倍",
+        "100 到 1000 倍",
+        "比 CoT 还少，因为做了剪枝"
+      ],
+      "explanation_zh": "课程引用的数据是 Game of 24 上 ToT 比 CoT 多 100 到 1000 倍的 token 成本。"
     }
   ]
 }

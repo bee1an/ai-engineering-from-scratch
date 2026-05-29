@@ -12,7 +12,15 @@
         "Control is about hardware; alignment is about software"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "下列哪一项最能概括 alignment 与 AI control 的区别？",
+      "options_zh": [
+        "alignment 问的是 U 是否可信；control 问的是即使不信任 U，我们能否安全地使用它",
+        "control 替换 loss function，alignment 则改变 optimizer",
+        "二者是同义词",
+        "control 关心硬件，alignment 关心软件"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "Only U exists"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "AI Control 的威胁模型有哪些假设？",
+      "options_zh": [
+        "U 是 untrusted strong，T 是 trusted weak，H 是有限可信的人工劳力",
+        "U 与 T 都是 adversarial",
+        "三种资源 (U、T、H) 都是 trusted",
+        "只存在 U"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "T cannot edit text"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Untrusted Monitoring 中存在、而 Trusted Editing 能规避的关键风险是什么？",
+      "options_zh": [
+        "两个 U 实例可能 collude 或共享先验，所以协议必须分配预算来抵抗共谋",
+        "人类无法被审计",
+        "硬件资源争用",
+        "T 无法编辑文本"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "It strictly Pareto-dominates: higher usefulness at every safety level"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "在 Greenblatt 等人 (ICML 2024) 的 code-backdoor 任务上，Trusted Editing 相对于 Untrusted Monitoring 取得了什么结果？",
+      "options_zh": [
+        "严格更差",
+        "只在 human budget 为零时领先",
+        "二者完全等价",
+        "它实现了严格的 Pareto 占优：在每个 safety 等级上 usefulness 都更高"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "Control may fail at higher capability levels if U can manipulate T or reason about H's audit distribution"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "下列哪一项不属于本课列出的 control 三大根本性局限？",
+      "options_zh": [
+        "trusted weak 模型最终会落后于 U",
+        "control 会作为副产品产出 aligned 模型",
+        "人类无法 scale",
+        "在更高 capability 等级上，如果 U 能操纵 T 或推断 H 的审计分布，control 可能失效"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "That the model passed a manual jailbreak test"
       ],
       "correct": 1,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "Control Safety Case 在论证什么？",
+      "options_zh": [
+        "T 比 U 更有能力",
+        "在对 U 的 worst-case 假设下，部署协议能把不可接受结果的概率限定在某个上界以内",
+        "U 是值得信赖的",
+        "模型通过了一次手工 jailbreak 测试"
+      ],
+      "explanation_zh": ""
     }
   ]
 }

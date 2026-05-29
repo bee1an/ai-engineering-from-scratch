@@ -12,7 +12,15 @@
         "January 2024; high-risk systems applied that day"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "EU AI Act 何时生效？最先适用的是哪一类？",
+      "options_zh": [
+        "2024 年 8 月生效；禁止性实践与 AI literacy 条款于 2025 年 2 月 2 日开始适用",
+        "2026 年 8 月生效；生效当日只有 GPAI 适用",
+        "2025 年 8 月生效；所有类别同时适用",
+        "2024 年 1 月生效；当日 high-risk 系统就开始适用"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -24,7 +32,15 @@
         "Up to 5M EUR or 1% of global turnover"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "从 2026 年 8 月 2 日起，EU AI Act 的最高罚款额度是多少？",
+      "options_zh": [
+        "无上限",
+        "最高 100 万欧元或全球营业额的 0.1%",
+        "最高 1500 万欧元或全球营业额的 3%",
+        "最高 500 万欧元或全球营业额的 1%"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -36,7 +52,15 @@
         "Transparency, Copyright, Safety and Security"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "GPAI Code of Practice（2025 年 7 月 10 日）由哪三章组成？",
+      "options_zh": [
+        "训练、推理、部署",
+        "Capability、Control、Compliance",
+        "隐私、偏见、watermarking",
+        "Transparency、Copyright、Safety and Security"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "check",
@@ -48,7 +72,15 @@
         "Expansion into algorithmic bias"
       ],
       "correct": 0,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "2025 年 2 月英国 AISI 更名为 “AI Security Institute” 释放了什么信号？",
+      "options_zh": [
+        "范围收窄，聚焦前沿能力安全，淡化算法偏见与言论自由相关议题",
+        "与 EU AI Office 合并",
+        "关闭英国的前沿评估",
+        "扩展到算法偏见领域"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -60,7 +92,15 @@
         "Mandatory open-source release of frontier models"
       ],
       "correct": 2,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "美国 CAISI 的更名（2025 年 6 月）在政策方向上释放了什么信号？",
+      "options_zh": [
+        "与 FDA 合并",
+        "更严格的部署前安全评估",
+        "转向 “pro-growth AI policies”，强调标准制定和创新支持，弱化部署前评估",
+        "强制要求所有前沿模型开源"
+      ],
+      "explanation_zh": ""
     },
     {
       "stage": "post",
@@ -72,7 +112,15 @@
         "Article 12 establishes an AISI under MSIT and mandates local representatives, risk assessment, and safety measures for high-impact and generative AI"
       ],
       "correct": 3,
-      "explanation": ""
+      "explanation": "",
+      "question_zh": "韩国 AI Framework Act（2026 年 1 月生效）的核心义务是什么？",
+      "options_zh": [
+        "完全照搬 EU AI Act",
+        "强制所有生成式模型开放权重",
+        "完全禁止外国 AI 提供商",
+        "第 12 条在 MSIT 下设立 AISI，并要求高影响及生成式 AI 设立本地代表、做风险评估并采取安全措施"
+      ],
+      "explanation_zh": ""
     }
   ]
 }
