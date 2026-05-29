@@ -17,7 +17,7 @@ const ROADMAP_PATH = path.join(REPO_ROOT, 'ROADMAP.md');
 const GLOSSARY_PATH = path.join(REPO_ROOT, 'glossary', 'terms.md');
 const OUTPUT_PATH = path.join(__dirname, 'data.js');
 
-const GITHUB_BASE = 'https://github.com/rohitg00/ai-engineering-from-scratch/tree/main/';
+const GITHUB_BASE = 'https://github.com/bee1an/ai-engineering-from-scratch/tree/main/';
 
 // ─── Parse ROADMAP.md for lesson statuses ────────────────────────────
 function parseRoadmap(content) {
@@ -222,22 +222,20 @@ function parseReadme(content, roadmapStatuses) {
   return phases;
 }
 
-// ─── Extract lesson summary + keywords from docs/en.md ───────────────
+// ─── Extract lesson summary + keywords from docs/{en,zh}.md ──────────
 /**
- * Single-pass read of a lesson's docs/en.md.
+ * Single-pass read of a lesson's docs/{lang}.md.
  *
  * Returns:
  *   summary  — first `> blockquote` line (the lesson's one-liner motto).
  *   keywords — all `### H3` heading texts joined by ' · '.
- *              H3 headings are the densest vocabulary in a lesson doc
- *              (e.g. "Scaled dot-product · Causal masking · KV cache"),
- *              so they extend search coverage without bloating data.js.
  *
  * Both fields are empty strings when the file is absent or has no
  * matching content — expected for planned lessons with no docs yet.
  */
-function extractLessonMeta(relPath) {
-  const docPath = path.join(REPO_ROOT, relPath, 'docs', 'en.md');
+function extractLessonMeta(relPath, lang) {
+  const file = lang === 'zh' ? 'zh.md' : 'en.md';
+  const docPath = path.join(REPO_ROOT, relPath, 'docs', file);
   const result = { summary: '', keywords: '' };
   try {
     const lines = fs.readFileSync(docPath, 'utf8').split(/\r?\n/);
@@ -409,15 +407,18 @@ function build() {
   console.log('🔍 Discovering outputs + Phase 14 missions...');
   const artifacts = discoverArtifacts();
 
-  console.log('📚 Extracting lesson summaries + keywords from docs/en.md...');
-  let summarized = 0, withKeywords = 0;
+  console.log('📚 Extracting lesson summaries + keywords from docs/{en,zh}.md...');
+  let summarized = 0, withKeywords = 0, zhSummarized = 0;
   for (const phase of phases) {
     for (const lesson of phase.lessons) {
       if (lesson.url) {
         const relPath = lesson.url.replace(GITHUB_BASE, '').replace(/\/+$/, '');
-        const meta = extractLessonMeta(relPath);
-        if (meta.summary)  { lesson.summary  = meta.summary;  summarized++;   }
-        if (meta.keywords) { lesson.keywords = meta.keywords; withKeywords++; }
+        const metaEn = extractLessonMeta(relPath, 'en');
+        if (metaEn.summary)  { lesson.summary  = metaEn.summary;  summarized++;   }
+        if (metaEn.keywords) { lesson.keywords = metaEn.keywords; withKeywords++; }
+        const metaZh = extractLessonMeta(relPath, 'zh');
+        if (metaZh.summary)  { lesson.summary_zh  = metaZh.summary;  zhSummarized++; }
+        if (metaZh.keywords) { lesson.keywords_zh = metaZh.keywords; }
       }
     }
   }
@@ -434,7 +435,7 @@ function build() {
   console.log(`   Phases: ${phases.length}`);
   console.log(`   Lessons: ${totalLessons}`);
   console.log(`   Complete: ${completeLessons}`);
-  console.log(`   Summaries: ${summarized}, Keywords: ${withKeywords}`);
+  console.log(`   Summaries: ${summarized}, Keywords: ${withKeywords}, ZH summaries: ${zhSummarized}`);
   console.log(`   Glossary terms: ${glossaryTerms.length}`);
   console.log(`   Artifacts: ${artifacts.length}`);
 
